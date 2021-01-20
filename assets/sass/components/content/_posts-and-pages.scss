@@ -1,0 +1,38 @@
+.site {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
+	.site-main {
+		flex-grow: 1;
+	}
+}
+
+.page-template-default {
+
+	.entry-content.no-blocks {
+		& > * {
+			max-width: 1000px;
+		}
+
+		& > :first-child {
+			margin-top: 0;
+		}
+
+		h2 {
+			font-size: 1.75rem;
+			font-weight: 600;
+		}
+
+		h3 {
+			font-weight: 600;
+		}
+
+		padding: 0 1rem;
+	}
+
+	.default-site-title {
+		font-size: 2.25rem;
+		font-weight: 700;
+	}
+}
