@@ -10,9 +10,11 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-	</header><!-- .entry-header -->
+	<div class="container pl-4 pr-4">
+		<header class="entry-header">
+			<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+		</header><!-- .entry-header -->
+	</div>
 
 	<?php phmu_starter_wp_theme_post_thumbnail(); ?>
 
