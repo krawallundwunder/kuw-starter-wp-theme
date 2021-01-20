@@ -25,6 +25,12 @@
 @media (min-width: $screen-xl) {
 	.container {
 		max-width: $screen-xl;
+	}
+}
+
+@media (min-width: $screen-2xl) {
+	.container {
+		max-width: $screen-2xl;
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 	}
