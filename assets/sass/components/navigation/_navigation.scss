@@ -20,6 +20,7 @@
 
 .main-navigation {
 	display: flex;
+	align-items: center;
 	height: 100%;
 	position: relative;
 
@@ -117,7 +118,7 @@
 			flex-direction: column;
 
 			& > li + li {
-				border-top: 1px solid #e0dada;
+				border-top: 1px solid #e8e8e8;
 			}
 
 			li {
@@ -137,6 +138,45 @@
 
 		@media (min-width: $screen-lg) {
 			display: none;
+		}
+	}
+}
+
+.menu-toggle {
+	position: relative;
+	height: 0.875rem;
+	width: 2rem;
+
+	&:focus {
+		outline: none;
+	}
+
+	&:before, &:after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background-color: $color__text;
+		transition: all ease-in-out 200ms;
+	}
+
+	&:before {
+		bottom: 0;
+	}
+
+	&:after {
+		top: 0;
+	}
+
+	&.active {
+
+		&:before {
+			transform: rotate(45deg) translate(-0.5rem, -0.25rem);
+		}
+
+		&:after {
+			transform: rotate(-45deg) translate(-0.25rem, 0);
 		}
 	}
 }

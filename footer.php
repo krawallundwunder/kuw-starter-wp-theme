@@ -11,7 +11,7 @@
 
 ?>
 
-<footer id="colophon" class="site-footer">
+<footer id="colophon" class="site-footer pt-8 pb-6">
 	<div class="site-info">
 		<a href="<?php echo esc_url(__('https://wordpress.org/', 'phmu-starter-wp-theme')); ?>">
 			<?php

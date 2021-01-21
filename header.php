@@ -48,11 +48,11 @@
 			<nav id="site-navigation" class="main-navigation">
 				<button
 					class="menu-toggle"
+					:class="{ 'active': isOpen() }"
 					aria-controls="menu-mobile"
 					aria-expanded="false"
 					@click="toggle"
 				>
-					<?php esc_html_e('Primary Menu', 'phmu-starter-wp-theme'); ?>
 				</button>
 				<?php
 				wp_nav_menu(
