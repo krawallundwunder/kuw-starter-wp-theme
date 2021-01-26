@@ -173,9 +173,14 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
- * ACF Blocks.
+ * ACF blocks.
  */
 require get_template_directory() . '/inc/acf-blocks.php';
+
+/**
+ * Custom post types
+ */
+require get_template_directory() . '/inc/custom-post-types.php';
 
 /**
  * Load Jetpack compatibility file.
