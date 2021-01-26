@@ -1,1 +1,1 @@
-Put raw images here.
+Put raw images that need to be compressed here.

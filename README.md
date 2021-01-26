@@ -8,7 +8,6 @@ Basic WP theme for setting up new projects.
 - Alpine.js (https://github.com/alpinejs/alpine)
 
 ## Setup & Development
-
 ```bash
 # install dependencies
 $ npm install

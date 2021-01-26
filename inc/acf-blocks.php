@@ -1,6 +1,6 @@
 <?php
 
-// Register custom block category, change "PHMU" to customer name
+// TODO: Register custom block category, change "PHMU" to customer name
 function phmu_starter_wp_theme_custom_block_category( $categories, $post )
 {
 	return array_merge(
