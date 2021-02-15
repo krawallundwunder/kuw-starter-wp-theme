@@ -1,0 +1,83 @@
+.testimonial {
+
+	padding: 2.5rem 0;
+
+	.container {
+		position: relative;
+		text-align: center;
+	}
+
+	&__logo {
+		margin-left: auto;
+		margin-right: auto;
+		height: 2rem;
+		width: auto;
+	}
+
+	&__quote {
+		font-size: 1.25rem;
+		font-weight: 500;
+		max-width: 48rem;
+		margin-left: auto;
+		margin-right: auto;
+
+		@media (min-width: $screen-sm) {
+			font-size: 1.5rem;
+		}
+	}
+
+	footer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		@media (min-width: $screen-sm) {
+			flex-direction: row;
+		}
+	}
+
+	&__author {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 0.75rem;
+
+		@media (min-width: $screen-sm) {
+			flex-direction: row;
+			margin-left: 0.75rem;
+			margin-top: 0;
+		}
+
+		&-img {
+			border-radius: 9999px;
+			height: 2.5rem;
+			width: 2.5rem;
+			margin-left: auto;
+			margin-right: auto;
+
+			&-wrapper {
+				flex-shrink: 0;
+				display: flex;
+			}
+		}
+
+		&-name {
+			font-weight: 500;
+		}
+
+		&-position {
+			font-weight: 500;
+		}
+	}
+
+	&__slash {
+		height: 1.25rem;
+		color: $color__text;
+		display: none;
+
+		@media (min-width: $screen-sm) {
+			display: block;
+		}
+	}
+}
