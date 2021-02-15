@@ -15,15 +15,19 @@ $button_secondary = get_field('cta_button_secondary');
 	<div class="container pr-4 pl-4">
 		<h2 class="cta-section__title">
 			<span><?php echo $line_1 ?></span>
-			<span><?php echo $line_2 ?></span>
+			<?php if ($line_2): ?>
+				<span><?php echo $line_2 ?></span>
+			<?php endif ?>
 		</h2>
 		<div class="cta-section__buttons">
 			<a class="button button-primary" href="<?php echo $button_primary['url'] ?>">
 				<?php echo $button_primary['title'] ?>
 			</a>
-			<a class="button button-secondary" href="<?php echo $button_secondary['url'] ?>">
-				<?php echo $button_secondary['title'] ?>
-			</a>
+			<?php if ($button_secondary): ?>
+				<a class="button button-secondary" href="<?php echo $button_secondary['url'] ?>">
+					<?php echo $button_secondary['title'] ?>
+				</a>
+			<?php endif ?>
 		</div>
 	</div>
 </div>

@@ -340,6 +340,10 @@ button{background-color:transparent;background-image:none;cursor:pointer;padding
 .cta-section__buttons{margin-top:2rem;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .cta-section__buttons .button{width:100%}
 .cta-section__buttons .button+.button{margin-top:.5rem}
+.logo-cloud{text-align:center}
+.logo-cloud__grid{margin-top:2rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}
+.logo-cloud__grid-item{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
+.logo-cloud__grid-item img{height:3rem}
 .screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute !important;width:1px;word-wrap:normal !important}
 .screen-reader-text:focus{background-color:#fff;border-radius:3px;-webkit-box-shadow:0 0 2px 2px rgba(0,0,0,0.6);box-shadow:0 0 2px 2px rgba(0,0,0,0.6);clip:auto !important;-webkit-clip-path:none;clip-path:none;color:#000;display:block;font-size:.875rem;font-weight:700;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}
 #primary[tabindex="-1"]:focus{outline:0}
@@ -359,6 +363,7 @@ button{background-color:transparent;background-image:none;cursor:pointer;padding
 .main-navigation .menu-mobile{display:none !important}
 .main-navigation .menu-mobile{display:none}
 .team-section__team-member img{width:16rem;height:16rem}
+.logo-cloud__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
 }@media(min-width:1280px){.container{max-width:1280px}
 }@media(min-width:1536px){.container{max-width:1536px;padding-left:0 !important;padding-right:0 !important}
 }@media(min-width:2000px){html{font-size:17px}

@@ -12,7 +12,9 @@ $subtitle = get_field('ts_subtitle');
 <div class="acf-block team-section">
 	<div class="container pr-4 pl-4">
 		<h2><?php echo $headline ?></h2>
-		<p><?php echo $subtitle ?></p>
+		<?php if ($subtitle): ?>
+			<p><?php echo $subtitle ?></p>
+		<?php endif ?>
 		<div class="team-section__grid">
 			<?php while (have_rows('ts_team_members')): the_row(); ?>
 				<div class="team-section__team-member">

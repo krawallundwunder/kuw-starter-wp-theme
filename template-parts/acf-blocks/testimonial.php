@@ -23,9 +23,11 @@ $company_logo = get_field('tm_company_logo');
 				</p>
 			</div>
 			<footer class="mt-8">
-				<div class="testimonial__author-img-wrapper">
-					<img class="testimonial__author-img" src="<?php echo $author_img ?>" alt="<?php echo $author_name ?>"/>
-				</div>
+				<?php if ($author_img): ?>
+					<div class="testimonial__author-img-wrapper">
+						<img class="testimonial__author-img" src="<?php echo $author_img ?>" alt="<?php echo $author_name ?>"/>
+					</div>
+				<?php endif ?>
 				<div class="testimonial__author">
 					<div class="testimonial__author-name"><?php echo $author_name ?></div>
 
