@@ -6,3 +6,32 @@ button {
 	color: inherit;
 	border: none;
 }
+
+.button {
+	padding: 0.75rem 1.25rem;
+	font-weight: 500;
+	border-radius: 0.625rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: $transition;
+
+	&-primary {
+		color: white;
+		background-color: $color__primary;
+
+		&:hover {
+			background-color: #383838;
+		}
+	}
+
+	&-secondary {
+		color: $color__text;
+		background-color: #fff;
+		border: 1px solid $color__primary;
+
+		&:hover {
+			background-color: #f1f1f1;
+		}
+	}
+}
