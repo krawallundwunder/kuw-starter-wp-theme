@@ -1,8 +1,8 @@
 <?php
 /**
- * Block: Welcome Text
+ * Block: Testimonial
  *
- * @package Advelio_WP_Theme
+ * @package phmu-starter-wp-theme
  */
 
 $quote = get_field('tm_quote');
