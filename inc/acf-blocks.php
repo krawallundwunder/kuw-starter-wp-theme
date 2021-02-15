@@ -71,5 +71,15 @@ function acf_blocks_init()
 			'category'          => 'phmu-blocks',
 			'mode'              => 'edit',
 		));
+
+		// Hero section
+		acf_register_block_type(array(
+			'name'              => 'hero-section',
+			'title'             => __('Hero section'),
+			'description'       => __('A simple hero section'),
+			'render_template'   => 'template-parts/acf-blocks/hero-section.php',
+			'category'          => 'phmu-blocks',
+			'mode'              => 'edit',
+		));
 	}
 }

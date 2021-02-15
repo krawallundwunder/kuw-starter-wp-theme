@@ -1,0 +1,90 @@
+.hero-section {
+	text-align: center;
+	padding: 2rem 0;
+
+	@media (min-width: $screen-md) {
+		padding: 4rem 0;
+	}
+
+	&.is-front-page {
+		padding: 3rem 0;
+
+		@media (min-width: $screen-md) {
+			padding: 8rem 0;
+		}
+	}
+
+	&.has-bg-img {
+		color: white;
+
+		.button {
+
+			&-primary {
+				background-color: white;
+				color: $color__text;
+
+				&:hover {
+					background-color: rgb(220, 220, 220);
+				}
+			}
+
+			&-secondary {
+				background-color: rgba(0, 0, 0, 0.35);
+				color: white;
+				border: none;
+
+				&:hover {
+					background-color: rgba(0, 0, 0, 0.5);
+				}
+			}
+		}
+	}
+
+	&__title {
+		margin: 0;
+
+		@media (min-width: $screen-md) {
+			font-size: 2.75rem;
+		}
+	}
+
+	&__subtitle {
+		max-width: 40rem;
+		margin: 1.25rem auto 0;
+		font-size: 1.125rem;
+		font-weight: 500;
+
+		@media (min-width: $screen-md) {
+			font-size: 1.25rem;
+		}
+	}
+
+	&__buttons {
+		margin-top: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		@media (min-width: $screen-sm) {
+			flex-direction: row;
+		}
+
+		.button {
+			width: 100%;
+
+			@media (min-width: $screen-sm) {
+				width: auto;
+			}
+		}
+
+		.button + .button {
+			margin-top: 0.5rem;
+
+			@media (min-width: $screen-sm) {
+				margin-top: 0;
+				margin-left: 0.5rem;
+			}
+		}
+	}
+}

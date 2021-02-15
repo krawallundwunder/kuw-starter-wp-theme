@@ -1,6 +1,6 @@
 <?php
 /**
- * Block: CTA section
+ * Block: Logo cloud
  *
  * @package phmu-starter-wp-theme
  */
@@ -8,7 +8,7 @@
 $headline = get_field('lc_headline');
 ?>
 
-<div class="acf-block logo-cloud">
+<section class="acf-block logo-cloud">
 	<div class="container pr-4 pl-4">
 		<?php if ($headline): ?>
 			<h2 class="logo-cloud__title">
@@ -24,4 +24,4 @@ $headline = get_field('lc_headline');
 			<?php endwhile ?>
 		</div>
 	</div>
-</div>
+</section>

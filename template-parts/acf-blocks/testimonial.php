@@ -13,7 +13,7 @@ $company_name = get_field('tm_company_name');
 $company_logo = get_field('tm_company_logo');
 ?>
 
-<div class="acf-block testimonial">
+<section class="acf-block testimonial">
 	<div class="container pr-4 pl-4">
 		<img class="testimonial__logo" src="<?php echo $company_logo ?>" alt="<?php echo $company_name ?>"/>
 		<blockquote class="mt-10 ml-0 mb-0 mr-0">
@@ -40,4 +40,4 @@ $company_logo = get_field('tm_company_logo');
 			</footer>
 		</blockquote>
 	</div>
-</div>
+</section>

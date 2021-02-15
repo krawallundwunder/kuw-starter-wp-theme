@@ -9,7 +9,7 @@ $headline = get_field('ts_headline');
 $subtitle = get_field('ts_subtitle');
 ?>
 
-<div class="acf-block team-section">
+<section class="acf-block team-section">
 	<div class="container pr-4 pl-4">
 		<h2><?php echo $headline ?></h2>
 		<?php if ($subtitle): ?>
@@ -28,4 +28,4 @@ $subtitle = get_field('ts_subtitle');
 			<?php endwhile ?>
 		</div>
 	</div>
-</div>
+</section>

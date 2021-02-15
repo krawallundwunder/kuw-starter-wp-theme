@@ -11,7 +11,7 @@ $button_primary = get_field('cta_button_primary');
 $button_secondary = get_field('cta_button_secondary');
 ?>
 
-<div class="acf-block cta-section">
+<section class="acf-block cta-section">
 	<div class="container pr-4 pl-4">
 		<h2 class="cta-section__title">
 			<span><?php echo $line_1 ?></span>
@@ -30,4 +30,4 @@ $button_secondary = get_field('cta_button_secondary');
 			<?php endif ?>
 		</div>
 	</div>
-</div>
+</section>
