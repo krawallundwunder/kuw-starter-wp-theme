@@ -5,8 +5,13 @@
 		margin-top: 0;
 		margin-bottom: 1.25rem;
 	}
+
+	&:last-child {
+		padding-bottom: 4.5rem;
+	}
 }
 
+@import 'blog-section';
 @import 'cta-section';
 @import 'hero-section';
 @import 'logo-cloud';
