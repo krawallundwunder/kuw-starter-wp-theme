@@ -11,11 +11,13 @@ $button_primary = get_field('hs_button_primary');
 $button_secondary = get_field('hs_button_secondary');
 $bg = get_field('hs_bg');
 $is_front_page = get_field('hs_is_front_page');
+
+$bg_style = $bg ? 'background-image: linear-gradient(rgba(0, 0, 0, 0.625), rgba(0, 0, 0, 0.625)), url('.$bg.')' : ''
 ?>
 
 <section
 	class="acf-block hero-section<?php echo ($bg ? ' has-bg-img' : '') ?><?php echo ($is_front_page ? ' is-front-page' : '') ?>"
-	style="background-image: linear-gradient(rgba(0, 0, 0, 0.625), rgba(0, 0, 0, 0.625)), url('<?php echo $bg ?>')"
+	style="<?php echo $bg_style ?>"
 >
 	<div class="container pr-4 pl-4">
 		<h1 class="hero-section__title"><?php echo $title ?></h1>

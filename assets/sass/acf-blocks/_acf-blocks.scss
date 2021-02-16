@@ -1,9 +1,15 @@
 .acf-block {
 	padding: 2.5rem 0;
+
+	h2 {
+		margin-top: 0;
+		margin-bottom: 1.25rem;
+	}
 }
 
 @import 'cta-section';
 @import 'hero-section';
 @import 'logo-cloud';
+@import 'slider';
 @import 'team-section';
 @import 'testimonial';

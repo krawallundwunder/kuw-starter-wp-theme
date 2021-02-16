@@ -79,7 +79,27 @@ function acf_blocks_init()
 			'description'       => __('A simple hero section'),
 			'render_template'   => 'template-parts/acf-blocks/hero-section.php',
 			'category'          => 'phmu-blocks',
-			'mode'              => 'edit',
+			'mode'              => 'edit'
+		));
+
+		// Image slider
+		acf_register_block_type(array(
+			'name'              => 'image-slider',
+			'title'             => __('Image slider'),
+			'description'       => __('A simple image slider'),
+			'render_template'   => 'template-parts/acf-blocks/image-slider.php',
+			'category'          => 'phmu-blocks',
+			'mode'              => 'edit'
+		));
+
+		// Blog section
+		acf_register_block_type(array(
+			'name'              => 'blog-section',
+			'title'             => __('Blog section'),
+			'description'       => __('A simple blog section'),
+			'render_template'   => 'template-parts/acf-blocks/blog-section.php',
+			'category'          => 'phmu-blocks',
+			'mode'              => 'edit'
 		));
 	}
 }

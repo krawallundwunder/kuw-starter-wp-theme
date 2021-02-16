@@ -1,6 +1,9 @@
 .hero-section {
 	text-align: center;
 	padding: 2rem 0;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 
 	@media (min-width: $screen-md) {
 		padding: 4rem 0;
