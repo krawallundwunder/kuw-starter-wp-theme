@@ -37,7 +37,7 @@
     "gulp-uglifycss": "^1.0.6",
     "gulp-wp-pot": "^2.0.7",
     "gulp-zip": "^5.0.2",
-    "pre-push": "^0.1.1",
+    "pre-commit": "^1.2.2",
     "purgecss-with-wordpress": "^4.0.2",
     "tailwindcss": "^2.0.3"
   },
@@ -53,7 +53,7 @@
     "cache-clear": "gulp clearCache",
     "prod": "gulp prod"
   },
-  "pre-push": [
+  "pre-commit": [
     "prod"
   ]
 }
