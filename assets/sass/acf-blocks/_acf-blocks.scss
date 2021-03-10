@@ -5,6 +5,10 @@
 		@apply mt-0 mb-5;
 	}
 
+	&__subtitle {
+		@apply text-lg md:text-xl;
+	}
+
 	&:last-child {
 		@apply pb-20;
 	}

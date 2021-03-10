@@ -8,18 +8,21 @@
 $headline = get_field('lc_headline');
 ?>
 
-<section class="acf-block logo-cloud">
-	<div class="container pr-4 pl-4">
+<section class="acf-block text-center">
+	<div class="container px-4">
 		<?php if ($headline): ?>
-			<h2 class="logo-cloud__title">
+			<h2 class="text-base text-gray-500 font-semibold uppercase tracking-wide">
 				<?php echo $headline ?>
 			</h2>
 		<?php endif ?>
-		<div class="logo-cloud__grid">
+		<div class="mt-2 grid grid-cols-2 gap-8 lg:grid-cols-6">
 			<?php while (have_rows('lc_logos')): the_row(); ?>
-				<div class="logo-cloud__grid-item">
-					<img src="<?php echo the_sub_field('lc_logos_logo') ?>"
-							 alt="<?php echo the_sub_field('lc_logos_company') ?>"/>
+				<div class="flex items-center justify-center">
+					<img
+						class="h-12"
+						src="<?php echo the_sub_field('lc_logos_logo') ?>"
+						alt="<?php echo the_sub_field('lc_logos_company') ?>"
+					/>
 				</div>
 			<?php endwhile ?>
 		</div>
