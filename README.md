@@ -14,4 +14,10 @@ $ npm install
 
 # compile and watch styles/scripts/images and serve with hot reload
 $ npm start
+
+# compile styles/scripts/images and purge unused styles
+$ npm prod
 ```
+
+## Note
+Please ensure CSS is purged before pushing.
