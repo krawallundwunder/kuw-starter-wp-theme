@@ -4,6 +4,7 @@ Basic WP theme for setting up new projects.
 ## Features
 - ACF Pro Support (https://www.advancedcustomfields.com/resources/)
 - Sass/SCSS (https://sass-lang.com/documentation)
+- TailwindCSS (https://tailwindcss.com/docs)
 - SVG Inject (https://github.com/iconfu/svg-inject)
 - Alpine.js (https://github.com/alpinejs/alpine)
 
