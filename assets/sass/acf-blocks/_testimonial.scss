@@ -1,81 +1,38 @@
 .testimonial {
 
 	.container {
-		position: relative;
-		text-align: center;
+		@apply relative text-center;
 	}
 
 	&__logo {
-		margin-left: auto;
-		margin-right: auto;
-		height: 2rem;
-		width: auto;
+		@apply mx-auto h-8 w-auto;
 	}
 
 	&__quote {
-		font-size: 1.25rem;
-		font-weight: 500;
-		max-width: 48rem;
-		margin-left: auto;
-		margin-right: auto;
-
-		@media (min-width: $screen-sm) {
-			font-size: 1.5rem;
-		}
+		@apply max-w-3xl mx-auto font-medium text-xl sm:text-2xl;
 	}
 
 	footer {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-
-		@media (min-width: $screen-sm) {
-			flex-direction: row;
-		}
+		@apply flex flex-col items-center justify-center sm:flex-row;
 	}
 
 	&__author {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-top: 0.75rem;
-
-		@media (min-width: $screen-sm) {
-			flex-direction: row;
-			margin-left: 0.75rem;
-			margin-top: 0;
-		}
+		@apply flex flex-col items-center mt-3 sm:flex-row sm:mt-0 sm:ml-3;
 
 		&-img {
-			border-radius: 9999px;
-			height: 2.5rem;
-			width: 2.5rem;
-			margin-left: auto;
-			margin-right: auto;
+			@apply rounded-full h-10 w-10 mx-auto;
 
 			&-wrapper {
-				flex-shrink: 0;
-				display: flex;
+				@apply flex-shrink-0 flex;
 			}
 		}
 
-		&-name {
-			font-weight: 500;
-		}
-
-		&-position {
-			font-weight: 500;
+		&-name, &-position {
+			@apply font-medium;
 		}
 	}
 
 	&__slash {
-		height: 1.25rem;
-		color: $color__primary;
-		display: none;
-
-		@media (min-width: $screen-sm) {
-			display: block;
-		}
+		@apply h-5 text-black hidden sm:block;
 	}
 }

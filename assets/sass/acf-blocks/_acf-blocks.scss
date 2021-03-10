@@ -1,13 +1,12 @@
 .acf-block {
-	padding: 2.5rem 0;
+	@apply py-10 px-0;
 
 	h2 {
-		margin-top: 0;
-		margin-bottom: 1.25rem;
+		@apply mt-0 mb-5;
 	}
 
 	&:last-child {
-		padding-bottom: 4.5rem;
+		@apply pb-20;
 	}
 }
 

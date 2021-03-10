@@ -31,6 +31,9 @@ const outputStyle = 'compact';
 const errLogToConsole = true;
 const precision = 10;
 
+// Path to tailwind.config.js
+const jsTailwindSRC = './tailwind.config.js';
+
 // JS Vendor options.
 
 // Path to JS vendor folder.
@@ -82,7 +85,7 @@ const zipName = 'file.zip';
 
 // Must be a folder outside of the zip folder.
 const zipDestination = './../'; // Default: Parent folder.
-const zipIncludeGlob = ['./**/*']; // Default: Include all files/folders in current directory.
+const zipIncludeGlob = [ './**/*' ]; // Default: Include all files/folders in current directory.
 
 // Default ignored files and folders for the zip file.
 const zipIgnoreGlob = [
@@ -132,7 +135,7 @@ const team = 'AhmadAwais <your_email@email.com>';
 
 // Browsers you care about for auto-prefixing. Browserlist https://github.com/ai/browserslist
 // The following list is set as per WordPress requirements. Though; Feel free to change.
-const BROWSERS_LIST = ['last 2 version', '> 1%'];
+const BROWSERS_LIST = [ 'last 2 version', '> 1%' ];
 
 // Export.
 module.exports = {
@@ -145,6 +148,7 @@ module.exports = {
 	outputStyle,
 	errLogToConsole,
 	precision,
+	jsTailwindSRC,
 	jsVendorSRC,
 	jsVendorDestination,
 	jsVendorFile,

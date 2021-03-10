@@ -6,8 +6,10 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@babel/register": "^7.0.0",
     "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.0.0",
+    "@tailwindcss/typography": "^0.4.0",
+    "autoprefixer": "^10.2.5",
     "beepbeep": "^1.2.2",
     "browser-sync": "^2.11.1",
     "eslint": "^7.12.0",
@@ -23,6 +25,8 @@
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.2.0",
+    "gulp-postcss": "^9.0.0",
+    "gulp-purgecss": "^4.0.2",
     "gulp-remember": "^1.0.1",
     "gulp-rename": "^2.0.0",
     "gulp-rtlcss": "^1.2.0",
@@ -32,7 +36,10 @@
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.6",
     "gulp-wp-pot": "^2.0.7",
-    "gulp-zip": "^5.0.2"
+    "gulp-zip": "^5.0.2",
+    "pre-push": "^0.1.1",
+    "purgecss-with-wordpress": "^4.0.2",
+    "tailwindcss": "^2.0.3"
   },
   "scripts": {
     "start": "gulp",
@@ -43,6 +50,10 @@
     "js-vendors": "gulp vendorsJS",
     "translate": "gulp translate",
     "styles-rtl": "gulp stylesRTL",
-    "cache-clear": "gulp clearCache"
-  }
+    "cache-clear": "gulp clearCache",
+    "prod": "gulp prod"
+  },
+  "pre-push": [
+    "prod"
+  ]
 }

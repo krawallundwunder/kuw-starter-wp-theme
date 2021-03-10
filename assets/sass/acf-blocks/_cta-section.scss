@@ -1,41 +1,19 @@
 .cta-section {
-	text-align: center;
+	@apply text-center;
 
 	&__title {
-		display: flex;
-		flex-direction: column;
+		@apply flex flex-col;
 
 		span + span {
-			color: $color__primary;
+			@apply text-black;
 		}
 	}
 
 	&__buttons {
-		margin-top: 1.5rem;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-
-		@media (min-width: $screen-sm)  {
-			 flex-direction: row;
-		}
+		@apply mt-6 flex flex-col items-center justify-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2;
 
 		.button {
-			width: 100%;
-
-			@media (min-width: $screen-sm)  {
-				width: auto;
-			}
-		}
-
-		.button + .button {
-			margin-top: 0.5rem;
-
-			@media (min-width: $screen-sm)  {
-				margin-top: 0;
-				margin-left: 0.5rem;
-			}
+			@apply w-full sm:w-auto;
 		}
 	}
 }

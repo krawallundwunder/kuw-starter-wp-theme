@@ -17,7 +17,7 @@ $query = new WP_Query(array(
 <section
 	class="acf-block blog-section"
 >
-	<div class="container pr-4 pl-4">
+	<div class="container">
 		<h2 class="blog-section__title"><?php echo $title ?></h2>
 		<?php if ($subtitle): ?>
 			<p class="blog-section__subtitle"><?php echo $subtitle ?></p>
@@ -26,7 +26,7 @@ $query = new WP_Query(array(
 			<div class="blog-section__grid">
 				<?php while ($query->have_posts()): $query->the_post() ?>
 					<a class="blog-section__post-card" href="<?php the_permalink() ?>">
-						<img src="<?php echo get_the_post_thumbnail_url() ?>" alt="" />
+						<img src="<?php echo get_the_post_thumbnail_url() ?>" alt=""/>
 						<div class="blog-section__post-card-content">
 							<h3><?php the_title() ?></h3>
 							<p><?php echo wp_trim_words(get_the_excerpt(), 15) ?></p>

@@ -1,37 +1,23 @@
 .team-section {
-	text-align: center;
+	@apply text-center;
 
 	&__grid {
-		margin-top: 2.5rem;
-		@include grid-cols(1);
-		gap: 2rem;
-
-		@media (min-width: $screen-md) {
-			@include grid-cols(3);
-		}
+		@apply mt-10 grid grid-cols-1 gap-8 md:grid-cols-3;
 	}
 
 	&__team-member {
-		text-align: center;
+		@apply text-center;
 
 		img {
-			width: 12rem;
-			height: 12rem;
-			border-radius: 9999px;
-
-			@media (min-width: $screen-lg) {
-				width: 16rem;
-				height: 16rem;
-			}
+			@apply mx-auto w-48 h-48 rounded-full lg:h-64 lg:w-64;
 		}
 	}
 
 	&__name {
-		font-weight: 600;
+		@apply font-semibold;
 	}
 
 	&__position {
-		font-weight: 500;
-		color: $color__primary;
+		@apply font-medium text-gray-600;
 	}
 }

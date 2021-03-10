@@ -37,6 +37,9 @@ const minifycss = require( 'gulp-uglifycss' ); // Minifies CSS files.
 const autoprefixer = require( 'gulp-autoprefixer' ); // Autoprefixing magic.
 const mmq = require( 'gulp-merge-media-queries' ); // Combine matching media queries into one.
 const rtlcss = require( 'gulp-rtlcss' ); // Generates RTL stylesheet.
+const postcss = require( 'gulp-postcss' );
+const purgecss = require ( 'gulp-purgecss' );
+const purgecssWordpress  = require ( 'purgecss-with-wordpress' );
 
 // JS related plugins.
 const concat = require( 'gulp-concat' ); // Concatenates JS files.
@@ -112,6 +115,8 @@ const reload = done => {
  *    7. Injects CSS or reloads the browser via browserSync
  */
 gulp.task( 'styles', () => {
+	const tailwindcss = require( 'tailwindcss' );
+
 	return gulp
 		.src( config.styleSRC, {allowEmpty: true})
 		.pipe( plumber( errorHandler ) )
@@ -123,6 +128,63 @@ gulp.task( 'styles', () => {
 				precision: config.precision
 			})
 		)
+		.pipe( postcss([
+			tailwindcss( config.jsTailwindSRC ),
+			require( 'autoprefixer' )
+		]) )
+		.on( 'error', sass.logError )
+		.pipe( sourcemaps.write({includeContent: false}) )
+		.pipe( sourcemaps.init({loadMaps: true}) )
+		.pipe( autoprefixer( config.BROWSERS_LIST ) )
+		.pipe( sourcemaps.write( './' ) )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( gulp.dest( config.styleDestination ) )
+		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
+		.pipe( mmq({log: true}) ) // Merge Media Queries only for .min.css version.
+		.pipe( browserSync.stream() ) // Reloads style.css if that is enqueued.
+		.pipe( rename({suffix: '.min'}) )
+		.pipe( minifycss({maxLineLen: 10}) )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( gulp.dest( config.styleDestination ) )
+		.pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
+		.pipe( browserSync.stream() ) // Reloads style.min.css if that is enqueued.
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> STYLES — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+gulp.task( 'stylesProd', () => {
+	const tailwindcss = require( 'tailwindcss' );
+
+	return gulp
+		.src( config.styleSRC, {allowEmpty: true})
+		.pipe( plumber( errorHandler ) )
+		.pipe( sourcemaps.init() )
+		.pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: config.outputStyle,
+				precision: config.precision
+			})
+		)
+		.pipe( postcss([
+			tailwindcss( config.jsTailwindSRC ),
+			require( 'autoprefixer' )
+		]) )
+		.pipe( purgecss({
+			content: [ '**/*.php' ],
+			safelist: purgecssWordpress.safelist,
+
+			// enable dynamic grids
+			safelistPatterns: [
+				/grid/
+			],
+			defaultExtractor: content =>
+				content.match( /[A-z0-9-:/]+/g ) || []
+		}) )
 		.on( 'error', sass.logError )
 		.pipe( sourcemaps.write({includeContent: false}) )
 		.pipe( sourcemaps.init({loadMaps: true}) )
@@ -405,3 +467,5 @@ gulp.task(
 		gulp.watch( config.imgSRC, gulp.series( 'images', reload ) ); // Reload on customJS file changes.
 	})
 );
+
+gulp.task( 'prod', gulp.parallel( 'stylesProd', 'vendorsJS', 'customJS', 'images' ) );
