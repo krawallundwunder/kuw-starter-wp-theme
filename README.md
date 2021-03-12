@@ -14,9 +14,6 @@ Basic WP theme for setting up new projects.
 # install dependencies
 $ npm install
 
-# install Timber via Composer
-$ composer require timber/timber
-
 # compile and watch styles/scripts/images and serve with hot reload
 $ npm start
 
