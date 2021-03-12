@@ -56,7 +56,6 @@ get_header();
       $props['headline'] = 'Hello from example.twig!';
       $props['subtitle'] = 'This is an example Twig Template.';
       $props['description'] = 'Feel free to edit or delete it.';
-      $props['with-thumbnails'] = false;
       Timber::render('example.twig', $props);
     ?>
 
