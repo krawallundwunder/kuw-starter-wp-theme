@@ -101,5 +101,38 @@ function acf_blocks_init()
 			'category'          => 'phmu-blocks',
 			'mode'              => 'edit'
 		));
+
+    // FAQ Section
+    acf_register_block_type(array(
+      'name'              => 'faq-section',
+      'title'             => __('FAQ'),
+      'description'       => __('A simple FAQ block'),
+      'render_callback'   => 'faq_section_callback',
+      'category'          => 'phmu-blocks',
+      'mode'              => 'edit',
+    ));
 	}
+}
+
+/**
+ *  This is the callback that displays the FAQ Section Block.
+ *
+ * @param   array  $block      The block settings and attributes.
+ * @param   string $content    The block content (emtpy string).
+ * @param   bool   $is_preview True during AJAX preview.
+ */
+function faq_section_callback( $block, $content = '', $is_preview = false ) {
+  $context = Timber::context();
+
+  // Store block values.
+  $context['block'] = $block;
+
+  // Store field values.
+  $context['fields'] = get_fields();
+
+  // Store $is_preview value.
+  $context['is_preview'] = $is_preview;
+
+  // Render the block.
+  Timber::render( 'faq.twig', $context );
 }

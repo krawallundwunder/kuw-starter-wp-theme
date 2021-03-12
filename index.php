@@ -48,6 +48,29 @@ get_header();
 		endif;
 		?>
 
+    <!--
+      Example Component
+    -->
+    <?php
+      $props = array();
+      $props['headline'] = 'Hello from example.twig!';
+      $props['subtitle'] = 'This is an example Twig Template.';
+      $props['description'] = 'Feel free to edit or delete it.';
+      $props['with-thumbnails'] = false;
+      Timber::render('example.twig', $props);
+    ?>
+
+    <!--
+      Posts List Component
+    -->
+    <?php
+      $props = array();
+      $props['posts'] = Timber::get_posts('posts_per_page=3');
+      $props['headline'] = 'Blog Posts';
+      $props['button_text'] = 'View all posts';
+      Timber::render('posts-list.twig', $props);
+    ?>
+
 	</main><!-- #main -->
 
 <?php
