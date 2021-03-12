@@ -2,7 +2,7 @@
 Basic WP theme for setting up new projects.
 
 ## Features
-- Timber Support (https://timber.github.io/docs/)
+- Timber Support (https://timber.github.io/docs/) (https://de.wordpress.org/plugins/timber-library/)
 - ACF Pro Support (https://www.advancedcustomfields.com/resources/)
 - Sass/SCSS (https://sass-lang.com/documentation)
 - TailwindCSS (https://tailwindcss.com/docs)
