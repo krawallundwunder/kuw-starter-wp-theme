@@ -15,8 +15,8 @@ if ( ! class_exists( 'Timber' ) ) {
 	add_action(
 		'admin_notices',
 		function() {
-			echo '<div class="error"><p>Timber is not activated. Please make sure you have installed Timber. Check out <a href="' . esc_url( get_template_directory_uri() ) . '/README.md">README</a> for more details. </p></div>';
-		}
+			echo '<div class="error"><p>Timber is not detected. Make sure you <a href="' . esc_url( admin_url( 'plugin-install.php?s=Timber&tab=search&type=term' ) ) . '">install and activate</a> the plugin.</p></div>';
+    }
 	);
 
 	add_filter(
