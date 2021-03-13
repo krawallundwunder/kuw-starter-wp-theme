@@ -18,7 +18,7 @@ $ npm install
 $ npm start
 
 # compile styles/scripts/images and purge unused styles
-$ npm prod
+$ npm run prod
 ```
 
 ## Note
