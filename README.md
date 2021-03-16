@@ -2,6 +2,7 @@
 Basic WP theme for setting up new projects.
 
 ## Features
+- Timber Support (https://timber.github.io/docs/) (https://de.wordpress.org/plugins/timber-library/)
 - ACF Pro Support (https://www.advancedcustomfields.com/resources/)
 - Sass/SCSS (https://sass-lang.com/documentation)
 - TailwindCSS (https://tailwindcss.com/docs)
@@ -17,7 +18,7 @@ $ npm install
 $ npm start
 
 # compile styles/scripts/images and purge unused styles
-$ npm prod
+$ npm run prod
 ```
 
 ## Note

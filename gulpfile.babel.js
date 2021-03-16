@@ -175,7 +175,7 @@ gulp.task( 'stylesProd', () => {
 			require( 'autoprefixer' )
 		]) )
 		.pipe( purgecss({
-			content: [ '**/*.php' ],
+			content: [ '**/*.php', '**/*.twig' ],
 			safelist: purgecssWordpress.safelist,
 
 			// enable dynamic grids

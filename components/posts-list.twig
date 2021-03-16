@@ -1,0 +1,45 @@
+<section aria-labelledby="blog-posts-title" class="max-w-md mx-auto my-4">
+  <div class="rounded-lg bg-white overflow-hidden shadow">
+    <div class="p-6">
+      <h2 class="text-base font-medium text-gray-900" id="blog-posts-title">{{ headline }}</h2>
+      <div class="flow-root mt-6">
+        <ul class="-my-5 divide-y divide-gray-200">
+          {% for post in posts %}
+          <li class="py-5">
+            <div class="relative focus-within:ring-2 focus-within:ring-cyan-500">
+              <div class="flex flex-row">
+                {% if post.thumbnail.src %}
+                  <img class="w-16 h-16 rounded-md object-cover mr-4" src="{{ post.thumbnail.src|resize(250,250) }}" width="100%" height="100%" alt="">
+                {% else %}
+                <div class="bg-orange-50 rounded-md flex flex-row justify-items-center items-center mr-4">
+                  <div class="flex-none w-16 h-16 flex justify-center items-center">
+                    <svg class="h-8 w-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  </div>
+                </div>
+                {% endif %}
+                <div class="flex flex-col">
+                  <h3 class="text-sm font-semibold text-gray-800">
+                    <a href="{{ post.link }}" class="hover:underline focus:outline-none">
+                      <!-- Extend touch target to entire panel -->
+                      <span class="absolute inset-0" aria-hidden="true"></span>
+                      {{ post.title }}
+                    </a>
+                  </h3>
+                <p class="mt-1 text-sm text-gray-600 line-clamp-2">
+                  {{post.post_content|excerpt(10)}}
+                </p>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="mt-6">
+        <a href="{{ blog.link }}" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+          {{ button_text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
