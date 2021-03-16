@@ -19,7 +19,7 @@ $bg_style = $bg ? 'background-image: linear-gradient(rgba(0, 0, 0, 0.625), rgba(
 	class="acf-block hero-section<?php echo ($bg ? ' has-bg-img' : '') ?><?php echo ($is_front_page ? ' is-front-page' : '') ?>"
 	style="<?php echo $bg_style ?>"
 >
-	<div class="container pr-4 pl-4">
+	<div class="container px-4">
 		<h1 class="hero-section__title"><?php echo $title ?></h1>
 		<p class="hero-section__subtitle"><?php echo $subtitle ?></p>
 		<?php if ($button_primary): ?>

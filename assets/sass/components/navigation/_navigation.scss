@@ -1,173 +1,95 @@
 .site-header {
-	position: sticky;
-	top: 0;
-	background-color: #fff;
-	box-shadow: $shadow-sm;
-	height: 4rem;
-	z-index: 999;
+	@apply sticky top-0 bg-white shadow-sm h-16 z-50;
 
 	.container {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 100%;
+		@apply flex items-center justify-between h-full;
 	}
 
 	.site-title {
-		font-weight: 800;
-		letter-spacing: -0.025em;
+		@apply font-extrabold tracking-tight;
 	}
 }
 
 .main-navigation {
-	display: flex;
-	align-items: center;
-	height: 100%;
-	position: relative;
+	@apply flex items-center h-full relative;
 
 	.menu-toggle {
-
-		@media (min-width: $screen-lg) {
-			display: none;
-		}
+		@apply lg:hidden;
 	}
 
 	.menu-desktop {
-		display: none;
-
-		@media (min-width: $screen-lg) {
-			display: block;
-		}
+		@apply hidden lg:block;
 
 		ul {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			display: flex;
-			height: 100%;
-
-			& > li + li {
-				margin-left: 1.25rem;
-			}
+			@apply m-0 p-0 list-none flex space-x-5 h-full;
 
 			li {
-				position: relative;
-				height: 100%;
-				display: flex;
+				@apply relative flex h-full;
 
 				&:before {
 					content: '';
-					position: absolute;
-					bottom: 0;
-					left: 0;
-					right: 0;
 					height: 2px;
-					background-color: $color__primary;
-					opacity: 0;
-					transition: $transition;
+					@apply absolute inset-x-0 bottom-0 bg-black opacity-0 transition;
 				}
 
 				&.current_page_item {
 
 					&:before {
-						opacity: 0.75;
+						@apply opacity-75;
 					}
 
 					a {
-						font-weight: 600;
-						color: $color__text;
-						pointer-events: none;
+						@apply font-semibold text-black pointer-events-none;
 					}
 				}
 
 				a {
-					display: flex;
-					align-items: center;
-					height: 100%;
-					font-size: 1rem;
-					font-weight: 400;
-					color: rgb(123, 123, 132);
-					transition: $transition;
-
-					&:hover {
-						color: $color__text
-					}
+					@apply flex items-center h-full text-base font-normal text-gray-600 transition hover:text-gray-900;
 				}
 			}
 		}
 	}
 
 	.menu-mobile {
-		background-color: #fff;
-		display: block;
-		position: fixed;
-		top: 4rem;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		padding: 2rem 1rem;
+		@apply bg-white block fixed top-16 inset-x-0 bottom-0 py-8 px-4;
 
-		@media (min-width: $screen-lg) {
+		@screen lg {
 			display: none !important;
 		}
 
 		ul {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			display: flex;
-			flex-direction: column;
-
-			& > li + li {
-				border-top: 1px solid #e8e8e8;
-			}
+			@apply list-none p-0 m-0 flex flex-col divide-y divide-gray-300;
 
 			li {
 
 				a {
-					display: flex;
-					padding: 0.75rem 0;
+					@apply flex py-3 px-0;
 				}
 
 				&.current_page_item a {
-					font-weight: 600;
-					pointer-events: none;
+					@apply font-semibold pointer-events-none;
 				}
 			}
-		}
-
-
-		@media (min-width: $screen-lg) {
-			display: none;
 		}
 	}
 }
 
 .menu-toggle {
-	position: relative;
 	height: 0.875rem;
-	width: 2rem;
-
-	&:focus {
-		outline: none;
-	}
+	@apply relative w-8 focus:outline-none;
 
 	&:before, &:after {
 		content: '';
-		position: absolute;
-		left: 0;
-		right: 0;
 		height: 2px;
-		background-color: $color__text;
-		transition: all ease-in-out 200ms;
+		@apply absolute inset-x-0 bg-black;
 	}
 
 	&:before {
-		bottom: 0;
+		@apply bottom-0;
 	}
 
 	&:after {
-		top: 0;
+		@apply top-0;
 	}
 
 	&.active {

@@ -1,8 +1,0 @@
-body {
-	scroll-behavior: smooth;
-
-	&.no-scroll {
-		height: 100vw;
-		overflow: hidden;
-	}
-}

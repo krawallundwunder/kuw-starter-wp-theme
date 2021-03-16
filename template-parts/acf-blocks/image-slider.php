@@ -19,10 +19,10 @@ $per_view = get_field('sl_per_view');
 >
 	<div class="container pr-4 pl-4">
 		<?php if ($title): ?>
-			<h2 class="slider__title"><?php echo $title ?></h2>
+			<h2><?php echo $title ?></h2>
 		<?php endif ?>
 		<?php if ($subtitle): ?>
-			<p class="slider__subtitle"><?php echo $subtitle ?></p>
+			<p class="acf-block__subtitle"><?php echo $subtitle ?></p>
 		<?php endif ?>
 		<div class="glide" id="<?php echo $id ?>">
 			<div class="glide__track" data-glide-el="track">
