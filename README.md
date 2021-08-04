@@ -9,10 +9,17 @@ Basic WP theme for setting up new projects.
 - SVG Inject (https://github.com/iconfu/svg-inject)
 - Alpine.js (https://github.com/alpinejs/alpine)
 
+## Required/recommended Plugins
+- Timber (https://wordpress.org/plugins/timber-library/)
+- SVG Support (https://wordpress.org/plugins/svg-support/)
+
 ## Setup & Development
 ```bash
 # install dependencies
 $ npm install
+
+# setup git hooks
+$ husky install
 
 # compile and watch styles/scripts/images and serve with hot reload
 $ npm start
@@ -20,6 +27,3 @@ $ npm start
 # compile styles/scripts/images and purge unused styles
 $ npm run prod
 ```
-
-## Note
-Please ensure CSS is purged before pushing.

@@ -1,12 +1,10 @@
-function mobileMenu() {
-	return {
-		show: false,
-		toggle() {
-			this.show = ! this.show;
-			document.body.classList.toggle( 'no-scroll' );
-		},
-		isOpen() {
-			return true === this.show;
-		}
-	};
-}
+document.addEventListener('alpine:init', () => {
+  Alpine.data('mobileMenu', () => ({
+    open: false,
+
+    toggle() {
+      this.open = ! this.open
+      document.body.classList.toggle('no-scroll')
+    },
+  }))
+})

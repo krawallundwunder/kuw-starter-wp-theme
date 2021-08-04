@@ -23,7 +23,7 @@
 	<script src="<?php echo get_template_directory_uri() ?>/assets/js/svg-inject.min.js"></script>
 
 	<?php wp_head(); ?>
-	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" integrity="sha512-BXASbMmKLu+RC5TDnkupyhvrjiOQXILh/5zgIS8k5JAC71a73lNweVEg/X+9XJQ7GK22PH9WpztY3zqrji+xrQ==" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://unpkg.com/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
@@ -36,7 +36,7 @@
 	<a class="sr-only"
 		 href="#primary"><?php esc_html_e('Skip to content', 'phmu-starter-wp-theme'); ?></a>
 
-	<header id="masthead" class="site-header" x-data="mobileMenu()">
+	<header id="masthead" class="site-header" x-data="mobileMenu">
 		<div class="container pr-4 pl-4">
 			<div class="site-branding">
 				<p class="site-title">
@@ -50,14 +50,19 @@
 			</div><!-- .site-branding -->
 
 			<nav id="site-navigation" class="main-navigation">
-				<button
-					class="menu-toggle"
-					:class="{ 'active': isOpen() }"
-					aria-controls="menu-mobile"
-					aria-expanded="false"
-					@click="toggle"
-				>
-				</button>
+        <div class="-mb-1">
+          <button
+            class="lg:hidden hamburger hamburger--spin"
+            :class="open && 'is-active'"
+            aria-controls="menu-mobile"
+            :aria-expanded="open"
+            @click="toggle()"
+          >
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+          </button>
+        </div>
 				<?php
 				wp_nav_menu(
 					array(
@@ -66,13 +71,14 @@
 					)
 				);
 				?>
-				<div class="menu-mobile" x-show="isOpen()"><?php
+				<div class="menu-mobile transition" x-show="open" x-transition><?php
 					wp_nav_menu(
 						array(
 							'theme_location' => 'menu-1',
 							'menu_id' => 'menu-mobile',
 						)
 					);
-					?></div>
+					?>
+        </div>
 			</nav><!-- #site-navigation --></div>
 	</header><!-- #masthead -->

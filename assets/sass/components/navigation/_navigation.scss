@@ -73,33 +73,3 @@
 		}
 	}
 }
-
-.menu-toggle {
-	height: 0.875rem;
-	@apply relative w-8 focus:outline-none;
-
-	&:before, &:after {
-		content: '';
-		height: 2px;
-		@apply absolute inset-x-0 bg-black;
-	}
-
-	&:before {
-		@apply bottom-0;
-	}
-
-	&:after {
-		@apply top-0;
-	}
-
-	&.active {
-
-		&:before {
-			transform: rotate(45deg) translate(-0.5rem, -0.25rem);
-		}
-
-		&:after {
-			transform: rotate(-45deg) translate(-0.25rem, 0);
-		}
-	}
-}
