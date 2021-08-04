@@ -181,7 +181,6 @@ gulp.task('stylesProd', () => {
 
       // enable dynamic grids
       safelistPatterns: [
-        ...purgecssWordpress.safelistPatterns,
         /grid/,
       ],
       defaultExtractor: (content) =>
