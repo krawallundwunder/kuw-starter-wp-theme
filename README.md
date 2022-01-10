@@ -16,14 +16,14 @@ Basic WP theme for setting up new projects.
 ## Setup & Development
 ```bash
 # install dependencies
-$ npm install
+$ yarn install
 
 # setup git hooks
 $ husky install
 
 # compile and watch styles/scripts/images and serve with hot reload
-$ npm start
+$ yarn start
 
 # compile styles/scripts/images and purge unused styles
-$ npm run prod
+$ yarn run prod
 ```

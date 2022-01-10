@@ -50,9 +50,9 @@
 			</div><!-- .site-branding -->
 
 			<nav id="site-navigation" class="main-navigation">
-        <div class="-mb-1">
+        <div class="-mb-1 lg:hidden">
           <button
-            class="lg:hidden hamburger hamburger--spin"
+            class="hamburger hamburger--spin"
             :class="open && 'is-active'"
             aria-controls="menu-mobile"
             :aria-expanded="open"

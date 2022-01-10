@@ -1,6 +1,16 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  mode: 'jit',
+  content: [
+    './*.php',
+    './components/*.twig',
+    './components/**/*.twig',
+    './inc/*.php',
+    './inc/**/*.php',
+    './template-parts/*.php',
+    './template-parts/**/*.php',
+    './assets/**/*.css',
+  ],
+  darkMode: 'media',
   theme: {
     extend: {
       colors: {

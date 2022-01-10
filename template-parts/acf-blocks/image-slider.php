@@ -39,11 +39,11 @@ $per_view = get_field('sl_per_view');
 			</div>
 			<div class="glide__arrows" data-glide-el="controls">
 				<button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/icons/chevron-left.svg"
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/icons/chevron-left.svg"
 							 onload="SVGInject(this)"/>
 				</button>
 				<button class="glide__arrow glide__arrow--right" data-glide-dir="&gt;">
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/icons/chevron-right.svg"
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/img/icons/chevron-right.svg"
 							 onload="SVGInject(this)"/>
 				</button>
 			</div>
