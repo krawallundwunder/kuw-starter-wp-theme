@@ -12,6 +12,7 @@
     "husky": "^7.0.1"
   },
   "scripts": {
+    "setup": "yarn install && husky install",
     "dev": "npx tailwindcss -i ./assets/src/input.css -o ./assets/css/tailwind.css && npx tailwindcss -o ./assets/css/tailwind.min.css --minify --watch",
     "prod": "npx tailwindcss -i ./assets/src/input.css -o ./assets/css/tailwind.css && npx tailwindcss -o ./assets/css/tailwind.min.css --minify"
   }
