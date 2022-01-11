@@ -36,7 +36,7 @@
 	<a class="sr-only"
 		 href="#primary"><?php esc_html_e('Skip to content', 'phmu-starter-wp-theme'); ?></a>
 
-	<header id="masthead" class="site-header" x-data="mobileMenu">
+	<header id="masthead" class="site-header py-5" x-data="mobileMenu">
 		<div class="flex flex-row justify-between items-center px-5">
 			<div class="site-branding">
 				<p class="font-bold">
@@ -73,7 +73,8 @@
           );
           ?>
         </div>
-				<div class="menu-mobile fixed top-[5rem] md:top-[4rem] px-5 py-2.5 left-0 right-0 bottom-0 w-full bg-white transition" x-show="open" x-transition><?php
+    <div class="menu-mobile
+    fixed top-[7rem] md:top-[6rem] px-5 py-2.5 left-0 right-0 bottom-0 w-full bg-white transition" x-show="open" x-transition><?php
 					wp_nav_menu(
 						array(
 							'theme_location' => 'menu-1',

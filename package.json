@@ -8,15 +8,29 @@
     "dev": "npx tailwindcss -i ./assets/css/src.css -o ./assets/css/tailwind.min.css --minify --watch",
     "prod": "npx tailwindcss -i ./assets/css/src.css -o ./assets/css/tailwind.min.css --minify"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./assets/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
     "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.12"
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.0"
+    "@tailwindcss/typography": "^0.5.0",
+    "@wordpress/eslint-plugin": "^9.1.0",
+    "eslint": "^7.12.0"
   }
 }
