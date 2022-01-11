@@ -8,7 +8,6 @@ module.exports = {
     './inc/**/*.php',
     './template-parts/*.php',
     './template-parts/**/*.php',
-    './assets/**/*.css',
   ],
   darkMode: 'media',
   theme: {

@@ -37,9 +37,9 @@
 		 href="#primary"><?php esc_html_e('Skip to content', 'phmu-starter-wp-theme'); ?></a>
 
 	<header id="masthead" class="site-header" x-data="mobileMenu">
-		<div class="container pr-4 pl-4">
+		<div class="flex flex-row justify-between items-center px-5">
 			<div class="site-branding">
-				<p class="site-title">
+				<p class="font-bold">
 					<a
 						href="<?php echo esc_url(home_url('/')); ?>"
 						rel="home"
@@ -63,15 +63,17 @@
           </span>
           </button>
         </div>
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'menu-1',
-						'menu_class' => 'menu-desktop'
-					)
-				);
-				?>
-				<div class="menu-mobile transition" x-show="open" x-transition><?php
+				<div class="hidden lg:block">
+          <?php
+          wp_nav_menu(
+            array(
+              'theme_location' => 'menu-1',
+              'menu_class' => 'menu-desktop'
+            )
+          );
+          ?>
+        </div>
+				<div class="menu-mobile fixed top-[5rem] md:top-[4rem] px-5 py-2.5 left-0 right-0 bottom-0 w-full bg-white transition" x-show="open" x-transition><?php
 					wp_nav_menu(
 						array(
 							'theme_location' => 'menu-1',

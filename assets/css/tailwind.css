@@ -1308,10 +1308,6 @@ select {
   flex-shrink: 0;
 }
 
-.flex-grow {
-  flex-grow: 1;
-}
-
 .border-collapse {
   border-collapse: collapse;
 }
@@ -1649,12 +1645,13 @@ select {
   transition-duration: 150ms;
 }
 
-.ease-in {
-  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+.container {
+  border: 15px solid red;
 }
 
-.ease-out {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+.tirrek {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .focus-within\:ring-2:focus-within {
