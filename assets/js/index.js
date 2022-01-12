@@ -1,5 +1,5 @@
 // Mobile Menu Toggle with Alpine.js
-document.addEventListener('alpine:init', function () {
+document.addEventListener('alpine:init', function() {
   // Disable eslint check for next line since Alpine.js is loaded via script tag.
   // eslint-disable-next-line
   Alpine.data('mobileMenu', function () {
