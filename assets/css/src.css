@@ -32,35 +32,12 @@
   color: rgba(255, 255, 255, var(--tw-text-opacity))
 }
 
-.hero-section.has-bg-img .button-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity))
+.button-primary {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500;
 }
 
-.hero-section.has-bg-img .button-primary:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgba(243, 244, 246, var(--tw-bg-opacity))
-}
-
-.hero-section.has-bg-img .button-primary {
-  --tw-text-opacity: 1;
-  color: rgba(0, 0, 0, var(--tw-text-opacity))
-}
-
-.hero-section.has-bg-img .button-secondary {
-  border-style: none;
-  --tw-bg-opacity: 1;
-  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
-  --tw-bg-opacity: .4
-}
-
-.hero-section.has-bg-img .button-secondary:hover {
-  --tw-bg-opacity: .5
-}
-
-.hero-section.has-bg-img .button-secondary {
-  --tw-text-opacity: 1;
-  color: rgba(255, 255, 255, var(--tw-text-opacity))
+.button-secondary {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
 }
 
 .hero-section__title {
