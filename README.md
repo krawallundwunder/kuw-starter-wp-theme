@@ -3,8 +3,8 @@ Basic WP theme for setting up new projects.
 
 ## Features
 - Timber Support (https://timber.github.io/docs/) (https://de.wordpress.org/plugins/timber-library/)
+- TailwindCSS JIT Support (https://tailwindcss.com/)
 - ACF Pro Support (https://www.advancedcustomfields.com/resources/)
-- Sass/SCSS (https://sass-lang.com/documentation)
 - TailwindCSS (https://tailwindcss.com/docs)
 - SVG Inject (https://github.com/iconfu/svg-inject)
 - Alpine.js (https://github.com/alpinejs/alpine)
@@ -16,14 +16,11 @@ Basic WP theme for setting up new projects.
 ## Setup & Development
 ```bash
 # install dependencies
-$ yarn install
+$ yarn run setup
 
-# setup git hooks
-$ husky install
+# compile and watch styles/scripts
+$ yarn run dev
 
-# compile and watch styles/scripts/images and serve with hot reload
-$ yarn start
-
-# compile styles/scripts/images and purge unused styles
+# compile styles/scripts and purge unused styles
 $ yarn run prod
 ```
