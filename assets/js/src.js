@@ -12,3 +12,6 @@ document.addEventListener('alpine:init', function() {
     }
   })
 })
+console.log(
+  'test'
+)
