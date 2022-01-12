@@ -8,7 +8,6 @@
  *
  * @package phmu-starter-wp-theme
  */
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -20,7 +19,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
 				rel="stylesheet">
 
-	<script src="<?php echo get_template_directory_uri() ?>/assets/js/dist/svg-inject.min.js"></script>
+	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/svg-inject.min.js"></script>
 
 	<?php wp_head(); ?>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -34,7 +33,10 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<a class="sr-only"
-		 href="#primary"><?php esc_html_e('Skip to content', 'phmu-starter-wp-theme'); ?></a>
+		 href="#primary"><?php esc_html_e(
+     'Skip to content',
+     'phmu-starter-wp-theme'
+   ); ?></a>
 
 	<header id="masthead" class="site-header py-5" x-data="mobileMenu">
 		<div class="flex flex-row justify-between items-center px-5">
@@ -64,24 +66,18 @@
           </button>
         </div>
 				<div class="hidden lg:block">
-          <?php
-          wp_nav_menu(
-            array(
-              'theme_location' => 'menu-1',
-              'menu_class' => 'menu-desktop'
-            )
-          );
-          ?>
+          <?php wp_nav_menu([
+            'theme_location' => 'menu-1',
+            'menu_class' => 'menu-desktop',
+          ]); ?>
         </div>
     <div class="menu-mobile
-    fixed top-[7rem] md:top-[6rem] px-5 py-2.5 left-0 right-0 bottom-0 w-full bg-white transition" x-show="open" x-transition><?php
-					wp_nav_menu(
-						array(
-							'theme_location' => 'menu-1',
-							'menu_id' => 'menu-mobile',
-						)
-					);
-					?>
+    fixed top-[7rem] md:top-[6rem] px-5 py-2.5 left-0 right-0 bottom-0 w-full bg-white transition" x-show="open" x-transition><?php wp_nav_menu(
+      [
+        'theme_location' => 'menu-1',
+        'menu_id' => 'menu-mobile',
+      ]
+    ); ?>
         </div>
 			</nav><!-- #site-navigation --></div>
 	</header><!-- #masthead -->

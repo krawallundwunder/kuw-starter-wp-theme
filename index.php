@@ -12,65 +12,54 @@
  * @package phmu-starter-wp-theme
  */
 
-get_header();
-?>
+get_header(); ?>
 
 	<main id="primary" class="site-main">
 
-		<?php
-		if (have_posts()) :
-
-			if (is_home() && !is_front_page()) :
-				?>
+		<?php if (have_posts()):
+    if (is_home() && !is_front_page()): ?>
 				<header>
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
-			<?php
-			endif;
+			<?php endif;
 
-			/* Start the Loop */
-			while (have_posts()) :
-				the_post();
+    /* Start the Loop */
+    while (have_posts()):
+      the_post();
 
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part('template-parts/content', get_post_type());
-
-			endwhile;
-
-		else :
-
-			get_template_part('template-parts/content', 'none');
-
-		endif;
-		?>
+      /*
+       * Include the Post-Type-specific template for the content.
+       * If you want to override this in a child theme, then include a file
+       * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+       */
+      get_template_part('template-parts/content', get_post_type());
+    endwhile;
+  else:
+    get_template_part('template-parts/content', 'none');
+  endif; ?>
 
     <!--
       Example Component
     -->
     <?php
-      $props = array();
-      $props['headline'] = 'Hello from example.twig!';
-      $props['subtitle'] = 'This is an example Twig Template.';
-      $props['description'] = 'Feel free to edit or delete it.';
-      Timber::render('example.twig', $props);
+    $props = [];
+    $props['headline'] = 'Hello from example.twig!';
+    $props['subtitle'] = 'This is an example Twig Template.';
+    $props['description'] = 'Feel free to edit or delete it.';
+    Timber::render('example.twig', $props);
     ?>
 
     <!--
       Posts List Component
     -->
     <?php
-      $props = array();
-      $props['posts'] = Timber::get_posts('posts_per_page=3');
-      $props['headline'] = 'Blog Posts';
-      $props['button_text'] = 'View all posts';
-      Timber::render('posts-list.twig', $props);
+    $props = [];
+    $props['posts'] = Timber::get_posts('posts_per_page=3');
+    $props['headline'] = 'Blog Posts';
+    $props['button_text'] = 'View all posts';
+    Timber::render('posts-list.twig', $props);
     ?>
 
 	</main><!-- #main -->
 
-<?php
-get_footer();
+<?php get_footer();
