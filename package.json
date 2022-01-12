@@ -8,7 +8,7 @@
     "styles": "npx tailwindcss -i ./assets/css/src.css -o ./assets/css/dist/style.min.css --minify --watch",
     "js": "npx webpack build --watch",
     "dev": "yarn npm-run-all --parallel styles js",
-    "prod": "npx tailwindcss -i ./assets/css/src.css -o ./assets/css/dist/style.min.css --minify && yarn eslint ./assets/js/*.js && yarn eslint ./assets/js/**/*.js"
+    "prod": "npx tailwindcss -i ./assets/css/src.css -o ./assets/css/dist/style.min.css --minify && yarn eslint ./assets/js/src.js"
   },
   "devDependencies": {
     "@wordpress/eslint-plugin": "^9.1.0",
