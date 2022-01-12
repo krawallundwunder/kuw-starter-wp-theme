@@ -20,7 +20,7 @@ if (post_password_required()) {
 }
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments-area text-6xl my-24 py-24">
 
 	<?php
 	// You can start editing here -- including this comment!

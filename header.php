@@ -20,7 +20,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
 				rel="stylesheet">
 
-	<script src="<?php echo get_template_directory_uri() ?>/assets/js/svg-inject.min.js"></script>
+	<script src="<?php echo get_template_directory_uri() ?>/assets/js/dist/svg-inject.min.js"></script>
 
 	<?php wp_head(); ?>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
