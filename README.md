@@ -23,6 +23,6 @@ $ yarn setup
 # start development process and watch styles/scripts
 $ yarn dev
 
-# compile styles/scripts and lint PHP files for production
+# compile, lint and format theme for production
 $ yarn prod
 ```
