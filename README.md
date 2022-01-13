@@ -17,10 +17,10 @@ Basic WP theme for setting up new projects.
 ## Setup & Development
 
 ```bash
-# install dependencies
+# install dependencies and set up necessary tools
 $ yarn setup
 
-# compile and watch styles/scripts
+# start development process and watch styles/scripts
 $ yarn dev
 
 # compile styles/scripts and lint PHP files for production
