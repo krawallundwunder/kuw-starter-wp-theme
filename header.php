@@ -71,13 +71,11 @@
             'menu_class' => 'menu-desktop',
           ]); ?>
         </div>
-    <div class="menu-mobile
-    fixed top-[7rem] md:top-[6rem] px-5 py-2.5 left-0 right-0 bottom-0 w-full bg-white transition" x-show="open" x-transition><?php wp_nav_menu(
-      [
-        'theme_location' => 'menu-1',
-        'menu_id' => 'menu-mobile',
-      ]
-    ); ?>
+        <div class="menu-mobile fixed top-[4rem] px-5 py-2.5 left-0 right-0 bottom-0 w-full bg-white transition" x-show="open" x-transition>
+        <?php wp_nav_menu([
+          'theme_location' => 'menu-1',
+          'menu_id' => 'menu-mobile',
+        ]); ?>
         </div>
 			</nav><!-- #site-navigation --></div>
 	</header><!-- #masthead -->
