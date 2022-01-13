@@ -19,11 +19,11 @@ Basic WP theme for setting up new projects.
 
 ```bash
 # install dependencies
-$ yarn run setup
+$ yarn setup
 
 # compile and watch styles/scripts
-$ yarn run dev
+$ yarn dev
 
 # compile styles/scripts and lint PHP files for production
-$ yarn run prod
+$ yarn prod
 ```

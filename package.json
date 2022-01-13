@@ -4,12 +4,12 @@
   "repository": "git@github.com:phmu/phmu-starter-wp-theme.git",
   "license": "MIT",
   "scripts": {
-    "setup": "yarn && yarn husky install",
-    "dev": "yarn run npm-run-all --parallel styles js",
-    "prod": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/dist/main.min.css --minify && npx webpack build && yarn run eslint ./assets/js/index.js && yarn run prettier-php",
-    "styles": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/dist/main.min.css --minify --watch",
-    "js": "npx webpack build --watch",
-    "prettier-php": "yarn run prettier \"**.php\" --write"
+    "setup": "yarn install && yarn husky install",
+    "dev": "yarn npm-run-all --parallel styles-dev js-dev",
+    "styles-dev": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/dist/main.min.css --minify --watch",
+    "js-dev": "npx webpack build --watch",
+    "prettier-php": "yarn prettier \"**.php\" --write",
+    "prod": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/dist/main.min.css --minify && npx webpack build && yarn run eslint ./assets/js/index.js && yarn run prettier-php"
   },
   "devDependencies": {
     "tailwindcss": "^3.0.13",
