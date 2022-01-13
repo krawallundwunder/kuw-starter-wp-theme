@@ -15,18 +15,13 @@
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-				rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/svg-inject.min.js"></script>
-
 	<?php wp_head(); ?>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" integrity="sha512-BXASbMmKLu+RC5TDnkupyhvrjiOQXILh/5zgIS8k5JAC71a73lNweVEg/X+9XJQ7GK22PH9WpztY3zqrji+xrQ==" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://unpkg.com/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
-	<link rel="stylesheet" href="https://unpkg.com/@glidejs/glide@3.4.1/dist/css/glide.theme.min.css">
+  <script defer src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/alpine.min.js?v=3.7.1"></script>
+	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/glide.min.js?=v3.5.2"></script>
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.core.min.css">
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.theme.min.css">
 </head>
 
 <body <?php body_class(); ?>>
