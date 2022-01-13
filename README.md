@@ -13,7 +13,6 @@ Basic WP theme for setting up new projects.
 ## Required Plugins
 
 - Timber (https://wordpress.org/plugins/timber-library/)
-- SVG Support (https://wordpress.org/plugins/svg-support/)
 
 ## Setup & Development
 
