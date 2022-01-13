@@ -151,13 +151,13 @@ add_action('widgets_init', 'phmu_starter_wp_theme_widgets_init');
 function phmu_starter_wp_theme_scripts()
 {
   wp_enqueue_style(
-    'tailwind-min-css',
-    get_template_directory_uri() . '/assets/css/dist/style.min.css',
+    'main-css',
+    get_template_directory_uri() . '/assets/css/dist/main.min.css',
     [],
     _S_VERSION
   );
   wp_enqueue_script(
-    'custom-javascript',
+    'main-javascript',
     get_template_directory_uri() . '/assets/js/dist/bundle.min.js',
     [],
     _S_VERSION,
