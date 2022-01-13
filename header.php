@@ -38,10 +38,10 @@
      'phmu-starter-wp-theme'
    ); ?></a>
 
-	<header id="masthead" class="site-header py-5" x-data="mobileMenu">
+	<header id="masthead" class="site-header py-5 dark:bg-gray-900" x-data="mobileMenu">
 		<div class="flex flex-row justify-between items-center px-5">
 			<div class="site-branding">
-				<p class="font-bold">
+				<p class="font-bold text-gray-900 dark:text-white">
 					<a
 						href="<?php echo esc_url(home_url('/')); ?>"
 						rel="home"
