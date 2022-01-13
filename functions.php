@@ -157,8 +157,8 @@ function phmu_starter_wp_theme_scripts()
     _S_VERSION
   );
   wp_enqueue_script(
-    'main-javascript',
-    get_template_directory_uri() . '/assets/js/dist/bundle.min.js',
+    'main-js',
+    get_template_directory_uri() . '/assets/js/dist/main.min.js',
     [],
     _S_VERSION,
     true

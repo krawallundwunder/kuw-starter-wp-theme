@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   mode: 'production',
   entry: {
-    'bundle.min.js': [
+    'main.min.js': [
       path.resolve(__dirname, 'assets/js/index.js'),
     ],
   },
