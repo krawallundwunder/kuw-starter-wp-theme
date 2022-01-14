@@ -16,12 +16,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/svg-inject.min.js"></script>
-	<?php wp_head(); ?>
+	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/svg-inject.min.js?=v1.2.3"></script>
   <script defer src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/alpine.min.js?v=3.7.1"></script>
 	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/glide.min.js?=v3.5.2"></script>
-	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.core.min.css">
-	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.theme.min.css">
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.core.min.css?=v3.5.2">
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.theme.min.css?=v3.5.2">
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
