@@ -33,8 +33,8 @@
      'phmu-starter-wp-theme'
    ); ?></a>
 
-	<header id="masthead" class="site-header py-5 dark:bg-gray-900" x-data="mobileMenu">
-		<div class="flex flex-row justify-between items-center px-5">
+	<header id="masthead" class="py-5 site-header dark:bg-gray-900" x-data="mobileMenu">
+		<div class="flex flex-row items-center justify-between px-5">
 			<div class="site-branding">
 				<p class="font-bold text-gray-900 dark:text-white">
 					<a

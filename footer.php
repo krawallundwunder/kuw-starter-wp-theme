@@ -10,7 +10,7 @@
  */
 ?>
 
-<footer id="colophon" class="site-footer pt-8 pb-6">
+<footer id="colophon" class="pt-8 pb-6 site-footer">
 	<div class="site-info">
 		<a href="<?php echo esc_url(
     __('https://wordpress.org/', 'phmu-starter-wp-theme')

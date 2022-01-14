@@ -1,19 +1,19 @@
 <section aria-labelledby="blog-posts-title" class="max-w-md mx-auto my-4">
-  <div class="rounded-lg bg-white overflow-hidden shadow">
+  <div class="overflow-hidden bg-white rounded-lg shadow">
     <div class="p-6">
       <h2 class="text-base font-medium text-gray-900" id="blog-posts-title">{{ headline }}</h2>
-      <div class="flow-root mt-6">
+      <div class="mt-6 flow-root">
         <ul class="-my-5 divide-y divide-gray-200">
           {% for post in posts %}
           <li class="py-5">
             <div class="relative focus-within:ring-2 focus-within:ring-cyan-500">
               <div class="flex flex-row">
                 {% if post.thumbnail.src %}
-                  <img class="w-16 h-16 rounded-md object-cover mr-4" src="{{ post.thumbnail.src|resize(250,250) }}" width="100%" height="100%" alt="">
+                  <img class="object-cover w-16 h-16 mr-4 rounded-md" src="{{ post.thumbnail.src|resize(250,250) }}" width="100%" height="100%" alt="">
                 {% else %}
-                <div class="bg-orange-50 rounded-md flex flex-row justify-items-center items-center mr-4">
-                  <div class="flex-none w-16 h-16 flex justify-center items-center">
-                    <svg class="h-8 w-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <div class="flex flex-row items-center mr-4 rounded-md bg-orange-50 justify-items-center">
+                  <div class="flex items-center justify-center flex-none w-16 h-16">
+                    <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                   </div>
                 </div>
                 {% endif %}
@@ -36,7 +36,7 @@
         </ul>
       </div>
       <div class="mt-6">
-        <a href="{{ blog.link }}" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+        <a href="{{ blog.link }}" class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50">
           {{ button_text }}
         </a>
       </div>

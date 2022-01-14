@@ -18,7 +18,7 @@ $per_view = get_field('sl_per_view');
 <section
 	class="acf-block slider image-slider"
 >
-	<div class="container pr-4 pl-4">
+	<div class="container pl-4 pr-4">
 		<?php if ($title): ?>
 			<h2><?php echo $title; ?></h2>
 		<?php endif; ?>

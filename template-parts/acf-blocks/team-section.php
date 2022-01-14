@@ -9,7 +9,7 @@ $headline = get_field('ts_headline');
 $subtitle = get_field('ts_subtitle');
 ?>
 
-<section class="acf-block text-center">
+<section class="text-center acf-block">
 	<div class="container px-4">
 		<h2><?php echo $headline; ?></h2>
 		<?php if ($subtitle): ?>
@@ -20,7 +20,7 @@ $subtitle = get_field('ts_subtitle');
      the_row(); ?>
 				<div class="text-center">
 					<img
-						class="mx-auto w-48 h-48 rounded-full lg:h-64 lg:w-64"
+						class="w-48 h-48 mx-auto rounded-full lg:h-64 lg:w-64"
 						src="<?php the_sub_field('ts_team_members_img'); ?>"
 						alt="<?php the_sub_field('ts_team_members_name'); ?>"
 					/>

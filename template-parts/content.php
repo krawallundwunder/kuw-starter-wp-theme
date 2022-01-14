@@ -7,8 +7,8 @@
  * @package phmu-starter-wp-theme
  */
 ?>
-<div class="container mx-auto py-16">
-	<article class="max-w-prose mx-auto px-4 xl:px-0 prose prose-orange"
+<div class="container py-16 mx-auto">
+	<article class="px-4 mx-auto prose max-w-prose xl:px-0 prose-orange"
 					 id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<header class="entry-header">
 			<?php

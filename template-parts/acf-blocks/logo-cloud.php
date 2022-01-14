@@ -7,10 +7,10 @@
 
 $headline = get_field('lc_headline'); ?>
 
-<section class="acf-block text-center">
+<section class="text-center acf-block">
 	<div class="container px-4">
 		<?php if ($headline): ?>
-			<h2 class="text-base text-gray-500 font-semibold uppercase tracking-wide">
+			<h2 class="text-base font-semibold tracking-wide text-gray-500 uppercase">
 				<?php echo $headline; ?>
 			</h2>
 		<?php endif; ?>
