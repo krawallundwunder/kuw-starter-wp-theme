@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  @apply mx-auto w-full sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px] 2xl:max-w-[1536px];
+}
+
+.menu-desktop {
+  @apply flex flex-row space-x-2 text-gray-900 dark:text-white;
+}
+
+.site {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column
+}
+
+.site .site-main {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1
+}
+
+.hero-section.has-bg-img {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity))
+}
+
+.button-primary {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500;
+}
+
+.button-secondary {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+}
+
+.hero-section__title {
+  margin: 0
+}
+
+.hero-section__subtitle {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+  max-width: 42rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500
+}
+
+.hero-section__buttons {
+  margin-top: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.hero-section__buttons>:not([hidden])~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+
+.hero-section__buttons .button {
+  width: 100%
+}
+
+.slider {
+  text-align: center
+}
+
+.slider .glide {
+  position: relative;
+  margin-top: 2rem
+}
+
+.slider .glide__slides {
+  margin: 0
+}
+
+.slider .glide__arrow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border-style: none;
+  --tw-bg-opacity: 1;
+  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+  --tw-bg-opacity: .4
+}
+
+.slider .glide__arrow:hover {
+  --tw-bg-opacity: .6
+}
+
+.slider .glide__arrow {
+  padding: .75rem;
+  --tw-shadow: 0 0 #0000;
+  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  -webkit-transition-property: background-color, border-color, color, fill, stroke, opacity, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms
+}
+
+
+.acf-block {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem
+}
+
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center
+}
+
+.hero-section.is-front-page {
+  padding-top: 3rem;
+  padding-bottom: 3rem
+}
+
+.hamburger {
+  @apply text-gray-900 dark:text-white;
+  padding: .5rem .5rem;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-transition-property: opacity, -webkit-filter;
+  transition-property: opacity, -webkit-filter;
+  transition-property: opacity, filter;
+  transition-property: opacity, filter, -webkit-filter;
+  -webkit-transition-duration: .3s;
+  transition-duration: .3s;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+  font: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible
+}
+
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  background-color: currentColor
+}
+
+.hamburger-box {
+  width: 26px;
+  height: 16px;
+  display: inline-block;
+  position: relative
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -1px
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 26px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 9999px;
+  position: absolute;
+  -webkit-transition-property: color, -webkit-transform;
+  transition-property: color, -webkit-transform;
+  transition-property: transform, color;
+  transition-property: transform, color, -webkit-transform;
+  -webkit-transition-duration: .3s;
+  transition-duration: .3s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  display: block
+}
+
+.hamburger-inner::before {
+  top: -7px
+}
+
+.hamburger-inner::after {
+  bottom: -7px
+}
+
+.hamburger--spin .hamburger-inner {
+  -webkit-transition-duration: .3s;
+  transition-duration: .3s;
+  -webkit-transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19)
+}
+
+.hamburger--spin .hamburger-inner::before {
+  -webkit-transition: top .1s .25s ease-in, opacity .1s ease-in;
+  transition: top .1s .25s ease-in, opacity .1s ease-in
+}
+
+.hamburger--spin .hamburger-inner::after {
+  -webkit-transition: bottom .1s .25s ease-in, -webkit-transform .22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transition: bottom .1s .25s ease-in, -webkit-transform .22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transition: bottom .1s .25s ease-in, transform .22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transition: bottom .1s .25s ease-in, transform .22s cubic-bezier(0.55, 0.055, 0.675, 0.19), -webkit-transform .22s cubic-bezier(0.55, 0.055, 0.675, 0.19)
+}
+
+.hamburger--spin.is-active .hamburger-inner {
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+  -webkit-transition-delay: .12s;
+  transition-delay: .12s;
+  -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+}
+
+.hamburger--spin.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+  -webkit-transition: top .1s ease-out, opacity .1s .12s ease-out;
+  transition: top .1s ease-out, opacity .1s .12s ease-out
+}
+
+.hamburger--spin.is-active .hamburger-inner::after {
+  bottom: 0;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  -webkit-transition: bottom .1s ease-out, -webkit-transform .22s .12s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: bottom .1s ease-out, -webkit-transform .22s .12s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: bottom .1s ease-out, transform .22s .12s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: bottom .1s ease-out, transform .22s .12s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform .22s .12s cubic-bezier(0.215, 0.61, 0.355, 1)
+}
