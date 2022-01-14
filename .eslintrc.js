@@ -5,10 +5,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@wordpress/eslint-plugin/esnext',
-  ],
+  extends: ['eslint:recommended', 'plugin:@wordpress/eslint-plugin/esnext'],
   parserOptions: {
     sourceType: 'module',
   },
@@ -20,5 +17,16 @@ module.exports = {
     semi: ['error', 'never'],
     quotes: ['error', 'single'],
     'linebreak-style': ['error', 'unix'],
+    'space-unary-ops': [
+      2,
+      {
+        words: true,
+        nonwords: false,
+        overrides: {
+          new: false,
+          '++': true,
+        },
+      },
+    ],
   },
 }
