@@ -1,6 +1,7 @@
 module.exports = {
   content: [
     './*.php',
+    './**/*.twig',
     './components/*.twig',
     './components/**/*.twig',
     './inc/*.php',

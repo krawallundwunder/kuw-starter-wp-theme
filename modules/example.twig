@@ -1,0 +1,19 @@
+<div class="container items-center px-8 py-16 space-x-0 space-y-6 sm:space-x-12 sm:space-y-0 xl:px-0 sm:flex">
+  <div class="w-4/5 max-w-[14rem] mx-auto">
+    <div class="aspect-w-1 aspect-h-1">
+      <img
+        class="object-cover w-full rounded-full"
+        src="{{ Image(module.image).src}}"
+        alt="{{ Image(module.image).alt}}"
+      />
+    </div>
+  </div>
+  <div class="my-auto text-orange-800 sm:flex-1">
+    <h2 class="max-w-2xl mb-6 font-serif text-5xl italic font-black leading-none sm:leading-tight">{{module.title}}</h2>
+    <a
+      class="block px-10 font-sans font-semibold text-center text-orange-800 border-2 border-orange-800 rounded-full sm:inline-block sm:text-sm h-88 w-88 py-7"
+      href="{{module.button.url}}"
+      >{{module.button.title}}</a
+    >
+  </div>
+</div>
