@@ -1,14 +1,48 @@
-// Mobile Menu Toggle with Alpine.js
-document.addEventListener('alpine:init', function() {
-  // Disable eslint check for next line since Alpine.js is loaded via script tag.
-  // eslint-disable-next-line
-  Alpine.data('mobileMenu', function () {
-    return {
-      open: false,
-      toggle: function toggle() {
-        this.open = !this.open
-        document.body.classList.toggle('no-scroll')
-      },
-    }
-  })
-})
+import { createApp } from 'petite-vue'
+
+function Menu() {
+  return {
+    isOpen: false,
+    isScrolled: false,
+    toggle() {
+      this.isOpen = !this.isOpen
+      document.body.classList.toggle('no-scroll')
+    },
+    updateScroll() {
+      this.isScrolled = window.scrollY
+      if (window.scrollY > 80) {
+        this.isScrolled = true
+      } else {
+        this.isScrolled = false
+      }
+    },
+    watchScroll() {
+      window.addEventListener('scroll', this.updateScroll)
+    },
+  }
+}
+
+const Accordion = () => {
+  return {
+    isOpen: false,
+    toggle() {
+      this.isOpen = !this.isOpen
+    },
+  }
+}
+
+const Hero = () => {
+  return {
+    scrollDown() {
+      const pageHeight = window.innerHeight
+      window.scrollBy(0, pageHeight)
+    },
+  }
+}
+
+createApp({
+  $delimiters: ['${', '}'],
+  Accordion,
+  Menu,
+  Hero,
+}).mount()

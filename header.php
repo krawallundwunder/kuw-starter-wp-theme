@@ -17,7 +17,6 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/svg-inject.min.js?=v1.2.3"></script>
-  <script defer src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/alpine.min.js?v=3.7.1"></script>
 	<script src="<?php echo get_template_directory_uri(); ?>/assets/js/dist/glide.min.js?=v3.5.2"></script>
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.core.min.css?=v3.5.2">
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/dist/glide.theme.min.css?=v3.5.2">
@@ -33,7 +32,7 @@
      'phmu-starter-wp-theme'
    ); ?></a>
 
-	<header id="masthead" class="py-5 site-header dark:bg-gray-900" x-data="mobileMenu">
+	<header id="masthead" class="py-5 site-header dark:bg-gray-900">
 		<div class="flex flex-row items-center justify-between px-5">
 			<div class="site-branding">
 				<p class="font-bold text-gray-900 dark:text-white">
@@ -46,7 +45,7 @@
 				</p>
 			</div><!-- .site-branding -->
 
-			<nav id="site-navigation" class="main-navigation">
+		<nav id="site-navigation" class="main-navigation">
         <div class="-mb-1 lg:hidden">
           <button
             class="hamburger hamburger--spin"
@@ -72,5 +71,6 @@
           'menu_id' => 'menu-mobile',
         ]); ?>
         </div>
-			</nav><!-- #site-navigation --></div>
+	</nav><!-- #site-navigation -->
+    </div>
 	</header><!-- #masthead -->
