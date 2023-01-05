@@ -1,4 +1,4 @@
-# PHMU Starter WP Theme
+# krawall & wunder Starter WP Theme
 
 Basic WP theme for setting up new projects.
 
