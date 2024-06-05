@@ -13,6 +13,12 @@ call_user_func(function (): void {
 
 add_action('wp_enqueue_scripts', function (): void {
     wp_enqueue_script('Flynt/assets/main', Asset::requireUrl('assets/main.js'), [], null);
+     wp_enqueue_script(
+    'load-alpine',
+    get_template_directory_uri() . '/assets/scripts/main.min.js',
+    [],
+    true
+  );
     wp_script_add_data('Flynt/assets/main', 'module', true);
 
     wp_localize_script('Flynt/assets/main', 'FlyntData', [
