@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "checkVersion": "check-node-version --package -p",
-    "start": "run-s --silent dev",
+    "start": "run-s --silent dev styles-dev",
     "dev": "run-s --silent checkVersion clean serve",
     "clean": "rimraf ./dist && mkdirp ./dist",
     "serve": "vite dev",

@@ -60,6 +60,8 @@ assets/bower_components/*
 # Compiled Files and Build Dirs #
 ##########
 /README.html
+dist
+assets/css/dist
 
 # PhpStrom Project Files #
 .idea/
