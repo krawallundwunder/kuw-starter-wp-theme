@@ -2,12 +2,12 @@ module.exports = {
   content: [
     './*.php',
     './**/*.twig',
-    './components/*.twig',
-    './components/**/*.twig',
+    './Components/*.twig',
+    './Components/**/*.twig',
     './inc/*.php',
     './inc/**/*.php',
-    './template-parts/*.php',
-    './template-parts/**/*.php',
+    './templates/*.php',
+    './templates/**/*.php',
   ],
   darkMode: 'media',
   theme: {

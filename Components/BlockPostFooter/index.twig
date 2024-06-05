@@ -1,0 +1,45 @@
+<flynt-component name="BlockPostFooter" class="componentSpacing">
+  <div class="container">
+    <div data-size="medium" data-align="center">
+      <hr>
+      <div data-size="medium" data-align="left">
+        {% if post.terms('tag')  %}
+          <span class="visuallyHidden">{{ labels.tagsLabel }}</span>
+          <ul class="tags">
+            {% for tag in post.terms('tag') %}
+              <li class="tag">
+                <a class="button button--text" href="{{ tag.link|e('esc_url') }}">{{ tag }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <div class="author">
+          {% if post.author.avatar %}
+            <a href="{{ post.author.link|e('esc_url') }}" aria-hidden="true" tabindex="-1">
+              <img
+                class="avatar-image lazyload"
+                width="96"
+                height="96"
+                src="{{ placeholderImage(96, 96) }}"
+                data-src="{{ post.author.avatar({size: 192}) }}"
+                alt="{{ post.author.name|e }}">
+            </a>
+          {% endif %}
+          <div class="details">
+            <p>
+              <a href="{{ post.author.link|e('esc_url') }}">
+                <span class="visuallyHidden">{{ labels.postedByLabel }}</span>
+                {{ post.author.name }}
+              </a>
+            </p>
+            {% if post.author.meta.description %}
+              <p>
+                <small>{{ post.author.meta.description|e }}</small>
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</flynt-component>
