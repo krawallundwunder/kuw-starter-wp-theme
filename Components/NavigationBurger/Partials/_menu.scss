@@ -1,0 +1,47 @@
+.menu {
+  backface-visibility: hidden;
+  background-color: var(--color-background);
+  block-size: calc(100% - var(--navigation-height));
+  inline-size: 100%;
+  inset-block-start: var(--navigation-height);
+  inset-inline-start: 0;
+  list-style: none;
+  margin: 0;
+  overflow-y: auto;
+  padding-block: var(--component-spacing);
+  padding-inline: var(--container-spacing);
+  position: fixed;
+  transition: translate 0.45s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.45s;
+  translate: 100% 0;
+  visibility: hidden;
+  will-change: translate, visibility;
+  z-index: 98;
+
+  .admin-bar & {
+    block-size: calc(100% - var(--navigation-height) - var(--wp-admin--admin-bar--height));
+    inset-block-start: calc(var(--navigation-height) + var(--wp-admin--admin-bar--height));
+  }
+
+  .link {
+    color: var(--color-text);
+    display: block;
+    font-size: 1.25rem;
+    padding-block: 0.9rem;
+    padding-inline: 1.25rem;
+    text-decoration: none;
+  }
+
+  .current-menu-item {
+    .link {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+  }
+}
+
+&[data-status='menuIsOpen'] {
+  .menu {
+    translate: 0 0;
+    visibility: visible;
+  }
+}

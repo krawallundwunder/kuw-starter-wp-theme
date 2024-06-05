@@ -1,0 +1,17 @@
+.results {
+  list-style: none;
+  padding: 0;
+
+  .result + .result {
+    margin-block-start: var(--flow-space);
+  }
+
+  footer {
+    text-align: end;
+  }
+}
+
+.noResults {
+  margin-block-start: calc(var(--component-spacing) / 2);
+  text-align: center;
+}

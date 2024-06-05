@@ -1,0 +1,60 @@
+flynt-component[name='GridPostsArchive'] {
+  .posts {
+    --grid-columns: 1;
+    display: grid;
+    gap: var(--flow-space);
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+
+    @media (min-width: $breakpoint-tablet) {
+      --grid-columns: 2;
+    }
+
+    @media (min-width: $breakpoint-tablet-horizontal) {
+      --grid-columns: 3;
+    }
+  }
+
+  .posts-empty {
+    text-align: center;
+  }
+
+  .post {
+    inline-size: var(--grid-item-width);
+    max-inline-size: var(--grid-item-max-width);
+
+    .link {
+      block-size: 100%;
+      color: currentColor;
+      display: flex;
+      flex-direction: column;
+      font-weight: initial;
+      text-decoration: none;
+    }
+
+    .content {
+      color: var(--color-text);
+      flex-grow: 1;
+      margin-block-start: 0;
+    }
+
+    .footer {
+      align-items: center;
+      display: flex;
+      inline-size: 100%;
+      justify-content: space-between;
+      padding-block: 0 var(--box-spacing);
+      padding-inline: var(--box-spacing);
+      position: relative;
+
+      .readingTime {
+        color: var(--color-text-muted);
+      }
+    }
+  }
+
+  @import 'Partials/filter';
+  @import 'Partials/pagination';
+}

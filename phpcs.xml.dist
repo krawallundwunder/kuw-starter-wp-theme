@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<ruleset name="Flynt Theme PHP Coding Standards">
+  <description>Coding Standards for Flynt Theme</description>
+
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>./vendor/*</exclude-pattern>
+  <exclude-pattern>./dist/*</exclude-pattern>
+
+  <file>.</file>
+
+  <arg name="extensions" value="php"/>
+  <arg name="colors"/>
+
+  <!-- Commenting rules for ./lib -->
+  <rule ref="Squiz.Commenting">
+    <include-pattern>./lib/*</include-pattern>
+    <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
+    <exclude name="Squiz.Commenting.LongConditionClosingComment.Missing"/>
+    <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+    <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName"/>
+    <exclude name="Squiz.Commenting.FileComment.Missing"/>
+    <exclude name="Squiz.Commenting.BlockComment.NoEmptyLineAfter"/>
+    <exclude name="Squiz.Commenting.FileComment.MissingAuthorTag"/>
+    <exclude name="Squiz.Commenting.FunctionComment.MissingReturn"/>
+    <exclude name="Squiz.Commenting.VariableComment.MissingVar"/>
+  </rule>
+
+  <!-- Use short array syntax -->
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+
+  <!-- Show sniff codes in all reports -->
+  <arg value="s"/>
+  <!-- Exclude Warnings -->
+  <arg value="n"/>
+
+  <rule ref="PSR12"/>
+</ruleset>
