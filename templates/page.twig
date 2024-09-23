@@ -1,7 +1,21 @@
 {% extends 'templates/_document.twig' %}
 
 {% block content %}
-  {% for component in post.meta('pageComponents') %}
-    {{ renderComponent(component) }}
-  {% endfor %}
+  {% if page_template not in ['page-custom.php'] %}
+    {% for component in post.meta('pageComponents') %}
+      {{ renderComponent(component) }}
+    {% endfor %}
+  {% else %}
+    <div class='container mb-24 mt-24'>
+      <div
+        class='content prose lg:prose-xl prose-capecod-950 prose-a:text-capecod-900 hover:prose-a:text-capecod-400 prose-p:text-capecod-950 prose-h2:text-capecod-950 prose-h3:text-capecod-950 '
+        data-size='{{ options.size }}'
+        data-align='{{ options.align }}'
+        data-text-align='{{ options.textAlign }}'
+      >
+        <h1>{{ post.title }}</h1>
+        {{ post.content }}
+      </div>
+    </div>
+  {% endif %}
 {% endblock %}
