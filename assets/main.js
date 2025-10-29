@@ -11,14 +11,10 @@ import.meta.glob([
   '../Components/**',
   '../assets/**',
   '!**/*.js',
-  '!**/*.scss',
   '!**/*.php',
   '!**/*.twig',
   '!**/screenshot.png',
   '!**/*.md'
 ])
 
-window.customElements.define(
-  'flynt-component',
-  FlyntComponent
-)
+window.customElements.define('flynt-component', FlyntComponent)

@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@import './styles/_reset.css';
+@import './styles/_variables.css';
+@import './styles/_fonts.css';
+@import './styles/_base.css';
+@import './css/tailwind.css';
+
+:root {
+  --color-accent: #FFD700;
+  --color-neutral: #1a1a1a;
+  --color-button-light: #2a2a2a;
+  --font-family-sans: Inter, sans-serif;
+  --font-family-serif: serif;
+}
+.container {
+  @apply mx-auto w-11/12 px-4;
+  max-width: 640px;
+}
+
+@media (width >= 768px) {
+  .container {
+    width: 100%;
+    max-width: 768px;
+  }
+}
+
+@media (width >= 1024px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media (width >= 1280px) {
+  .container {
+    max-width: 1236px;
+  }
+}
+
+@media (width >= 1536px) {
+  .container {
+    max-width: 1336px;
+  }
+}
+
+.menu-desktop {
+  @apply flex flex-row space-x-2 text-gray-900 dark:text-white;
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site .site-main {
+  flex-grow: 1;
+}

@@ -16,7 +16,7 @@ add_filter('block_categories_all', function ($categories, $post) {
 add_action('after_setup_theme', function (): void {
   add_theme_support('editor-styles');
 
-  add_editor_style('assets/css/editor-style.scss');
+  add_editor_style(\Flynt\Utils\Asset::requireUrl('assets/editor-style.css'));
 });
 
 

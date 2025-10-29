@@ -29,7 +29,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 * **NavigationBurger:** use is_external and is_target_blank ([e383910](https://github.com/flyntwp/flynt/commit/e3839105158a3afc91bdb9e012fa48cb3ff15773))
 * **NavigationFooter:** use is_external and is_target_blank, reduce markup ([acf44aa](https://github.com/flyntwp/flynt/commit/acf44aac5d464f1c030af995426ade543c5ad01f))
-* **NavigationMain:** use is_external and is_target_blank ([39ee3c0](https://github.com/flyntwp/flynt/commit/39ee3c0fe04cecef50d012ee790e27423ae1aea9))
+* **Navigation:** use is_external and is_target_blank ([39ee3c0](https://github.com/flyntwp/flynt/commit/39ee3c0fe04cecef50d012ee790e27423ae1aea9))
 * **package.json:** add releasePatch script ([f6429d8](https://github.com/flyntwp/flynt/commit/f6429d855f1d1e64ef001a5f99d6a66d2cd130a2))
 
 ### Bug Fixes
@@ -66,7 +66,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Other
 
 * **NavigationBurger:** use Timber\Menu sub-namespace instead of Timber ([#352](https://github.com/flyntwp/flynt/issues/352)) ([c7a763f](https://github.com/flyntwp/flynt/commit/c7a763f697f949f049773a3b42b616816450bb00))
-* **NavigationMain:** use Timber\Menu sub-namespace instead of Timber ([#354](https://github.com/flyntwp/flynt/issues/354)) ([70f7e75](https://github.com/flyntwp/flynt/commit/70f7e75cde48241a9ff966d550226ba4782fad18))
+* **Navigation:** use Timber\Menu sub-namespace instead of Timber ([#354](https://github.com/flyntwp/flynt/issues/354)) ([70f7e75](https://github.com/flyntwp/flynt/commit/70f7e75cde48241a9ff966d550226ba4782fad18))
 
 ## [1.4.0](https://github.com/flyntwp/flynt/compare/v1.3.0...v1.4.0) (2020-10-21)
 
@@ -95,7 +95,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **Components:** Accessibility Improvements ([1ebc27b](https://github.com/flyntwp/flynt/commit/1ebc27b386ac86398d8cc7ce2253388252eeb9bb))
 * **ExternalScriptLoader:** remove ([8c54251](https://github.com/flyntwp/flynt/commit/8c542514e0fcfbad88c389f4863199db2a9a937b)), closes [#283](https://github.com/flyntwp/flynt/issues/283)
 * **FormPasswordProtection, post, GridPostsArchive:** add missing titles in favor of accessibility ([4891096](https://github.com/flyntwp/flynt/commit/489109652e168d9936ac632b2b78f7c136b309ff))
-* **NavigationMain:** allow changing the logo via the customizer ([4e84112](https://github.com/flyntwp/flynt/commit/4e8411260f5b5fdd2d13bbee6e5b0066578d61c5))
+* **Navigation:** allow changing the logo via the customizer ([4e84112](https://github.com/flyntwp/flynt/commit/4e8411260f5b5fdd2d13bbee6e5b0066578d61c5))
 * **pageComponents:** add page components to all pages and post types, but posts ([f218164](https://github.com/flyntwp/flynt/commit/f218164d3c470a6976656b72f121570939c177df))
 * **RemoveEditor:** dequeue Gutenberg styles ([3321873](https://github.com/flyntwp/flynt/commit/3321873109cba56fb66c01a365609a6521bacb37)), closes [#261](https://github.com/flyntwp/flynt/issues/261)
 * **theme:** add heading format classes ([6f357ce](https://github.com/flyntwp/flynt/commit/6f357ceadd1d529916b39baae6d622ba25b4d018))

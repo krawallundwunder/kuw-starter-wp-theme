@@ -24,7 +24,7 @@ add_action('after_setup_theme', function (): void {
 
 function getEditorStylesheetUrl(): string
 {
-    return str_replace(get_template_directory_uri(), '', Asset::requireUrl('assets/editor-style.scss'));
+    return str_replace(get_template_directory_uri(), '', Asset::requireUrl('assets/editor-style.css'));
 }
 
 if (Asset::isHotModuleReplacement()) {

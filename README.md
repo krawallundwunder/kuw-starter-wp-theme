@@ -156,7 +156,7 @@ Example:
 If it makes logical sense, loading strategies can be combined:
 
 ```twig
-<flynt-component name="NavigationMain" load:on="idle" load:on:media="(min-width: 1024px)">
+<flynt-component name="Navigation" load:on="idle" load:on:media="(min-width: 1024px)">
 ```
 
 With nested components the loading strategy is waiting for parents. If you have a component with `load:on="idle"` nested inside a component with `load:on="visible"`, the child component will only be loaded on visible of the parent component.
