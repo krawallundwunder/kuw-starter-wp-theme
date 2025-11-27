@@ -14,7 +14,10 @@
     "build": "NODE_ENV=production vite build",
     "build:lint": "bun run lint && NODE_ENV=production vite build",
     "lint": "./vendor/bin/phpcs",
-    "format": "./vendor/bin/phpcbf"
+    "format": "./vendor/bin/phpcbf",
+    "prepare": "husky",
+    "test": "bun run build:lint",
+    "test:ci": "bun run lint && bun run build"
   },
   "dependencies": {
     "body-scroll-lock": "^3.1.5",
@@ -27,9 +30,12 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.16",
+    "@zackad/prettier-plugin-twig": "^0.16.0",
     "autoprefixer": "^10.4.19",
     "concurrently": "^9.2.1",
+    "husky": "^9.1.7",
     "postcss": "^8.5.6",
+    "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^4.1.16",
     "vite": "^5.2.11",
     "vite-plugin-full-reload": "^1.1.0"
