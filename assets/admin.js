@@ -1,5 +1,5 @@
 if (import.meta.env.DEV) {
-  import('@vite/client')
+  import('@vite/client');
 }
 
-import.meta.glob('../Components/**/admin.js', { eager: true })
+import.meta.glob('../Components/**/admin.js', { eager: true });

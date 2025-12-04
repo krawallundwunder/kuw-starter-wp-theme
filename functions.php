@@ -7,7 +7,10 @@ use Flynt\Utils\FileLoader;
 require_once __DIR__ . '/vendor/autoload.php';
 
 if (!defined('WP_ENV')) {
-  define('WP_ENV', function_exists('wp_get_environment_type') ? wp_get_environment_type() : 'production');
+  define(
+    'WP_ENV',
+    function_exists('wp_get_environment_type') ? wp_get_environment_type() : 'production',
+  );
 } elseif (!defined('WP_ENVIRONMENT_TYPE')) {
   define('WP_ENVIRONMENT_TYPE', WP_ENV);
 }
@@ -32,3 +35,21 @@ add_action('after_setup_theme', function (): void {
 });
 
 require_once get_template_directory() . '/inc/acf-blocks/acf-blocks.php';
+add_filter('upload_mimes', function ($mimes) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+});
+
+add_filter(
+  'wp_check_filetype_and_ext',
+  function ($data, $file, $filename, $mimes) {
+    $filetype = wp_check_filetype($filename, $mimes);
+    return [
+      'ext' => $filetype['ext'],
+      'type' => $filetype['type'],
+      'proper_filename' => $data['proper_filename'],
+    ];
+  },
+  10,
+  4,
+);

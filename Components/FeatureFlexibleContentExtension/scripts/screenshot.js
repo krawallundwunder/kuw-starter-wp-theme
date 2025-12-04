@@ -1,43 +1,61 @@
 /* globals FlyntData, FeatureFlexibleContentExtension */
 
 // Add delegated events.
-document.addEventListener('mouseenter', (e) => {
-  const { target } = e
+document.addEventListener(
+  'mouseenter',
+  e => {
+    const { target } = e;
 
-  if (typeof target === 'object' && target !== null && 'getAttribute' in target && target.matches('a[data-layout]')) {
-    const layout = target.dataset.layout
-    showComponentScreenshot(layout, target)
-  }
-}, true)
+    if (
+      typeof target === 'object' &&
+      target !== null &&
+      'getAttribute' in target &&
+      target.matches('a[data-layout]')
+    ) {
+      const layout = target.dataset.layout;
+      showComponentScreenshot(layout, target);
+    }
+  },
+  true
+);
 
-document.addEventListener('mouseleave', (e) => {
-  const { target } = e
+document.addEventListener(
+  'mouseleave',
+  e => {
+    const { target } = e;
 
-  if (typeof target === 'object' && target !== null && 'getAttribute' in target && target.matches('a[data-layout]')) {
-    hideComponentScreenshot(target)
-  }
-}, true)
+    if (
+      typeof target === 'object' &&
+      target !== null &&
+      'getAttribute' in target &&
+      target.matches('a[data-layout]')
+    ) {
+      hideComponentScreenshot(target);
+    }
+  },
+  true
+);
 
-function showComponentScreenshot (layout, wrapper) {
-  const componentName = firstToUpperCase(layout)
-  const image = `${FlyntData.templateDirectoryUri}/${FeatureFlexibleContentExtension.components[componentName]}/screenshot.png`
-  const wrapperContainer = document.createElement('div')
+function showComponentScreenshot(layout, wrapper) {
+  const componentName = firstToUpperCase(layout);
+  const image = `${FlyntData.templateDirectoryUri}/${FeatureFlexibleContentExtension.components[componentName]}/screenshot.png`;
+  const wrapperContainer = document.createElement('div');
 
-  wrapperContainer.classList.add('flyntComponentScreenshot-imageWrapper')
-  wrapper.append(wrapperContainer)
+  wrapperContainer.classList.add('flyntComponentScreenshot-imageWrapper');
+  wrapper.append(wrapperContainer);
 
-  const img = document.createElement('img')
-  img.classList.add('flyntComponentScreenshot-previewImageLarge')
-  img.src = image
+  const img = document.createElement('img');
+  img.classList.add('flyntComponentScreenshot-previewImageLarge');
+  img.src = image;
 
-  wrapperContainer.prepend(img)
+  wrapperContainer.prepend(img);
 }
 
-function hideComponentScreenshot (wrapper) {
-  const wrapperContainer = wrapper.querySelector('.flyntComponentScreenshot-imageWrapper')
-  wrapperContainer.remove()
+function hideComponentScreenshot(wrapper) {
+  const wrapperContainer = wrapper.querySelector('.flyntComponentScreenshot-imageWrapper');
+  wrapperContainer.remove();
 }
 
-function firstToUpperCase (str) {
-  return str.substr(0, 1).toUpperCase() + str.substr(1)
+function firstToUpperCase(str) {
+  return str.substr(0, 1).toUpperCase() + str.substr(1);
 }

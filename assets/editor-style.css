@@ -1,0 +1,24 @@
+@import './styles/_variables.css';
+@import './styles/_fonts.css';
+@import 'tailwindcss';
+
+:root {
+  --color-accent: #fff9d5;
+  --color-neutral: #31422f;
+}
+
+#tinymce.wp-editor {
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  text-size-adjust: none;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}
+
+.block-editor-inserter {
+  margin: 0;
+}

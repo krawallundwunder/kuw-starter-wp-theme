@@ -10,13 +10,23 @@ namespace Flynt\TimberMetaTransformValues;
 use Timber\Timber;
 
 add_action('init', function (): void {
-    $priority = 100;
-    add_filter('acf/format_value/type=file', __NAMESPACE__ . '\transformFile', $priority, 3);
-    add_filter('acf/format_value/type=image', __NAMESPACE__ . '\transformImage', $priority, 3);
-    add_filter('acf/format_value/type=gallery', __NAMESPACE__ . '\transformGallery', $priority, 3);
-    add_filter('acf/format_value/type=post_object', __NAMESPACE__ . '\transformPostObject', $priority, 3);
-    add_filter('acf/format_value/type=relationship', __NAMESPACE__ . '\transformRelationship', $priority, 3);
-    add_filter('acf/format_value/type=taxonomy', __NAMESPACE__ . '\transformTaxonomy', $priority, 3);
+  $priority = 100;
+  add_filter('acf/format_value/type=file', __NAMESPACE__ . '\transformFile', $priority, 3);
+  add_filter('acf/format_value/type=image', __NAMESPACE__ . '\transformImage', $priority, 3);
+  add_filter('acf/format_value/type=gallery', __NAMESPACE__ . '\transformGallery', $priority, 3);
+  add_filter(
+    'acf/format_value/type=post_object',
+    __NAMESPACE__ . '\transformPostObject',
+    $priority,
+    3,
+  );
+  add_filter(
+    'acf/format_value/type=relationship',
+    __NAMESPACE__ . '\transformRelationship',
+    $priority,
+    3,
+  );
+  add_filter('acf/format_value/type=taxonomy', __NAMESPACE__ . '\transformTaxonomy', $priority, 3);
 });
 
 /**
@@ -26,11 +36,11 @@ add_action('init', function (): void {
  */
 function shouldTransformValue($value, array $field): bool
 {
-    if (empty($value) || $field === []) {
-        return false;
-    }
+  if (empty($value) || $field === []) {
+    return false;
+  }
 
-    return isset($field['return_format']) && in_array($field['return_format'], ['array', 'object']);
+  return isset($field['return_format']) && in_array($field['return_format'], ['array', 'object']);
 }
 
 /**
@@ -41,11 +51,11 @@ function shouldTransformValue($value, array $field): bool
  */
 function transformFile($value, $id, array $field)
 {
-    if (empty($value) || !shouldTransformValue($value, $field)) {
-        return $value;
-    }
+  if (empty($value) || !shouldTransformValue($value, $field)) {
+    return $value;
+  }
 
-    return Timber::get_attachment($value);
+  return Timber::get_attachment($value);
 }
 
 /**
@@ -56,11 +66,11 @@ function transformFile($value, $id, array $field)
  */
 function transformImage($value, $id, array $field)
 {
-    if (empty($value) || !shouldTransformValue($value, $field)) {
-        return $value;
-    }
+  if (empty($value) || !shouldTransformValue($value, $field)) {
+    return $value;
+  }
 
-    return Timber::get_image($value);
+  return Timber::get_image($value);
 }
 
 /**
@@ -71,13 +81,13 @@ function transformImage($value, $id, array $field)
  */
 function transformGallery($value, $id, array $field)
 {
-    if (empty($value) || !shouldTransformValue($value, $field)) {
-        return $value;
-    }
+  if (empty($value) || !shouldTransformValue($value, $field)) {
+    return $value;
+  }
 
-    return array_map(function ($image) {
-        return Timber::get_Image($image);
-    }, $value);
+  return array_map(function ($image) {
+    return Timber::get_Image($image);
+  }, $value);
 }
 
 /**
@@ -88,15 +98,15 @@ function transformGallery($value, $id, array $field)
  */
 function transformPostObject($value, $id, array $field)
 {
-    if (empty($value) || !shouldTransformValue($value, $field)) {
-        return $value;
-    }
+  if (empty($value) || !shouldTransformValue($value, $field)) {
+    return $value;
+  }
 
-    if (!$field['multiple']) {
-        return Timber::get_post($value);
-    }
+  if (!$field['multiple']) {
+    return Timber::get_post($value);
+  }
 
-    return Timber::get_posts($value);
+  return Timber::get_posts($value);
 }
 
 /**
@@ -107,11 +117,11 @@ function transformPostObject($value, $id, array $field)
  */
 function transformRelationship($value, $id, array $field)
 {
-    if (empty($value) || !shouldTransformValue($value, $field)) {
-        return $value;
-    }
+  if (empty($value) || !shouldTransformValue($value, $field)) {
+    return $value;
+  }
 
-    return Timber::get_posts($value);
+  return Timber::get_posts($value);
 }
 
 /**
@@ -122,14 +132,14 @@ function transformRelationship($value, $id, array $field)
  */
 function transformTaxonomy($value, $id, array $field)
 {
-    if (empty($value) || !shouldTransformValue($value, $field)) {
-        return $value;
-    }
+  if (empty($value) || !shouldTransformValue($value, $field)) {
+    return $value;
+  }
 
-    if ($field['field_type'] === 'select' || $field['field_type'] === 'radio') {
-        $termId = isset($value->term_id) ? $value->term_id : $value;
-        return Timber::get_term((int) $termId);
-    }
+  if ($field['field_type'] === 'select' || $field['field_type'] === 'radio') {
+    $termId = isset($value->term_id) ? $value->term_id : $value;
+    return Timber::get_term((int) $termId);
+  }
 
-    return Timber::get_terms((array) $value);
+  return Timber::get_terms((array) $value);
 }

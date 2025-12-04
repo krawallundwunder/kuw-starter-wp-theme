@@ -12,16 +12,16 @@ Basic WP theme for setting up new projects based on Flynt.
 
 ## Dependencies
 
-* [WordPress](https://wordpress.org/) >= 6.1
-* [Node](https://nodejs.org/en/) = 20
-* [Composer](https://getcomposer.org/download/) >= 2.4
-* [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/) >= 6.0
+- [WordPress](https://wordpress.org/) >= 6.1
+- [Node](https://nodejs.org/en/) = 20
+- [Composer](https://getcomposer.org/download/) >= 2.4
+- [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/) >= 6.0
 
 ## Install
 
 1. Clone this repo to `<your-project>/wp-content/themes`.
 2. Change the domain variable in `flynt/vite.config.js` to match your domain:
-`const wordpressHost = 'http://your-project.test'`
+   `const wordpressHost = 'http://your-project.test'`
 3. Navigate to the theme folder and run the following command in your terminal:
 
 ```
@@ -76,15 +76,15 @@ The `admin.scss` file is compiled to `./dist/assets/admin.css` which is enqueued
 
 ### Lib & Inc
 
-The `./lib` folder includes helper functions and basic setup logic. *You will most likely not need to modify any files inside `./lib`.* All files in the `./lib` folder are autoloaded via PSR-4.
+The `./lib` folder includes helper functions and basic setup logic. _You will most likely not need to modify any files inside `./lib`._ All files in the `./lib` folder are autoloaded via PSR-4.
 
 The `./inc` folder is a more organised version of WordPress' `functions.php` and contains all custom theme logic. All files in the `./inc` folder are automatically required.
 
 For organisation, `./inc` has three subfolders. We recommend using these three folders to keep the theme well-structured:
 
-* `customPostTypes`<br> Use this folder to register custom WordPress post types.
-* `customTaxonomies`<br> Use this folder to register custom WordPress taxonomies.
-* `fieldGroups`<br> Use this folder to register Advanced Custom Fields field groups. (See [Field Groups](#field-groups) for more information.)
+- `customPostTypes`<br> Use this folder to register custom WordPress post types.
+- `customTaxonomies`<br> Use this folder to register custom WordPress taxonomies.
+- `fieldGroups`<br> Use this folder to register Advanced Custom Fields field groups. (See [Field Groups](#field-groups) for more information.)
 
 After the files from `./lib` and `./inc` are loaded, all [components](#components) from the `./Components` folder are loaded.
 
@@ -94,7 +94,7 @@ Flynt uses [Timber](https://www.upstatement.com/timber/) to structure its page t
 
 As part of the [Twig Extension](#twig-extensions) the theme uses a Twig function in to render components into templates:
 
-* `renderComponent(componentName, data)` renders a single component. [For example, in the `index.twig` template](https://github.com/flyntwp/flynt/tree/master/templates/index.twig).
+- `renderComponent(componentName, data)` renders a single component. [For example, in the `index.twig` template](https://github.com/flyntwp/flynt/tree/master/templates/index.twig).
 
 Besides the main document structure (in `./templates/_document.twig`), everything else is a component.
 
@@ -134,18 +134,18 @@ Using a module based approach, allows to breaks JavaScript into separate files a
 
 Different loading strategies can be defined for each component independently when using the custom element `flynt-component`:
 
-* `load:on="idle"`<br>
-Initialises after full page load, when the browser enters idle state.<br>
-Usage example: Elements that don’t need to be interactive immediately.
-* `load:on="visible"`<br>
-Initialises after the element get visible in the viewport.<br>
-Usage example: Elements that go “below the fold” or should be loaded when the user sees them.
-* `load:on="load"` (default)<br>
-Initialises immediately when the page loads.<br>
-Usage example: Elements that need to be interactive as soon as possible.
-* `load:on:media="(min-width: 1024px)"`<br>
-Initialises when the specified media query matches.<br>
-Usage example: Elements which may only be visible on certain screen sizes.
+- `load:on="idle"`<br>
+  Initialises after full page load, when the browser enters idle state.<br>
+  Usage example: Elements that don’t need to be interactive immediately.
+- `load:on="visible"`<br>
+  Initialises after the element get visible in the viewport.<br>
+  Usage example: Elements that go “below the fold” or should be loaded when the user sees them.
+- `load:on="load"` (default)<br>
+  Initialises immediately when the page loads.<br>
+  Usage example: Elements that need to be interactive as soon as possible.
+- `load:on:media="(min-width: 1024px)"`<br>
+  Initialises when the specified media query matches.<br>
+  Usage example: Elements which may only be visible on certain screen sizes.
 
 Example:
 
@@ -156,7 +156,11 @@ Example:
 If it makes logical sense, loading strategies can be combined:
 
 ```twig
-<flynt-component name="NavigationMain" load:on="idle" load:on:media="(min-width: 1024px)">
+<flynt-component
+  name="Navigation"
+  load:on="idle"
+  load:on:media="(min-width: 1024px)"
+></flynt-component>
 ```
 
 With nested components the loading strategy is waiting for parents. If you have a component with `load:on="idle"` nested inside a component with `load:on="visible"`, the child component will only be loaded on visible of the parent component.
@@ -172,20 +176,20 @@ namespace Flynt\Components\BlockWysiwyg;
 
 function getACFLayout()
 {
-    return [
-        'name' => 'blockWysiwyg',
-        'label' => __('Block: Wysiwyg', 'flynt'),
-        'sub_fields' => [
-            [
-                'label' => __('Content', 'flynt'),
-                'name' => 'contentHtml',
-                'type' => 'wysiwyg',
-                'delay' => 0,
-                'media_upload' => 0,
-                'required' => 1,
-            ],
-        ]
-    ];
+  return [
+    'name' => 'blockWysiwyg',
+    'label' => __('Block: Wysiwyg', 'flynt'),
+    'sub_fields' => [
+      [
+        'label' => __('Content', 'flynt'),
+        'name' => 'contentHtml',
+        'type' => 'wysiwyg',
+        'delay' => 0,
+        'media_upload' => 0,
+        'required' => 1,
+      ],
+    ],
+  ];
 }
 ```
 
@@ -202,31 +206,29 @@ use ACFComposer\ACFComposer;
 use Flynt\Components;
 
 add_action('Flynt/afterRegisterComponents', function () {
-    ACFComposer::registerFieldGroup([
+  ACFComposer::registerFieldGroup([
+    'name' => 'pageComponents',
+    'title' => 'Page Components',
+    'style' => 'seamless',
+    'fields' => [
+      [
         'name' => 'pageComponents',
-        'title' => 'Page Components',
-        'style' => 'seamless',
-        'fields' => [
-            [
-                'name' => 'pageComponents',
-                'label' => __('Page Components', 'flynt'),
-                'type' => 'flexible_content',
-                'button_label' => __('Add Component', 'flynt'),
-                'layouts' => [
-                    Components\BlockWysiwyg\getACFLayout(),
-                ]
-            ]
+        'label' => __('Page Components', 'flynt'),
+        'type' => 'flexible_content',
+        'button_label' => __('Add Component', 'flynt'),
+        'layouts' => [Components\BlockWysiwyg\getACFLayout()],
+      ],
+    ],
+    'location' => [
+      [
+        [
+          'param' => 'post_type',
+          'operator' => '==',
+          'value' => 'page',
         ],
-        'location' => [
-            [
-                [
-                    'param' => 'post_type',
-                    'operator' => '==',
-                    'value' => 'page'
-                ]
-            ]
-        ]
-    ]);
+      ],
+    ],
+  ]);
 });
 ```
 
@@ -236,10 +238,10 @@ Here we use the [ACF Field Group Composer](https://github.com/flyntwp/acf-field-
 
 Flynt includes several utility functions for creating Advanced Custom Fields options pages. Briefly, these are:
 
-* `Flynt\Utils\Options::addTranslatable`<br> Adds fields into a new group inside the Translatable Options options page. When used with the WPML plugin, these fields will be returned in the current language.
-* `Flynt\Utils\Options::addGlobal`<br> Adds fields into a new group inside the Global Options options page. When used with WPML, these fields will always be returned from the primary language. In this way these fields are *global* and cannot be translated.
-* `Flynt\Utils\Options::getTranslatable` <br> Retrieve a translatable option.
-* `Flynt\Utils\Options::getGlobal` <br> Retrieve a global option.
+- `Flynt\Utils\Options::addTranslatable`<br> Adds fields into a new group inside the Translatable Options options page. When used with the WPML plugin, these fields will be returned in the current language.
+- `Flynt\Utils\Options::addGlobal`<br> Adds fields into a new group inside the Global Options options page. When used with WPML, these fields will always be returned from the primary language. In this way these fields are _global_ and cannot be translated.
+- `Flynt\Utils\Options::getTranslatable` <br> Retrieve a translatable option.
+- `Flynt\Utils\Options::getGlobal` <br> Retrieve a global option.
 
 ### Timber Dynamic Resize
 
@@ -257,7 +259,7 @@ Returns the reading time of a string in minutes.
 {{ 'This is a string'|readingTime }}
 ```
 
-*Example from [Components/GridPostsArchive/index.twig](./Components/GridPostsArchive/index.twig)*
+_Example from [Components/GridPostsArchive/index.twig](./Components/GridPostsArchive/index.twig)_
 
 ---
 
@@ -267,11 +269,11 @@ Renders a component. [See Page Templates](#page-templates).
 
 ```twig
 {% for component in post.meta('pageComponents') %}
-    {{ renderComponent(component) }}
+  {{ renderComponent(component) }}
 {% endfor %}
 ```
 
-*Example from [templates/page.twig](./templates/page.twig)*
+_Example from [templates/page.twig](./templates/page.twig)_
 
 #### `placeholderImage($width, $height, $color = null)` (Type: Function)
 
@@ -281,7 +283,7 @@ Useful in combination with lazysizes for lazy loading. Returns a "data:image/svg
 {{ placeholderImage(768, 512, 'rgba(125, 125, 125, 0.1)') }}
 ```
 
-*Example from [Components/BlockImage/index.twig](./Components/BlockImage/index.twig)*
+_Example from [Components/BlockImage/index.twig](./Components/BlockImage/index.twig)_
 
 ---
 
@@ -293,7 +295,7 @@ Resizes an image dynamically. [See Timber Dynamic Resize](#timber-dynamic-resize
 {{ post.thumbnail.src|resizeDynamic(1920, (1920 / 3 * 2)|round, 'center') }}
 ```
 
-*Example from [Components/BlockImage/index.twig](./Components/BlockImage/index.twig)*
+_Example from [Components/BlockImage/index.twig](./Components/BlockImage/index.twig)_
 
 ---
 
@@ -321,7 +323,7 @@ In this care try to set the relative upload path manually and refresh the permal
 
 ```php
 add_filter('Flynt/TimberDynamicResize/relativeUploadDir', function () {
-    return 'app/uploads'; // Example for Bedrock installs.
+  return 'app/uploads'; // Example for Bedrock installs.
 });
 ```
 
@@ -341,10 +343,10 @@ This project is maintained by [Bleech](https://bleech.de/en/).
 
 The main people in charge of this repo are:
 
-* [Steffen Bewersdorff](https://github.com/steffenbew)
-* [Dominik Tränklein](https://github.com/domtra)
-* [Timo Hubois](https://github.com/timohubois)
-* [Harun Bašić](https://github.com/harunbleech)
+- [Steffen Bewersdorff](https://github.com/steffenbew)
+- [Dominik Tränklein](https://github.com/domtra)
+- [Timo Hubois](https://github.com/timohubois)
+- [Harun Bašić](https://github.com/harunbleech)
 
 ## Contributing
 

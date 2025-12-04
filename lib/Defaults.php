@@ -10,25 +10,25 @@ use Flynt\ComponentManager;
  */
 class Defaults
 {
-    /**
-     * Initialize the class.
-     */
-    public static function init(): void
-    {
-        add_action('Flynt/registerComponent', [self::class, 'loadFunctionsFile']);
-    }
+  /**
+   * Initialize the class.
+   */
+  public static function init(): void
+  {
+    add_action('Flynt/registerComponent', [self::class, 'loadFunctionsFile']);
+  }
 
-    /**
-     * Load the functions.php file of a component.
-     *
-     * @param string $componentName The name of the component.
-     */
-    public static function loadFunctionsFile(string $componentName): void
-    {
-        $componentManager = ComponentManager::getInstance();
-        $functionsFilePath = $componentManager->getComponentFilePath($componentName, 'functions.php');
-        if (false !== $functionsFilePath) {
-            require_once $functionsFilePath;
-        }
+  /**
+   * Load the functions.php file of a component.
+   *
+   * @param string $componentName The name of the component.
+   */
+  public static function loadFunctionsFile(string $componentName): void
+  {
+    $componentManager = ComponentManager::getInstance();
+    $functionsFilePath = $componentManager->getComponentFilePath($componentName, 'functions.php');
+    if (false !== $functionsFilePath) {
+      require_once $functionsFilePath;
     }
+  }
 }

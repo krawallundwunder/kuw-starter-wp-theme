@@ -34,7 +34,7 @@ add_action('Flynt/afterRegisterComponents', function (): void {
         [
           'param' => 'post_type',
           'operator' => '==',
-          'value' => 'page'
+          'value' => 'page',
         ],
         [
           'param' => 'page_template',

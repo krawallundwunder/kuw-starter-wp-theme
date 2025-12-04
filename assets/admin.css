@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+@import '../Components/FeatureFlexibleContentExtension/styles/_screenshot.css';
+@import '../Components/FeatureFlexibleContentExtension/styles/_search.css';
+@import './styles/_fonts.css';

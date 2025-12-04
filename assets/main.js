@@ -1,24 +1,20 @@
-import 'vite/modulepreload-polyfill'
-import FlyntComponent from './scripts/FlyntComponent'
+import 'vite/modulepreload-polyfill';
+import FlyntComponent from './scripts/FlyntComponent';
 
-import 'lazysizes'
+import 'lazysizes';
 
 if (import.meta.env.DEV) {
-  import('@vite/client')
+  import('@vite/client');
 }
 
 import.meta.glob([
   '../Components/**',
   '../assets/**',
   '!**/*.js',
-  '!**/*.scss',
   '!**/*.php',
   '!**/*.twig',
   '!**/screenshot.png',
-  '!**/*.md'
-])
+  '!**/*.md',
+]);
 
-window.customElements.define(
-  'flynt-component',
-  FlyntComponent
-)
+window.customElements.define('flynt-component', FlyntComponent);

@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html class="html {{ body_class }}" {{ site.language_attributes }}>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="alternate" type="application/rss+xml" title="{{- theme.labels.feed|replace({'%s': site.title}) -}}" href="{{ site.rss2|e('esc_url') }}">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="{{ theme.labels.feed|replace({
+        '%s': site.title
+      }) }}"
+      href="{{ site.rss2|e('esc_url') }}"
+    />
     {{ function('wp_head') }}
   </head>
   <body>
@@ -15,11 +22,14 @@
       <div class="pageWrapper">
         <header class="mainHeader">
           {% block header %}
-            {{ renderComponent('NavigationMain') }}
-            {{ renderComponent('NavigationBurger') }}
+            {{ renderComponent('Navigation') }}
           {% endblock %}
         </header>
-        <main id="mainContent" class="mainContent" aria-label="{{- theme.labels.mainContentAriaLabel|e -}}">
+        <main
+          id="mainContent"
+          class="mainContent"
+          aria-label="{{ theme.labels.mainContentAriaLabel|e }}"
+        >
           {% if function('post_password_required') %}
             {{ function('get_the_password_form') }}
           {% else %}
