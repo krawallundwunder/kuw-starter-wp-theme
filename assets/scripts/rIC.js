@@ -17,21 +17,23 @@
 /*
  * @see https://developers.google.com/web/updates/2015/08/using-requestidlecallback
  */
-window.requestIdleCallback = window.requestIdleCallback ||
+window.requestIdleCallback =
+  window.requestIdleCallback ||
   function (cb) {
     return setTimeout(function () {
-      const start = Date.now()
+      const start = Date.now();
       const cbOptions = {
         didTimeout: false,
         timeRemaining: function () {
-          return Math.max(0, 50 - (Date.now() - start))
-        }
-      }
-      cb(cbOptions)
-    }, 1)
-  }
+          return Math.max(0, 50 - (Date.now() - start));
+        },
+      };
+      cb(cbOptions);
+    }, 1);
+  };
 
-window.cancelIdleCallback = window.cancelIdleCallback ||
+window.cancelIdleCallback =
+  window.cancelIdleCallback ||
   function (id) {
-    clearTimeout(id)
-  }
+    clearTimeout(id);
+  };

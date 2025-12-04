@@ -7,18 +7,21 @@ use Flynt\Utils\FileLoader;
 require_once __DIR__ . '/vendor/autoload.php';
 
 if (!defined('WP_ENV')) {
-    define('WP_ENV', function_exists('wp_get_environment_type') ? wp_get_environment_type() : 'production');
+  define(
+    'WP_ENV',
+    function_exists('wp_get_environment_type') ? wp_get_environment_type() : 'production',
+  );
 } elseif (!defined('WP_ENVIRONMENT_TYPE')) {
-    define('WP_ENVIRONMENT_TYPE', WP_ENV);
+  define('WP_ENVIRONMENT_TYPE', WP_ENV);
 }
 
 // Check if the required plugins are installed and activated.
 // If they aren't, this function redirects the template rendering to use
 // plugin-inactive.php instead and shows a warning in the admin backend.
 if (Init::checkRequiredPlugins()) {
-    FileLoader::loadPhpFiles('inc');
-    add_action('after_setup_theme', [\Flynt\Init::class, 'initTheme']);
-    add_action('after_setup_theme', [\Flynt\Init::class, 'loadComponents'], 101);
+  FileLoader::loadPhpFiles('inc');
+  add_action('after_setup_theme', [\Flynt\Init::class, 'initTheme']);
+  add_action('after_setup_theme', [\Flynt\Init::class, 'loadComponents'], 101);
 }
 
 // Remove the admin-bar inline-CSS as it isn't compatible with the sticky footer CSS.
@@ -28,20 +31,25 @@ add_theme_support('admin-bar', ['callback' => '__return_false']);
 add_action('after_setup_theme', function (): void {
   // Make theme available for translation.
   // Translations can be filed in the /languages/ directory.
-    load_theme_textdomain('flynt', get_template_directory() . '/languages');
+  load_theme_textdomain('flynt', get_template_directory() . '/languages');
 });
 
 require_once get_template_directory() . '/inc/acf-blocks/acf-blocks.php';
 add_filter('upload_mimes', function ($mimes) {
-    $mimes['svg'] = 'image/svg+xml';
-    return $mimes;
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
 });
 
-add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mimes) {
+add_filter(
+  'wp_check_filetype_and_ext',
+  function ($data, $file, $filename, $mimes) {
     $filetype = wp_check_filetype($filename, $mimes);
     return [
-    'ext' => $filetype['ext'],
-    'type' => $filetype['type'],
-    'proper_filename' => $data['proper_filename']
+      'ext' => $filetype['ext'],
+      'type' => $filetype['type'],
+      'proper_filename' => $data['proper_filename'],
     ];
-}, 10, 4);
+  },
+  10,
+  4,
+);

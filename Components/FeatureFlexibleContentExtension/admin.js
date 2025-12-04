@@ -1,1 +1,1 @@
-import.meta.glob('./scripts/*.js', { eager: true })
+import.meta.glob('./scripts/*.js', { eager: true });

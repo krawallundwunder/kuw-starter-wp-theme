@@ -8,14 +8,7 @@ const config = {
   bracketSpacing: true,
   arrowParens: 'avoid',
 
-  plugins: [
-
-    '@prettier/plugin-php',
-
-    '@zackad/prettier-plugin-twig',
-
-    'prettier-plugin-tailwindcss',
-  ],
+  plugins: ['@prettier/plugin-php', '@zackad/prettier-plugin-twig', 'prettier-plugin-tailwindcss'],
 
   overrides: [
     {

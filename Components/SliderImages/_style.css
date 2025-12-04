@@ -12,7 +12,7 @@ flynt-component[name='SliderImages'] {
 
     &-item {
       block-size: 0;
-      padding-block-end: calc((2/3) * 100%);
+      padding-block-end: calc((2 / 3) * 100%);
       position: relative;
     }
 

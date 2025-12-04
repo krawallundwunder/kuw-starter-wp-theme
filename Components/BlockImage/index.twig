@@ -1,28 +1,52 @@
-<flynt-component name="BlockImage" class="{{ not noComponentSpacing ? 'py-8 md:py-12 lg:py-16' }}" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
-	<div class="container px-4 mx-auto">
-		{% if image %}
-			{% set sizeClass = 'max-w-full' %}
-			{% if options.size == 'small' %}
-				{% set sizeClass = 'max-w-2xl' %}
-			{% elseif options.size == 'medium' %}
-				{% set sizeClass = 'max-w-4xl' %}
-			{% elseif options.size == 'large' %}
-				{% set sizeClass = 'max-w-6xl' %}
-			{% endif %}
+<flynt-component
+  name="BlockImage"
+  class="{{ not noComponentSpacing ? 'py-8 md:py-12 lg:py-16' }}"
+  {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}
+>
+  <div class="container mx-auto px-4">
+    {% if image %}
+      {% set sizeClass = 'max-w-full' %}
+      {% if options.size == 'small' %}
+        {% set sizeClass = 'max-w-2xl' %}
+      {% elseif options.size == 'medium' %}
+        {% set sizeClass = 'max-w-4xl' %}
+      {% elseif options.size == 'large' %}
+        {% set sizeClass = 'max-w-6xl' %}
+      {% endif %}
 
-			<figure class="{{ sizeClass }} mx-auto">
-				{% if image.post_mime_type == 'image/svg+xml' %}
-					<img class="w-full h-auto rounded-lg" src="{{ image.src }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy"/>
-				{% else %}
-					<img class="w-full h-auto rounded-lg" src="{{ image.src|resizeDynamic(768) }}" srcset="{{ image.src|resizeDynamic(640) }} 640w, {{ image.src|resizeDynamic(768) }} 768w, {{ image.src|resizeDynamic(1024) }} 1024w, {{ image.src|resizeDynamic(1366) }} 1366w, {{ image.src|resizeDynamic(1920) }} 1920w" sizes="(max-width: 768px) 100vw, {{ options.size == 'full' ? '100vw' : '90vw' }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy"/>
-				{% endif %}
+      <figure class="{{ sizeClass }} mx-auto">
+        {% if image.post_mime_type == 'image/svg+xml' %}
+          <img
+            class="h-auto w-full rounded-lg"
+            src="{{ image.src }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            alt="{{ image.alt|e }}"
+            loading="lazy"
+          />
+        {% else %}
+          <img
+            class="h-auto w-full rounded-lg"
+            src="{{ image.src|resizeDynamic(768) }}"
+            srcset="{{ image.src|resizeDynamic(640) }} 640w, {{ image.src|resizeDynamic(
+              768
+            ) }} 768w, {{ image.src|resizeDynamic(1024) }} 1024w, {{ image.src|resizeDynamic(
+              1366
+            ) }} 1366w, {{ image.src|resizeDynamic(1920) }} 1920w"
+            sizes="(max-width: 768px) 100vw, {{ options.size == 'full' ? '100vw' : '90vw' }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            alt="{{ image.alt|e }}"
+            loading="lazy"
+          />
+        {% endif %}
 
-				{% if image.caption %}
-					<figcaption class="mt-3 text-sm text-gray-600 dark:text-gray-400">
-						{{ image.caption|e }}
-					</figcaption>
-				{% endif %}
-			</figure>
-		{% endif %}
-	</div>
+        {% if image.caption %}
+          <figcaption class="mt-3 text-sm text-gray-600 dark:text-gray-400">
+            {{ image.caption|e }}
+          </figcaption>
+        {% endif %}
+      </figure>
+    {% endif %}
+  </div>
 </flynt-component>

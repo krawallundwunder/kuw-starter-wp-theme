@@ -1,9 +1,9 @@
 <flynt-component name="BlockPostFooter" class="componentSpacing">
   <div class="container">
     <div data-size="medium" data-align="center">
-      <hr>
+      <hr />
       <div data-size="medium" data-align="left">
-        {% if post.terms('tag')  %}
+        {% if post.terms('tag') %}
           <span class="visuallyHidden">{{ labels.tagsLabel }}</span>
           <ul class="tags">
             {% for tag in post.terms('tag') %}
@@ -21,8 +21,13 @@
                 width="96"
                 height="96"
                 src="{{ placeholderImage(96, 96) }}"
-                data-src="{{ post.author.avatar({size: 192}) }}"
-                alt="{{ post.author.name|e }}">
+                data-src="{{
+                post.author.avatar({
+                  size: 192
+                })
+                }}"
+                alt="{{ post.author.name|e }}"
+              />
             </a>
           {% endif %}
           <div class="details">

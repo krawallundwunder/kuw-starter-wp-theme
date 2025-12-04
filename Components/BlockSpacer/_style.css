@@ -1,14 +1,17 @@
 flynt-component[name='BlockSpacer'] {
   &[data-status='collapse'] {
-    margin-block-start: calc((-1 * var(--component-spacing)) + (var(--percentage-distance) * var(--component-spacing) ) / 100);
+    margin-block-start: calc(
+      (-1 * var(--component-spacing)) + (var(--percentage-distance) * var(--component-spacing)) /
+        100
+    );
   }
 
   &[data-status='expand'] {
-    margin-block-start: calc((var(--percentage-distance) * var(--component-spacing) ) / 100);
+    margin-block-start: calc((var(--percentage-distance) * var(--component-spacing)) / 100);
 
     &[data-theme] {
       margin-block-start: 0;
-      padding-block-start: calc((var(--percentage-distance) * var(--component-spacing) ) / 100);
+      padding-block-start: calc((var(--percentage-distance) * var(--component-spacing)) / 100);
     }
   }
 

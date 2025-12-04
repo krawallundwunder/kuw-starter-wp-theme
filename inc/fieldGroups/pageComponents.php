@@ -4,7 +4,7 @@ use ACFComposer\ACFComposer;
 use Flynt\Components;
 
 add_action('Flynt/afterRegisterComponents', function (): void {
-    ACFComposer::registerFieldGroup([
+  ACFComposer::registerFieldGroup([
     'name' => 'pageComponents',
     'title' => __('Page Components', 'flynt'),
     'style' => 'seamless',
@@ -34,7 +34,7 @@ add_action('Flynt/afterRegisterComponents', function (): void {
         [
           'param' => 'post_type',
           'operator' => '==',
-          'value' => 'page'
+          'value' => 'page',
         ],
         [
           'param' => 'page_template',
@@ -43,5 +43,5 @@ add_action('Flynt/afterRegisterComponents', function (): void {
         ],
       ],
     ],
-    ]);
+  ]);
 });

@@ -22,8 +22,14 @@ function getACFLayout(): array
         'name' => 'imagePosition',
         'type' => 'button_group',
         'choices' => [
-          'left' => sprintf('<i class="dashicons dashicons-align-left" title="%1$s"></i>', __('Image on the left', 'flynt')),
-          'right' => sprintf('<i class="dashicons dashicons-align-right" title="%1$s"></i>', __('Image on the right', 'flynt'))
+          'left' => sprintf(
+            '<i class="dashicons dashicons-align-left" title="%1$s"></i>',
+            __('Image on the left', 'flynt'),
+          ),
+          'right' => sprintf(
+            '<i class="dashicons dashicons-align-right" title="%1$s"></i>',
+            __('Image on the right', 'flynt'),
+          ),
         ],
         'default_value' => 'left',
       ],
@@ -64,7 +70,7 @@ function getACFLayout(): array
         'name' => 'optionsTab',
         'type' => 'tab',
         'placement' => 'top',
-        'endpoint' => 0
+        'endpoint' => 0,
       ],
       [
         'label' => '',
@@ -126,7 +132,7 @@ function getACFLayout(): array
             'default_value' => 0,
             'ui' => 1,
           ],
-        ]
+        ],
       ],
       [
         'label' => __('Button Style', 'flynt'),
@@ -162,7 +168,7 @@ function getACFLayout(): array
           ],
         ],
       ],
-    ]
+    ],
   ];
 }
 

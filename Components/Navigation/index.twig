@@ -1,57 +1,96 @@
 <flynt-component name="Navigation">
-	<nav class="bg-black border-b border-gray-800">
-		<div class="container px-4 mx-auto">
+  <nav class="border-b border-gray-800 bg-black">
+    <div class="container mx-auto px-4">
+      <div class="flex h-20 items-center justify-between">
+        <a href="{{ site.url }}" class="flex items-center">
+          <img class="h-10 w-auto" src="{{ logo.src }}" alt="{{ site.name }}" />
+        </a>
 
-			<div class="flex items-center justify-between h-20">
-				<a href="{{ site.url }}" class="flex items-center">
-					<img class="w-auto h-10" src="{{ logo.src }}" alt="{{ site.name }}">
-				</a>
+        <div class="hidden items-center space-x-8 lg:flex">
+          {% for item in menu.items %}
+            <a
+              href="{{ item.link }}"
+              class="text-white transition-colors duration-200 hover:text-yellow-400 {{
+              item.current
+                ? 'text-yellow-400'
+                : ''
+              }}"
+            >
+              {{ item.title }}
+            </a>
+          {% endfor %}
+        </div>
 
-				<div class="items-center hidden space-x-8 lg:flex">
-					{% for item in menu.items %}
-						<a href="{{ item.link }}" class="text-white hover:text-yellow-400 transition-colors duration-200 {{ item.current ? 'text-yellow-400' : '' }}">
-							{{ item.title }}
-						</a>
-					{% endfor %}
-				</div>
+        <button
+          class="burger-btn group flex flex-col space-y-1.5 lg:hidden"
+          aria-label="Menü öffnen"
+        >
+          <span
+            class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:translate-y-2 group-[.active]:rotate-45"
+          >
 
-				<button class="lg:hidden burger-btn flex flex-col space-y-1.5 group" aria-label="Menü öffnen">
-					<span class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:rotate-45 group-[.active]:translate-y-2"></span>
-					<span class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:opacity-0"></span>
-					<span class="w-6 h-0.5 bg-white transition-all duration-300 group-[.active]:-rotate-45 group-[.active]:-translate-y-2"></span>
-				</button>
-			</div>
+          </span>
+          <span class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:opacity-0">
 
-			<div class="fixed inset-0 z-40 hidden transition-opacity duration-300 opacity-0 lg:hidden mobile-overlay bg-black/50 backdrop-blur-sm"></div>
+          </span>
+          <span
+            class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:-translate-y-2 group-[.active]:-rotate-45"
+          >
 
-			<div class="fixed top-0 right-0 z-50 h-full transition-transform duration-300 ease-out transform translate-x-full bg-black lg:hidden mobile-menu w-80">
-				<div
-					class="flex flex-col h-full p-6">
-					<!-- Header -->
-					<div class="flex items-center justify-between mb-8">
-						<h2 class="text-lg font-semibold text-white">Menü</h2>
-						<button class="p-2 text-white transition-colors mobile-close hover:text-yellow-400" aria-label="Menü schließen">
-							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-							</svg>
-						</button>
-					</div>
+          </span>
+        </button>
+      </div>
 
-					<div class="flex-1 space-y-4">
-						{% for item in menu.items %}
-							<a href="{{ item.link }}" class="mobile-menu-link block text-white hover:text-yellow-400 py-3 text-lg font-medium transition-colors duration-200 border-b border-gray-800 last:border-b-0 {{ item.current ? 'text-yellow-400' : '' }}">
-								{{ item.title }}
-							</a>
-						{% endfor %}
-					</div>
+      <div
+        class="mobile-overlay fixed inset-0 z-40 hidden bg-black/50 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden"
+      ></div>
 
-					<div class="pt-6 text-sm text-gray-400 border-t border-gray-800">
-						<p>&copy;
-							{{ "now"|date('Y') }}
-							{{ site.title }}</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
+      <div
+        class="mobile-menu fixed top-0 right-0 z-50 h-full w-80 translate-x-full transform bg-black transition-transform duration-300 ease-out lg:hidden"
+      >
+        <div class="flex h-full flex-col p-6">
+          <!-- Header -->
+          <div class="mb-8 flex items-center justify-between">
+            <h2 class="text-lg font-semibold text-white">Menü</h2>
+            <button
+              class="mobile-close p-2 text-white transition-colors hover:text-yellow-400"
+              aria-label="Menü schließen"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="flex-1 space-y-4">
+            {% for item in menu.items %}
+              <a
+                href="{{ item.link }}"
+                class="mobile-menu-link block border-b border-gray-800 py-3 text-lg font-medium text-white transition-colors duration-200 last:border-b-0 hover:text-yellow-400 {{
+                item.current
+                  ? 'text-yellow-400'
+                  : ''
+                }}"
+              >
+                {{ item.title }}
+              </a>
+            {% endfor %}
+          </div>
+
+          <div class="border-t border-gray-800 pt-6 text-sm text-gray-400">
+            <p>
+              &copy;
+              {{ 'now'|date('Y') }}
+              {{ site.title }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </flynt-component>

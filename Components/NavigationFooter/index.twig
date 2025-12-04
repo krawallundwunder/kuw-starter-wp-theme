@@ -1,18 +1,22 @@
 <flynt-component name="NavigationFooter">
-	<footer class="footer">
-		<div class="container">
-			{% if menu %}
-				<nav class="navigation" aria-label="{{ labels.ariaLabel }}">
-					{% include 'Partials/_menu.twig' with {'items': menu.get_items, 'level': '0', 'maxLevel': maxLevel} only %}
-				</nav>
-			{% endif %}
+  <footer class="footer">
+    <div class="container">
+      {% if menu %}
+        <nav class="navigation" aria-label="{{ labels.ariaLabel }}">
+          {% include 'Partials/_menu.twig' with {
+            items: menu.get_items,
+            level: '0',
+            maxLevel: maxLevel
+          } only %}
+        </nav>
+      {% endif %}
 
-			{% if contentHtml %}
-				<div class="content">
-					{{ contentHtml|e('wp_kses_post') }}
+      {% if contentHtml %}
+        <div class="content">
+          {{ contentHtml|e('wp_kses_post') }}
 
-				{# Social Media Links optional hinzufügen #}
-					{# <div class="social-links">
+          {# Social Media Links optional hinzufügen #}
+          {# <div class="social-links">
 					            <a href="#" class="social-link" aria-label="Facebook">
 					              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">...</svg>
 					            </a>
@@ -20,15 +24,15 @@
 					              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">...</svg>
 					            </a>
 					          </div> #}
-				</div>
-			{% endif %}
+        </div>
+      {% endif %}
 
-			<div class="copyright">
-				&copy;
-				{{ "now"|date('Y') }}
-				{{ site.title }}.
-				{{ labels.allRightsReserved ?: 'All rights reserved.' }}
-			</div>
-		</div>
-	</footer>
+      <div class="copyright">
+        &copy;
+        {{ 'now'|date('Y') }}
+        {{ site.title }}.
+        {{ labels.allRightsReserved ? : 'All rights reserved.' }}
+      </div>
+    </div>
+  </footer>
 </flynt-component>

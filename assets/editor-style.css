@@ -1,10 +1,10 @@
 @import './styles/_variables.css';
 @import './styles/_fonts.css';
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --color-accent: #FFF9D5;
-  --color-neutral: #31422F;
+  --color-accent: #fff9d5;
+  --color-neutral: #31422f;
 }
 
 #tinymce.wp-editor {
@@ -18,7 +18,6 @@
     box-sizing: inherit;
   }
 }
-
 
 .block-editor-inserter {
   margin: 0;

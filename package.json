@@ -15,6 +15,7 @@
     "build:lint": "bun run lint && NODE_ENV=production vite build",
     "lint": "./vendor/bin/phpcs",
     "format": "./vendor/bin/phpcbf",
+    "prettier": "npx prettier --write .",
     "prepare": "husky",
     "test": "bun run build:lint",
     "test:ci": "bun run lint && bun run build"
@@ -34,11 +35,15 @@
     "autoprefixer": "^10.4.19",
     "concurrently": "^9.2.1",
     "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^4.1.16",
     "vite": "^5.2.11",
     "vite-plugin-full-reload": "^1.1.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,scss,php,twig,md}": "npx prettier --write"
   },
   "browserslist": [
     "supports array-flat"

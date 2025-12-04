@@ -12,8 +12,8 @@ use Flynt\Utils\TwigExtensionPlaceholderImage;
 use Twig\Environment;
 
 add_filter('timber/twig', function (Environment $twig): Environment {
-    $twig->addExtension(new TwigExtensionRenderComponent());
-    $twig->addExtension(new TwigExtensionReadingTime());
-    $twig->addExtension(new TwigExtensionPlaceholderImage());
-    return $twig;
+  $twig->addExtension(new TwigExtensionRenderComponent());
+  $twig->addExtension(new TwigExtensionReadingTime());
+  $twig->addExtension(new TwigExtensionPlaceholderImage());
+  return $twig;
 });

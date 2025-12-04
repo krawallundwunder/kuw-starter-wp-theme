@@ -38,7 +38,7 @@ flynt-component[name='GridImageText'] {
       }
     }
 
-    &[data-card='true']{
+    &[data-card='true'] {
       --column-gap: var(--flow-space);
 
       .content {
