@@ -13,11 +13,15 @@ add_action('init', function (): void {
 });
 
 add_filter('Flynt/addComponentData?name=Navigation', function (array $data): array {
+  $globalOptions = Options::getGlobal('Seiten Einstellungen');
   $data['menu'] = Timber::get_menu('navigation_main') ?? Timber::get_pages_menu();
+
+  $acfLogo = $globalOptions['logo'] ?? [];
+  $wpLogoID = get_theme_mod('custom_logo');
+  $wpLogo = $wpLogoID ? wp_get_attachment_image_url($wpLogoID, 'full') : null;
+  $defaultLogo = Asset::requireUrl('assets/images/logo.png');
   $data['logo'] = [
-    'src' => get_theme_mod('custom_logo')
-      ? wp_get_attachment_image_url(get_theme_mod('custom_logo'), 'full')
-      : Asset::requireUrl('assets/images/logo.png'),
+    'src' => $acfLogo ?: $wpLogo ?: $defaultLogo,
     'alt' => get_bloginfo('name'),
   ];
 

@@ -26,10 +26,12 @@
   --color-text-muted: hsl(0, 0%, 100%, 0.8);
 }
 
---breakpoint-mobile-horizontal: 480px;
---breakpoint-tablet: 768px;
---breakpoint-tablet-horizontal: 1024px;
---breakpoint-desktop: 1280px;
+:root{
+  --breakpoint-mobile-horizontal: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-tablet-horizontal: 1024px;
+  --breakpoint-desktop: 1280px;
+}
 
 :root {
   /**

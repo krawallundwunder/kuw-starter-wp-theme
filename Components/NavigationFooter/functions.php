@@ -12,7 +12,20 @@ add_action('init', function (): void {
 });
 
 add_filter('Flynt/addComponentData?name=NavigationFooter', function (array $data): array {
+  $globalOptions = Options::getGlobal('Seiten Einstellungen');
+  $footerSettings = $globalOptions['footer_settings'] ?? [];
+  $data['footer_logo'] = $footerSettings['footer_logo'] ?? [];
   $data['menu'] = Timber::get_menu('navigation_footer') ?? Timber::get_pages_menu();
+
+  $acfLogo = $globalOptions['logo'] ?? [];
+  $wpLogoID = get_theme_mod('custom_logo');
+  $wpLogo = $wpLogoID ? wp_get_attachment_image_url($wpLogoID, 'full') : null;
+  // $defaultLogo = Asset::requireUrl('assets/images/logo.png');
+  $data['logo'] = [
+    'src' => $acfLogo ?: $wpLogo ?: null,
+    'alt' => get_bloginfo('name'),
+  ];
+
 
   return $data;
 });
