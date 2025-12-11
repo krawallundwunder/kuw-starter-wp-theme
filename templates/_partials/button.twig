@@ -5,7 +5,8 @@
 } %}
 
 {% set variantClasses = {
-  'primary': 'bg-primary text-secondary hover:brightness-85 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]',
+  'primary': 'bg-primary text-secondary hover:text-white hover:brightness-85 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]',
+  'secondary': 'border-2 border-secondary text-primary hover:bg-secondary hover:text-white hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]',
 } %}
 
 {% set selectedSize = sizeClasses[size|default('medium')] %}
