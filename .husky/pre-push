@@ -1,1 +1,4 @@
-yarn run prod
+# #!/bin/sh
+# . "$(dirname "$0")/_/husky.sh"
+
+# yarn run prod
