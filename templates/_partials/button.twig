@@ -1,0 +1,16 @@
+{% set baseClasses = 'flex items-center justify-center gap-2 font-semibold no-underline! rounded-lg transition-all duration-300 ease-in-out cursor-pointer whitespace-nowrap' %}
+
+{% set sizeClasses = {
+  'medium': 'px-6 py-3 text-base',
+} %}
+
+{% set variantClasses = {
+  'primary': 'bg-primary text-secondary hover:brightness-85 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]',
+} %}
+
+{% set selectedSize = sizeClasses[size|default('medium')] %}
+{% set selectedVariant = variantClasses[variant|default('primary')] %}
+
+<a href="{{ link|default('#') }}" class="{{ baseClasses }} {{ selectedSize }} {{ selectedVariant }}">
+	<span>{{ text|default('Button') }}</span>
+</a>
