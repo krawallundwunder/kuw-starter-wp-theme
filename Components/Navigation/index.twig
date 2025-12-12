@@ -1,7 +1,5 @@
-<flynt-component
-	name="Navigation" load:on="idle" load:on:media="(max-width: 1023px)">
+<flynt-component name="Navigation" load:on="idle" load:on:media="(max-width: 1023px)">
 
-	{# LÓGICA DE DADOS (Prepara a lista combinada) #}
 	{% if menu and navigation_second %}
 		{% set mobileItems = menu.items | merge(navigation_second.items) %}
 	{% elseif menu %}
@@ -29,7 +27,7 @@
 					{% include "Partials/_menuDesktop.twig" with { items: menu.items } %}
 				</div>
 
-				{# BOTÃO BURGER #}
+				{# BUTTON BURGER #}
 				<button class="burger-btn group flex flex-col space-y-1.5 lg:hidden z-50 relative p-2" aria-label="Abrir menu">
 					<span class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:bg-yellow-400"></span>
 					<span class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:bg-yellow-400"></span>
@@ -45,7 +43,7 @@
 				<div
 					class="flex h-full flex-col p-6">
 
-					{# Header do Drawer #}
+					{# DRAWER HEADER #}
 					<div class="mb-8 flex items-center justify-between">
 						<h2 class="text-xl font-bold text-white uppercase tracking-wider">Menu</h2>
 						<button class="mobile-close p-2 text-gray-400 hover:text-white transition-colors">
@@ -55,14 +53,13 @@
 						</button>
 					</div>
 
-					{# CORPO DO MENU #}
 					<div
 						class="flex-1 space-y-4">
 
-						{# --- AQUI ENTRA O SEU NOVO PARTIAL --- #}
+						{# MOBILE MENU #}
 						{% include "Partials/_menuMobile.twig" with { items: mobileItems } only %}
 
-						{# Botão CTA Mobile (Fica fora do loop, mas dentro do scroll) #}
+						{# MOBILE CTA BUTTON #}
 						{% if button_link and button_link.url %}
 							<div class="pt-6">
 								<a class="mobile-menu-link block w-full text-center bg-white text-black font-bold py-3 px-4 rounded hover:bg-gray-200 transition-colors" href="{{ button_link.url }}" target="{{ button_link.target ? '_blank' : '_self' }}">
@@ -73,7 +70,7 @@
 
 					</div>
 
-					{# Footer do Drawer #}
+					{# DRAWER FOOTER #}
 					<div class="border-t border-gray-800 pt-6 text-xs text-gray-500">
 						<p>&copy;
 							{{ 'now'|date('Y') }}

@@ -1,6 +1,6 @@
 <ul class="flex flex-col list-none p-0 m-0">
 	{% for item in items %}
-		<li class="border-b border-gray-800 last:border-0 pb-2 mb-2">
+		<li class="border-b border-gray-800 last:border-0 pb-2 mb-2 no-underline!">
 
 			{% if item.children is defined and item.children|length > 0 %}
 
@@ -12,10 +12,10 @@
 						</svg>
 					</summary>
 
-					<ul class="mt-2 pl-6 border-l border-gray-700 space-y-3 ml-2">
+					<ul class="mt-2 pl-6 space-y-3 ml-2">
 						{% for child in item.children %}
 							<li>
-								<a class="mobile-menu-link block text-base text-gray-400 hover:text-white transition-colors {{ child.current ? 'text-white font-semibold' : '' }}" href="{{ child.link|e('esc_url') }}" {{ child.is_external or child.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
+								<a class="mobile-menu-link block text-base text-gray-300 hover:text-white transition-colors no-underline! {{ child.current ? 'text-yellow-400 font-semibold underline!' : '' }}" href="{{ child.link|e('esc_url') }}" {{ child.is_external or child.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
 									{{ child.title }}
 								</a>
 							</li>
@@ -25,7 +25,7 @@
 
 			{% else %}
 
-				<a href="{{ item.link|e('esc_url') }}" class="mobile-menu-link block py-2 text-lg font-medium text-white transition-colors hover:text-yellow-400 {{ item.current ? 'text-yellow-400' : '' }}" {{ item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
+				<a href="{{ item.link|e('esc_url') }}" class="mobile-menu-link block py-2 text-lg font-medium text-white transition-colors hover:text-yellow-400 no-underline! {{ item.current ? 'text-yellow-400 font-semibold underline!' : '' }}" {{ item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
 					{{ item.title }}
 				</a>
 
