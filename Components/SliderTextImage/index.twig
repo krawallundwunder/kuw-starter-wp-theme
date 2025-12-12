@@ -7,6 +7,22 @@
   } %}
 	<script type="application/json">{{ jsonData|json_encode }}</script>
 	<div class="container relative my-14" data-flow="layout">
+
+		<div class="flex flex-col text-center pb-12">
+			{% if tag %}
+				<span class="text-xl font-medium pb-4">{{ tag }}</span>
+			{% endif %}
+			{% if title %}
+				<h2 class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title }}</h2>
+			{% endif %}
+			{% if description %}
+				<div class="prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mx-auto {{ backgroundColorConfig[sectionColor|default('bg-white')].text }}">
+					{{ description|raw }}
+				</div>
+			{% endif %}
+		</div>
+
+
 		{% if slides %}
 			<div data-ref="slider" class="slider swiper-container overflow-hidden" data-size="full" data-align="center">
 				<div class="swiper-wrapper" role="region" aria-live="polite">

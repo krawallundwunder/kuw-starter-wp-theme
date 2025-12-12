@@ -26,6 +26,28 @@ function getACFLayout(): array
         'endpoint' => 0,
       ],
       [
+        'label' => __('Tag', 'flynt'),
+        'name' => 'tag',
+        'type' => 'text',
+        'instructions' => __('Fügen Sie einen Titel für den gesamten Slider hinzu.', 'flynt'),
+        'required' => 0,
+      ],
+      [
+        'label' => __('Titel', 'flynt'),
+        'name' => 'title',
+        'type' => 'text',
+        'instructions' => __('Fügen Sie einen Titel für den gesamten Slider hinzu.', 'flynt'),
+        'required' => 0,
+      ],
+      [
+        'label' => __('Beschreibung', 'flynt'),
+        'name' => 'description',
+        'type' => 'wysiwyg',
+        'instructions' => __('Fügen Sie eine Beschreibung für den gesamten Slider hinzu.', 'flynt'),
+        'required' => 0,
+        'media_upload' => 0,
+      ],
+      [
         'label' => __('Slides', 'flynt'),
         'name' => 'slides',
         'type' => 'repeater',
