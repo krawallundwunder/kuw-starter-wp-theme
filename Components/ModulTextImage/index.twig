@@ -1,0 +1,58 @@
+<flynt-component name="ModulTextImage" class="py-8 md:py-12 lg:py-16" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
+	<div class="container px-4 mx-auto">
+		<div
+			class="grid gap-8 lg:gap-14 {{ options.imagePosition == 'left' or options.imagePosition == 'right' ? 'md:grid-cols-2 items-center' : 'justify-items-center' }}">
+
+			{# Image Column #}
+			{% if image %}
+				<figure class="{{ options.imagePosition == 'right' ? 'md:order-2' : options.imagePosition == 'bottom' ? 'order-2' : '' }} {{ (options.imagePosition == 'top' or options.imagePosition == 'bottom') and options.aspectRatio != '16-9' ? 'max-w-3xl w-full' : 'w-full' }}">
+					<div class=" rounded-lg overflow-hidden {{ options.aspectRatio != 'auto' ? 'relative' : '' }}" {% if options.aspectRatio != 'auto' %} style="aspect-ratio: {{ options.aspectRatio == '16-9' ? '16/9' : options.aspectRatio == '4-3' ? '4/3' : options.aspectRatio == '1-1' ? '1/1' : 'auto' }}" {% endif %}>
+						{% if image.post_mime_type == 'image/svg+xml' %}
+							<img class="w-full h-auto {{ options.aspectRatio != 'auto' ? 'absolute inset-0 object-cover' : '' }}" src="{{ image.src }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy">
+						{% else %}
+							<img class="w-full h-auto {{ options.aspectRatio != 'auto' ? 'absolute inset-0 h-full object-cover' : '' }}" src="{{ image.src|resizeDynamic(768) }}" srcset="{{ image.src|resizeDynamic(640) }} 640w, {{ image.src|resizeDynamic(768) }} 768w, {{ image.src|resizeDynamic(1024) }} 1024w, {{ image.src|resizeDynamic(1366) }} 1366w" sizes="(max-width: 768px) 100vw, {{ options.imagePosition == 'left' or options.imagePosition == 'right' ? '50vw' : '100vw' }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy">
+						{% endif %}
+					</div>
+				</figure>
+			{% endif %}
+
+			{# Content Column #}
+			<div class="flex flex-col justify-center {{ options.imagePosition == 'bottom' ? 'order-1' : '' }} {{ options.imagePosition == 'top' or options.imagePosition == 'bottom' ? 'text-center items-center' : '' }}">
+
+				{% if tagline %}
+					<div class="mb-4.5 text-sm text-[#1570EF] font-normal leading-6 font-inter tracking-wide uppercase">
+						{{ tagline|e }}
+					</div>
+				{% endif %}
+
+				{% if title %}
+					<h2 class="text-[#181D27] font-sfpro leading-11 tracking-[-0.8px] font-normal mb-8 text-3xl md:text-4xl lg:text-5xl md:mb-6">
+						{{ title|e }}
+					</h2>
+				{% endif %}
+
+				{% if contentHtml %}
+					<div class="prose text-[#535862] font-sfpro text-base leading-[25px] font-normal max-w-none mb-6 {{ options.imagePosition == 'top' or options.imagePosition == 'bottom' ? 'text-center' : '' }}">
+						{{ contentHtml|e('wp_kses_post') }}
+					</div>
+				{% endif %}
+
+				{# TODO: Add global button #}
+				{% if button %}
+					<div>
+						<a href="{{ button.url }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all {{ button.style == 'secondary' ? 'bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600' : button.style == 'outline' ? 'border-2 border-current hover:bg-gray-100 dark:hover:bg-gray-800' : 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' }}" {{ button.target ? 'target="' ~ button.target ~ '"' }}>
+							{{ button.title|e }}
+							{% if button.style != 'outline' %}
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+								</svg>
+							{% endif %}
+						</a>
+					</div>
+				{% endif %}
+
+			</div>
+
+		</div>
+	</div>
+</flynt-component>
