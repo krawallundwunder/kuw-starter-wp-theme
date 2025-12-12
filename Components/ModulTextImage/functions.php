@@ -47,7 +47,7 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Button', 'flynt'),
-        'instructions' => __('Hier kannst du einen Button hinzufügen (max. 2).', 'flynt'),
+        'instructions' => __('Hier kannst du einen Button hinzufügen.', 'flynt'),
         'name' => 'button',
         'type' => 'link',
         'return_format' => 'array',
@@ -98,10 +98,3 @@ function getACFLayout(): array
     ],
   ];
 }
-
-add_filter('Flynt/addComponentData?name=Modul', function ($data) {
-  if (!empty($data['button']) && !empty($data['button_style'])) {
-    $data['button']['style'] = $data['button_style'];
-  }
-  return $data;
-});
