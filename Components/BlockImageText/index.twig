@@ -1,27 +1,16 @@
 <flynt-component name="BlockImageText" class="py-8 md:py-12 lg:py-16" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
 	<div class="container px-4 mx-auto">
 		<div
-			class="
-				      grid md:grid-cols-2
-				      {{ options.gapSize == 'small' ? 'gap-6' : options.gapSize == 'large' ? 'gap-12 lg:gap-16' : 'gap-8 lg:gap-12' }}
-				      {{ options.verticalAlign == 'top' ? 'items-start' : options.verticalAlign == 'bottom' ? 'items-end' : 'items-center' }}
-				    ">
+			class=" grid md:grid-cols-2 {{ options.gapSize == 'small' ? 'gap-6' : options.gapSize == 'large' ? 'gap-12 lg:gap-16' : 'gap-8 lg:gap-12' }} {{ options.verticalAlign == 'top' ? 'items-start' : options.verticalAlign == 'bottom' ? 'items-end' : 'items-center' }} ">
 
 			{# Image Column #}
 			{% if image %}
 				<figure class="{{ imagePosition == 'right' ? 'md:order-2' : '' }}">
-					<div class="
-						            rounded-lg overflow-hidden
-						            {{ options.aspectRatio != 'auto' ? 'relative' : '' }}
-						          " {% if options.aspectRatio != 'auto' %} style="aspect-ratio: {{ options.aspectRatio == '16-9' ? '16/9' : options.aspectRatio == '4-3' ? '4/3' : options.aspectRatio == '1-1' ? '1/1' : 'auto' }}" {% endif %}>
+					<div class=" rounded-lg overflow-hidden {{ options.aspectRatio != 'auto' ? 'relative' : '' }} " {% if options.aspectRatio != 'auto' %} style="aspect-ratio: {{ options.aspectRatio == '16-9' ? '16/9' : options.aspectRatio == '4-3' ? '4/3' : options.aspectRatio == '1-1' ? '1/1' : 'auto' }}" {% endif %}>
 						{% if image.post_mime_type == 'image/svg+xml' %}
 							<img class="w-full h-auto {{ options.aspectRatio != 'auto' ? 'absolute inset-0 object-cover' : '' }}" src="{{ image.src }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy">
 						{% else %}
-							<img class="w-full h-auto {{ options.aspectRatio != 'auto' ? 'absolute inset-0 h-full object-cover' : '' }}" src="{{ image.src|resizeDynamic(768) }}" srcset="
-								                  {{ image.src|resizeDynamic(640) }} 640w,
-								                  {{ image.src|resizeDynamic(768) }} 768w,
-								                  {{ image.src|resizeDynamic(1024) }} 1024w,
-								                  {{ image.src|resizeDynamic(1366) }} 1366w" sizes="(max-width: 768px) 100vw, 50vw" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy">
+							<img class="w-full h-auto {{ options.aspectRatio != 'auto' ? 'absolute inset-0 h-full object-cover' : '' }}" src="{{ image.src|resizeDynamic(768) }}" srcset=" {{ image.src|resizeDynamic(640) }} 640w, {{ image.src|resizeDynamic(768) }} 768w, {{ image.src|resizeDynamic(1024) }} 1024w, {{ image.src|resizeDynamic(1366) }} 1366w" sizes="(max-width: 768px) 100vw, 50vw" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy">
 						{% endif %}
 					</div>
 
@@ -34,12 +23,7 @@
 			{% endif %}
 
 			{# Content Column #}
-			<div class="
-					        {{ options.contentBackground ? 'p-8 md:p-10 lg:p-12 rounded-xl bg-gray-50 dark:bg-gray-900' : '' }}
-					        {{ options.contentAlign == 'center' ? 'text-center' : options.contentAlign == 'right' ? 'text-right' : '' }}
-					        flex flex-col
-					        {{ options.verticalAlign == 'top' ? 'justify-start' : options.verticalAlign == 'bottom' ? 'justify-end' : 'justify-center' }}
-					      ">
+			<div class=" {{ options.contentBackground ? 'p-8 md:p-10 lg:p-12 rounded-xl bg-gray-50 dark:bg-gray-900' : '' }} {{ options.contentAlign == 'center' ? 'text-center' : options.contentAlign == 'right' ? 'text-right' : '' }} flex flex-col {{ options.verticalAlign == 'top' ? 'justify-start' : options.verticalAlign == 'bottom' ? 'justify-end' : 'justify-center' }} ">
 
 				{% if title %}
 					<h2 class="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl md:mb-6">
@@ -48,22 +32,14 @@
 				{% endif %}
 
 				{% if contentHtml %}
-					<div class="
-							            prose dark:prose-invert max-w-none mb-6
-							            {{ options.contentAlign == 'center' ? 'prose-center' : options.contentAlign == 'right' ? 'prose-right' : '' }}
-							          ">
+					<div class=" prose dark:prose-invert max-w-none mb-6 {{ options.contentAlign == 'center' ? 'prose-center' : options.contentAlign == 'right' ? 'prose-right' : '' }} ">
 						{{ contentHtml|e('wp_kses_post') }}
 					</div>
 				{% endif %}
 
 				{% if button %}
 					<div class="{{ options.contentAlign == 'center' ? 'flex justify-center' : options.contentAlign == 'right' ? 'flex justify-end' : '' }}">
-						<a href="{{ button.url }}" class="
-							                inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all
-							                {{ button.style == 'secondary' ? 'bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600' :
-							                   button.style == 'outline' ? 'border-2 border-current hover:bg-gray-100 dark:hover:bg-gray-800' :
-							                   'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' }}
-							              " {{ button.target ? 'target="' ~ button.target ~ '"' }}>
+						<a href="{{ button.url }}" class=" inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all {{ button.style == 'secondary' ? 'bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600' : button.style == 'outline' ? 'border-2 border-current hover:bg-gray-100 dark:hover:bg-gray-800' : 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' }} " {{ button.target ? 'target="' ~ button.target ~ '"' }}>
 							{{ button.title|e }}
 							{% if button.style != 'outline' %}
 								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
