@@ -5,7 +5,7 @@
     'bg-gray-200': { 'design': 'gray-dark', 'text': 'text-black' },
     'bg-black': { 'design': 'black', 'text': 'text-white' },
   } %}
-	<script type="application/json">{{ jsonData|json_encode }}</script>
+	<script type="application/json">{{ jsonData|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_QUOT'))|raw }}</script>
 	<div class="container relative my-14" data-flow="layout">
 
 		<div class="flex flex-col text-center pb-12">
@@ -53,10 +53,15 @@
 											</div>
 										{% endif %}
 										{% if slide.name or slide.role %}
-											<div class="flex flex-wrap items-center gap-2 text-lg lg:text-xl">
-												<span class="font-semibold">{{ slide.name }},
-												</span>
-												<span class="opacity-90">{{ slide.role }}</span>
+											<div class="text-lg lg:text-xl">
+												{% if slide.name %}
+													<span class="font-semibold">{{ slide.name }}</span>
+													{% if slide.name and slide.role %},
+													{% endif %}
+												{% endif %}
+												{% if slide.role %}
+													<span class="opacity-90">{{ slide.role }}</span>
+												{% endif %}
 											</div>
 										{% endif %}
 									</div>

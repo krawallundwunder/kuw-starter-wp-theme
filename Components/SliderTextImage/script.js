@@ -11,11 +11,24 @@ export default function (el) {
   const elements = buildRefs(el)
   const componentData = getJSON(el)
 
-  // Wait for component to be fully in DOM
   let swiper
-  setTimeout(() => {
-    swiper = initSlider(elements, componentData)
-  }, 100)
+
+  // Initialize when component is ready
+  const initWhenReady = () => {
+    if (elements.slider && elements.slider.offsetWidth > 0) {
+      swiper = initSlider(elements, componentData)
+    } else {
+      requestAnimationFrame(initWhenReady)
+    }
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      initWhenReady()
+    })
+  } else {
+    initWhenReady()
+  }
 
   return () => swiper?.destroy?.()
 }
@@ -30,6 +43,9 @@ function initSlider(elements, componentData) {
     roundLengths: true,
     centeredSlides: true,
     rewind: true,
+    updateOnImagesReady: true,
+    preloadImages: true,
+    watchSlidesProgress: true,
 
     a11y: options.a11y || {
       prevSlideMessage: 'Previous slide',
@@ -78,16 +94,55 @@ function initSlider(elements, componentData) {
   try {
     const swiper = new Swiper(elements.slider, config)
 
-    // Force update to ensure proper rendering
-    setTimeout(() => {
+    swiper.on('init', () => {
+      setEqualHeight(swiper)
+    })
+
+    swiper.on('imagesReady', () => {
+      setEqualHeight(swiper)
       swiper.update()
-      swiper.navigation.update()
-      swiper.pagination.update()
-    }, 300)
+    })
+
+    swiper.on('resize', () => {
+      setEqualHeight(swiper)
+    })
 
     return swiper
   } catch (error) {
     console.error('Swiper initialization error:', error)
   }
-
 }
+
+function setEqualHeight(swiper) {
+  if (!swiper || !swiper.slides) return
+
+  const slides = swiper.slides
+  let maxHeight = 0
+
+  slides.forEach(slide => {
+    const section = slide.querySelector('section')
+    if (section) {
+      section.style.height = 'auto'
+    }
+  })
+
+  slides.forEach(slide => {
+    const section = slide.querySelector('section')
+    if (section) {
+      const slideHeight = section.offsetHeight
+      if (slideHeight > maxHeight) {
+        maxHeight = slideHeight
+      }
+    }
+  })
+
+  if (maxHeight > 0) {
+    slides.forEach(slide => {
+      const section = slide.querySelector('section')
+      if (section) {
+        section.style.height = maxHeight + 'px'
+      }
+    })
+  }
+}
+

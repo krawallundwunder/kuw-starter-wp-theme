@@ -73,28 +73,28 @@ function getACFLayout(): array
             'required' => 1
           ],
           [
-            'label' => 'Author',
+            'label' => __('Author', 'flynt'),
             'name' => 'name',
             'type' => 'text',
-            'instructions' => 'Name der Person, die das Zitat gesagt hat.',
+            'instructions' => __('Name der Person, die das Zitat gesagt hat.', 'flynt'),
             'wrapper' => [
               'width' => '33',
             ],
           ],
           [
-            'label' => 'Berufsbezeichnung/Rolle',
+            'label' => __('Berufsbezeichnung/Rolle', 'flynt'),
             'name' => 'role',
             'type' => 'text',
-            'instructions' => 'Berufsbezeichnung oder Rolle der Person, die das Zitat gesagt hat.',
+            'instructions' => __('Berufsbezeichnung oder Rolle der Person, die das Zitat gesagt hat.', 'flynt'),
             'wrapper' => [
               'width' => '33',
             ],
           ],
           [
-            'label' => 'Bild',
+            'label' => __('Bild', 'flynt'),
             'name' => 'image',
             'type' => 'image',
-            'instructions' => 'Bild der Person, die das Zitat gesagt hat. Ideal: quadratisch.',
+            'instructions' => __('Bild der Person, die das Zitat gesagt hat. Ideal: quadratisch.', 'flynt'),
             'required' => 0,
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
@@ -103,10 +103,10 @@ function getACFLayout(): array
             ],
           ],
           [
-            'label' => 'Hintergrundfarbe',
+            'label' => __('Hintergrundfarbe', 'flynt'),
             'name' => 'bgColorClass',
             'type' => 'select',
-            'instructions' => 'Wählen Sie eine Hintergrundfarbe für diesen Abschnitt aus.',
+            'instructions' => __('Wählen Sie eine Hintergrundfarbe für diesen Abschnitt aus.', 'flynt'),
             'required' => 0,
             'choices' => [
               'bg-white' => 'Weiß',
