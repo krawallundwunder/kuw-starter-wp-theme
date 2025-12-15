@@ -6,7 +6,7 @@
 			{# Image Column #}
 			{% if image %}
 				<figure class="{{ options.imagePosition == 'right' ? 'md:order-2' : options.imagePosition == 'bottom' ? 'order-2' : '' }} {{ (options.imagePosition == 'top' or options.imagePosition == 'bottom') and options.aspectRatio != '16-9' ? 'max-w-3xl w-full' : 'w-full' }}">
-					<div class=" rounded-lg overflow-hidden {{ options.aspectRatio != 'auto' ? 'relative' : '' }}" {% if options.aspectRatio != 'auto' %} style="aspect-ratio: {{ options.aspectRatio == '16-9' ? '16/9' : options.aspectRatio == '4-3' ? '4/3' : options.aspectRatio == '1-1' ? '1/1' : 'auto' }}" {% endif %}>
+					<div class=" rounded-lg overflow-hidden {{ options.aspectRatio != 'auto' ? 'relative' : '' }}" {% if options.aspectRatio != 'auto' %} style="aspect-ratio: {{ {'16-9': '16/9', '4-3': '4/3', '1-1': '1/1'}[options.aspectRatio] }}" {% endif %}>
 						{% if image.post_mime_type == 'image/svg+xml' %}
 							<img class="w-full h-auto {{ options.aspectRatio != 'auto' ? 'absolute inset-0 object-cover' : '' }}" src="{{ image.src }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt|e }}" loading="lazy">
 						{% else %}
