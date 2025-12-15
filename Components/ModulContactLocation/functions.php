@@ -17,7 +17,7 @@ function getACFLayout()
         'sub_fields' => [
             // Kontakt Tab
             [
-                'label' => 'Kontakt Section',
+                'label' => __('Kontakt Section', 'flynt'),
                 'name' => 'contactTab',
                 'type' => 'tab',
             ],
@@ -80,21 +80,6 @@ function getACFLayout()
                         'name' => 'formLink',
                         'type' => 'link',
                         'return_format' => 'array',
-                        'wrapper' => ['width' => '50'],
-                    ],
-                    [
-                        'label' => 'Icon (Optional)',
-                        'name' => 'icon',
-                        'type' => 'select',
-                        'choices' => [
-                            'users' => 'Kollaboration',
-                            'newspaper' => 'Presse',
-                            'briefcase' => 'Karriere',
-                            'message-circle' => 'Allgemein',
-                            'mail' => 'E-Mail',
-                            'phone' => 'Telefon',
-                        ],
-                        'allow_null' => 1,
                         'wrapper' => ['width' => '50'],
                     ],
                 ],
