@@ -1,0 +1,46 @@
+<flynt-component name="BlockHeroSection" class="componentHeroHeader">
+	{% set colorMap = {
+    'white': {
+        text: 'text-black',
+        button: 'bg-white text-black hover:bg-yellow-400 hover:text-white border-yellow-400 hover:border-yellow-400'
+    },
+    'black': {
+        text: 'text-white',
+        button: 'bg-white text-yellow-400 hover:bg-yellow-400 hover:text-white border-yellow-400 hover:border-yellow-400'
+    }
+  } %}
+
+	{% set layoutClasses = {
+    'left': 'lg:flex-row-reverse',
+    'right': 'lg:flex-row',
+  } %}
+
+	<div class="relative flex flex-col justify-center pt-24 {{ colorMap[backgroundColor].text }} bg-{{ backgroundColor }} lg:min-h-[70vh] bg-cover bg-center bg-no-repeat" {% if backgroundImage %} style="background-image: url('{{ backgroundImage.src|esc_url }}');" {% endif %}>
+
+		{% if backgroundImage %}
+			<div class="absolute inset-0 bg-black" style="opacity: {{ overlayOpacity|default(60) / 100 }};"></div>
+		{% endif %}
+
+		<div class="container relative z-10 flex items-center h-full py-12">
+			<div class="flex flex-col-reverse gap-12 items-center w-full {{ layoutClasses[imagePosition|default('right')] }}">
+
+				<div class="w-full {{ textPosition == 'full' ? 'w-full text-center' : 'text-start lg:w-1/2 '}} flex flex-col items-center">
+					{% if headline %}
+						<div class="h2 text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 font-bold">
+							{{ headline|e('wp_kses_post') }}
+						</div>
+					{% endif %}
+
+					{% if ctaButton and ctaButton.url %}
+						<div class="mt-8">
+							<a href="{{ ctaButton.url|esc_url }}" target="{{ ctaButton.target|default('_self') }}" class="inline-block {{ colorMap[backgroundColor].button }} text-sm font-bold py-3 px-8 rounded-[5px] border-2 transition-all duration-300 hover:scale-105 {{ textPosition == 'full' ? 'mx-auto' : ''}}">
+								{{ (ctaButton.title ?: 'Mehr erfahren')|e('html') }}
+							</a>
+						</div>
+					{% endif %}
+				</div>
+
+			</div>
+		</div>
+	</div>
+</flynt-component>
