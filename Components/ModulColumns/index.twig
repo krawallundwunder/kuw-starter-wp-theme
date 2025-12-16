@@ -1,0 +1,131 @@
+<section class="component component-columns-module bg-white text-primary py-16 lg:py-24 transition-all duration-300 ease-in-out">
+	<div class=" container mx-auto px-4 sm:px-6 lg:px-8">
+		{% if title %}
+			<h2 class="text-4xl md:text-5xl lg:text-7xl font-medium leading-none mb-6 sm:mb-10">{{ title }}</h2>
+		{% endif %}
+
+		{% if description %}
+			<div class="text-start mb-12 lg:mb-16">
+				<div class="text-lg md:text-xl lg:text-[22px] font-light leading-tight mb-6 sm:mb-8 text-gray-500">
+					{{ description|e('wp_kses_post') }}
+				</div>
+			</div>
+		{% endif %}
+
+		<div class="grid grid-cols-1 gap-8 md:grid-flow-col md:auto-cols-fr md:grid-cols-{{ columns|length }}">
+			{% for column in columns %}
+				{% set has_link = column.button and column.button.url %}
+
+				<div class="column js-column-item flex flex-col gap-4 md:gap-8 h-full rounded-md p-1.5 transition-all duration-300 ease-in-out text-{{ options.textAlignment }}">
+
+					<div class="grow bg-gray-50 rounded-lg">
+						{% if column.image %}
+							<div class="column-image mb-8">
+								{% if has_link %}
+									<a href="{{ column.button.url }}" target="{{ column.button.target }}" {{ column.button.target == '_blank' ? 'rel="noopener noreferrer"' }}>
+									{% endif %}
+									<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="object-cover object-center max-h-80 {{ options.isImageRounded ? ' rounded-full aspect-square mx-auto' : 'w-full h-full rounded-t-lg' }} {% if has_link %}transition-opacity duration-300 ease-in-out hover:opacity-80{% endif %}">
+									{% if has_link %}
+									</a>
+								{% endif %}
+							</div>
+						{% endif %}
+
+						<div class="mx-4 mb-4">
+							{% if column.tag %}
+								<div class="column-tag mb-1">
+									<span class="inline-block text-sm font-medium text-blue-500 uppercase tracking-wide">
+										{{ column.tag }}
+									</span>
+								</div>
+							{% endif %}
+
+							{% if column.subtitle %}
+								<div class="column-subtitle-container mb-2.5">
+									<h3 class="js-column-subtitle column-subtitle text-3xl font-medium w-full text-primary">
+										{{ column.subtitle }}
+									</h3>
+								</div>
+							{% endif %}
+
+							{% if column.description %}
+								<div class="column-description text-gray-500 text-lg md:text-xl lg:text-[22px] leading-tight font-light">
+									{{ column.description|e('wp_kses_post') }}
+								</div>
+							{% endif %}
+						</div>
+					</div>
+
+					{% if column.button and column.button.url %}
+						<div class="column-button mt-auto pt-4">
+							<a href="{{ column.button.url }}" class="bg-gray-50 no-underline! py-3 px-3 rounded-lg text-primary hover:bg-blue-600 hover:text-white btn-base" target="{{ column.button.target }}" {{ column.button.target == '_blank' ? 'rel="noopener noreferrer"' }}>
+								{{ column.button.title ? column.button.title : 'Book a Meeting' }}
+							</a>
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<style>
+	.column-subtitle-container {
+		min-height: var(--row-subtitle-height, auto);
+		display: flex;
+		align-items: flex-end;
+	}
+</style>
+<script>
+	function equalizeColumnHeightsScoped() {
+const components = document.querySelectorAll('.component-columns-module');
+
+if (! components.length) {
+return;
+}
+
+components.forEach(component => {
+const columnItems = component.querySelectorAll('.js-column-item');
+
+if (! columnItems.length) {
+return;
+}
+
+let maxHeight = 0;
+
+columnItems.forEach(item => {
+item.style.removeProperty('--row-subtitle-height');
+const subtitle = item.querySelector('.js-column-subtitle');
+if (subtitle) {
+subtitle.parentElement.style.minHeight = '0px';
+}
+});
+
+requestAnimationFrame(() => {
+columnItems.forEach(item => {
+const subtitle = item.querySelector('.js-column-subtitle');
+if (subtitle) {
+const subtitleHeight = subtitle.getBoundingClientRect().height;
+if (subtitleHeight > maxHeight) {
+maxHeight = subtitleHeight;
+}
+subtitle.parentElement.style.removeProperty('min-height');
+}
+});
+
+if (maxHeight > 0) {
+columnItems.forEach(item => {
+item.style.setProperty('--row-subtitle-height', `${maxHeight}px`);
+});
+}
+});
+});
+}
+
+document.addEventListener('DOMContentLoaded', equalizeColumnHeightsScoped);
+
+let resizeTimeoutScoped;
+window.addEventListener('resize', () => {
+clearTimeout(resizeTimeoutScoped);
+resizeTimeoutScoped = setTimeout(equalizeColumnHeightsScoped, 150);
+});
+</script>
