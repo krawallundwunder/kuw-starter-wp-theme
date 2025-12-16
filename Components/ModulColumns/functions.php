@@ -57,7 +57,7 @@ function getACFLayout(): array
             'mime_types' => 'jpg,jpeg,png',
             'required' => 0,
             'wrapper' => [
-              'width' => 25
+              'width' => 20
             ]
           ],
           [
@@ -67,7 +67,7 @@ function getACFLayout(): array
             'instructions' => 'Optional: Add a tag or label for the column.',
             'required' => 0,
             'wrapper' => [
-              'width' => 25
+              'width' => 20
             ]
           ],
           [
@@ -77,7 +77,7 @@ function getACFLayout(): array
             'instructions' => 'Write a short, descriptive title for the column.',
             'required' => 0,
             'wrapper' => [
-              'width' => 25
+              'width' => 20
             ]
           ],
           [
@@ -90,7 +90,7 @@ function getACFLayout(): array
             'media_upload' => 0,
             'required' => 0,
             'wrapper' => [
-              'width' => 35
+              'width' => 25
             ]
           ],
           [

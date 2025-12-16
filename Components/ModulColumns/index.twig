@@ -59,7 +59,7 @@
 					{% if column.button and column.button.url %}
 						<div class="column-button mt-auto pt-4">
 							<a href="{{ column.button.url }}" class="bg-gray-50 no-underline! py-3 px-3 rounded-lg text-primary hover:bg-blue-600 hover:text-white btn-base" target="{{ column.button.target }}" {{ column.button.target == '_blank' ? 'rel="noopener noreferrer"' }}>
-								{{ column.button.title ? column.button.title : 'Book a Meeting' }}
+								{{ column.button.title ? column.button.title : __('Book a Meeting', 'flynt') }}
 							</a>
 						</div>
 					{% endif %}
@@ -76,7 +76,8 @@
 	}
 </style>
 <script>
-	function equalizeColumnHeightsScoped() {
+	(function () {
+function equalizeColumnHeights() {
 const components = document.querySelectorAll('.component-columns-module');
 
 if (! components.length) {
@@ -121,11 +122,12 @@ item.style.setProperty('--row-subtitle-height', `${maxHeight}px`);
 });
 }
 
-document.addEventListener('DOMContentLoaded', equalizeColumnHeightsScoped);
+document.addEventListener('DOMContentLoaded', equalizeColumnHeights);
 
-let resizeTimeoutScoped;
+let resizeTimeout;
 window.addEventListener('resize', () => {
-clearTimeout(resizeTimeoutScoped);
-resizeTimeoutScoped = setTimeout(equalizeColumnHeightsScoped, 150);
+clearTimeout(resizeTimeout);
+resizeTimeout = setTimeout(equalizeColumnHeights, 150);
 });
+})();
 </script>
