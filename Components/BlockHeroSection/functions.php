@@ -64,7 +64,7 @@ function getACFLayout()
           'full' => __('Voll', 'flynt'),
           'left' => __('Links', 'flynt'),
         ],
-        'default_value' => 'right',
+        'default_value' => 'full',
         'wrapper' => [
           'width' => '33%',
         ],
