@@ -9,8 +9,11 @@
 function kuw_hex_to_rgb($hex)
 {
   $hex = str_replace('#', '', $hex);
-  $length = strlen($hex);
+  if (preg_match('/^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$/', $hex) !== 1) {
+    return '0, 0, 0';
+  }
 
+  $length = strlen($hex);
   if ($length === 3) {
     $r = hexdec(str_repeat(substr($hex, 0, 1), 2));
     $g = hexdec(str_repeat(substr($hex, 1, 1), 2));
