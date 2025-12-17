@@ -9,11 +9,8 @@
 function kuw_hex_to_rgb($hex)
 {
   $hex = str_replace('#', '', $hex);
-  if (preg_match('/^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$/', $hex) !== 1) {
-    return '0, 0, 0';
-  }
-
   $length = strlen($hex);
+
   if ($length === 3) {
     $r = hexdec(str_repeat(substr($hex, 0, 1), 2));
     $g = hexdec(str_repeat(substr($hex, 1, 1), 2));
@@ -79,10 +76,10 @@ function kuw_output_dynamic_colors()
       <?php foreach ($colorMap as $name => $color): ?>
         <?php if (!empty($color)): ?>
           --color-<?php echo $name; ?>:
-            <?php echo $color; ?>
+            <?php echo esc_html($color); ?>
           ;
           --color-<?php echo $name; ?>-rgb:
-            <?php echo kuw_hex_to_rgb($color); ?>
+            <?php echo esc_html(kuw_hex_to_rgb($color)); ?>
           ;
         <?php endif; ?>
       <?php endforeach; ?>
