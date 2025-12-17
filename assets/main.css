@@ -15,9 +15,6 @@
   padding-inline: 1rem;
 }
 
-.menu-desktop {
-  @apply flex flex-row space-x-2 text-gray-900 dark:text-white;
-}
 
 flynt-component {
   display: block;

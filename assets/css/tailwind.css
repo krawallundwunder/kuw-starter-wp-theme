@@ -4,9 +4,6 @@
   @apply mx-auto w-11/12 px-4 sm:max-w-[640px] md:w-full md:max-w-3xl lg:max-w-[1000px] xl:max-w-[1236px] 2xl:max-w-[1336px];
 }
 
-.menu-desktop {
-  @apply flex flex-row space-x-2 text-gray-900 dark:text-white;
-}
 
 .site {
   display: -webkit-box;
