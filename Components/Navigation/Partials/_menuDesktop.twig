@@ -4,16 +4,16 @@
 
 		<li class="relative group z-50">
 
-			{% if item.children is defined and item.children|length > 0 %}
+			{% set has_children = item.children is defined and item.children|length > 0 %}
 
+			{% if has_children %}
 				{# DROPDOWN TOGGLE #}
-				<span class="inline-flex items-center cursor-pointer py-2 px-3 transition-colors duration-200 ease-in-out will-change-[color] {{ is_active ? 'text-yellow-400 underline decoration-2 underline-offset-4' : 'text-white hover:text-yellow-400 ' }}">
+				<button type="button" aria-haspopup="true" aria-expanded="false" class="inline-flex items-center cursor-pointer py-2 px-3 transition-colors duration-200 ease-in-out will-change-[color] {{ is_active ? 'text-yellow-400 underline decoration-2 underline-offset-4' : 'text-white hover:text-yellow-400 ' }}">
 					<span>{{ item.title }}</span>
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ms-1 inline-block transition-transform duration-200 group-hover:rotate-180" viewbox="0 0 20 20" fill="currentColor">
 						<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
 					</svg>
-				</span>
-
+				</button>
 			{% else %}
 
 				{# STANDARD LINK #}
@@ -24,8 +24,8 @@
 			{% endif %}
 
 			{# DROPDOWN MENU #}
-			{% if item.children is defined and item.children|length > 0 %}
-				<ul class="absolute left-0 top-full hidden w-56 rounded-md bg-white shadow-xl ring-1 ring-black/5 group-hover:block py-2">
+			{% if has_children %}
+				<ul class="absolute left-0 top-full hidden w-56 rounded-md bg-white shadow-xl ring-1 ring-black/5 group-hover:block py-1">
 					{% for child in item.children %}
 						<li>
 							<a class="block px-4 py-2 text-sm transition-colors duration-150 no-underline! {{ child.current ? 'bg-gray-100 text-black font-semibold underline!' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900' }}" href="{{ child.link|e('esc_url') }}" {{ child.is_external or child.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>

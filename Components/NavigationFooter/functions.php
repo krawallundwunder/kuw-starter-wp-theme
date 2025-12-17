@@ -20,7 +20,6 @@ add_filter('Flynt/addComponentData?name=NavigationFooter', function (array $data
   $acfLogo = $globalOptions['logo'] ?? [];
   $wpLogoID = get_theme_mod('custom_logo');
   $wpLogo = $wpLogoID ? wp_get_attachment_image_url($wpLogoID, 'full') : null;
-  // $defaultLogo = Asset::requireUrl('assets/images/logo.png');
   $data['logo'] = [
     'src' => $acfLogo ?: $wpLogo ?: null,
     'alt' => get_bloginfo('name'),

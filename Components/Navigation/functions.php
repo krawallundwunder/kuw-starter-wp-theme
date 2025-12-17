@@ -21,7 +21,7 @@ add_filter('Flynt/addComponentData?name=Navigation', function (array $data): arr
   $wpLogo = $wpLogoID ? wp_get_attachment_image_url($wpLogoID, 'full') : null;
   $defaultLogo = Asset::requireUrl('assets/images/logo.png');
   $data['logo'] = [
-    'src' => $acfLogo ?: $wpLogo ?: $defaultLogo,
+    'src' => ($acfLogo['src'] ?? null) ?: $wpLogo ?: $defaultLogo,
     'alt' => get_bloginfo('name'),
   ];
 
