@@ -32,9 +32,18 @@ function getACFLayout()
       [
         'label' => __('CTA Button', 'flynt'),
         'name' => 'ctaButton',
-        'type' => 'link',
-        'wrapper' => [
-          'width' => '50%',
+        'type' => 'repeater',
+        'instructions' => __('Fügen Sie bis zu zwei Call-to-Action Buttons hinzu.', 'flynt'),
+        'min' => 0,
+        'max' => 2,
+        'layout' => 'row',
+        'button_label' => __('Button hinzufügen', 'flynt'),
+        'sub_fields' => [
+          [
+            'label' => __('Button', 'flynt'),
+            'name' => 'button',
+            'type' => 'link',
+          ],
         ],
       ],
       [

@@ -27,11 +27,13 @@
 						</div>
 					{% endif %}
 
-					{% if ctaButton and ctaButton.url %}
-						<div class="mt-8 {{ textPosition == 'full' ? 'mx-auto' : 'self-start'}}">
-							<a href="{{ ctaButton.url|esc_url }}" target="{{ ctaButton.target|default('_self') }}" class="inline-block {{ colorMap[backgroundColor].button }} text-sm font-bold py-3 px-8 rounded-[5px] border-2 transition-all duration-300 hover:scale-105">
-								{{ (ctaButton.title ?: 'Mehr erfahren')|e('html') }}
-							</a>
+					{% if ctaButton %}
+						<div class="mt-8 gap-6 {{ textPosition == 'full' ? 'mx-auto' : 'self-start'}}">
+							{% for button in ctaButton %}
+								<a href="{{ button.button.url }}" target="{{ button.button.target|default('_self') }}" class="inline-block {{ colorMap[backgroundColor].button }} text-sm font-bold py-3 px-8 rounded-[5px] border-2 transition-all duration-300 hover:scale-105">
+									{{ button.button.title  }}
+								</a>
+							{% endfor %}
 						</div>
 					{% endif %}
 				</div>
