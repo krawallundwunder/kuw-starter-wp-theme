@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .container {
-  @apply mx-auto w-11/12 px-4 sm:max-w-[640px] md:w-full md:max-w-[768px] lg:max-w-[1000px] xl:max-w-[1236px] 2xl:max-w-[1336px];
+  @apply mx-auto w-11/12 px-4 sm:max-w-[640px] md:w-full md:max-w-3xl lg:max-w-[1000px] xl:max-w-[1236px] 2xl:max-w-[1336px];
 }
 
 
