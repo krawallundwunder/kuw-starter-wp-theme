@@ -1,17 +1,32 @@
-{% set baseClasses = 'flex items-center justify-center gap-2 font-semibold no-underline! rounded-lg transition-all duration-300 ease-in-out cursor-pointer whitespace-nowrap' %}
+{% set tag = link ? 'a' : 'button' %}
+{% set buttonType = type|default('button') %}
+{% set targetStr = target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' : '' %}
+
+{% set baseClasses = 'group inline-flex items-center justify-center gap-2 font-semibold no-underline rounded-lg transition-all duration-300 ease-in-out cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none' %}
 
 {% set sizeClasses = {
   'medium': 'px-6 py-3 text-base',
 } %}
 
 {% set variantClasses = {
-  'primary': 'bg-primary text-secondary hover:text-white hover:brightness-85 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]',
-  'secondary': 'border-2 border-secondary text-primary hover:bg-secondary hover:text-white hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]',
+  'primary': 'bg-primary text-secondary border-2 border-transparent hover:brightness-110 hover:-translate-y-0.5 focus-visible:ring-primary',
+  'secondary': 'bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white hover:-translate-y-0.5 focus-visible:ring-primary',
 } %}
 
 {% set selectedSize = sizeClasses[size|default('medium')] %}
 {% set selectedVariant = variantClasses[variant|default('primary')] %}
+{% set customClasses = class|default('') %}
 
-<a href="{{ link|default('#') }}" class="{{ baseClasses }} {{ selectedSize }} {{ selectedVariant }}">
+<{{tag}} {% if tag == 'a' %} href="{{ link|default('#') }}" {{ targetStr }} {% if disabled %} role="link" aria-disabled="true" tabindex="-1" {% endif %} {% else %} type="{{ buttonType }}" {% if disabled %} disabled {% endif %} {% endif %} class="{{ baseClasses }} {{ selectedSize }} {{ selectedVariant }} {{ customClasses }}" {% if ariaLabel %} aria-label="{{ ariaLabel }}" {% endif %} {{ extraAttributes|default('') }}>
+
+	{% if iconLeft %}
+		<span class="transition-transform group-hover:-translate-x-1">{{ iconLeft }}</span>
+	{% endif %}
+
 	<span>{{ text|default('Button') }}</span>
-</a>
+
+	{% if iconRight %}
+		<span class="transition-transform group-hover:translate-x-1">{{ iconRight }}</span>
+	{% endif %}
+
+</{{tag}}>
