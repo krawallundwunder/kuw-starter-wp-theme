@@ -1,0 +1,30 @@
+{% set baseClasses = 'flex flex-col text-start pb-12' %}
+{% set descriptionClass = 'prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current' %}
+
+
+<div class="{{ baseClasses }}">
+	{% if tag %}
+		<span class="text-xl font-medium pb-4 text-black/70">{{ tag }}</span>
+	{% endif %}
+
+	{% if title %}
+		<h2 class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title }}</h2>
+	{% endif %}
+
+	{% if description %}
+		<div class="{{ descriptionClass }}">
+			{{ description|raw }}
+		</div>
+	{% endif %}
+
+	{% if buttons %}
+		<div class="flex md:flex-row gap-4 pt-6">
+			{% for button in buttons %}
+				{% include "templates/_partials/button.twig" with {
+      text: button.text,
+      link: button.link,
+    } %}
+			{% endfor %}
+		</div>
+	{% endif %}
+</div>
