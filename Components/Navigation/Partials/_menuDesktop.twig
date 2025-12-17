@@ -17,7 +17,7 @@
 			{% else %}
 
 				{# STANDARD LINK #}
-				<a class="inline-block py-2 px-3 transition-colors duration-200 ease-in-out will-change-[color] no-underline! {{ item.current ? 'text-yellow-400 underline! decoration-2 underline-offset-4' : ' text-white hover:text-yellow-400 hover:underline' }}" href="{{ item.link|e('esc_url') }}" {{ item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
+				<a class="inline-block py-2 px-3 transition-colors duration-200 ease-in-out will-change-[color] no-underline! {{ item.current ? 'text-yellow-400 underline! decoration-2 underline-offset-4' : ' text-white hover:text-yellow-400 hover:underline' }}" href="{{ item.link|e('esc_url')|e }}" {{ item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer nofollow"' }}>
 					<span>{{ item.title }}</span>
 				</a>
 
