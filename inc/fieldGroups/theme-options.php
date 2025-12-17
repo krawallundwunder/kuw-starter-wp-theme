@@ -31,6 +31,7 @@ Options::addGlobal('Seiten Einstellungen', [
         'name' => 'primary_color',
         'type' => 'color_picker',
         'instructions' => __('Wähle die Primärfarbe der Webseite.', 'flynt'),
+        'default_value' => '#2563eb',
         'wrapper' => [
           'width' => '20',
         ],
@@ -40,6 +41,7 @@ Options::addGlobal('Seiten Einstellungen', [
         'name' => 'secondary_color',
         'type' => 'color_picker',
         'instructions' => __('Wähle die Sekundärfarbe der Webseite.', 'flynt'),
+        'default_value' => '#4f46e5',
         'wrapper' => [
           'width' => '20',
         ],
