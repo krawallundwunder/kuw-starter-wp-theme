@@ -8,12 +8,12 @@
 	{% endif %}
 
 	{% if title %}
-		<h2 class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title }}</h2>
+		<{{heading_level|default('h2')}} class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title }}</{{heading_level|default('h2')}}>
 	{% endif %}
 
 	{% if description %}
 		<div class="{{ descriptionClass }}">
-			{{ description|raw }}
+			{{ description }}
 		</div>
 	{% endif %}
 
@@ -21,9 +21,10 @@
 		<div class="flex md:flex-row gap-4 pt-6">
 			{% for button in buttons %}
 				{% include "templates/_partials/button.twig" with {
-      text: button.text,
-      link: button.link,
-    } %}
+          text: button.text,
+          link: button.link,
+          variant: loop.first ? 'primary' : 'secondary',
+        } %}
 			{% endfor %}
 		</div>
 	{% endif %}
