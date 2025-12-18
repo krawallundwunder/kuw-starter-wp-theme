@@ -14,13 +14,22 @@ export default function (el) {
   let swiper
 
   // Initialize when component is ready
-  const initWhenReady = () => {
-    if (elements.slider && elements.slider.offsetWidth > 0) {
-      swiper = initSlider(elements, componentData)
-    } else {
-      requestAnimationFrame(initWhenReady)
+  const initWhenReady = (startTime) => {
+    const now = performance.now();
+    if (!startTime) startTime = now;
+
+    // Timeout nach 3 Sekunden
+    if (now - startTime > 3000) {
+      console.warn('Swiper: Slider element did not gain width within 3s.');
+      return;
     }
-  }
+
+    if (elements.slider && elements.slider.offsetWidth > 0) {
+      swiper = initSlider(elements, componentData);
+    } else {
+      requestAnimationFrame(() => initWhenReady(startTime));
+    }
+  };
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
