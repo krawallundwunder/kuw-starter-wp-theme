@@ -1,7 +1,7 @@
-<flynt-component name="ModulTextImage" class="py-8 md:py-12 lg:py-16" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
-	<div class="container px-4 mx-auto">
+<flynt-component name="ModulTextImage" class="py-8 md:py-12 lg:py-16">
+	<div class="container">
 		<div
-			class="grid gap-8 lg:gap-14 {{ options.imagePosition == 'left' or options.imagePosition == 'right' ? 'md:grid-cols-2 items-center' : 'justify-items-center' }}">
+			class="grid gap-8 lg:gap-14 {{ options.imagePosition in ['left', 'right'] ? 'md:grid-cols-2 items-center' : 'justify-items-center' }}">
 
 			{# Image Column #}
 			{% if image %}
@@ -32,7 +32,7 @@
 				{% endif %}
 
 				{% if contentHtml %}
-					<div class="prose text-[#535862] font-sfpro text-base leading-[25px] font-normal max-w-none mb-6 {{ options.imagePosition == 'top' or options.imagePosition == 'bottom' ? 'text-center' : '' }}">
+					<div class="prose text-[#535862] font-sfpro text-base leading-6.25 font-normal max-w-none mb-6 {{ options.imagePosition == 'top' or options.imagePosition == 'bottom' ? 'text-center' : '' }}">
 						{{ contentHtml|e('wp_kses_post') }}
 					</div>
 				{% endif %}

@@ -1,9 +1,6 @@
 <?php
 
 namespace Flynt\Components\ModulTextImage;
-
-use Flynt\FieldVariables;
-
 function getACFLayout(): array
 {
   return [
@@ -98,10 +95,3 @@ function getACFLayout(): array
     ],
   ];
 }
-
-add_filter('Flynt/addComponentData?name=Modul', function ($data) {
-  if (!empty($data['button']) && !empty($data['button_style'])) {
-    $data['button']['style'] = $data['button_style'];
-  }
-  return $data;
-});
