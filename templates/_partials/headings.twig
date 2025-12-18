@@ -4,16 +4,16 @@
 
 <div class="{{ baseClasses }}">
 	{% if tag %}
-		<span class="text-xl font-medium pb-4 text-black/70">{{ tag }}</span>
+		<span class="text-xl font-medium pb-4 text-black/70">{{ tag|e }}</span>
 	{% endif %}
 
 	{% if title %}
-		<{{heading_level|default('h2')}} class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title }}</{{heading_level|default('h2')}}>
+		<{{heading_level|default('h2')}} class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title|e }}</{{heading_level|default('h2')}}>
 	{% endif %}
 
 	{% if description %}
 		<div class="{{ descriptionClass }}">
-			{{ description }}
+			{{ description|e }}
 		</div>
 	{% endif %}
 
