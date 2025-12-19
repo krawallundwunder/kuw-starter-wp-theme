@@ -1,0 +1,122 @@
+<flynt-component name="SliderTextImage" load:on="visible" class="componentSpacing">
+	{% set backgroundColorConfig = {
+    'bg-white': { 'design': 'yellow', 'text': 'text-black' },
+    'bg-gray-100': { 'design': 'gray', 'text': 'text-black' },
+    'bg-gray-200': { 'design': 'gray-dark', 'text': 'text-black' },
+    'bg-black': { 'design': 'black', 'text': 'text-white' },
+  } %}
+	<script type="application/json">{{ jsonData|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_QUOT'))|raw }}</script>
+	<div class="container relative my-14" data-flow="layout">
+
+		<div class="flex flex-col text-center pb-12">
+			{% if tag %}
+				<span class="text-xl font-medium pb-4">{{ tag }}</span>
+			{% endif %}
+			{% if title %}
+				<h2 class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title }}</h2>
+			{% endif %}
+			{% if description %}
+				<div class="prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mx-auto {{ backgroundColorConfig[sectionColor|default('bg-white')].text }}">
+					{{ description|raw }}
+				</div>
+			{% endif %}
+		</div>
+
+
+		{% if slides %}
+			<div data-ref="slider" class="slider swiper-container overflow-hidden" data-size="full" data-align="center">
+				<div class="swiper-wrapper" role="region" aria-live="polite">
+					{% for slide in slides %}
+						{% set currentBgColor = slide.bgColorClass|default('bg-white') %}
+						{% set slideGraphicColor = backgroundColorConfig[currentBgColor].design %}
+
+						<div class="slider-item swiper-slide flex">
+
+							<section class="p-6 lg:p-16 rounded-xl lg:rounded-4xl relative w-full  flex flex-col {{ currentBgColor }} {{ backgroundColorConfig[currentBgColor].text }}">
+								{% if slide.backgroundGraphic and slide.backgroundGraphic != 'none' %}
+									<div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+										{% include 'Partials/_graphic.twig' with { graphic: slide.backgroundGraphic, color: slideGraphicColor } %}
+									</div>
+								{% endif %}
+								<div class="relative z-10 h-full flex flex-col md:flex-row gap-8 items-center justify-between">
+									{% if slide.image %}
+										<div class="">
+											<div class="relative lg:w-[304px] lg:h-[304px] aspect-square overflow-hidden">
+												<img src="{{ slide.image.src }}" alt="{{ slide.image.alt }}" class="w-full h-full object-cover">
+											</div>
+										</div>
+									{% endif %}
+									<div class="w-full flex flex-col">
+										{% if slide.content %}
+											<div class="prose prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mb-8 text-2xl md:text-[32px] italic {{ backgroundColorConfig[currentBgColor].text }}">
+												{{ slide.content|raw }}
+											</div>
+										{% endif %}
+										{% if slide.name or slide.role %}
+											<div class="text-lg lg:text-xl">
+												{% if slide.name %}
+													<span class="font-semibold">{{ slide.name }}</span>
+													{% if slide.name and slide.role %},
+													{% endif %}
+												{% endif %}
+												{% if slide.role %}
+													<span class="opacity-90">{{ slide.role }}</span>
+												{% endif %}
+											</div>
+										{% endif %}
+									</div>
+								</div>
+							</section>
+
+						</div>
+					{% endfor %}
+				</div>
+
+				<button type="button" data-ref="prev" class="group hidden lg:block absolute z-10 -bottom-1 left-4 w-8 h-8 rounded-full items-center justify-center transition-colors duration-300 bg-transparent hover:bg-yellow-400 cursor-pointer slider-button slider-button--prev" aria-label="{{ sliderOptions.a11y.prevSlideMessage|e }}">
+					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32" class="w-full h-full">
+						<path d="M16 31C7.71573 31 1 24.2843 1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31Z" class="stroke-yellow-400 group-hover:fill-yellow-400 transition-colors duration-300 fill-transparent"/>
+						<path d="M16 10L10 16M10 16L16 22M10 16L22 16" class="stroke-yellow-400 group-hover:stroke-white transition-colors duration-300"/>
+					</svg>
+				</button>
+				<button type="button" data-ref="next" class="group hidden lg:block absolute rotate-180 z-10 -bottom-1 right-4 w-8 h-8 rounded-full items-center justify-center transition-colors duration-300 bg-transparent hover:bg-yellow-400 cursor-pointer slider-button slider-button--next" aria-label="{{ sliderOptions.a11y.nextSlideMessage|e }}">
+					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32" class="w-full h-full">
+						<path d="M16 31C7.71573 31 1 24.2843 1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31Z" class="stroke-yellow-400 group-hover:fill-yellow-400 transition-colors duration-300 fill-transparent"/>
+						<path d="M16 10L10 16M10 16L16 22M10 16L22 16" class="stroke-yellow-400 group-hover:stroke-white transition-colors duration-300"/>
+					</svg>
+				</button>
+				<div data-ref="pagination" class="slider-pagination text-center mt-6 space-x-2"></div>
+			</div>
+		{% endif %}
+	</div>
+</flynt-component>
+
+<style>
+	.swiper-slide {
+		height: auto;
+		display: flex;
+	}
+
+	.slider-item {
+		display: flex;
+		width: 100%;
+	}
+
+	.slider-item section {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		min-height: 400px;
+	}
+
+	@media(min-width: 1024px) {
+		.slider-item section {
+			min-height: 500px;
+		}
+	}
+
+	/* Equal height container */
+	.slider-item .relative.z-10 {
+		display: flex;
+		flex: 1;
+	}
+</style>

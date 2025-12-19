@@ -15,6 +15,7 @@ add_action('Flynt/afterRegisterComponents', function (): void {
         'type' => 'flexible_content',
         'button_label' => __('Add Component', 'flynt'),
         'layouts' => [
+          Components\BlockHeroSection\getACFLayout(),
           Components\BlockAnchor\getACFLayout(),
           Components\BlockImage\getACFLayout(),
           Components\BlockImageText\getACFLayout(),
@@ -25,7 +26,10 @@ add_action('Flynt/afterRegisterComponents', function (): void {
           Components\GridPostsLatest\getACFLayout(),
           Components\ListComponents\getACFLayout(),
           Components\SliderImages\getACFLayout(),
+          Components\SliderTextImage\getACFLayout(),
+          Components\ModuliFrame\getACFLayout(),
           Components\ReusableComponent\getACFLayout(),
+          Components\ModulTextImage\getACFLayout(),
           Components\ModulContactLocation\getACFLayout(),
         ],
       ],
