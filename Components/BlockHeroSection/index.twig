@@ -11,7 +11,7 @@
   } %}
 
 
-	<div class="relative flex flex-col justify-center pt-24 {{ colorMap[backgroundColor].text }} bg-{{ backgroundColor }} lg:min-h-[70vh] bg-cover bg-center bg-no-repeat" {% if backgroundImage %} style="background-image: url('{{ backgroundImage.src|esc_url }}');" {% endif %}>
+	<div class="relative flex flex-col justify-center pt-24 {{ colorMap[backgroundColor].text }} bg-{{ backgroundColor|default('white') }} lg:min-h-[70vh] bg-cover bg-center bg-no-repeat" {% if backgroundImage %} style="background-image: url('{{ backgroundImage.src|esc_url }}');" {% endif %}>
 
 		{% if backgroundImage %}
 			<div class="absolute inset-0 bg-black" style="opacity: {{ overlayOpacity|default(60) / 100 }};"></div>
