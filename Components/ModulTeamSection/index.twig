@@ -19,13 +19,13 @@
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 				{% for member in teamMembers %}
 					<div class="flex">
-						<div class="bg-gray-100 rounded-2xl p-8 lg:p-10 flex flex-col items-center text-center w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+						<div class="bg-gray-100 rounded-2xl p-8 lg:p-10 flex flex-col items-center text-center w-full">
 
 							<div class="w-40 h-40 lg:w-48 lg:h-48 mb-6">
 								{% if member.image %}
-									<img src="{{ member.image|default(member.image.url) }}" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg" loading="lazy">
+									<img src="{{ member.image|default(member.image.src) }}" class="w-full h-full object-cover rounded-full" loading="lazy">
 								{% else %}
-									<div class="w-full h-full rounded-full bg-linear-to-br from-purple-500 to-purple-700 border-4 border-white shadow-lg flex items-center justify-center">
+									<div class="w-full h-full rounded-full bg-linear-to-br from-purple-500 to-purple-700 flex items-center justify-center">
 										<svg class="w-24 h-24 text-white opacity-90" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
 										</svg>
