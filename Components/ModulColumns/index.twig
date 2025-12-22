@@ -1,14 +1,18 @@
-<section class="component component-columns-module bg-white text-primary py-16 lg:py-24 transition-all duration-300 ease-in-out">
-	<div class=" container mx-auto px-4 sm:px-6 lg:px-8">
-		{% if title %}
-			<h2 class="text-4xl md:text-5xl lg:text-7xl font-medium leading-none mb-6 sm:mb-10">{{ title }}</h2>
-		{% endif %}
+<section class="component component-columns-module  text-black py-16 lg:py-24 transition-all duration-300 ease-in-out">
+	<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+		{% if title or description %}
+			<div class="text-center">
+				{% if title %}
+					<h2 class="text-4xl md:text-5xl lg:text-7xl font-medium leading-none mb-6 sm:mb-10">{{ title }}</h2>
+				{% endif %}
 
-		{% if description %}
-			<div class="text-start mb-12 lg:mb-16">
-				<div class="text-lg md:text-xl lg:text-[22px] font-light leading-tight mb-6 sm:mb-8 text-gray-500">
-					{{ description|e('wp_kses_post') }}
-				</div>
+				{% if description %}
+					<div class="mb-12 lg:mb-16">
+						<div class="text-lg md:text-xl lg:text-[22px] font-light leading-tight mb-6 sm:mb-8 text-gray-500">
+							{{ description|e('wp_kses_post') }}
+						</div>
+					</div>
+				{% endif %}
 			</div>
 		{% endif %}
 
@@ -16,18 +20,12 @@
 			{% for column in columns %}
 				{% set has_link = column.button and column.button.url %}
 
-				<div class="column js-column-item flex flex-col gap-4 md:gap-8 h-full rounded-md p-1.5 transition-all duration-300 ease-in-out text-{{ options.textAlignment }}">
+				<div class="column js-column-item bg-gray-50 flex flex-col gap-4 md:gap-8 h-full rounded-lg p-1.5 transition-all duration-300 ease-in-out text-{{ options.textAlignment }}">
 
-					<div class="grow bg-gray-50 rounded-lg">
+					<div class="grow">
 						{% if column.image %}
 							<div class="column-image mb-8">
-								{% if has_link %}
-									<a href="{{ column.button.url }}" target="{{ column.button.target }}" {{ column.button.target == '_blank' ? 'rel="noopener noreferrer"' }}>
-									{% endif %}
-									<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="object-cover object-center max-h-80 {{ options.isImageRounded ? ' rounded-full aspect-square mx-auto' : 'w-full h-full rounded-t-lg' }} {% if has_link %}transition-opacity duration-300 ease-in-out hover:opacity-80{% endif %}">
-									{% if has_link %}
-									</a>
-								{% endif %}
+								<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="object-cover object-center max-h-60 {{ options.isImageRounded ? ' rounded-full aspect-square mx-auto' : 'w-full h-full rounded-t-lg' }} {% if has_link %}transition-opacity duration-300 ease-in-out hover:opacity-80{% endif %}">
 							</div>
 						{% endif %}
 
@@ -57,8 +55,8 @@
 					</div>
 
 					{% if column.button and column.button.url %}
-						<div class="column-button mt-auto pt-4">
-							<a href="{{ column.button.url }}" class="bg-gray-50 no-underline! py-3 px-3 rounded-lg text-primary hover:bg-blue-600 hover:text-white btn-base" target="{{ column.button.target }}" {{ column.button.target == '_blank' ? 'rel="noopener noreferrer"' }}>
+						<div class="column-button mt-auto mx-4 mb-6">
+							<a href="{{ column.button.url }}" class="bg-blue-600 no-underline! py-3 px-3 rounded-lg text-white hover:bg-blue-300 hover:text-white btn-base" target="{{ column.button.target }}" {{ column.button.target == '_blank' ? 'rel="noopener noreferrer"' }}>
 								{{ column.button.title ? column.button.title : __('Book a Meeting', 'flynt') }}
 							</a>
 						</div>
@@ -75,6 +73,7 @@
 		align-items: flex-end;
 	}
 </style>
+
 <script>
 	(function () {
 function equalizeColumnHeights() {

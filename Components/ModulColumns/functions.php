@@ -23,7 +23,6 @@ function getACFLayout(): array
         'name' => 'title',
         'type' => 'text',
         'instructions' => __('Optional: Add a title for the section.', 'flynt'),
-        'required' => 0,
       ],
       [
         'label' => __('Description', 'flynt'),
@@ -33,7 +32,6 @@ function getACFLayout(): array
         'tabs' => 'visual',
         'toolbar' => 'basic',
         'media_upload' => 0,
-        'required' => 0,
       ],
       [
         'label' => __('Columns', 'flynt'),
@@ -55,7 +53,6 @@ function getACFLayout(): array
             'library' => 'all',
             'max_size' => 4,
             'mime_types' => 'jpg,jpeg,png',
-            'required' => 0,
             'wrapper' => [
               'width' => 20
             ]
@@ -65,7 +62,6 @@ function getACFLayout(): array
             'name' => 'tag',
             'type' => 'text',
             'instructions' => 'Optional: Add a tag or label for the column.',
-            'required' => 0,
             'wrapper' => [
               'width' => 20
             ]
@@ -75,7 +71,6 @@ function getACFLayout(): array
             'name' => 'subtitle',
             'type' => 'text',
             'instructions' => 'Write a short, descriptive title for the column.',
-            'required' => 0,
             'wrapper' => [
               'width' => 20
             ]
@@ -88,7 +83,6 @@ function getACFLayout(): array
             'tabs' => 'visual',
             'toolbar' => 'basic',
             'media_upload' => 0,
-            'required' => 0,
             'wrapper' => [
               'width' => 25
             ]
@@ -99,7 +93,6 @@ function getACFLayout(): array
             'type' => 'link',
             'instructions' => 'Optional: Add a button to the column.',
             'return_format' => 'array',
-            'required' => 0,
             'wrapper' => [
               'width' => 15
             ]
@@ -122,7 +115,7 @@ function getACFLayout(): array
           [
             'label' => __('Text Alignment', 'flynt'),
             'name' => 'textAlignment',
-            'instructions' => __('Select the alignment for the Subtitle, Description and Button.', 'flynt'),
+            'instructions' => __('Select the alignment for the Card.', 'flynt'),
             'type' => 'select',
             'choices' => [
               'left' => __('Left', 'flynt'),
