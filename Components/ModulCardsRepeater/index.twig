@@ -29,11 +29,11 @@
 						{% for button in buttons %}
 							{% if button.link %}
 								<a href="{{ button.link.url }}" {% if button.link.target %} target="{{ button.link.target }}" {% endif %} class="inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-all duration-200 no-underline!
-										                    {% if button.style == 'primary' %}
-										                     bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg
-										                    {% else %}
-										                     bg-white text-gray-800 border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600
-										                    {% endif %}">
+																														                    {% if button.style == 'primary' %}
+																														                     bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg
+																														                    {% else %}
+																														                     bg-white text-gray-800 border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600
+																														                    {% endif %}">
 									{{ button.link.title }}
 								</a>
 							{% endif %}
@@ -72,7 +72,7 @@
 								<div class="overflow-hidden bg-gray-200 aspect-video shrink-0">
 									<img src="{{ Image(card.image).src('large') }}" alt="{{ card.title }}" class="h-full w-full object-cover {% if hasLink %}group-hover:scale-105 transition-transform duration-300{% endif %}" loading="lazy"/>
 								</div>
-								<div class="p-6 fgrow flex flex-col">
+								<div class="p-6 grow flex flex-col">
 									{% if card.title %}
 										<h3 class="text-xl font-bold text-gray-900 mb-3">
 											{{ card.title }}
