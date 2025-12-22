@@ -1,96 +1,84 @@
-<flynt-component name="Navigation">
-  <nav class="border-b border-gray-800 bg-black">
-    <div class="container mx-auto px-4">
-      <div class="flex h-20 items-center justify-between">
-        <a href="{{ site.url }}" class="flex items-center">
-          <img class="h-10 w-auto" src="{{ logo.src }}" alt="{{ site.name }}" />
-        </a>
+<flynt-component name="Navigation" load:on="idle" load:on:media="(max-width: 1023px)">
 
-        <div class="hidden items-center space-x-8 lg:flex">
-          {% for item in menu.items %}
-            <a
-              href="{{ item.link }}"
-              class="text-white transition-colors duration-200 hover:text-yellow-400 {{
-              item.current
-                ? 'text-yellow-400'
-                : ''
-              }}"
-            >
-              {{ item.title }}
-            </a>
-          {% endfor %}
-        </div>
+	{% if menu and navigation_second %}
+		{% set mobileItems = menu.items | merge(navigation_second.items) %}
+	{% elseif menu %}
+		{% set mobileItems = menu.items %}
+	{% elseif navigation_second %}
+		{% set mobileItems = navigation_second.items %}
+	{% else %}
+		{% set mobileItems = [] %}
+	{% endif %}
 
-        <button
-          class="burger-btn group flex flex-col space-y-1.5 lg:hidden"
-          aria-label="Menü öffnen"
-        >
-          <span
-            class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:translate-y-2 group-[.active]:rotate-45"
-          >
+	<nav class="border-b border-gray-800 bg-black relative z-50">
+		<div class="container mx-auto px-4">
+			<div
+				class="flex h-20 items-center justify-between">
 
-          </span>
-          <span class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:opacity-0">
+				{# LOGO #}
+				{% if (header_logo and header_logo.src) or (logo and logo.src) %}
+					<div class="z-50 relative">
+						{% include "Partials/_logo.twig" with { header_logo: header_logo, logo: logo, site: site } %}
+					</div>
+				{% endif %}
 
-          </span>
-          <span
-            class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:-translate-y-2 group-[.active]:-rotate-45"
-          >
+				{# MENU DESKTOP #}
+				<div class="hidden items-center space-x-8 lg:flex">
+					{% include "Partials/_menuDesktop.twig" with { items: menu.items } %}
+				</div>
 
-          </span>
-        </button>
-      </div>
+				{# BUTTON BURGER #}
+				<button class="burger-btn group flex flex-col space-y-1.5 lg:hidden z-50 relative p-2" aria-label="Abrir menu">
+					<span class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:bg-yellow-400"></span>
+					<span class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:bg-yellow-400"></span>
+					<span class="h-0.5 w-6 bg-white transition-all duration-300 group-[.active]:bg-yellow-400"></span>
+				</button>
+			</div>
 
-      <div
-        class="mobile-overlay fixed inset-0 z-40 hidden bg-black/50 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden"
-      ></div>
+			{# OVERLAY #}
+			<div class="mobile-overlay fixed inset-0 z-40 hidden bg-black/60 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden"></div>
 
-      <div
-        class="mobile-menu fixed top-0 right-0 z-50 h-full w-80 translate-x-full transform bg-black transition-transform duration-300 ease-out lg:hidden"
-      >
-        <div class="flex h-full flex-col p-6">
-          <!-- Header -->
-          <div class="mb-8 flex items-center justify-between">
-            <h2 class="text-lg font-semibold text-white">Menü</h2>
-            <button
-              class="mobile-close p-2 text-white transition-colors hover:text-yellow-400"
-              aria-label="Menü schließen"
-            >
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
+			{# MENU DRAWER #}
+			<div class="mobile-menu fixed top-0 right-0 z-50 h-full w-80 translate-x-full transform bg-black shadow-2xl transition-transform duration-300 ease-out lg:hidden overflow-y-auto border-l border-gray-800">
+				<div
+					class="flex h-full flex-col p-6">
 
-          <div class="flex-1 space-y-4">
-            {% for item in menu.items %}
-              <a
-                href="{{ item.link }}"
-                class="mobile-menu-link block border-b border-gray-800 py-3 text-lg font-medium text-white transition-colors duration-200 last:border-b-0 hover:text-yellow-400 {{
-                item.current
-                  ? 'text-yellow-400'
-                  : ''
-                }}"
-              >
-                {{ item.title }}
-              </a>
-            {% endfor %}
-          </div>
+					{# DRAWER HEADER #}
+					<div class="mb-8 flex items-center justify-between">
+						<h2 class="text-xl font-bold text-white uppercase tracking-wider">{{ menu_title|default('Menü') }}</h2>
+						<button class="mobile-close p-2 text-gray-400 hover:text-white transition-colors" aria-label="Close menu">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+							</svg>
+						</button>
+					</div>
 
-          <div class="border-t border-gray-800 pt-6 text-sm text-gray-400">
-            <p>
-              &copy;
-              {{ 'now'|date('Y') }}
-              {{ site.title }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+					<div
+						class="flex-1 space-y-4">
+
+						{# MOBILE MENU #}
+						{% include "Partials/_menuMobile.twig" with { items: mobileItems } only %}
+
+						{# MOBILE CTA BUTTON #}
+						{% if button_link and button_link.url %}
+							<div class="pt-6">
+								<a class="mobile-menu-link block w-full text-center bg-white text-black font-bold py-3 px-4 rounded hover:bg-gray-200 transition-colors" href="{{ button_link.url }}" target="{{ button_link.target ? '_blank' : '_self' }}">
+									{{ button_link.title }}
+								</a>
+							</div>
+						{% endif %}
+
+					</div>
+
+					{# DRAWER FOOTER #}
+					<div class="border-t border-gray-800 pt-6 text-xs text-gray-500">
+						<p>&copy;
+							{{ 'now'|date('Y') }}
+							{{ site.title }}</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</nav>
 </flynt-component>

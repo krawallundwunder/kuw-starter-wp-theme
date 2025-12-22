@@ -2,11 +2,8 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-  --color-accent: #ffd700;
-  --color-neutral: #1a1a1a;
-  --color-button-light: #2a2a2a;
-  --font-sans: Inter, sans-serif;
-  --font-serif: serif;
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
 }
 
 @import './styles/_variables.css';
@@ -18,9 +15,6 @@
   padding-inline: 1rem;
 }
 
-.menu-desktop {
-  @apply flex flex-row space-x-2 text-gray-900 dark:text-white;
-}
 
 flynt-component {
   display: block;
