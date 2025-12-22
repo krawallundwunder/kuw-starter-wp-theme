@@ -1,0 +1,131 @@
+<flynt-component name="ModulCardsRepeater">
+	<section class="cards-repeater py-16 bg-gray-50">
+		<div
+			class="container mx-auto px-4 max-w-7xl">
+
+			{# Header Section #}
+			<div class="text-center mb-12 max-w-3xl mx-auto">
+				{% if tag %}
+					<span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4">
+						{{ tag }}
+					</span>
+				{% endif %}
+
+				{% if title %}
+					<h2 class="text-4xl font-bold text-gray-900 mb-4">
+						{{ title }}
+					</h2>
+				{% endif %}
+
+				{% if description %}
+					<p class="text-lg text-gray-600 mb-8 line-clamp-3">
+						{{ description }}
+					</p>
+				{% endif %}
+
+				{# Main Buttons #}
+				{% if buttons %}
+					<div class="flex flex-wrap justify-center gap-4">
+						{% for button in buttons %}
+							{% if button.link %}
+								<a href="{{ button.link.url }}" {% if button.link.target %} target="{{ button.link.target }}" {% endif %} class="inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-all duration-200 no-underline!
+										                    {% if button.style == 'primary' %}
+										                     bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg
+										                    {% else %}
+										                     bg-white text-gray-800 border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600
+										                    {% endif %}">
+									{{ button.link.title }}
+								</a>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+
+			{# Cards Grid #}
+			{% if cards %}
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{% for card in cards %}
+						{% set hasContent = card.title or card.description or card.button %}
+						{% set hasImage = card.image %}
+						{% set hasLink = card.button %}
+
+						{# Case 1: Nur Bild - nimmt komplette Card ein #}
+						{% if hasImage and not hasContent %}
+							<div class="group overflow-hidden aspect-video rounded-xl shadow-md {% if hasLink %}hover:shadow-xl transition-shadow duration-300{% endif %}">
+								{% if hasLink %}
+									<a href="{{ card.button.url }}" {% if card.button.target %} target="{{ card.button.target }}" {% endif %} class="block h-full">
+										<div class="overflow-hidden h-full">
+											<img src="{{ Image(card.image).src('large') }}" alt="{{ card.button.title }}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
+										</div>
+									</a>
+								{% else %}
+									<div class="overflow-hidden h-full">
+										<img src="{{ Image(card.image).src('large') }}" alt="" class="h-full w-full object-cover" loading="lazy"/>
+									</div>
+								{% endif %}
+							</div>
+
+							{# Case 2: Bild + Content #}
+						{% elseif hasImage and hasContent %}
+							<div class="bg-white rounded-xl shadow-md {% if hasLink %}hover:shadow-xl transition-shadow duration-300{% endif %} overflow-hidden {% if hasLink %}group{% endif %} flex flex-col">
+								<div class="overflow-hidden bg-gray-200 aspect-video shrink-0">
+									<img src="{{ Image(card.image).src('large') }}" alt="{{ card.title }}" class="h-full w-full object-cover {% if hasLink %}group-hover:scale-105 transition-transform duration-300{% endif %}" loading="lazy"/>
+								</div>
+								<div class="p-6 fgrow flex flex-col">
+									{% if card.title %}
+										<h3 class="text-xl font-bold text-gray-900 mb-3">
+											{{ card.title }}
+										</h3>
+									{% endif %}
+
+									{% if card.description %}
+										<p class="text-gray-600 mb-4 line-clamp-4 grow">
+											{{ card.description }}
+										</p>
+									{% endif %}
+
+									{% if hasLink %}
+										<a href="{{ card.button.url }}" {% if card.button.target %} target="{{ card.button.target }}" {% endif %} class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors group/link mt-auto">
+											{{ card.button.title }}
+											<svg class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+											</svg>
+										</a>
+									{% endif %}
+								</div>
+							</div>
+
+							{# Case 3: Nur Content ohne Bild #}
+						{% elseif hasContent %}
+							<div class="bg-white rounded-xl shadow-md {% if hasLink %}hover:shadow-xl transition-shadow duration-300 group{% endif %} p-6 flex flex-col h-full">
+								{% if card.title %}
+									<h3 class="text-xl font-bold text-gray-900 mb-3">
+										{{ card.title }}
+									</h3>
+								{% endif %}
+
+								{% if card.description %}
+									<p class="text-gray-600 mb-4 grow">
+										{{ card.description }}
+									</p>
+								{% endif %}
+
+								{% if hasLink %}
+									<a href="{{ card.button.url }}" {% if card.button.target %} target="{{ card.button.target }}" {% endif %} class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors group/link mt-auto">
+										{{ card.button.title }}
+										<svg class="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+										</svg>
+									</a>
+								{% endif %}
+							</div>
+						{% endif %}
+
+					{% endfor %}
+				</div>
+			{% endif %}
+
+		</div>
+	</section>
+</flynt-component>

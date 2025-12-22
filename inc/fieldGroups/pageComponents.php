@@ -28,6 +28,7 @@ add_action('Flynt/afterRegisterComponents', function (): void {
           Components\SliderImages\getACFLayout(),
           Components\SliderTextImage\getACFLayout(),
           Components\ModuliFrame\getACFLayout(),
+          Components\ModulCardsRepeater\getACFLayout(),
           Components\ReusableComponent\getACFLayout(),
           Components\ModulTextImage\getACFLayout(),
         ],
