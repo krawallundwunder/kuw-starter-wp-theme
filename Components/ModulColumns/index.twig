@@ -25,7 +25,7 @@
 					<div class="grow">
 						{% if column.image %}
 							<div class="column-image mb-8">
-								<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="object-cover object-center max-h-60 {{ options.isImageRounded ? ' rounded-full aspect-square mx-auto' : 'w-full h-full rounded-t-lg' }} {% if has_link %}transition-opacity duration-300 ease-in-out hover:opacity-80{% endif %}">
+								<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="object-cover object-center max-h-60 {{ options.isImageRounded ? ' rounded-full aspect-square mx-auto' : 'w-full h-full rounded-t-lg' }}">
 							</div>
 						{% endif %}
 
