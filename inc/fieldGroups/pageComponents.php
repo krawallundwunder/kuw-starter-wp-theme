@@ -26,6 +26,7 @@ add_action('Flynt/afterRegisterComponents', function (): void {
           Components\GridPostsLatest\getACFLayout(),
           Components\ListComponents\getACFLayout(),
           Components\SliderImages\getACFLayout(),
+          Components\ModulTeamSection\getACFLayout(),
           Components\ModulColumns\getACFLayout(),
           Components\SliderTextImage\getACFLayout(),
           Components\ModuliFrame\getACFLayout(),
