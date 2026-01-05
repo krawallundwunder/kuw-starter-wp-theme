@@ -2,9 +2,6 @@
 
 namespace Flynt\Components\ModulCardsRepeater;
 
-use Flynt\FieldVariables;
-
-
 function getACFLayout()
 {
     return [
@@ -27,8 +24,8 @@ function getACFLayout()
             [
                 'label' => 'Beschreibung',
                 'name' => 'description',
-                'type' => 'textarea',
-                'rows' => 4,
+                'type' => 'wysiwyg',
+                'media_upload' => 0,
                 'instructions' => __('Füge einen einleitenden Beschreibungstext hinzu', 'flynt'),
             ],
             [
@@ -75,9 +72,8 @@ function getACFLayout()
                     [
                         'label' => 'Beschreibung',
                         'name' => 'description',
-                        'type' => 'textarea',
-                        'rows' => 4,
-                        'maxlength' => 200,
+                        'type' => 'wysiwyg',
+                        'media_upload' => 0,
                         'instructions' => __('Optional: Beschreibung der Card', 'flynt'),
                     ],
                     [
