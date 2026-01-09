@@ -1,3 +1,10 @@
+{# Script für Accordion-Funktionalität #}
+{% if layoutType == 'layout-2' %}
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+{% endif %}
+
+{% set componentId = random() %}
+
 <section class="flyntComponent bg-gray-50">
   <div class="py-12 px-4 mx-auto max-w-7xl sm:py-20 lg:px-6">
 
@@ -10,18 +17,56 @@
       } %}
     </div>
 
-    {# FAQ Items Grid #}
-    {% if faqItems %}
-      <div class="grid gap-8 {% if options.layout == 'two-columns' %}md:grid-cols-2 md:gap-x-12 md:gap-y-10{% endif %}">
+    {# Layout 2 #}
+    {% if faqItems and layoutType == 'layout-2' %}
+      <div class="flex flex-col gap-4">
+        {% for item in faqItems %}
+          <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+            <button type="button" command="--toggle" commandfor="faq-{{ componentId }}-{{ loop.index0 }}" class="flex w-full items-start justify-between text-left p-6 hover:bg-gray-50 transition-colors">
+              <div class="flex items-start flex-1">
+                <svg class="shrink-0 mr-3 w-6 h-6 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-lg font-semibold text-gray-900">{{ item.question }}</span>
+              </div>
+              <span class="ml-4 flex h-7 items-center shrink-0">
+                {# Plus Icon #}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="w-6 h-6 text-gray-400 in-aria-expanded:hidden">
+                  <path d="M12 6v12m6-6H6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                {# Minus Icon #}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="w-6 h-6 text-blue-600 [&:not([aria-expanded='true']_*)]:hidden">
+                  <path d="M18 12H6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </button>
 
+            <el-disclosure id="faq-{{ componentId }}-{{ loop.index0 }}" hidden class="[&:not([hidden])]:block">
+              <div class="px-6 pb-6 pt-0">
+                <div class="text-gray-600 leading-relaxed pl-9">
+                  {{ item.answer|raw }}
+                </div>
+              </div>
+            </el-disclosure>
+          </div>
+        {% endfor %}
+      </div>
+
+    {# Layout 1 #}
+    {% elseif faqItems %}
+      {% set gridClass = columns == '1' ? '' : 'md:grid-cols-2' %}
+      <div class="grid gap-8 {{ gridClass }} md:gap-x-12 md:gap-y-10">
         {% for item in faqItems %}
           <div class="bg-white rounded-lg p-6 shadow-sm">
 
             {# Question #}
             <div class="flex items-start mb-4">
-              <svg class="shrink-0 mr-3 w-6 h-6 text-blue-600 mt-0.5"
-                   fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+              <svg class="shrink-0 mr-3 w-6 h-6 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                      clip-rule="evenodd"></path>
               </svg>
 
               <h3 class="text-lg font-semibold text-gray-900">
@@ -35,7 +80,6 @@
             </div>
           </div>
         {% endfor %}
-
       </div>
     {% endif %}
   </div>

@@ -32,8 +32,7 @@ function getACFLayout(): array
         'label' => __('Beschreibung', 'flynt'),
         'instructions' => __('Optional: Einleitungstext zur FAQ-Sektion', 'flynt'),
         'name' => 'description',
-        'type' => 'wysiwyg',
-        'media_upload' => 0,
+        'type' => 'textarea',
       ],
       [
         'label' => __('FAQ Items', 'flynt'),
@@ -55,9 +54,7 @@ function getACFLayout(): array
             'label' => __('Antwort', 'flynt'),
             'instructions' => __('Die Antwort auf die Frage', 'flynt'),
             'name' => 'answer',
-            'type' => 'wysiwyg',
-            'delay' => 0,
-            'media_upload' => 0,
+            'type' => 'textarea',
             'required' => 1,
           ],
         ],
@@ -70,23 +67,36 @@ function getACFLayout(): array
         'endpoint' => 0,
       ],
       [
-        'label' => '',
-        'name' => 'options',
-        'type' => 'group',
-        'layout' => 'row',
-        'sub_fields' => [
+        'label' => __('Layout', 'flynt'),
+        'instructions' => __('Wähle das Layout der FAQ-Items', 'flynt'),
+        'name' => 'layoutType',
+        'type' => 'select',
+        'choices' => [
+          'layout-1' => __('Kacheln (immer sichtbar)', 'flynt'),
+          'layout-2' => __('Accordion (aufklappbar)', 'flynt'),
+        ],
+        'default_value' => 'layout-1',
+        'ui' => 1,
+      ],
+      [
+        'label' => __('Spaltenanzahl', 'flynt'),
+        'instructions' => __('Wähle die Anzahl der Spalten für das Kachel-Layout', 'flynt'),
+        'name' => 'columns',
+        'type' => 'select',
+        'choices' => [
+          '1' => __('1 Spalte', 'flynt'),
+          '2' => __('2 Spalten', 'flynt'),
+        ],
+        'default_value' => '2',
+        'ui' => 1,
+        'conditional_logic' => [
           [
-            'label' => __('Layout', 'flynt'),
-            'instructions' => __('Wähle das Layout der FAQ-Items', 'flynt'),
-            'name' => 'layout',
-            'type' => 'select',
-            'choices' => [
-              'single' => __('Einspaltig', 'flynt'),
-              'two-columns' => __('Zweispaltig', 'flynt'),
-            ],
-            'default_value' => 'two-columns',
-            'ui' => 1,
-          ],
+            [
+              'fieldPath' => 'layoutType',
+              'operator' => '==',
+              'value' => 'layout-1'
+            ]
+          ]
         ],
       ],
     ],
