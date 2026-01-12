@@ -3,98 +3,91 @@
 		<div
 			class="container mx-auto px-4 max-w-7xl">
 
-			{# Header Section #}
-			<div>
+			{# Header #}
+			{% if tag or title or description or buttons %}
 				{% include "templates/_partials/headings.twig" with {
-          tag: tag,
-          title: title,
-          description: description,
-          buttons: ctaButtons
-        } %}
-			</div>
+					tag: tag,
+					title: title,
+					description: description,
+					buttons: buttons
+				} %}
+			{% endif %}
+
+			{# Geprüft if any card has image + content #}
+			{% set hasImageCards = cards|filter(c => c.image and (c.title or c.description or c.cardButton))|length > 0 %}
 
 			{# Cards Grid #}
 			{% if cards %}
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ cards|length <= 3 ? cards|length : 3 }} gap-6">
 					{% for card in cards %}
-						{% set hasContent = card.title or card.description or card.button %}
+						{% set hasContent = card.title or card.description or card.cardButton %}
 						{% set hasImage = card.image %}
-						{% set hasLink = card.button %}
+						{% set hasLink = card.cardButton.url ?? false %}
 
-						{# Case 1: Nur Bild - nimmt komplette Card ein #}
+						{# Case 1: Only Image #}
 						{% if hasImage and not hasContent %}
 							<div class="group overflow-hidden aspect-video rounded-xl shadow-md {% if hasLink %}hover:shadow-xl transition-shadow duration-300{% endif %}">
-								{% if hasLink %}
-									<a href="{{ card.button.url }}" {% if card.button.target %} target="{{ card.button.target }}" {% endif %} class="block h-full">
-										<div class="overflow-hidden h-full">
-											<img src="{{ Image(card.image).src('large') }}" alt="{{ card.button.title }}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
-										</div>
-									</a>
-								{% else %}
-									<div class="overflow-hidden h-full">
-										<img src="{{ Image(card.image).src('large') }}" alt="" class="h-full w-full object-cover" loading="lazy"/>
-									</div>
-								{% endif %}
+								{% set imgWrapper = hasLink ? '<a href="' ~ card.cardButton.url ~ '"' ~ (card.cardButton.target ? ' target="' ~ card.cardButton.target ~ '"' : '') ~ ' class="block h-full">' : '<div class="h-full">' %}
+								{{ imgWrapper|raw }}
+								<img src="{{ Image(card.image).src('large') }}" alt="{{ card.cardButton.title ?? '' }}" class="h-full w-full object-cover {% if hasLink %}group-hover:scale-[1.05] transition-transform duration-300{% endif %}" loading="lazy"/>
+								{{ hasLink ? '</a>' : '</div>' }}
 							</div>
 
-							{# Case 2: Bild + Content #}
+							{# Case 2: Image + Content #}
 						{% elseif hasImage and hasContent %}
-							<div class="bg-white rounded-xl shadow-md {% if hasLink %}hover:shadow-xl transition-shadow duration-300{% endif %} overflow-hidden {% if hasLink %}group{% endif %} flex flex-col">
+							<div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col {% if hasLink %}transform transition duration-300 hover:scale-105{% endif %}">
 								<div class="overflow-hidden bg-gray-200 aspect-video shrink-0">
-									<img src="{{ Image(card.image).src('large') }}" alt="{{ card.title }}" class="h-full w-full object-cover {% if hasLink %}group-hover:scale-105 transition-transform duration-300{% endif %}" loading="lazy"/>
+									<img src="{{ Image(card.image).src('large') }}" alt="{{ card.title }}" class="h-full w-full object-cover" loading="lazy"/>
 								</div>
 								<div class="p-6 grow flex flex-col">
 									{% if card.title %}
-										<h3 class="text-xl font-bold text-gray-900 mb-3">
-											{{ card.title }}
-										</h3>
+										<h3 class="text-xl font-bold text-gray-900 mb-3">{{ card.title }}</h3>
 									{% endif %}
-
 									{% if card.description %}
-										<p class="text-gray-600 mb-4 line-clamp-4 grow">
-											{{ card.description }}
-										</p>
+										<p class="text-gray-600 mb-4 line-clamp-4 grow">{{ card.description }}</p>
 									{% endif %}
-
 									{% if hasLink %}
-										<div>
+										<div class="mt-4 flex flex-1">
 											{% include "templates/_partials/button.twig" with {
-                        buttons: ctaButtons
-                      } %}
+												text: card.cardButton.title,
+												link: card.cardButton.url,
+												target: card.cardButton.target,
+												variant: 'secondary',
+											} %}
 										</div>
 									{% endif %}
 								</div>
 							</div>
 
-							{# Case 3: Nur Content ohne Bild #}
+							{# Case 3: Only Content #}
 						{% elseif hasContent %}
-							<div class="bg-white rounded-xl shadow-md {% if hasLink %}hover:shadow-xl transition-shadow duration-300 group{% endif %} p-6 flex flex-col h-full">
-								{% if card.title %}
-									<h3 class="text-xl font-bold text-gray-900 mb-3">
-										{{ card.title }}
-									</h3>
+							<div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full {% if hasLink %}transform transition duration-300 hover:scale-105{% endif %}">
+								{% if hasImageCards %}
+									<div class="aspect-video shrink-0"></div>
 								{% endif %}
-
-								{% if card.description %}
-									<p class="text-gray-600 mb-4 grow">
-										{{ card.description }}
-									</p>
-								{% endif %}
-
-								{% if hasLink %}
-									<div>
-										{% include "templates/_partials/button.twig" with {
-                        buttons: ctaButtons
-                      } %}
-									</div>
-								{% endif %}
+								<div class="p-6 grow flex flex-col">
+									{% if card.title %}
+										<h3 class="text-xl font-bold text-gray-900 mb-3">{{ card.title }}</h3>
+									{% endif %}
+									{% if card.description %}
+										<p class="text-gray-600 mb-4 grow">{{ card.description }}</p>
+									{% endif %}
+									{% if hasLink %}
+										<div class="mt-4 flex flex-1">
+											{% include "templates/_partials/button.twig" with {
+												text: card.cardButton.title,
+												link: card.cardButton.url,
+												target: card.cardButton.target,
+												variant: 'secondary',
+											} %}
+										</div>
+									{% endif %}
+								</div>
 							</div>
 						{% endif %}
-
 					{% endfor %}
 				</div>
 			{% endif %}
-
 		</div>
 	</section>
 </flynt-component>

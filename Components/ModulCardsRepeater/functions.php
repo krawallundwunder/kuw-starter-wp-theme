@@ -2,50 +2,36 @@
 
 namespace Flynt\Components\ModulCardsRepeater;
 
+add_filter('Flynt/addComponentData?name=ModulCardsRepeater', function ($data) {
+  // Format CTA buttons
+  if (!empty($data['ctaButtons'])) {
+    $data['buttons'] = array_map(fn($btn) => [
+      'text' => $btn['button']['title'] ?? '',
+      'link' => $btn['button']['url'] ?? '',
+    ], array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button'])));
+  }
+
+  return $data;
+});
+
 function getACFLayout()
 {
     return [
         'name' => 'ModulCardsRepeater',
         'label' => 'Modul: Cards Repeater',
         'sub_fields' => [
+            ['label' => 'Tag', 'name' => 'tag', 'type' => 'text', 'maxlength' => 50],
+            ['label' => 'Titel', 'name' => 'title', 'type' => 'text'],
+            ['label' => 'Beschreibung', 'name' => 'description', 'type' => 'wysiwyg', 'media_upload' => 0],
             [
-                'label' => 'Tag',
-                'name' => 'tag',
-                'type' => 'text',
-                'instructions' => __('Füge ein Tag hinzu', 'flynt'),
-                'maxlength' => 50,
-            ],
-            [
-                'label' => 'Titel',
-                'name' => 'title',
-                'type' => 'text',
-                'instructions' => __('Füge einen Haupttitel hinzu', 'flynt'),
-            ],
-            [
-                'label' => 'Beschreibung',
-                'name' => 'description',
-                'type' => 'wysiwyg',
-                'media_upload' => 0,
-                'instructions' => __('Füge einen einleitenden Beschreibungstext hinzu', 'flynt'),
-            ],
-            [
-                'label' => __('Call-to-Action (CTA)', 'flynt'),
-                'name' => 'ctaButtons',
-                'type' => 'repeater',
-                'min' => 0,
-                'max' => 2,
-                'layout' => 'row',
-                'button_label' => __('Button hinzufügen', 'flynt'),
-                'instructions' => __('Max. 2 Buttons (1. Button = Primary, 2. Button = Secondary)', 'flynt'),
-                'sub_fields' => [
-                    [
-                      'label' => __('Button Link', 'flynt'),
-                      'name' => 'button',
-                      'type' => 'link',
-                      'instructions' => __('Fügen Sie eine Call-to-Action-Schaltfläche hinzu.', 'flynt'),
-                      'return_format' => 'array',
-                    ],
-                ],
+              'label' => 'CTA Buttons',
+              'name' => 'ctaButtons',
+              'type' => 'repeater',
+              'layout' => 'row',
+              'button_label' => 'Button Hinzufügen',
+              'sub_fields' => [
+                ['label' => 'Button', 'name' => 'button', 'type' => 'link', 'return_format' => 'array'],
+              ],
             ],
             [
                 'label' => 'Cards',
@@ -55,34 +41,10 @@ function getACFLayout()
                 'layout' => 'block',
                 'button_label' => 'Card hinzufügen',
                 'sub_fields' => [
-                    [
-                        'label' => 'Bild',
-                        'name' => 'image',
-                        'type' => 'image',
-                        'return_format' => 'id',
-                        'preview_size' => 'medium',
-                        'instructions' => __('Optional: Bild für die Card', 'flynt'),
-                    ],
-                    [
-                        'label' => 'Titel',
-                        'name' => 'title',
-                        'type' => 'text',
-                        'instructions' => __('Optional: Titel der Card', 'flynt'),
-                    ],
-                    [
-                        'label' => 'Beschreibung',
-                        'name' => 'description',
-                        'type' => 'wysiwyg',
-                        'media_upload' => 0,
-                        'instructions' => __('Optional: Beschreibung der Card', 'flynt'),
-                    ],
-                    [
-                      'label' => __('Button Link', 'flynt'),
-                      'name' => 'button',
-                      'type' => 'link',
-                      'instructions' => __('Fügen Sie eine Call-to-Action-Schaltfläche hinzu.', 'flynt'),
-                      'return_format' => 'array',
-                    ],
+                    ['label' => 'Bild', 'name' => 'image', 'type' => 'image', 'return_format' => 'id', 'preview_size' => 'medium'],
+                    ['label' => 'Titel', 'name' => 'title', 'type' => 'text'],
+                    ['label' => 'Beschreibung', 'name' => 'description', 'type' => 'wysiwyg', 'media_upload' => 0],
+                    ['label' => 'Button Link', 'name' => 'cardButton', 'type' => 'link', 'return_format' => 'array'],
                 ],
             ],
         ],
