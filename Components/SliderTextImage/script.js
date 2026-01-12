@@ -88,8 +88,8 @@ function initSlider(elements, componentData) {
     pagination: {
       el: elements.pagination,
       clickable: true,
-      bulletClass: 'slider-pagination-bullet inline-block w-2.5 h-2.5 rounded-full border border-yellow-400! cursor-pointer transition-all duration-200',
-      bulletActiveClass: 'slider-pagination-bullet-active bg-yellow-400 border-yellow-400'
+      bulletClass: 'slider-pagination-bullet inline-block w-2.5 h-2.5 rounded-full border border-primary! cursor-pointer transition-all duration-200',
+      bulletActiveClass: 'slider-pagination-bullet-active bg-primary border-primary'
     }
   }
 

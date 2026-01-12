@@ -2,7 +2,34 @@
 
 namespace Flynt\Components\ModulColumns;
 
-use Flynt\FieldVariables;
+add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
+  // Format buttons for the template
+  if (!empty($data['ctaButtons'])) {
+    $data['buttons'] = [];
+    foreach ($data['ctaButtons'] as $ctaButton) {
+      if (!empty($ctaButton['button'])) {
+        $data['buttons'][] = [
+          'text' => $ctaButton['button']['title'],
+          'link' => $ctaButton['button']['url'],
+        ];
+      }
+    }
+  }
+
+  if (!empty($data['cardButton'])) {
+    $data['cardButtonFormatted'] = [];
+    foreach ($data['cardButton'] as $cardButton) {
+      if (!empty($cardButton['button'])) {
+        $data['cardButtonFormatted'][] = [
+          'text' => $cardButton['button']['title'],
+          'link' => $cardButton['button']['url'],
+        ];
+      }
+    }
+  }
+
+  return $data;
+});
 
 function getACFLayout(): array
 {
@@ -19,19 +46,49 @@ function getACFLayout(): array
         'layout' => 'row',
       ],
       [
-        'label' => __('Title', 'flynt'),
-        'name' => 'title',
+        'label' => __('Tag', 'flynt'),
+        'name' => 'tag',
         'type' => 'text',
-        'instructions' => __('Optional: Add a title for the section.', 'flynt'),
+        'instructions' => __('Optionaler Tag über dem Titel.', 'flynt'),
       ],
       [
-        'label' => __('Description', 'flynt'),
+        'label' => __('Titel', 'flynt'),
+        'name' => 'title',
+        'type' => 'text',
+        'instructions' => __('Hauptüberschrift des Blocks.', 'flynt'),
+      ],
+      [
+        'label' => __('Fließtext', 'flynt'),
         'name' => 'description',
         'type' => 'wysiwyg',
-        'instructions' => __('Optional: Add a description for the section.', 'flynt'),
-        'tabs' => 'visual',
-        'toolbar' => 'basic',
+        'delay' => 0,
         'media_upload' => 0,
+        'instructions' => __('Textinhalt des Blocks.', 'flynt'),
+      ],
+      [
+        'label' => __('CTA Buttons', 'flynt'),
+        'name' => 'ctaButtons',
+        'type' => 'repeater',
+        'instructions' => __('Call to Action Buttons unter dem Textinhalt.', 'flynt'),
+        'layout' => 'row',
+        'button_label' => __('Button Hinzufügen', 'flynt'),
+        'sub_fields' => [
+          [
+            'label' => __('Button', 'flynt'),
+            'name' => 'button',
+            'type' => 'link',
+            'instructions' => __('Button-Konfiguration.', 'flynt'),
+            'return_format' => 'array',
+          ],
+        ],
+      ],
+      [
+        'label' => __('Columns Tab', 'flynt'),
+        'name' => 'columnsTab',
+        'type' => 'tab',
+        'placement' => 'top',
+        'endpoint' => 0,
+        'layout' => 'row',
       ],
       [
         'label' => __('Columns', 'flynt'),
@@ -89,7 +146,7 @@ function getACFLayout(): array
           ],
           [
             'label' => __('Button', 'flynt'),
-            'name' => 'button',
+            'name' => 'cardButton',
             'type' => 'link',
             'instructions' => 'Optional: Add a button to the column.',
             'return_format' => 'array',
@@ -118,10 +175,10 @@ function getACFLayout(): array
             'instructions' => __('Select the alignment for the Card.', 'flynt'),
             'type' => 'select',
             'choices' => [
-              'left' => __('Left', 'flynt'),
+              'start' => __('Left', 'flynt'),
               'center' => __('Center', 'flynt'),
             ],
-            'default_value' => 'left',
+            'default_value' => 'start',
             'wrapper' => [
               'width' => 50
             ]

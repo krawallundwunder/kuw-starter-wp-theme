@@ -3,6 +3,17 @@
 namespace Flynt\Components\BlockHeroSection;
 
 add_filter('Flynt/addComponentData?name=BlockHeroSection', function ($data) {
+  if (!empty($data['ctaButtons'])) {
+    $data['buttons'] = [];
+    foreach ($data['ctaButtons'] as $ctaButton) {
+      if (!empty($ctaButton['button'])) {
+        $data['buttons'][] = [
+          'text' => $ctaButton['button']['title'],
+          'link' => $ctaButton['button']['url'],
+        ];
+      }
+    }
+  }
   return $data;
 });
 
@@ -30,19 +41,19 @@ function getACFLayout()
         'required' => 0,
       ],
       [
-        'label' => __('CTA Button', 'flynt'),
-        'name' => 'ctaButton',
+        'label' => __('CTA Buttons', 'flynt'),
+        'name' => 'ctaButtons',
         'type' => 'repeater',
-        'instructions' => __('Fügen Sie bis zu zwei Call-to-Action Buttons hinzu.', 'flynt'),
-        'min' => 0,
-        'max' => 2,
+        'instructions' => __('Call to Action Buttons unter dem Textinhalt.', 'flynt'),
         'layout' => 'row',
-        'button_label' => __('Button hinzufügen', 'flynt'),
+        'button_label' => __('Button Hinzufügen', 'flynt'),
         'sub_fields' => [
           [
             'label' => __('Button', 'flynt'),
             'name' => 'button',
             'type' => 'link',
+            'instructions' => __('Button-Konfiguration.', 'flynt'),
+            'return_format' => 'array',
           ],
         ],
       ],

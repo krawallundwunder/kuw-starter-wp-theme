@@ -8,20 +8,9 @@
 	<script type="application/json">{{ jsonData|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_QUOT'))|raw }}</script>
 	<div class="container relative my-14" data-flow="layout">
 
-		<div class="flex flex-col text-center pb-12">
-			{% if tag %}
-				<span class="text-xl font-medium pb-4">{{ tag }}</span>
-			{% endif %}
-			{% if title %}
-				<h2 class="text-3xl font-bold md:text-4xl lg:text-5xl pb-4 md:pb-6">{{ title }}</h2>
-			{% endif %}
-			{% if description %}
-				<div class="prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mx-auto {{ backgroundColorConfig[sectionColor|default('bg-white')].text }}">
-					{{ description|raw }}
-				</div>
-			{% endif %}
-		</div>
-
+		{% if tag or title or description or buttons %}
+			{% include "templates/_partials/headings.twig" with {tag, title, description, buttons, textAlign:'text-center' } %}
+		{% endif %}
 
 		{% if slides %}
 			<div data-ref="slider" class="slider swiper-container overflow-hidden" data-size="full" data-align="center">
@@ -72,16 +61,16 @@
 					{% endfor %}
 				</div>
 
-				<button type="button" data-ref="prev" class="group hidden lg:block absolute z-10 -bottom-1 left-4 w-8 h-8 rounded-full items-center justify-center transition-colors duration-300 bg-transparent hover:bg-yellow-400 cursor-pointer slider-button slider-button--prev" aria-label="{{ sliderOptions.a11y.prevSlideMessage|e }}">
+				<button type="button" data-ref="prev" class="group hidden lg:block absolute z-10 -bottom-1 left-4 w-8 h-8 rounded-full items-center justify-center transition-colors duration-300 bg-transparent hover:bg-primary cursor-pointer slider-button slider-button--prev" aria-label="{{ sliderOptions.a11y.prevSlideMessage|e }}">
 					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32" class="w-full h-full">
-						<path d="M16 31C7.71573 31 1 24.2843 1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31Z" class="stroke-yellow-400 group-hover:fill-yellow-400 transition-colors duration-300 fill-transparent"/>
-						<path d="M16 10L10 16M10 16L16 22M10 16L22 16" class="stroke-yellow-400 group-hover:stroke-white transition-colors duration-300"/>
+						<path d="M16 31C7.71573 31 1 24.2843 1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31Z" class="stroke-primary group-hover:fill-primary transition-colors duration-300 fill-transparent"/>
+						<path d="M16 10L10 16M10 16L16 22M10 16L22 16" class="stroke-primary group-hover:stroke-white transition-colors duration-300"/>
 					</svg>
 				</button>
-				<button type="button" data-ref="next" class="group hidden lg:block absolute rotate-180 z-10 -bottom-1 right-4 w-8 h-8 rounded-full items-center justify-center transition-colors duration-300 bg-transparent hover:bg-yellow-400 cursor-pointer slider-button slider-button--next" aria-label="{{ sliderOptions.a11y.nextSlideMessage|e }}">
+				<button type="button" data-ref="next" class="group hidden lg:block absolute rotate-180 z-10 -bottom-1 right-4 w-8 h-8 rounded-full items-center justify-center transition-colors duration-300 bg-transparent hover:bg-primary cursor-pointer slider-button slider-button--next" aria-label="{{ sliderOptions.a11y.nextSlideMessage|e }}">
 					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32" class="w-full h-full">
-						<path d="M16 31C7.71573 31 1 24.2843 1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31Z" class="stroke-yellow-400 group-hover:fill-yellow-400 transition-colors duration-300 fill-transparent"/>
-						<path d="M16 10L10 16M10 16L16 22M10 16L22 16" class="stroke-yellow-400 group-hover:stroke-white transition-colors duration-300"/>
+						<path d="M16 31C7.71573 31 1 24.2843 1 16C1 7.71573 7.71573 1 16 1C24.2843 1 31 7.71573 31 16C31 24.2843 24.2843 31 16 31Z" class="stroke-primary group-hover:fill-primary transition-colors duration-300 fill-transparent"/>
+						<path d="M16 10L10 16M10 16L16 22M10 16L22 16" class="stroke-primary group-hover:stroke-white transition-colors duration-300"/>
 					</svg>
 				</button>
 				<div data-ref="pagination" class="slider-pagination text-center mt-6 space-x-2"></div>

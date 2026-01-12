@@ -1,6 +1,23 @@
 <?php
 
 namespace Flynt\Components\ModulTextImage;
+
+add_filter('Flynt/addComponentData?name=ModulTextImage', function ($data) {
+  // Format buttons for the template
+  if (!empty($data['ctaButtons'])) {
+    $data['buttons'] = [];
+    foreach ($data['ctaButtons'] as $ctaButton) {
+      if (!empty($ctaButton['button'])) {
+        $data['buttons'][] = [
+          'text' => $ctaButton['button']['title'],
+          'link' => $ctaButton['button']['url'],
+        ];
+      }
+    }
+  }
+
+  return $data;
+});
 function getACFLayout(): array
 {
   return [
@@ -23,31 +40,41 @@ function getACFLayout(): array
         'mime_types' => 'jpg,jpeg,png,svg,webp',
       ],
       [
-        'label' => __('Tagline', 'flynt'),
-        'instructions' => __('Deinen gewünschten Tag eingeben', 'flynt'),
-        'name' => 'tagline',
+        'label' => __('Tag', 'flynt'),
+        'name' => 'tag',
         'type' => 'text',
+        'instructions' => __('Optionaler Tag über dem Titel.', 'flynt'),
       ],
       [
         'label' => __('Titel', 'flynt'),
-        'instructions' => __('Hier kannst du deinen Titel hinzufügen.', 'flynt'),
         'name' => 'title',
         'type' => 'text',
+        'instructions' => __('Hauptüberschrift des Blocks.', 'flynt'),
       ],
       [
-        'label' => __('Beschreibung', 'flynt'),
-        'instructions' => __('Hier kannst du deinen Textinhalt hinzufügen.', 'flynt'),
-        'name' => 'contentHtml',
+        'label' => __('Fließtext', 'flynt'),
+        'name' => 'description',
         'type' => 'wysiwyg',
         'delay' => 0,
         'media_upload' => 0,
+        'instructions' => __('Textinhalt des Blocks.', 'flynt'),
       ],
       [
-        'label' => __('Button', 'flynt'),
-        'instructions' => __('Hier kannst du einen Button hinzufügen (max. 2).', 'flynt'),
-        'name' => 'button',
-        'type' => 'link',
-        'return_format' => 'array',
+        'label' => __('CTA Buttons', 'flynt'),
+        'name' => 'ctaButtons',
+        'type' => 'repeater',
+        'instructions' => __('Call to Action Buttons unter dem Textinhalt.', 'flynt'),
+        'layout' => 'row',
+        'button_label' => __('Button Hinzufügen', 'flynt'),
+        'sub_fields' => [
+          [
+            'label' => __('Button', 'flynt'),
+            'name' => 'button',
+            'type' => 'link',
+            'instructions' => __('Button-Konfiguration.', 'flynt'),
+            'return_format' => 'array',
+          ],
+        ],
       ],
       [
         'label' => __('Optionen', 'flynt'),
