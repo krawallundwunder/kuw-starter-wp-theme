@@ -1,86 +1,58 @@
-{# Script für Accordion-Funktionalität #}
-{% if layoutType == 'layout-2' %}
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
-{% endif %}
+<flynt-component name="ModulFAQ">
+	<section class="py-12 sm:py-20">
+		<div
+			class="container">
+			{# Header Section #}
+			<div class="mb-12 text-center">
+				{% include "templates/_partials/headings.twig" with { tag, title, description } %}
+			</div>
 
-{% set componentId = random() %}
+			{% if faqItems %}
+				{% if layoutType == 'layout-2' %}
+					{# Layout 2: Accordion Style #}
+					<div class="flex flex-col border-t border-gray-200">
+						{% for item in faqItems %}
+							<details class="group border-b border-gray-200" id="faq-{{ loop.index0 }}">
+								<summary class="flex cursor-pointer items-start justify-between p-6 list-none transition-colors">
+									<div class="flex items-start">
+										<svg class="shrink-0 mr-3 w-6 h-6 text-primary mt-0.5" fill="currentColor" viewbox="0 0 20 20"><path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"/></svg>
+										<span class="text-lg font-medium">{{ item.question }}</span>
+									</div>
 
-<section class="flyntComponent bg-gray-50">
-  <div class="py-12 px-4 mx-auto max-w-7xl sm:py-20 lg:px-6">
+									{# Icon Toggle (Rotates when open) #}
+									<svg class="ml-4 w-6 h-6 shrink-0 transition-transform group-open:rotate-45 text-primary group-open:text-gray-400" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
+										<path d="M12 6v12m6-6H6" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</summary>
+								<div class="px-6 pb-6 pl-15 text-gray-600 leading-relaxed">
+									<div class="pl-9">{{ item.answer|raw }}</div>
+								</div>
+							</details>
+						{% endfor %}
+					</div>
 
-    {# Header Section #}
-    <div class="mb-12 text-center max-w-3xl mx-auto">
-      {% include "templates/_partials/headings.twig" with {
-        tag: tag,
-        title: title,
-        description: description,
-      } %}
-    </div>
+				{% else %}
+					{# Layout 1: Grid Style #}
+					<div class="grid gap-8 {{ columns == '1' ? '' : 'md:grid-cols-2' }}">
+						{% for item in faqItems %}
+							<div class="bg-primary/10 border border-primary rounded-lg p-6 shadow-sm">
+								<div class="flex items-start mb-4 text-gray-900">
+									<svg class="shrink-0 mr-3 w-6 h-6 text-primary mt-0.5" fill="currentColor" viewbox="0 0 20 20"><path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"/></svg>
+									<h3 class="text-lg font-semibold">{{ item.question }}</h3>
+								</div>
+								<div class="text-gray-600 leading-relaxed pl-9">{{ item.answer|raw }}</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			{% endif %}
 
-    {# Layout 2 #}
-    {% if faqItems and layoutType == 'layout-2' %}
-      <div class="flex flex-col gap-4">
-        {% for item in faqItems %}
-          <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-            <button type="button" command="--toggle" commandfor="faq-{{ componentId }}-{{ loop.index0 }}" class="flex w-full items-start justify-between text-left p-6 hover:bg-gray-50 transition-colors">
-              <div class="flex items-start flex-1">
-                <svg class="shrink-0 mr-3 w-6 h-6 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-lg font-semibold text-gray-900">{{ item.question }}</span>
-              </div>
-              <span class="ml-4 flex h-7 items-center shrink-0">
-                {# Plus Icon #}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="w-6 h-6 text-gray-400 in-aria-expanded:hidden">
-                  <path d="M12 6v12m6-6H6" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                {# Minus Icon #}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="w-6 h-6 text-blue-600 [&:not([aria-expanded='true']_*)]:hidden">
-                  <path d="M18 12H6" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </span>
-            </button>
+		</div>
+	</section>
+</flynt-component>
 
-            <el-disclosure id="faq-{{ componentId }}-{{ loop.index0 }}" hidden class="[&:not([hidden])]:block">
-              <div class="px-6 pb-6 pt-0">
-                <div class="text-gray-600 leading-relaxed pl-9">
-                  {{ item.answer|raw }}
-                </div>
-              </div>
-            </el-disclosure>
-          </div>
-        {% endfor %}
-      </div>
-
-    {# Layout 1 #}
-    {% elseif faqItems %}
-      {% set gridClass = columns == '1' ? '' : 'md:grid-cols-2' %}
-      <div class="grid gap-8 {{ gridClass }} md:gap-x-12 md:gap-y-10">
-        {% for item in faqItems %}
-          <div class="bg-white rounded-lg p-6 shadow-sm">
-
-            {# Question #}
-            <div class="flex items-start mb-4">
-              <svg class="shrink-0 mr-3 w-6 h-6 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                      clip-rule="evenodd"></path>
-              </svg>
-
-              <h3 class="text-lg font-semibold text-gray-900">
-                {{ item.question }}
-              </h3>
-            </div>
-
-            {# Answer #}
-            <div class="text-gray-600 leading-relaxed pl-9">
-              {{ item.answer|raw }}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
-  </div>
-</section>
+<style>
+	summary::-webkit-details-marker {
+		display: none;
+	}
+</style>
