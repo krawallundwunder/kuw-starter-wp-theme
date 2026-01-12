@@ -11,6 +11,7 @@ add_filter('Flynt/addComponentData?name=ModulTextImage', function ($data) {
         $data['buttons'][] = [
           'text' => $ctaButton['button']['title'],
           'link' => $ctaButton['button']['url'],
+          'target' => $ctaButton['button']['target'],
         ];
       }
     }

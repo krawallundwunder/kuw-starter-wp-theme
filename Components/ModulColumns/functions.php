@@ -11,6 +11,7 @@ add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
         $data['buttons'][] = [
           'text' => $ctaButton['button']['title'],
           'link' => $ctaButton['button']['url'],
+          'target' => $ctaButton['button']['target'],
         ];
       }
     }
@@ -20,9 +21,10 @@ add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
     $data['cardButtonFormatted'] = [];
     foreach ($data['cardButton'] as $cardButton) {
       if (!empty($cardButton['button'])) {
-        $data['cardButtonFormatted'][] = [
+        $data['cardButtons'][] = [
           'text' => $cardButton['button']['title'],
           'link' => $cardButton['button']['url'],
+          'target' => $cardButton['button']['target'],
         ];
       }
     }
@@ -111,7 +113,7 @@ function getACFLayout(): array
             'max_size' => 4,
             'mime_types' => 'jpg,jpeg,png',
             'wrapper' => [
-              'width' => 20
+              'width' => '20%'
             ]
           ],
           [
@@ -120,7 +122,7 @@ function getACFLayout(): array
             'type' => 'text',
             'instructions' => 'Optional: Add a tag or label for the column.',
             'wrapper' => [
-              'width' => 20
+              'width' => '20%'
             ]
           ],
           [
@@ -129,7 +131,7 @@ function getACFLayout(): array
             'type' => 'text',
             'instructions' => 'Write a short, descriptive title for the column.',
             'wrapper' => [
-              'width' => 20
+              'width' => '20%'
             ]
           ],
           [
@@ -141,7 +143,7 @@ function getACFLayout(): array
             'toolbar' => 'basic',
             'media_upload' => 0,
             'wrapper' => [
-              'width' => 25
+              'width' => '25%'
             ]
           ],
           [
@@ -151,7 +153,7 @@ function getACFLayout(): array
             'instructions' => 'Optional: Add a button to the column.',
             'return_format' => 'array',
             'wrapper' => [
-              'width' => 15
+              'width' => '15%'
             ]
           ]
         ]
@@ -180,7 +182,7 @@ function getACFLayout(): array
             ],
             'default_value' => 'start',
             'wrapper' => [
-              'width' => 50
+              'width' => '50%'
             ]
           ],
           [
@@ -190,7 +192,7 @@ function getACFLayout(): array
             'type' => 'true_false',
             'ui' => 1,
             'wrapper' => [
-              'width' => 50,
+              'width' => '50%',
             ]
           ],
         ]

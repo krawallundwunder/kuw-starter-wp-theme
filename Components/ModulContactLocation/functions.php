@@ -12,6 +12,7 @@ add_filter('Flynt/addComponentData?name=ModulContactLocation', function ($data) 
         $data['buttons'][] = [
           'text' => $ctaButton['button']['title'],
           'link' => $ctaButton['button']['url'],
+          'target' => $ctaButton['button']['target'],
         ];
       }
     }
@@ -99,21 +100,21 @@ function getACFLayout()
             'name' => 'title',
             'type' => 'text',
             'required' => 0,
-            'wrapper' => ['width' => '100'],
+            'wrapper' => ['width' => '100%'],
           ],
           [
             'label' => 'E-Mail',
             'name' => 'email',
             'type' => 'email',
             'required' => 0,
-            'wrapper' => ['width' => '50'],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => 'Telefon',
             'name' => 'phone',
             'type' => 'text',
             'required' => 0,
-            'wrapper' => ['width' => '50'],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => 'Link zum Kontaktformular',
@@ -121,7 +122,7 @@ function getACFLayout()
             'type' => 'link',
             'return_format' => 'array',
             'required' => 0,
-            'wrapper' => ['width' => '100'],
+            'wrapper' => ['width' => '100%'],
           ],
         ],
       ],
@@ -157,35 +158,35 @@ function getACFLayout()
             'type' => 'text',
             'instructions' => 'z.B. "Hauptsitz Dresden" oder "Niederlassung Berlin"',
             'required' => 0,
-            'wrapper' => ['width' => '100'],
+            'wrapper' => ['width' => '100%'],
           ],
           [
             'label' => 'Straße',
             'name' => 'street',
             'type' => 'text',
             'required' => 0,
-            'wrapper' => ['width' => '100'],
+            'wrapper' => ['width' => '100%'],
           ],
           [
             'label' => 'PLZ',
             'name' => 'zip',
             'type' => 'text',
             'required' => 0,
-            'wrapper' => ['width' => '33.33'],
+            'wrapper' => ['width' => '33.33%'],
           ],
           [
             'label' => 'Stadt',
             'name' => 'cityName',
             'type' => 'text',
             'required' => 0,
-            'wrapper' => ['width' => '33.33'],
+            'wrapper' => ['width' => '33.33%'],
           ],
           [
             'label' => 'Land (optional)',
             'name' => 'country',
             'type' => 'text',
             'required' => 0,
-            'wrapper' => ['width' => '33.33'],
+            'wrapper' => ['width' => '33.33%'],
           ],
           [
             'label' => 'Google Maps Link (optional)',
@@ -221,7 +222,7 @@ function getACFLayout()
           '4' => '4 Spalten',
         ],
         'default_value' => '2',
-        'wrapper' => ['width' => '33.33'],
+        'wrapper' => ['width' => '33.33%'],
         'conditional_logic' => [
           [
             [
@@ -242,7 +243,7 @@ function getACFLayout()
           '4' => '4 Spalten',
         ],
         'default_value' => '2',
-        'wrapper' => ['width' => '33.33'],
+        'wrapper' => ['width' => '33.33%'],
         'conditional_logic' => [
           [
             [
