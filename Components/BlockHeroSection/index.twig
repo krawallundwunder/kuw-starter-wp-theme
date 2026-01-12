@@ -1,0 +1,44 @@
+<flynt-component name="BlockHeroSection" class="componentHeroHeader">
+	{% set colorMap = {
+    'white': {
+        text: 'text-black',
+        button: 'bg-white text-black hover:bg-yellow-400 hover:text-white border-yellow-400 hover:border-yellow-400'
+    },
+    'black': {
+        text: 'text-white',
+        button: 'bg-white text-yellow-400 hover:bg-yellow-400 hover:text-white border-yellow-400 hover:border-yellow-400'
+    }
+  } %}
+
+
+	<div class="relative flex flex-col justify-center pt-24 {{ colorMap[backgroundColor].text }} bg-{{ backgroundColor|default('white') }} lg:min-h-[70vh] bg-cover bg-center bg-no-repeat" {% if backgroundImage %} style="background-image: url('{{ backgroundImage.src|esc_url }}');" {% endif %}>
+
+		{% if backgroundImage %}
+			<div class="absolute inset-0 bg-black" style="opacity: {{ overlayOpacity|default(60) / 100 }};"></div>
+		{% endif %}
+
+		<div class="container relative z-10 flex items-center h-full py-12">
+			<div class="flex gap-12 items-center w-full">
+
+				<div class="w-full {{ textPosition == 'full' ? 'w-full text-center' : 'text-start lg:w-2/3 '}} flex flex-col items-center">
+					{% if headline %}
+						<div class="h2 text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 font-bold">
+							{{ headline|e('wp_kses_post') }}
+						</div>
+					{% endif %}
+
+					{% if ctaButton %}
+						<div class="mt-8 gap-6 {{ textPosition == 'full' ? 'mx-auto' : 'self-start'}}">
+							{% for button in ctaButton %}
+								<a href="{{ button.button.url }}" target="{{ button.button.target|default('_self') }}" class="inline-block {{ colorMap[backgroundColor].button }} text-sm font-bold py-3 px-8 rounded-[5px] border-2 transition-all duration-300 hover:scale-105">
+									{{ button.button.title  }}
+								</a>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+
+			</div>
+		</div>
+	</div>
+</flynt-component>
