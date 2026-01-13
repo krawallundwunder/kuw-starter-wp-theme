@@ -39,21 +39,26 @@
 								<div class="overflow-hidden bg-gray-200 aspect-video shrink-0">
 									<img src="{{ Image(card.image).src('large') }}" alt="{{ card.title }}" class="h-full w-full object-cover" loading="lazy"/>
 								</div>
-								<div class="p-6 grow flex flex-col">
-									{% if card.title %}
-										<h3 class="text-xl font-bold text-gray-900 mb-3">{{ card.title }}</h3>
+								<div class="p-6 grow flex justify-between flex-col">
+									{% if card.title or card.description %}
+										<div>
+											{% if card.title %}
+												<h3 class="text-xl font-bold text-gray-900 mb-3">{{ card.title }}</h3>
+											{% endif %}
+											{% if card.description %}
+												<p class="text-gray-600 mb-4 line-clamp-4 grow">{{ card.description }}</p>
+											{% endif %}
+										</div>
 									{% endif %}
-									{% if card.description %}
-										<p class="text-gray-600 mb-4 line-clamp-4 grow">{{ card.description }}</p>
-									{% endif %}
+
 									{% if hasLink %}
-										<div class="mt-4 flex flex-1">
+										<div class="mt-4 shrink-0">
 											{% include "templates/_partials/button.twig" with {
-												text: card.cardButton.title,
-												link: card.cardButton.url,
-												target: card.cardButton.target,
-												variant: 'secondary',
-											} %}
+                          text: card.cardButton.title,
+                          link: card.cardButton.url,
+                          target: card.cardButton.target,
+                          variant: 'secondary',
+                        } %}
 										</div>
 									{% endif %}
 								</div>
@@ -62,24 +67,25 @@
 							{# Case 3: Only Content #}
 						{% elseif hasContent %}
 							<div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full {% if hasLink %}transform transition duration-300 hover:scale-105{% endif %}">
-								{% if hasImageCards %}
-									<div class="aspect-video shrink-0"></div>
-								{% endif %}
-								<div class="p-6 grow flex flex-col">
-									{% if card.title %}
-										<h3 class="text-xl font-bold text-gray-900 mb-3">{{ card.title }}</h3>
-									{% endif %}
-									{% if card.description %}
-										<p class="text-gray-600 mb-4 grow">{{ card.description }}</p>
+								<div class="p-6 grow flex flex-col justify-between">
+									{% if card.title or card.description %}
+										<div>
+											{% if card.title %}
+												<h3 class="text-xl font-bold text-gray-900 mb-3">{{ card.title }}</h3>
+											{% endif %}
+											{% if card.description %}
+												<p class="text-gray-600 mb-4 grow">{{ card.description }}</p>
+											{% endif %}
+										</div>
 									{% endif %}
 									{% if hasLink %}
-										<div class="mt-4 flex flex-1">
+										<div class="mt-4 shrink-0">
 											{% include "templates/_partials/button.twig" with {
-												text: card.cardButton.title,
-												link: card.cardButton.url,
-												target: card.cardButton.target,
-												variant: 'secondary',
-											} %}
+                        text: card.cardButton.title,
+                        link: card.cardButton.url,
+                        target: card.cardButton.target,
+                        variant: 'secondary',
+                      } %}
 										</div>
 									{% endif %}
 								</div>
