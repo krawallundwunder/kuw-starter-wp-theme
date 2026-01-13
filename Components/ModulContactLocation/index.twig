@@ -2,32 +2,14 @@
 	<div
 		class="container mx-auto px-4 py-16">
 
-		{# Kontakt Section - nur anzeigen wenn tatsächlich Einträge vorhanden #}
-		{% if contactAreas and contactAreas|length > 0 %}
+		{# Header Section #}
+		<div class="mb-20">
+			{% include "templates/_partials/headings.twig" with { tag, title, description, buttons, textAlign: 'text-center' } %}
+		</div>
+
+		{# Kontakt Section - Nur wenn Layout 'Kontakt' gewählt und Daten vorhanden #}
+		{% if layout == 'Kontakt' and contactAreas|length > 0 %}
 			<div class="mb-20">
-				<div class="mb-12">
-					{% if contactHeading %}
-						<h2 class="text-4xl md:text-5xl font-medium text-gray-900 mb-4">
-							{{ contactHeading }}
-						</h2>
-					{% endif %}
-
-					{% if contactDescription %}
-						<p class="text-lg text-gray-400 max-w-2xl">
-							{{ contactDescription }}
-						</p>
-					{% endif %}
-
-					{% if button %}
-						<div class="mt-4">
-							<a href="{{ button.url }}" {% if button.target %} target="{{ button.target }}" {% endif %} class="inline-block rounded-lg bg-gray-50 px-4 py-4 text-gray-500 font-medium hover:bg-blue-700 hover:text-gray-50 transition-colors duration-200 no-underline!">
-								{{ button.title }}
-							</a>
-						</div>
-					{% endif %}
-
-				</div>
-
 				{% set contactGridClasses = 'grid gap-8 lg:gap-12 ' %}
 				{% if contactLayout == '4' %}
 					{% set contactGridClasses = contactGridClasses ~ 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' %}
@@ -36,28 +18,22 @@
 				{% else %}
 					{% set contactGridClasses = contactGridClasses ~ 'grid-cols-1 md:grid-cols-2' %}
 				{% endif %}
+
 				<div class="{{ contactGridClasses }}">
 					{% for area in contactAreas %}
-						{# Nur anzeigen wenn mindestens ein Feld ausgefüllt ist #}
 						{% if area.title or area.email or area.phone or area.formLink %}
 							<div class="bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-shadow duration-300">
-								<div
-									class="flex flex-col h-full">
-									{# Titel #}
+								<div class="flex flex-col h-full">
 									{% if area.title %}
-										<h3 class="text-2xl font-medium text-gray-900 mb-4">
-											{{ area.title }}
-										</h3>
+										<h3 class="text-2xl font-medium text-gray-900 mb-4">{{ area.title }}</h3>
 									{% endif %}
 
-									{# Kontaktdaten #}
 									<div class="space-y-3 grow">
 										{% if area.email %}
-											<a href="mailto:{{ area.email }}" class="block text-blue-600 hover:text-blue-800 font-medium transition-colors">
+											<a href="mailto:{{ area.email }}" class="block font-medium transition-colors">
 												{{ area.email }}
 											</a>
 										{% endif %}
-
 										{% if area.phone %}
 											<a href="tel:{{ area.phone|replace({' ': '', '(': '', ')': '', '-': ''}) }}" class="block text-gray-600 hover:text-gray-800 transition-colors">
 												{{ area.phone }}
@@ -65,10 +41,9 @@
 										{% endif %}
 									</div>
 
-									{# Link zum Kontaktformular #}
 									{% if area.formLink %}
 										<div class="mt-6">
-											<a href="{{ area.formLink.url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors group" {% if area.formLink.target %} target="{{ area.formLink.target }}" {% endif %}>
+											<a href="{{ area.formLink.url }}" class="inline-flex items-center font-semibold transition-colors group" {% if area.formLink.target %} target="{{ area.formLink.target }}" {% endif %}>
 												{{ area.formLink.title|default('Kontaktformular') }}
 												<svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -84,23 +59,9 @@
 			</div>
 		{% endif %}
 
-		{# Standorte Section - nur anzeigen wenn tatsächlich Einträge vorhanden #}
-		{% if locations and locations|length > 0 %}
+		{# Standorte Section - Nur wenn Layout 'Standorte' gewählt und Daten vorhanden #}
+		{% if layout == 'Standorte' and locations|length > 0 %}
 			<div>
-				<div class="mb-12">
-					{% if locationsHeading %}
-						<h2 class="text-4xl md:text-5xl font-medium text-gray-900 mb-4">
-							{{ locationsHeading }}
-						</h2>
-					{% endif %}
-
-					{% if locationsDescription %}
-						<p class="text-lg text-gray-400 max-w-2xl">
-							{{ locationsDescription }}
-						</p>
-					{% endif %}
-				</div>
-
 				{% set locationsGridClasses = 'grid gap-8 lg:gap-12 ' %}
 				{% if locationsLayout == '4' %}
 					{% set locationsGridClasses = locationsGridClasses ~ 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' %}
@@ -109,71 +70,48 @@
 				{% else %}
 					{% set locationsGridClasses = locationsGridClasses ~ 'grid-cols-1 md:grid-cols-2' %}
 				{% endif %}
+
 				<div class="{{ locationsGridClasses }}">
 					{% for location in locations %}
-						{# Nur anzeigen wenn mindestens Stadt oder Adresse vorhanden #}
 						{% if location.city or location.street %}
-							<div
-								class="bg-white border border-gray-200 rounded-lg p-8 hover:border-blue-500 hover:shadow-lg transition-all duration-300">
-								{# Stadtname #}
+							<div class="bg-white border border-primary/30 rounded-lg p-8 hover:border-primary hover:shadow-lg transition-all duration-300">
 								{% if location.city %}
-									<h3 class="text-2xl font-medium text-gray-900 mb-6">
-										{{ location.city }}
-									</h3>
+									<h3 class="text-2xl font-medium text-gray-900 mb-6">{{ location.city }}</h3>
 								{% endif %}
 
-								{# Adresse #}
-								{% if location.street or location.zip or location.cityName %}
-									<div class="space-y-2 text-gray-600 mb-6">
-										{% if location.street %}
-											<p class="text-base">{{ location.street }}</p>
+								<div class="space-y-2 text-gray-600 mb-6">
+									{% if location.street %}
+										<p class="text-base">{{ location.street }}</p>
+									{% endif %}
+									<p class="text-base">
+										{{ location.zip }}
+										{{ location.cityName }}
+										{% if location.country %},
+											{{ location.country }}
 										{% endif %}
-										{% if location.zip or location.cityName %}
-											<p class="text-base">
-												{% if location.zip %}
-													{{ location.zip }}
-												{% endif %}
-												{% if location.cityName %}
-													{{ location.cityName }}
-												{% endif %}
-												{% if location.country %},
-													{{ location.country }}
-												{% endif %}
-											</p>
-										{% endif %}
-									</div>
-								{% endif %}
+									</p>
+								</div>
 
-								{# Zusätzliche Kontaktinfos #}
 								{% if location.phone or location.email %}
 									<div class="space-y-2 mb-6 pt-4 border-t border-gray-200">
 										{% if location.phone %}
-											<a href="tel:{{ location.phone|replace({' ': '', '(': '', ')': '', '-': ''}) }}" class="flex items-center font-bold text-gray-600 hover:text-blue-600 transition-colors">
-												<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-												</svg>
+											<a href="tel:{{ location.phone|replace({' ': '', '(': '', ')': '', '-': ''}) }}" class="flex items-center font-bold text-gray-600 hover:text-gray-800 transition-colors">
+												<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
 												{{ location.phone }}
 											</a>
 										{% endif %}
-
 										{% if location.email %}
-											<a href="mailto:{{ location.email }}" class="flex items-center font-bold text-gray-600 hover:text-blue-600 transition-colors">
-												<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-												</svg>
+											<a href="mailto:{{ location.email }}" class="flex items-center font-bold text-gray-600 hover:text-gray-800 transition-colors">
+												<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
 												{{ location.email }}
 											</a>
 										{% endif %}
 									</div>
 								{% endif %}
 
-								{# Google Maps Link #}
 								{% if location.mapLink %}
-									<a href="{{ location.mapLink }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors group">
-										<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-										</svg>
+									<a href="{{ location.mapLink }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-semibold transition-colors group">
+										<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
 										Auf Karte anzeigen
 									</a>
 								{% endif %}
@@ -183,5 +121,6 @@
 				</div>
 			</div>
 		{% endif %}
+
 	</div>
 </section>

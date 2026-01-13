@@ -1,22 +1,11 @@
 <div class="py-20 lg:py-24 bg-white" is="flynt-block-team-section">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		{% if heading or description %}
-			<div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
-				{% if heading %}
-					<h2 class="text-4xl sm:text-5xl lg:text-6xl font-medium text-gray-900 mb-5">
-						{{ heading }}
-					</h2>
-				{% endif %}
-				{% if description %}
-					<p class="text-lg text-gray-600 leading-relaxed">
-						{{ description }}
-					</p>
-				{% endif %}
-			</div>
+		{% if tag or title or description or buttons %}
+			{% include "templates/_partials/headings.twig" with {tag, title, description, buttons, textAlign:'text-center' } %}
 		{% endif %}
 
 		{% if teamMembers %}
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ teamMembers|length <= 3 ? teamMembers|length : 3 }} gap-6 lg:gap-8">
 				{% for member in teamMembers %}
 					<div class="flex">
 						<div class="bg-gray-100 rounded-2xl p-8 lg:p-10 flex flex-col items-center text-center w-full">

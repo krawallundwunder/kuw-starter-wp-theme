@@ -1,25 +1,12 @@
 <flynt-component name="ModuliFrame" class="py-8 md:py-12 lg:py-16">
 	<div class="container px-4 mx-auto">
 
-		<div class="max-w-4xl mx-auto mb-8 text-center md:mb-12">
-			{% if tag %}
-				<div class="mb-4.5 text-sm text-[#1570EF] font-normal leading-6 font-inter tracking-wide uppercase">
-					{{ tag|e }}
-				</div>
-			{% endif %}
+		{% if tag or title or description %}
+			<div class="">
+				{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign: 'text-center' } %}
+			</div>
+		{% endif %}
 
-			{% if title %}
-				<h2 class="text-[#181D27] leading-11 tracking-[-0.8px] font-normal mb-8 text-3xl md:text-4xl lg:text-5xl md:mb-6">
-					{{ title|e }}
-				</h2>
-			{% endif %}
-
-			{% if contentHtml %}
-				<div class="prose text-[#535862] text-base leading-6.25 font-normal max-w-none mb-6">
-					{{ contentHtml|e('wp_kses_post') }}
-				</div>
-			{% endif %}
-		</div>
 
 		{% if iframeUrl %}
 			<div class="w-full overflow-hidden rounded-lg bg-gray-100">

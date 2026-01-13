@@ -1,10 +1,12 @@
-{% set baseClasses = 'flex flex-col text-start pb-12' %}
-{% set descriptionClass = 'prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current' %}
+{% set textAlign = textAlign|default('text-start') %}
+{% set isTextCenter = textAlign == 'text-center' %}
+{% set baseClasses = 'flex flex-col pb-12' %}
+{% set descriptionClass = 'prose lg:prose-lg prose-li:marker:text-current prose-p:text-xl prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current' %}
 
 
-<div class="{{ baseClasses }}">
+<div class="{{ baseClasses }} {{ textAlign }}">
 	{% if tag %}
-		<span class="text-xl font-medium pb-4 text-black/70">{{ tag|e }}</span>
+		<span class="text-sm font-medium pb-4 text-primary/50 uppercase">{{ tag|e }}</span>
 	{% endif %}
 
 	{% if title %}
@@ -12,17 +14,18 @@
 	{% endif %}
 
 	{% if description %}
-		<div class="{{ descriptionClass }}">
+		<div class="{{ descriptionClass }} {% if isTextCenter %}self-center{% endif %}">
 			{{ description|e('wp_kses_post')}}
 		</div>
 	{% endif %}
 
 	{% if buttons %}
-		<div class="flex md:flex-row gap-4 pt-6">
+		<div class="flex md:flex-row gap-4 pt-6 {% if isTextCenter %}justify-center{% else %}justify-start{% endif %}">
 			{% for button in buttons %}
 				{% include "templates/_partials/button.twig" with {
           text: button.text,
           link: button.link,
+          target: button.target,
           variant: loop.first ? 'primary' : 'secondary',
         } %}
 			{% endfor %}

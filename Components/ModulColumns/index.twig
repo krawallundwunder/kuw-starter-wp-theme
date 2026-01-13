@@ -1,20 +1,17 @@
 <section class="component component-columns-module  text-black py-16 lg:py-24 transition-all duration-300 ease-in-out">
 	<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-		{% if title or description %}
-			<div class="text-center">
-				{% if title %}
-					<h2 class="text-4xl md:text-5xl lg:text-7xl font-medium leading-none mb-6 sm:mb-10">{{ title }}</h2>
-				{% endif %}
-
-				{% if description %}
-					<div class="mb-12 lg:mb-16">
-						<div class="text-lg md:text-xl lg:text-[22px] font-light leading-tight mb-6 sm:mb-8 text-gray-500">
-							{{ description|e('wp_kses_post') }}
-						</div>
-					</div>
-				{% endif %}
+		{% if tag or title or description %}
+			<div class="">
+				{% include "templates/_partials/headings.twig" with {
+            tag: tag,
+            title: title,
+            description: description,
+            buttons: buttons,
+            textAlign: textAlignment ? 'text-' ~ textAlignment : null
+          } %}
 			</div>
 		{% endif %}
+
 
 		<div class="grid grid-cols-1 gap-8 md:grid-flow-col md:auto-cols-fr md:grid-cols-{{ columns|length }}">
 			{% for column in columns %}
@@ -32,7 +29,7 @@
 						<div class="mx-4 mb-4">
 							{% if column.tag %}
 								<div class="column-tag mb-1">
-									<span class="inline-block text-sm font-medium text-blue-500 uppercase tracking-wide">
+									<span class="inline-block text-xs font-medium text-black/60 uppercase tracking-wide">
 										{{ column.tag }}
 									</span>
 								</div>
@@ -40,27 +37,29 @@
 
 							{% if column.subtitle %}
 								<div class="column-subtitle-container mb-2.5">
-									<h3 class="js-column-subtitle column-subtitle text-3xl font-medium w-full text-primary">
+									<h3 class="js-column-subtitle column-subtitle text-2xl font-medium w-full text-black">
 										{{ column.subtitle }}
 									</h3>
 								</div>
 							{% endif %}
 
 							{% if column.description %}
-								<div class="column-description text-gray-500 text-lg md:text-xl lg:text-[22px] leading-tight font-light">
+								<div class="column-description text-black/90 text-lg leading-tight font-light">
 									{{ column.description|e('wp_kses_post') }}
 								</div>
 							{% endif %}
 						</div>
 					</div>
 
-					{% if column.button and column.button.url %}
-						<div class="column-button mt-auto mx-4 mb-6">
-							<a href="{{ column.button.url }}" class="bg-blue-600 no-underline! py-3 px-3 rounded-lg text-white hover:bg-blue-300 hover:text-white btn-base" target="{{ column.button.target }}" {{ column.button.target == '_blank' ? 'rel="noopener noreferrer"' }}>
-								{{ column.button.title ? column.button.title : __('Book a Meeting', 'flynt') }}
-							</a>
-						</div>
+					{% if column.cardButton %}
+						{% include "templates/_partials/button.twig" with {
+            text: column.cardButton.title,
+            link: column.cardButton.url,
+            target: column.cardButton.target,
+            variant: 'secondary',
+          } %}
 					{% endif %}
+
 				</div>
 			{% endfor %}
 		</div>
