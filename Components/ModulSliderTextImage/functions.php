@@ -1,10 +1,10 @@
 <?php
 
-namespace Flynt\Components\SliderTextImage;
+namespace Flynt\Components\ModulSliderTextImage;
 
 use Flynt\Utils\Options;
 
-add_filter('Flynt/addComponentData?name=SliderTextImage', function (array $data): array {
+add_filter('Flynt/addComponentData?name=ModulSliderTextImage', function (array $data): array {
   $data['sliderOptions'] = Options::getTranslatable('SliderOptions');
   $data['jsonData'] = [
     'options' => array_merge($data['sliderOptions'], $data['options']),
@@ -12,46 +12,46 @@ add_filter('Flynt/addComponentData?name=SliderTextImage', function (array $data)
   return $data;
 });
 
+
 function getACFLayout(): array
 {
   return [
-    'name' => 'sliderTextImage',
-    'label' => __('Slider: Text Image', 'flynt'),
+    'name' => 'modulSliderTextImage',
+    'label' => __('Modul: Slider Text Image', 'flynt'),
     'sub_fields' => [
       [
-        'label' => __('Content', 'flynt'),
+        'label' => __('Inhalt', 'flynt'),
         'name' => 'contentTab',
         'type' => 'tab',
         'placement' => 'top',
-        'endpoint' => 0,
       ],
       [
-        'label' => __('Tag', 'flynt'),
+        'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'instructions' => __('Fügen Sie einen Titel für den gesamten Slider hinzu.', 'flynt'),
-        'required' => 0,
+        'maxlength' => 20,
+        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Über uns", „Unsere Leistung", „Was uns ausmacht" (max. 20 Zeichen)).', 'flynt'),
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'instructions' => __('Fügen Sie einen Titel für den gesamten Slider hinzu.', 'flynt'),
-        'required' => 0,
+        'maxlength' => 50,
+        'instructions' => __('Fügen Sie einen Titel für den gesamten Slider hinzu (max. 50 Zeichen).', 'flynt'),
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
-        'type' => 'wysiwyg',
-        'instructions' => __('Fügen Sie eine Beschreibung für den gesamten Slider hinzu.', 'flynt'),
-        'required' => 0,
-        'media_upload' => 0,
+        'type' => 'textarea',
+        'id' => 'input',
+        'maxlength' => 500,
+        'instructions' => __('Fügen Sie eine Beschreibung für den gesamten Slider hinzu (max. 500 Zeichen).', 'flynt'),
       ],
       [
         'label' => __('Slides', 'flynt'),
         'name' => 'slides',
         'type' => 'repeater',
-        'instructions' => __('Fügen Sie Slides zum Slider hinzu.', 'flynt'),
+        'instructions' => __('Hier haben Sie die Möglichkeit ihr Slider mit Inhalten zu füllen.', 'flynt'),
         'layout' => 'row',
         'min' => 1,
         'button_label' => __('Add Slide', 'flynt'),
@@ -62,21 +62,22 @@ function getACFLayout(): array
             'type' => 'accordion'
           ],
           [
-            'label' => __('Fließtext (WYSIWYG!)', 'flynt'),
+            'label' => __('Fließtext', 'flynt'),
             'name' => 'content',
-            'type' => 'wysiwyg',
-            'instructions' => __('fügen sie den Fließtext für diesen Slide hinzu.', 'flynt'),
-            'tabs' => 'all',
-            'toolbar' => 'full',
-            'media_upload' => 0,
+            'type' => 'textarea',
+            'id' => 'input',
+            'rows' => 6,
+            'maxlength' => 500,
+            'instructions' => __('Fügen Sie den Fließtext für diesen Slide hinzu (max. 500 Zeichen).', 'flynt'),
             'delay' => 1,
-            'required' => 1
+            'required' => 1,
           ],
           [
-            'label' => __('Author', 'flynt'),
+            'label' => __('Autor', 'flynt'),
             'name' => 'name',
             'type' => 'text',
-            'instructions' => __('Name der Person, die das Zitat gesagt hat.', 'flynt'),
+            'maxlength' => 25,
+            'instructions' => __('(max. 25 Zeichen)', 'flynt'),
             'wrapper' => [
               'width' => '33',
             ],
@@ -85,7 +86,8 @@ function getACFLayout(): array
             'label' => __('Berufsbezeichnung/Rolle', 'flynt'),
             'name' => 'role',
             'type' => 'text',
-            'instructions' => __('Berufsbezeichnung oder Rolle der Person, die das Zitat gesagt hat.', 'flynt'),
+            'maxlength' => 35,
+            'instructions' => __('(max. 35 Zeichen)', 'flynt'),
             'wrapper' => [
               'width' => '33',
             ],
@@ -94,8 +96,7 @@ function getACFLayout(): array
             'label' => __('Bild', 'flynt'),
             'name' => 'image',
             'type' => 'image',
-            'instructions' => __('Bild der Person, die das Zitat gesagt hat. Ideal: quadratisch.', 'flynt'),
-            'required' => 0,
+            'instructions' => __('Ideal: quadratisch.', 'flynt'),
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
             'wrapper' => [
@@ -107,7 +108,6 @@ function getACFLayout(): array
             'name' => 'bgColorClass',
             'type' => 'select',
             'instructions' => __('Wählen Sie eine Hintergrundfarbe für diesen Abschnitt aus.', 'flynt'),
-            'required' => 0,
             'choices' => [
               'bg-white' => 'Weiß',
               'bg-gray-100' => 'Hellgrau',
@@ -120,7 +120,7 @@ function getACFLayout(): array
         ]
       ],
       [
-        'label' => __('Options', 'flynt'),
+        'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
         'type' => 'tab',
         'placement' => 'top',

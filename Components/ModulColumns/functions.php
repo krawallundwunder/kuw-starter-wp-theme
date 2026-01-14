@@ -37,10 +37,10 @@ function getACFLayout(): array
 {
   return [
     'name' => 'modulColumns',
-    'label' => __('Modul: Columns', 'flynt'),
+    'label' => __('Modul: Statische Inhaltskacheln', 'flynt'),
     'sub_fields' => [
       [
-        'label' => __('Content', 'flynt'),
+        'label' => __('Inhalt', 'flynt'),
         'name' => 'contentTab',
         'type' => 'tab',
         'placement' => 'top',
@@ -48,65 +48,59 @@ function getACFLayout(): array
         'layout' => 'row',
       ],
       [
-        'label' => __('Tag', 'flynt'),
+        'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'instructions' => __('Optionaler Tag über dem Titel.', 'flynt'),
+        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Leistungen", „Vorteile" (max. 20 Zeichen)).', 'flynt'),
+        'maxlength' => 20,
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'instructions' => __('Hauptüberschrift des Blocks.', 'flynt'),
+        'maxlength' => 50,
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
       ],
       [
-        'label' => __('Fließtext', 'flynt'),
+        'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
-        'type' => 'wysiwyg',
-        'delay' => 0,
-        'media_upload' => 0,
-        'instructions' => __('Textinhalt des Blocks.', 'flynt'),
+        'type' => 'textarea',
+        'maxlength' => 750,
+        'id' => 'input',
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
       ],
       [
-        'label' => __('CTA Buttons', 'flynt'),
+        'label' => __('Buttons', 'flynt'),
         'name' => 'ctaButtons',
         'type' => 'repeater',
-        'instructions' => __('Call to Action Buttons unter dem Textinhalt.', 'flynt'),
+        'instructions' => __('Fügen Sie hier übergeordnete Buttons hinzu.', 'flynt'),
         'layout' => 'row',
-        'button_label' => __('Button Hinzufügen', 'flynt'),
+        'button_label' => __('Übergeordneten Button hinzufügen', 'flynt'),
+        'max' => 2,
         'sub_fields' => [
           [
             'label' => __('Button', 'flynt'),
             'name' => 'button',
             'type' => 'link',
-            'instructions' => __('Button-Konfiguration.', 'flynt'),
             'return_format' => 'array',
           ],
         ],
       ],
       [
-        'label' => __('Columns Tab', 'flynt'),
-        'name' => 'columnsTab',
-        'type' => 'tab',
-        'placement' => 'top',
-        'endpoint' => 0,
-        'layout' => 'row',
-      ],
-      [
-        'label' => __('Columns', 'flynt'),
+        'label' => __('Spalten', 'flynt'),
         'name' => 'columns',
         'type' => 'repeater',
-        'instructions' => __('Add between 2 and 5 columns.', 'flynt'),
+        'instructions' => __('Füge zwischen 2 und 5 Spalten hinzu.', 'flynt'),
         'layout' => 'row',
         'min' => 2,
         'max' => 5,
-        'button_label' => __('Add Column', 'flynt'),
+        'button_label' => __('Spalte hinzufügen', 'flynt'),
         'sub_fields' => [
           [
-            'label' => __('Image', 'flynt'),
+            'label' => __('Bild', 'flynt'),
             'name' => 'image',
             'type' => 'image',
-            'instructions' => 'Optional: Add an image to the column. Please use the same height for all columns for better alignment.',
+            'instructions' => __('Bild der Spalte (Erlaubte Typen: jpg,jpeg,png).', 'flynt'),
             'return_format' => 'array',
             'preview_size' => 'medium',
             'library' => 'all',
@@ -117,40 +111,42 @@ function getACFLayout(): array
             ]
           ],
           [
-            'label' => __('Tag', 'flynt'),
+            'label' => __('Tagline', 'flynt'),
             'name' => 'tag',
             'type' => 'text',
-            'instructions' => 'Optional: Add a tag or label for the column.',
+            'maxlength' => 20,
+            'instructions' => __('(max. 20 Zeichen)', 'flynt'),
             'wrapper' => [
               'width' => '20%'
             ]
           ],
           [
-            'label' => __('Subtitle', 'flynt'),
+            'label' => __('Titel', 'flynt'),
             'name' => 'subtitle',
             'type' => 'text',
-            'instructions' => 'Write a short, descriptive title for the column.',
+            'maxlength' => 50,
+            'instructions' => __('(max. 50 Zeichen)', 'flynt'),
             'wrapper' => [
               'width' => '20%'
             ]
           ],
           [
-            'label' => __('Description', 'flynt'),
+            'label' => __('Beschreibung', 'flynt'),
             'name' => 'description',
-            'type' => 'wysiwyg',
-            'instructions' => 'Describe the content of the column.',
+            'type' => 'textarea',
+            'id' => 'input',
+            'maxlength' => 1150,
+            'instructions' => __('(max. 1150 Zeichen)', 'flynt'),
             'tabs' => 'visual',
-            'toolbar' => 'basic',
-            'media_upload' => 0,
             'wrapper' => [
               'width' => '25%'
             ]
           ],
           [
-            'label' => __('Button', 'flynt'),
+            'label' => __('Button Link', 'flynt'),
             'name' => 'cardButton',
             'type' => 'link',
-            'instructions' => 'Optional: Add a button to the column.',
+            'instructions' => __('Button für die Kachel', 'flynt'),
             'return_format' => 'array',
             'wrapper' => [
               'width' => '15%'
@@ -159,7 +155,7 @@ function getACFLayout(): array
         ]
       ],
       [
-        'label' => __('Options', 'flynt'),
+        'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
         'type' => 'tab',
         'placement' => 'top',
@@ -172,13 +168,13 @@ function getACFLayout(): array
         'layout' => 'row',
         'sub_fields' => [
           [
-            'label' => __('Text Alignment', 'flynt'),
+            'label' => __('Textausrichtung', 'flynt'),
             'name' => 'textAlignment',
-            'instructions' => __('Select the alignment for the Card.', 'flynt'),
+            'instructions' => __('Ausrichtung des Textes innerhalb der Spalten.', 'flynt'),
             'type' => 'select',
             'choices' => [
-              'start' => __('Left', 'flynt'),
-              'center' => __('Center', 'flynt'),
+              'start' => __('Links', 'flynt'),
+              'center' => __('Zentriert', 'flynt'),
             ],
             'default_value' => 'start',
             'wrapper' => [
@@ -186,9 +182,9 @@ function getACFLayout(): array
             ]
           ],
           [
-            'label' => __('Is Image Rounded', 'flynt'),
+            'label' => __('Abgerundete Bilder', 'flynt'),
             'name' => 'isImageRounded',
-            'instructions' => __('Enable to display images with rounded corners.', 'flynt'),
+            'instructions' => __('Aktivieren, um Bilder mit abgerundeten Ecken darzustellen.', 'flynt'),
             'type' => 'true_false',
             'ui' => 1,
             'wrapper' => [

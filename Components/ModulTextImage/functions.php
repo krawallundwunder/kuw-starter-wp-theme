@@ -23,10 +23,10 @@ function getACFLayout(): array
 {
   return [
     'name' => 'modulTextImage',
-    'label' => __('Modul : Text & Image', 'flynt'),
+    'label' => __('Modul : Text & Bild', 'flynt'),
     'sub_fields' => [
       [
-        'label' => __('Content', 'flynt'),
+        'label' => __('Inhalt', 'flynt'),
         'name' => 'contentTab',
         'type' => 'tab',
         'placement' => 'top',
@@ -34,51 +34,53 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Bild', 'flynt'),
-        'instructions' => __('Image-Format: JPG, PNG, SVG, WebP.', 'flynt'),
+        'instructions' => __('Bild für den Inhaltsbereich (JPG, PNG, SVG, WebP).', 'flynt'),
         'name' => 'image',
         'type' => 'image',
         'preview_size' => 'medium',
         'mime_types' => 'jpg,jpeg,png,svg,webp',
       ],
       [
-        'label' => __('Tag', 'flynt'),
+        'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'instructions' => __('Optionaler Tag über dem Titel.', 'flynt'),
+        'maxlength' => 20,
+        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Über uns", „Unsere Leistung", „Was uns ausmacht" (max. 20 Zeichen)).', 'flynt'),
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'instructions' => __('Hauptüberschrift des Blocks.', 'flynt'),
+        'maxlength' => 50,
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
       ],
       [
-        'label' => __('Fließtext', 'flynt'),
+        'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
-        'type' => 'wysiwyg',
-        'delay' => 0,
-        'media_upload' => 0,
-        'instructions' => __('Textinhalt des Blocks.', 'flynt'),
+        'type' => 'textarea',
+        'maxlength' => 1500,
+        'id' => 'input',
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 1500 Zeichen).', 'flynt'),
       ],
       [
-        'label' => __('CTA Buttons', 'flynt'),
+        'label' => __('Buttons', 'flynt'),
         'name' => 'ctaButtons',
         'type' => 'repeater',
-        'instructions' => __('Call to Action Buttons unter dem Textinhalt.', 'flynt'),
+        'instructions' => __('Fügen Sie hier Buttons hinzu.', 'flynt'),
         'layout' => 'row',
-        'button_label' => __('Button Hinzufügen', 'flynt'),
+        'button_label' => __('Button hinzufügen', 'flynt'),
+        'max' => 2,
         'sub_fields' => [
           [
             'label' => __('Button', 'flynt'),
             'name' => 'button',
             'type' => 'link',
-            'instructions' => __('Button-Konfiguration.', 'flynt'),
             'return_format' => 'array',
           ],
         ],
       ],
       [
-        'label' => __('Optionen', 'flynt'),
+        'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
         'type' => 'tab',
         'placement' => 'top',
@@ -92,7 +94,7 @@ function getACFLayout(): array
         'sub_fields' => [
           [
             'label' => __('Aspect Ratio', 'flynt'),
-            'instructions' => __('Hier kannst du das Seitenverhältnis der Bilder ändern.', 'flynt'),
+            'instructions' => __('Seitenverhältnis des Bildes.', 'flynt'),
             'name' => 'aspectRatio',
             'type' => 'select',
             'choices' => [
@@ -107,7 +109,7 @@ function getACFLayout(): array
           [
             'label' => __('Bildposition', 'flynt'),
             'name' => 'imagePosition',
-            'instructions' => __('Hier kannst du die Bildposition ändern. 16:9 optimal bei Oben & Unten. 4:3 & 1:1 optimal für Rechts & Links', 'flynt'),
+            'instructions' => __('Position des Bildes im Layout. 16:9 optimal bei Oben & Unten. 4:3 & 1:1 optimal für Rechts & Links.', 'flynt'),
             'type' => 'select',
             'choices' => [
               'left' => __('Links', 'flynt'),

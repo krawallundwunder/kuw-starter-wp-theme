@@ -11,50 +11,49 @@ function getACFLayout()
 {
   return [
     'name' => 'modulTeamSection',
-    'label' => 'Modul: Team Section',
+    'label' => 'Modul: Team Sektion',
     'sub_fields' => [
       [
-        'label' => 'Überschrift',
-        'name' => 'headingTab',
+        'label' => __('Inhalt', 'flynt'),
+        'name' => 'contentTab',
         'type' => 'tab',
       ],
       [
-        'label' => __('Tag', 'flynt'),
+        'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'instructions' => __('Optionaler Tag über dem Titel.', 'flynt'),
+        'maxlength' => 20,
+        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Unser Team", „Über uns", „Die Köpfe" (max. 20 Zeichen)).', 'flynt'),
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'instructions' => __('Hauptüberschrift des Blocks.', 'flynt'),
+        'maxlength' => 50,
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
       ],
       [
-        'label' => __('Fließtext', 'flynt'),
+        'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
-        'type' => 'wysiwyg',
-        'delay' => 0,
-        'media_upload' => 0,
-        'instructions' => __('Textinhalt des Blocks.', 'flynt'),
+        'type' => 'textarea',
+        'maxlength' => 750,
+        'id' => 'input',
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
       ],
       [
-        'label' => 'Team-Mitglieder',
-        'name' => 'teamMembersTab',
-        'type' => 'tab',
-      ],
-      [
-        'label' => 'Team-Mitglieder',
+        'label' => __('Team-Mitglieder', 'flynt'),
         'name' => 'teamMembers',
         'type' => 'repeater',
+        'instructions' => __('Füge Team-Mitglieder hinzu (mind. 1).', 'flynt'),
         'min' => 1,
         'layout' => 'block',
-        'button_label' => 'Mitglied hinzufügen',
+        'button_label' => __('Neues Team-Mitglied', 'flynt'),
         'sub_fields' => [
           [
-            'label' => 'Profilbild',
+            'label' => __('Profilbild', 'flynt'),
             'name' => 'image',
             'type' => 'image',
+            'instructions' => __('Optional', 'flynt'),
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
             'library' => 'all',
@@ -63,37 +62,37 @@ function getACFLayout()
             ],
           ],
           [
-            'label' => 'Name',
+            'label' => __('Name', 'flynt'),
             'name' => 'name',
             'type' => 'text',
-            'instructions' => __('Hier kannst du einen Namen eingeben.', 'flynt'),
+            'instructions' => __('Optional', 'flynt'),
             'wrapper' => [
               'width' => '33.33%'
             ],
           ],
           [
-            'label' => 'Position',
+            'label' => __('Position', 'flynt'),
             'name' => 'position',
             'type' => 'text',
-            'instructions' => __('Hier kannst du die Position eingeben.', 'flynt'),
+            'instructions' => __('Optional', 'flynt'),
             'wrapper' => [
               'width' => '33.33%'
             ],
           ],
           [
-            'label' => 'Twitter/X URL',
+            'label' => __('Social Media URL Nr. 1', 'flynt'),
             'name' => 'twitterUrl',
             'type' => 'url',
-            'instructions' => __('Hier kannst du die dazugehörige Twitter/X URL eingeben.', 'flynt'),
+            'instructions' => __('Optional: z.B. Twitter/X Profil-URL', 'flynt'),
             'wrapper' => [
               'width' => '50%'
             ],
           ],
           [
-            'label' => 'LinkedIn URL',
+            'label' => __('Social Media URL Nr. 2', 'flynt'),
             'name' => 'linkedinUrl',
             'type' => 'url',
-            'instructions' => __('Hier kannst du die dazugehörige LinkedIn URL eingeben.', 'flynt'),
+            'instructions' => __('Optional: z.B. LinkedIn Profil-URL', 'flynt'),
             'wrapper' => [
               'width' => '50%'
             ],

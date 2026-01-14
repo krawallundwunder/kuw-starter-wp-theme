@@ -1,4 +1,4 @@
-<flynt-component name="SliderTextImage" load:on="visible" class="componentSpacing">
+<flynt-component name="ModulSliderTextImage" load:on="visible" class="componentSpacing">
 	{% set backgroundColorConfig = {
     'bg-white': { 'design': 'yellow', 'text': 'text-black' },
     'bg-gray-100': { 'design': 'gray', 'text': 'text-black' },
@@ -30,14 +30,14 @@
 								<div class="relative z-10 h-full flex flex-col md:flex-row gap-8 items-center justify-between">
 									{% if slide.image %}
 										<div class="">
-											<div class="relative lg:w-[304px] lg:h-[304px] aspect-square overflow-hidden">
+											<div class="relative lg:w-76 lg:h-76 aspect-square overflow-hidden">
 												<img src="{{ slide.image.src }}" alt="{{ slide.image.alt }}" class="w-full h-full object-cover">
 											</div>
 										</div>
 									{% endif %}
 									<div class="w-full flex flex-col">
 										{% if slide.content %}
-											<div class="prose prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mb-8 text-2xl md:text-[32px] italic {{ backgroundColorConfig[currentBgColor].text }}">
+											<div class="prose prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mb-8 text-2xl md:text-2xl italic {{ backgroundColorConfig[currentBgColor].text }}">
 												{{ slide.content|raw }}
 											</div>
 										{% endif %}

@@ -6,10 +6,10 @@ function getACFLayout(): array
 {
   return [
     'name' => 'modulFAQ',
-    'label' => __('Modul : FAQ', 'flynt'),
+    'label' => __('Modul: Fragen und Antworten ', 'flynt'),
     'sub_fields' => [
       [
-        'label' => __('Content', 'flynt'),
+        'label' => __('Inhalt', 'flynt'),
         'name' => 'contentTab',
         'type' => 'tab',
         'placement' => 'top',
@@ -17,26 +17,29 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Tagline', 'flynt'),
-        'instructions' => __('Optional: Kurzer Tag über dem Titel (z.B. "FAQ", "Hilfe", "Support")', 'flynt'),
+        'instructions' => __('Kurzer Tag über dem Titel (z. B. „FAQ", „Hilfe", „Support" (max. 20 Zeichen)).', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
+        'maxlength' => 20,
       ],
       [
         'label' => __('Titel', 'flynt'),
-        'instructions' => __('Hauptüberschrift der FAQ-Sektion', 'flynt'),
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'required' => 1,
+        'maxlength' => 50,
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
-        'instructions' => __('Optional: Einleitungstext zur FAQ-Sektion', 'flynt'),
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
         'name' => 'description',
         'type' => 'textarea',
+        'maxlength' => 750,
+        'id' => 'input',
       ],
       [
         'label' => __('FAQ Items', 'flynt'),
-        'instructions' => __('Füge hier deine Fragen und Antworten hinzu', 'flynt'),
+        'instructions' => __('Fügen Sie Fragen und Antworten hinzu (mind. 1).', 'flynt'),
         'name' => 'faqItems',
         'type' => 'repeater',
         'layout' => 'block',
@@ -45,22 +48,25 @@ function getACFLayout(): array
         'sub_fields' => [
           [
             'label' => __('Frage', 'flynt'),
-            'instructions' => __('Die Frage, die gestellt wird', 'flynt'),
             'name' => 'question',
             'type' => 'text',
+            'instructions' => __('(max. 150 Zeichen)', 'flynt'),
+            'maxlength' => 150,
             'required' => 1,
           ],
           [
             'label' => __('Antwort', 'flynt'),
-            'instructions' => __('Die Antwort auf die Frage', 'flynt'),
             'name' => 'answer',
             'type' => 'textarea',
+            'maxlength' => 1000,
+            'id' => 'input',
+            'instructions' => __('(max. 1000 Zeichen)', 'flynt'),
             'required' => 1,
           ],
         ],
       ],
       [
-        'label' => __('Optionen', 'flynt'),
+        'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
         'type' => 'tab',
         'placement' => 'top',
@@ -68,7 +74,7 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Layout', 'flynt'),
-        'instructions' => __('Wähle das Layout der FAQ-Items', 'flynt'),
+        'instructions' => __('Wähle das Layout der FAQ-Items.', 'flynt'),
         'name' => 'layoutType',
         'type' => 'select',
         'choices' => [
@@ -80,7 +86,7 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Spaltenanzahl', 'flynt'),
-        'instructions' => __('Wähle die Anzahl der Spalten für das Kachel-Layout', 'flynt'),
+        'instructions' => __('Anzahl der Spalten für das Kachel-Layout.', 'flynt'),
         'name' => 'columns',
         'type' => 'select',
         'choices' => [
