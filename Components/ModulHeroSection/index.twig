@@ -2,11 +2,9 @@
 	{% set colorMap = {
     'black': {
         text: 'text-black',
-        button: 'bg-white text-black hover:bg-yellow-400 hover:text-white border-yellow-400 hover:border-yellow-400'
     },
     'white': {
         text: 'text-white',
-        button: 'bg-white text-yellow-400 hover:bg-yellow-400 hover:text-white border-yellow-400 hover:border-yellow-400'
     }
   } %}
 
@@ -22,6 +20,10 @@
 
 				<div class="w-full {{ textPosition == 'full' ? 'w-full text-center' : 'text-start lg:w-2/3 '}} flex flex-col">
 
+					{% if tag %}
+						<span class="text-sm font-medium pb-4 uppercase">{{ tag|e }}</span>
+					{% endif %}
+
 					{% if headline %}
 						<div class="h2 text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 font-bold">
 							{{ headline|e('wp_kses_post') }}
@@ -29,7 +31,7 @@
 					{% endif %}
 
 					{% if description %}
-						<p class="text-2xl md:text-3xl lg:text-3xl mb-4 line-clamp-4">{{ description }}</p>
+						<p class="text-2xl md:text-3xl lg:text-3xl mb-4">{{ description }}</p>
 					{% endif %}
 
 

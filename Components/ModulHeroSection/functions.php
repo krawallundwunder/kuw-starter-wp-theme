@@ -31,6 +31,13 @@ function getACFLayout()
         'placement' => 'top',
       ],
       [
+        'label' => __('Tagline', 'flynt'),
+        'name' => 'tag',
+        'type' => 'text',
+        'maxlength' => 20,
+        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Willkommen" (max. 20 Zeichen)).', 'flynt'),
+      ],
+      [
         'label' => __('Überschrift', 'flynt'),
         'name' => 'headline',
         'type' => 'text',
@@ -101,9 +108,10 @@ function getACFLayout()
         'label' => __('Hintergrundbild', 'flynt'),
         'name' => 'backgroundImage',
         'type' => 'image',
-        'instructions' => __('Optional', 'flynt'),
+        'instructions' => __('Optionales Hintergrundbild für die gesamte Sektion (erlaubt: .jpg, .jpeg, .png, .svg, .webp)', 'flynt'),
         'return_format' => 'array',
         'preview_size' => 'thumbnail',
+        'mime_types' => 'jpg, jpeg, png, svg, webp',
         'library' => 'all',
         'wrapper' => [
           'width' => '33%',

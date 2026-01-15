@@ -33,7 +33,6 @@ function getACFLayout(): array
         'name' => 'description',
         'type' => 'textarea',
         'maxlength' => 750,
-        'id' => 'input',
         'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
       ],
       [

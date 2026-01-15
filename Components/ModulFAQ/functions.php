@@ -35,7 +35,6 @@ function getACFLayout(): array
         'name' => 'description',
         'type' => 'textarea',
         'maxlength' => 750,
-        'id' => 'input',
       ],
       [
         'label' => __('FAQ Items', 'flynt'),
@@ -59,7 +58,6 @@ function getACFLayout(): array
             'name' => 'answer',
             'type' => 'textarea',
             'maxlength' => 1000,
-            'id' => 'input',
             'instructions' => __('(max. 1000 Zeichen)', 'flynt'),
             'required' => 1,
           ],

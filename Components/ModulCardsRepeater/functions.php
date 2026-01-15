@@ -40,7 +40,6 @@ function getACFLayout()
               'maxlength' => 750,
               'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
               'type' => 'textarea',
-              'id' => 'input',
             ],
             [
               'label' => __('Buttons', 'flynt'),
@@ -73,7 +72,7 @@ function getACFLayout()
                       'type' => 'image',
                       'instructions' => __('Bild der Kachel (Erlaubte Typen: jpg,jpeg,png,svg).', 'flynt'),
                       'return_format' => 'id',
-                      'preview_size' => 'medium',
+                      'preview_size' => 'thumbnail',
                       'library' => 'all',
                       'mime_types' => 'jpg,jpeg,png,svg',
                     ],
@@ -88,9 +87,8 @@ function getACFLayout()
                       'label' => __('Beschreibung', 'flynt'),
                       'name' => 'description',
                       'type' => 'textarea',
-                      'id' => 'input',
                       'maxlength' => 1150,
-                      'instructions' => __('(max. 1150 Zeichen und begrenzt auf 15 Zeilen)', 'flynt'),
+                      'instructions' => __('(max. 1150 Zeichen)', 'flynt'),
                     ],
                     [
                       'label' => __('Button Link', 'flynt'),

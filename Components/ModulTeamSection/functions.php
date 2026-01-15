@@ -37,7 +37,6 @@ function getACFLayout()
         'name' => 'description',
         'type' => 'textarea',
         'maxlength' => 750,
-        'id' => 'input',
         'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
       ],
       [
@@ -53,10 +52,11 @@ function getACFLayout()
             'label' => __('Profilbild', 'flynt'),
             'name' => 'image',
             'type' => 'image',
-            'instructions' => __('Optional', 'flynt'),
+            'instructions' => __('Optional (erlaubt: .jpg, .jpeg, .png, .svg, .webp)', 'flynt'),
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
             'library' => 'all',
+            'mime_type' => 'jpeg, jpg, png, svg, webp',
             'wrapper' => [
               'width' => '33.33%'
             ],

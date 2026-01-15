@@ -66,7 +66,6 @@ function getACFLayout(): array
         'name' => 'description',
         'type' => 'textarea',
         'maxlength' => 750,
-        'id' => 'input',
         'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
       ],
       [
@@ -102,10 +101,10 @@ function getACFLayout(): array
             'type' => 'image',
             'instructions' => __('Bild der Spalte (Erlaubte Typen: jpg,jpeg,png).', 'flynt'),
             'return_format' => 'array',
-            'preview_size' => 'medium',
+            'preview_size' => 'thumbnail',
             'library' => 'all',
             'max_size' => 4,
-            'mime_types' => 'jpg,jpeg,png',
+            'mime_types' => 'jpg,jpeg,png,svg,webp',
             'wrapper' => [
               'width' => '20%'
             ]
@@ -134,7 +133,6 @@ function getACFLayout(): array
             'label' => __('Beschreibung', 'flynt'),
             'name' => 'description',
             'type' => 'textarea',
-            'id' => 'input',
             'maxlength' => 1150,
             'instructions' => __('(max. 1150 Zeichen)', 'flynt'),
             'tabs' => 'visual',

@@ -34,10 +34,10 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Bild', 'flynt'),
-        'instructions' => __('Bild für den Inhaltsbereich (JPG, PNG, SVG, WebP).', 'flynt'),
+        'instructions' => __('Bild für den Inhaltsbereich (erlaubt: JPG, JPEG, PNG, SVG, WebP).', 'flynt'),
         'name' => 'image',
         'type' => 'image',
-        'preview_size' => 'medium',
+        'preview_size' => 'thumbnail',
         'mime_types' => 'jpg,jpeg,png,svg,webp',
       ],
       [
@@ -59,7 +59,6 @@ function getACFLayout(): array
         'name' => 'description',
         'type' => 'textarea',
         'maxlength' => 1500,
-        'id' => 'input',
         'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 1500 Zeichen).', 'flynt'),
       ],
       [

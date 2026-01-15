@@ -37,7 +37,7 @@
 									{% endif %}
 									<div class="w-full flex flex-col">
 										{% if slide.content %}
-											<div class="prose prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mb-8 text-2xl md:text-2xl italic {{ backgroundColorConfig[currentBgColor].text }}">
+											<div class="prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mb-8 text-2xl md:text-2xl {{ backgroundColorConfig[currentBgColor].text }}">
 												{{ slide.content|raw }}
 											</div>
 										{% endif %}
