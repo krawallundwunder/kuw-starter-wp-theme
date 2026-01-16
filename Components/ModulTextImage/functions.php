@@ -3,7 +3,6 @@
 namespace Flynt\Components\ModulTextImage;
 
 add_filter('Flynt/addComponentData?name=ModulTextImage', function ($data) {
-  // Format buttons for the template
   if (!empty($data['ctaButtons'])) {
     $data['buttons'] = [];
     foreach ($data['ctaButtons'] as $ctaButton) {
@@ -16,9 +15,9 @@ add_filter('Flynt/addComponentData?name=ModulTextImage', function ($data) {
       }
     }
   }
-
   return $data;
 });
+
 function getACFLayout(): array
 {
   return [
@@ -92,23 +91,25 @@ function getACFLayout(): array
         'layout' => 'row',
         'sub_fields' => [
           [
-            'label' => __('Aspect Ratio', 'flynt'),
-            'instructions' => __('Seitenverhältnis des Bildes.', 'flynt'),
+            'label' => __('Bildformat', 'flynt'),
+            'instructions' => __('<strong>Was macht diese Einstellung?</strong><br>
+                                  Bestimmt die Form aller Bilder (z.B. breiter oder höher).<br><br>', 'flynt'),
             'name' => 'aspectRatio',
             'type' => 'select',
             'choices' => [
-              'auto' => __('Auto (Original)', 'flynt'),
-              '16-9' => __('16:9 (Volle Breite)', 'flynt'),
-              '4-3' => __('4:3 (Standard)', 'flynt'),
-              '1-1' => __('1:1 (Quadrat)', 'flynt'),
+              '4:3' => 'Klassisch (4:3) - Standard Foto',
+              '16:9' => 'Breitbild (16:9) - Video Format [Standard]',
             ],
-            'default_value' => 'auto',
+            'default_value' => '16:9',
             'ui' => 1,
+            'wrapper' => [
+              'width' => '50%'
+            ]
           ],
           [
             'label' => __('Bildposition', 'flynt'),
             'name' => 'imagePosition',
-            'instructions' => __('Position des Bildes im Layout. 16:9 optimal bei Oben & Unten. 4:3 & 1:1 optimal für Rechts & Links.', 'flynt'),
+            'instructions' => __('Position des Bildes im Layout.', 'flynt'),
             'type' => 'select',
             'choices' => [
               'left' => __('Links', 'flynt'),

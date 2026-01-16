@@ -3,7 +3,6 @@
 namespace Flynt\Components\ModulColumns;
 
 add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
-  // Format buttons for the template
   if (!empty($data['ctaButtons'])) {
     $data['buttons'] = [];
     foreach ($data['ctaButtons'] as $ctaButton) {
@@ -28,6 +27,34 @@ add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
         ];
       }
     }
+  }
+
+  if (!empty($data['columns'])) {
+    foreach ($data['columns'] as &$column) {
+      if (!empty($column['image'])) {
+        if (is_object($column['image']) && method_exists($column['image'], 'src')) {
+          $imageUrl = $column['image']->src();
+          $extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
+          $column['image'] = [
+            'src' => $imageUrl,
+            'alt' => $column['image']->alt(),
+            'mime_type' => ($extension === 'svg') ? 'image/svg+xml' : 'image/' . $extension,
+          ];
+        }
+      }
+    }
+  }
+
+  if (!empty($data['options']['aspectRatio'])) {
+    $data['aspectRatio'] = $data['options']['aspectRatio'];
+  }
+
+  if (!empty($data['options']['textAlignment'])) {
+    $data['textAlignment'] = $data['options']['textAlignment'];
+  }
+
+  if (!empty($data['options']['isImageRounded'])) {
+    $data['isImageRounded'] = $data['options']['isImageRounded'];
   }
 
   return $data;
@@ -175,6 +202,24 @@ function getACFLayout(): array
               'center' => __('Zentriert', 'flynt'),
             ],
             'default_value' => 'start',
+            'wrapper' => [
+              'width' => '50%'
+            ]
+          ],
+          [
+            'label' => __('Bildformat', 'flynt'),
+            'instructions' => __('<strong>Was macht diese Einstellung?</strong><br>
+                                  Bestimmt die Form aller Bilder (z.B. breiter oder höher).<br><br>
+                                  <strong>⚠️ Wichtig für Icons/Logos:</strong><br>
+                                  Diese Option schneidet Bilder zu. Für unverzerrte Icons aktivieren Sie bitte "Abgerundete Bilder".', 'flynt'),
+            'name' => 'aspectRatio',
+            'type' => 'select',
+            'choices' => [
+              '4:3' => 'Klassisch (4:3) - Standard Foto',
+              '16:9' => 'Breitbild (16:9) - Video Format [Standard]',
+            ],
+            'default_value' => '16:9',
+            'ui' => 1,
             'wrapper' => [
               'width' => '50%'
             ]

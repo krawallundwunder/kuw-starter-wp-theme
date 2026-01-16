@@ -1,28 +1,46 @@
-<section class="component component-columns-module  text-black py-16 lg:py-24 transition-all duration-300 ease-in-out">
+<section class="component component-columns-module text-black py-16 lg:py-24 transition-all duration-300 ease-in-out">
 	<div class="container mx-auto px-4 sm:px-6 lg:px-8">
 		{% if tag or title or description %}
 			<div class="">
 				{% include "templates/_partials/headings.twig" with {
-            tag: tag,
-            title: title,
-            description: description,
-            buttons: buttons,
-            textAlign: textAlignment ? 'text-' ~ textAlignment : null
-          } %}
+					tag: tag,
+					title: title,
+					description: description,
+					buttons: buttons,
+					textAlign: textAlignment ? 'text-' ~ textAlignment : null
+				} %}
 			</div>
 		{% endif %}
 
+		{% set aspectRatioValue = aspectRatio ?? '16:9' %}
+		{% set aspectRatioClass = {
+			'4:3': 'aspect-[4/3]',
+			'16:9': 'aspect-video',
+		}[aspectRatioValue] ?? 'aspect-video' %}
 
 		<div class="grid grid-cols-1 gap-8 md:grid-flow-col md:auto-cols-fr md:grid-cols-{{ columns|length }}">
 			{% for column in columns %}
 				{% set has_link = column.button and column.button.url %}
 
-				<div class="column js-column-item bg-gray-50 flex flex-col gap-4 md:gap-8 h-full rounded-lg p-1.5 transition-all duration-300 ease-in-out text-{{ options.textAlignment }}">
+				<div class="column js-column-item bg-gray-50 flex flex-col gap-4 md:gap-8 h-full rounded-lg p-1.5 transition-all duration-300 ease-in-out text-{{ textAlignment ?? 'start' }}">
 
 					<div class="grow">
 						{% if column.image %}
-							<div class="column-image mb-8">
-								<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="object-cover object-center max-h-60 {{ options.isImageRounded ? ' rounded-full aspect-square mx-auto' : 'w-full h-full rounded-t-lg' }}">
+							<div class="column-image mb-8 {{ isImageRounded ? 'flex justify-center items-center' : '' }}">
+								{% set isSvg = column.image.mime_type == 'image/svg+xml' %}
+
+								{% if isImageRounded %}
+									{# Abgerundete Bilder / Icons #}
+									{% if isSvg %}
+										<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto flex items-center justify-center">
+									{% else %}
+										{# Normale Bilder - rund #}
+										<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="rounded-full aspect-square mx-auto w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 object-cover object-center">
+									{% endif %}
+								{% else %}
+									{# Normale Bilder mit Aspect Ratio #}
+									<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" loading="lazy" class="w-full h-full rounded-lg object-cover object-center {{ aspectRatioClass }}">
+								{% endif %}
 							</div>
 						{% endif %}
 
@@ -53,11 +71,11 @@
 
 					{% if column.cardButton %}
 						{% include "templates/_partials/button.twig" with {
-            text: column.cardButton.title,
-            link: column.cardButton.url,
-            target: column.cardButton.target,
-            variant: 'secondary',
-          } %}
+							text: column.cardButton.title,
+							link: column.cardButton.url,
+							target: column.cardButton.target,
+							variant: 'secondary',
+						} %}
 					{% endif %}
 
 				</div>

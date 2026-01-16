@@ -3,12 +3,15 @@
 namespace Flynt\Components\ModulCardsRepeater;
 
 add_filter('Flynt/addComponentData?name=ModulCardsRepeater', function ($data) {
-  // Format CTA buttons
   if (!empty($data['ctaButtons'])) {
     $data['buttons'] = array_map(fn($btn) => [
       'text' => $btn['button']['title'] ?? '',
       'link' => $btn['button']['url'] ?? '',
     ], array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button'])));
+  }
+
+  if (!empty($data['options']['aspectRatio'])) {
+    $data['aspectRatio'] = $data['options']['aspectRatio'];
   }
 
   return $data;
@@ -21,10 +24,17 @@ function getACFLayout()
         'label' => __('Modul: Dynamische Inhaltskacheln', 'flynt'),
         'sub_fields' => [
             [
+              'label' => __('Inhalt', 'flynt'),
+              'name' => 'contentTab',
+              'type' => 'tab',
+              'placement' => 'top',
+              'endpoint' => 0,
+            ],
+            [
               'label' => __('Tagline', 'flynt'),
               'name' => 'tag',
               'type' => 'text',
-              'instructions' => __('Kurzer Tag über dem Titel (z. B. „FAQ“, „Hilfe“, „Support“ (max. 20 Zeichen).', 'flynt'),
+              'instructions' => __('Kurzer Tag über dem Titel (z. B. „FAQ", „Hilfe", „Support" (max. 20 Zeichen).', 'flynt'),
               'maxlength' => 20,
             ],
             [
@@ -98,6 +108,34 @@ function getACFLayout()
                       'instructions' => __('Button für die Kachel', 'flynt'),
                     ],
                 ],
+            ],
+            [
+              'label' => __('Einstellungen', 'flynt'),
+              'name' => 'optionsTab',
+              'type' => 'tab',
+              'placement' => 'top',
+              'endpoint' => 0,
+            ],
+            [
+              'label' => '',
+              'name' => 'options',
+              'type' => 'group',
+              'layout' => 'row',
+              'sub_fields' => [
+                [
+                  'label' => __('Bildformat', 'flynt'),
+                  'instructions' => __('<strong>Was macht diese Einstellung?</strong><br>
+                                        Bestimmt die Form aller Bilder (z.B. breiter oder höher).<br><br>', 'flynt'),
+                  'name' => 'aspectRatio',
+                  'type' => 'select',
+                  'choices' => [
+                    '4:3' => 'Klassisch (4:3) - Standard Foto',
+                    '16:9' => 'Breitbild (16:9) - Video Format [Standard]',
+                  ],
+                  'default_value' => '16:9',
+                  'ui' => 1,
+                ],
+              ],
             ],
         ],
     ];
