@@ -1,0 +1,95 @@
+<flynt-component name="ModulProjectsCpt">
+	<section class="py-16 bg-gray-50">
+		<div class="container mx-auto">
+
+			{% if tag or title or description or buttons %}
+				{% include "templates/_partials/headings.twig" with {
+          tag,
+          title,
+          description,
+          buttons,
+          textAlign
+        } only %}
+			{% endif %}
+
+			{# 2. Das Grid #}
+			{% if items %}
+				<div class="grid grid-cols-1 md:grid-cols-2 {{ gridClass }} gap-6">
+					{% for item in items %}
+						{# --- DATEN VORBEREITUNG (Fallback Logik) --- #}
+
+						{% set imageId = item.meta('image') ?: item.thumbnail.id %}
+
+						{% set itemDate = item.meta('date') ?: item.date %}
+
+						{% set itemTagline = item.meta('tagline') ?: item.tagline %}
+
+						{% set itemTitle = item.meta('title') ?: item.title %}
+
+						{% set itemDesc = item.meta('description') ?: item.preview.length(20).read_more(false) %}
+
+						{# Link: ACF 'link' Array #}
+						{% set acfLink = item.meta('link') %}
+						{% set linkUrl = acfLink.url ?? item.link %}
+						{% set linkTarget = acfLink.target ?? '_self' %}
+						{% set linkText = acfLink.title ?? 'Zum Projekt' %}
+
+						{# --- KACHEL START --- #}
+						<article class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+
+							<a href="{{ linkUrl }}" target="{{ linkTarget }}" class="block overflow-hidden {{ aspectRatioClass }} bg-gray-200 relative">
+								{% if imageId %}
+									<img class="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-500" src="{{ Image(imageId).src }}" srcset="{{ Image(imageId).srcset }}" alt="{{ itemTitle }}" loading="lazy">
+								{% else %}
+									<div class="flex items-center justify-center h-full text-gray-400 bg-gray-100 font-medium">Bild fehlt</div>
+								{% endif %}
+							</a>
+
+							<div class="p-6 grow flex flex-col">
+
+								{% if itemDate or itemTagline %}
+									<div
+										class="flex items-center justify-between gap-3 mb-4">
+										{# Links: Tagline #}
+										{% if itemTagline %}
+											<p class="text-sm font-normal bg-primary w-fit py-1 px-2 rounded-2xl text-white">
+												{{ itemTagline }}
+											</p>
+										{% endif %}
+
+										{# Rechts: Datum #}
+										{% if itemDate %}
+											<p class="text-sm text-gray-500 ml-auto">
+												{{ itemDate|date("d.m.Y") }}
+											</p>
+										{% endif %}
+									</div>
+								{% endif %}
+
+								<h3 class="text-xl font-bold text-gray-900 mb-3">
+									<a href="{{ linkUrl }}" target="{{ linkTarget }}" class="hover:text-primary transition-colors">
+										{{ itemTitle }}
+									</a>
+								</h3>
+
+								<div class="text-gray-600 prose prose-sm max-w-none mb-6 grow">
+									{{ itemDesc }}
+								</div>
+
+								<div class="mt-auto pt-4 border-t border-gray-100">
+									{% include "templates/_partials/button.twig" with {
+                    link: linkUrl,
+                    text: linkText,
+                    variant: 'outlined',
+                  } only %}
+								</div>
+
+							</div>
+						</article>
+
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+	</section>
+</flynt-component>
