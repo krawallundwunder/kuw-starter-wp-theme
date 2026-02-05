@@ -23,11 +23,11 @@ add_filter('Flynt/addComponentData?name=ModulProjectsCpt', function ($data) {
     }
 
     $ratio = $data['options']['aspectRatio'] ?? '16:9';
-    $data['aspectRatioClass'] = ($ratio === '4:3') ? 'aspect-[4/3]' : 'aspect-video';
+    $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
 
-    $cardCount = count($data['items'] ?? []);
-    $lgColumns = $cardCount <= 3 ? ($cardCount ?: 1) : 3;
-    $data['gridClass'] = "lg:grid-cols-{$lgColumns}";
+    $cardCount = count($data['items']);
+    $lgColumns = min(max($cardCount, 1), 3);
+    $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][$lgColumns];
 
     return $data;
 });

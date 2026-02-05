@@ -55,7 +55,7 @@
 
 		{# Zurück-Button #}
 		<div class="mt-12 pt-8 border-t border-gray-200">
-			<a href="javascript:history.back()" class="inline-flex items-center text-primary hover:underline font-medium">
+			<a href="{{ function('get_post_type_archive_link', 'projekte') }}" class="inline-flex items-center text-primary hover:underline font-medium">
 				← Zurück zur Übersicht
 			</a>
 		</div>
