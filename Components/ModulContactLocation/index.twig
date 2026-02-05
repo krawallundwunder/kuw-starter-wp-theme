@@ -69,71 +69,8 @@
 				{# Right Column - Contact Form #}
 				<div class="bg-gray-50 rounded-lg p-8 lg:p-10 h-fit sticky top-8">
 					<h3 class="text-2xl font-semibold text-gray-900 mb-6">Kontaktformular</h3>
-
-					<form
-						class="space-y-5">
-						{# Name Field #}
-						<div>
-							<label for="contact-name" class="block text-sm font-medium text-gray-700 mb-2">
-								Name
-								<span class="text-red-500">*</span>
-							</label>
-							<input type="text" id="contact-name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="Ihr Name">
-						</div>
-
-						{# Email Field #}
-						<div>
-							<label for="contact-email" class="block text-sm font-medium text-gray-700 mb-2">
-								E-Mail
-								<span class="text-red-500">*</span>
-							</label>
-							<input type="email" id="contact-email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="ihre.email@beispiel.de">
-						</div>
-
-						{# Phone Field #}
-						<div>
-							<label for="contact-phone" class="block text-sm font-medium text-gray-700 mb-2">
-								Telefon
-							</label>
-							<input type="tel" id="contact-phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="+49 123 456789">
-						</div>
-
-						{# Subject Field #}
-						<div>
-							<label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-2">
-								Betreff
-							</label>
-							<input type="text" id="contact-subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="Ihr Anliegen">
-						</div>
-
-						{# Message Field #}
-						<div>
-							<label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">
-								Nachricht
-								<span class="text-red-500">*</span>
-							</label>
-							<textarea id="contact-message" name="message" required rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors resize-none" placeholder="Ihre Nachricht an uns..."></textarea>
-						</div>
-
-						{# Privacy Checkbox #}
-						<div class="flex items-start">
-							<input type="checkbox" id="contact-privacy" name="privacy" required class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
-							<label for="contact-privacy" class="ml-3 text-sm text-gray-600">
-								Ich habe die
-								<a href="#" class="text-primary hover:underline">Datenschutzerklärung</a>
-								gelesen und akzeptiere diese.
-								<span class="text-red-500">*</span>
-							</label>
-						</div>
-
-						{# Submit Button #}
-						<button type="submit" class="w-full bg-primary text-white font-semibold py-3 px-6 rounded-lg hover:bg-primary-dark transition-colors duration-200 flex items-center justify-center group">
-							Nachricht senden
-							<iconify-icon icon="lucide:arrow-right" class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform text-current"></iconify-icon>
-						</button>
-					</form>
+					{% include "templates/_partials/contactForm.twig" with { formId: 'contactForm' } %}
 				</div>
-
 			</div>
 		</div>
 	</section>
