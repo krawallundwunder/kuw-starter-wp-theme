@@ -5,6 +5,7 @@ namespace Flynt;
 use Flynt\Utils\FileLoader;
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/inc/fieldGroups/contentCardArchive.php';
 
 if (!defined('WP_ENV')) {
   define(

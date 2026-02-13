@@ -1,0 +1,37 @@
+{% if cta_enabled %}
+	<section
+		class="py-16 w-11/12 my-3 lg:my-10 mx-auto rounded-lg overflow-hidden{% if cta_background %}bg-cover bg-center{% else %}bg-secondary{% endif %} relative" {% if cta_background %} style="background-image: url('{{ Image(cta_background).src }}')" {% endif %}>
+
+		{# Overlay bei Hintergrundbild #}
+		{% if cta_background %}
+			<div class="absolute inset-0 bg-black/60 rounded-lg"></div>
+		{% endif %}
+
+		<div class="container mx-auto px-4 relative z-10">
+			<div class="max-w-3xl mx-auto text-center text-white">
+
+				{% if cta_title %}
+					<h2 class="text-3xl md:text-4xl font-bold mb-4">
+						{{ cta_title }}
+					</h2>
+				{% endif %}
+
+				{% if cta_text %}
+					<p class="text-lg md:text-xl mb-8 text-white/90">
+						{{ cta_text }}
+					</p>
+				{% endif %}
+
+				{% if cta_button %}
+					{% include "templates/_partials/button.twig" with {
+						link: cta_button.url,
+						text: cta_button.title ?: 'Mehr erfahren',
+						target: cta_button.target ?: '_self',
+						variant: 'primary',
+					} only %}
+				{% endif %}
+
+			</div>
+		</div>
+	</section>
+{% endif %}

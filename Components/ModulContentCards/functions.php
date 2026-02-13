@@ -1,16 +1,37 @@
 <?php
 
-namespace Flynt\Components\ModulProjectsCpt;
+namespace Flynt\Components\ModulContentCards;
 
 use Timber\Timber;
 
-add_filter('Flynt/addComponentData?name=ModulProjectsCpt', function ($data) {
-    // 1. Projekte holen (ganz clean, wie bei deinem Kollegen)
-    $data['items'] = Timber::get_posts([
-        'post_type' => 'projekte',
-        'posts_per_page' => -1,
+add_filter('Flynt/addComponentData?name=ModulContentCards', function ($data) {
+
+    $data['taxonomies'] = $data['taxonomies'] ?: [];
+
+    // Base Query Args
+    $queryArgs = [
+        'post_type' => 'content_card',
+        'posts_per_page' => 9,
         'status' => 'publish',
-    ]);
+    ];
+
+    // NUR wenn Kategorien ausgewählt wurden, filter hinzufügen
+    if (!empty($data['taxonomies'])) {
+        $queryArgs['tax_query'] = [
+            [
+                'taxonomy' => 'content_card_category',
+                'field' => 'term_id',
+                'terms' => array_map(fn($tax) => $tax->term_id, $data['taxonomies']),
+            ],
+        ];
+    }
+
+    $data['items'] = Timber::get_posts($queryArgs);
+
+
+    if (empty($data['items'])) {
+        $data['items'] = [];
+    }
 
     if (!empty($data['ctaButtons'])) {
         $data['buttons'] = array_map(
@@ -25,7 +46,7 @@ add_filter('Flynt/addComponentData?name=ModulProjectsCpt', function ($data) {
     $ratio = $data['options']['aspectRatio'] ?? '16:9';
     $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
 
-    $cardCount = count($data['items']);
+    $cardCount = count($data['items']); // ✅ Jetzt safe!
     $lgColumns = min(max($cardCount, 1), 3);
     $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][$lgColumns];
 
@@ -36,8 +57,8 @@ add_filter('Flynt/addComponentData?name=ModulProjectsCpt', function ($data) {
 function getACFLayout()
 {
   return [
-    'name' => 'ModulProjectsCpt',
-    'label' => __('Modul: Post-Projekte', 'flynt'),
+    'name' => 'ModulContentCards',
+    'label' => __('Modul: Content-Karten', 'flynt'),
     'sub_fields' => [
       [
         'label' => __('Inhalt', 'flynt'),
@@ -115,6 +136,23 @@ function getACFLayout()
         ],
         'default_value' => '16:9',
         'ui' => 1,
+      ],
+      [
+        'label' => __('Kategorien', 'flynt'),
+        'instructions' => __(
+          'Wählen Sie 1 oder mehrere Kategorien aus oder lassen Sie das Feld leer, um alle Beiträge anzuzeigen.',
+          'flynt',
+        ),
+        'name' => 'taxonomies',
+        'type' => 'taxonomy',
+        'taxonomy' => 'content_card_category',
+        'field_type' => 'multi_select',
+        'allow_null' => 1,
+        'multiple' => 1,
+        'add_term' => 0,
+        'save_terms' => 0,
+        'load_terms' => 0,
+        'return_format' => 'object',
       ],
     ],
   ];
