@@ -1,5 +1,5 @@
 <flynt-component name="ModulStats" load:on="visible">
-	<section class="bg-white py-24 sm:py-32">
+	<section class="bg-white py-10 sm:py-16">
 		<div class="mx-auto max-w-7xl px-6 lg:px-8">
 
 			{% if tag or title or description or buttons %}
@@ -7,10 +7,10 @@
 			{% endif %}
 
 			{% if layout == 'timeline' %}
-				<div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+				<div class="mx-auto pt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
 					{% for item in items %}
 						<div class="relative">
-							<div class="flex items-center text-sm/6 font-semibold text-indigo-600">
+							<div class="flex items-center text-sm/6 font-semibold text-secondary">
 								<iconify-icon icon="lucide:dot" class="text-2xl"></iconify-icon>
 								{{ item.label }}
 								<div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"></div>
@@ -26,7 +26,7 @@
 				{# Combines 'simple' and 'simpleGrid' logic #}
 				{% set simpleGridCols = items|length > 0 ? items|length : 1 %}
 				{% set gridClass = layout == 'simpleGrid' ? 'grid-cols-1 gap-0.5 overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-' ~ simpleGridCols : 'grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3' %}
-				<dl class="grid {{ gridClass }} text-center">
+				<dl class="grid {{ gridClass }} text-center mt-10">
 					{% for item in items %}
 						<div class="flex flex-col {{ layout == 'simpleGrid' ? 'bg-gray-400/5 p-8' : 'mx-auto max-w-xs gap-y-4' }}">
 							<dt class="{{ layout == 'simpleGrid' ? 'text-sm/6 font-semibold' : 'text-base/7' }} text-gray-600">{{ item.label }}</dt>
