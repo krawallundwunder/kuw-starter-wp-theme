@@ -1,77 +1,201 @@
 <flynt-component name="ModulContactLocation">
 	<section class="bg-white">
 		<div class="container mx-auto px-4 py-16">
-			<div
-				class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 
-				{# Left Column - Header & Location Cards #}
-				<div class="space-y-8">
-					<div>
-						{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign } %}
-					</div>
+			{% if layoutVariant == 'contactOnly' %}
 
-					{# Location Cards #}
-					{% if locations|length > 0 %}
-						<div class="space-y-6">
-							{% for location in locations %}
-								{% if location.name or location.street %}
-									<div
-										class="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-										{# Location Name #}
-										{% if location.name %}
-											<h3 class="text-xl font-semibold text-gray-900 mb-3">{{ location.name }}</h3>
+				{# ========================================
+				   Layout 2: Nur Kontakt & Standorte
+				   ======================================== #}
+
+				{# Header #}
+				<div class="mb-12">
+					{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign } %}
+				</div>
+
+				{# Standorte Section #}
+				{% if locationsList and locationsList|length > 0 %}
+					<div class="mb-20">
+						{% set locationsGridClasses = 'grid gap-8 lg:gap-12 ' %}
+						{% if locationsLayout == '4' %}
+							{% set locationsGridClasses = locationsGridClasses ~ 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' %}
+						{% elseif locationsLayout == '3' %}
+							{% set locationsGridClasses = locationsGridClasses ~ 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' %}
+						{% else %}
+							{% set locationsGridClasses = locationsGridClasses ~ 'grid-cols-1 md:grid-cols-2' %}
+						{% endif %}
+
+						<div class="{{ locationsGridClasses }}">
+							{% for location in locationsList %}
+								{% if location.city or location.street %}
+									<div class="bg-white border border-gray-200 rounded-lg p-8 hover:border-primary hover:shadow-lg transition-all duration-300">
+										{% if location.city %}
+											<h3 class="text-2xl font-medium text-gray-900 mb-6">
+												{{ location.city }}
+											</h3>
 										{% endif %}
 
-										{# Address Block #}
-										{% if location.street or location.zip or location.city or location.country %}
-											<div class="space-y-1 text-gray-600 mb-4 pb-4 border-b border-gray-200">
+										{% if location.street or location.zip or location.cityName %}
+											<div class="space-y-2 text-gray-600 mb-6">
 												{% if location.street %}
 													<p class="text-base">{{ location.street }}</p>
 												{% endif %}
-												{% if location.zip or location.city %}
+												{% if location.zip or location.cityName %}
 													<p class="text-base">
-														{% if location.zip %}
-															{{ location.zip }}
-														{% endif %}
-														{% if location.city %}
-															{{ location.city }}
-														{% endif %}
-														{% if location.country %},
-															{{ location.country }}
-														{% endif %}
+														{% if location.zip %}{{ location.zip }} {% endif %}
+														{% if location.cityName %}{{ location.cityName }}{% endif %}
+														{% if location.country %}, {{ location.country }}{% endif %}
 													</p>
 												{% endif %}
 											</div>
 										{% endif %}
 
-										{# Contact Details #}
-										<div class="space-y-2">
-											{% if location.email %}
-												<a href="mailto:{{ location.email }}" class="flex items-center text-gray-700 hover:text-gray-900 transition-colors group">
-													<iconify-icon icon="lucide:mail" class="w-4 h-4 mr-2 text-current" aria-hidden="true"></iconify-icon>
-													<span class="text-sm font-medium">{{ location.email }}</span>
-												</a>
+										{% if location.mapLink %}
+											<a href="{{ location.mapLink }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-primary hover:text-primary-dark font-semibold transition-colors group">
+												<iconify-icon icon="lucide:map-pin" class="w-5 h-5 mr-2 text-current" aria-hidden="true"></iconify-icon>
+												Auf Karte anzeigen
+											</a>
+										{% endif %}
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+
+				{# Kontakt Section #}
+				{% if contactAreas and contactAreas|length > 0 %}
+					<div>
+						{% set contactGridClasses = 'grid gap-8 lg:gap-12 ' %}
+						{% if contactLayout == '4' %}
+							{% set contactGridClasses = contactGridClasses ~ 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' %}
+						{% elseif contactLayout == '3' %}
+							{% set contactGridClasses = contactGridClasses ~ 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' %}
+						{% else %}
+							{% set contactGridClasses = contactGridClasses ~ 'grid-cols-1 md:grid-cols-2' %}
+						{% endif %}
+
+						<div class="{{ contactGridClasses }}">
+							{% for area in contactAreas %}
+								{% if area.title or area.email or area.phone or area.formLink %}
+									<div class="bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-shadow duration-300">
+										<div class="flex flex-col h-full">
+											{% if area.title %}
+												<h3 class="text-2xl font-medium text-gray-900 mb-4">
+													{{ area.title }}
+												</h3>
 											{% endif %}
-											{% if location.phone %}
-												<a href="tel:{{ location.phone|replace({' ': '', '(': '', ')': '', '-': ''}) }}" class="flex items-center text-gray-700 hover:text-gray-900 transition-colors group">
-													<iconify-icon icon="lucide:phone" class="w-4 h-4 mr-2 text-current" aria-hidden="true"></iconify-icon>
-													<span class="text-sm font-medium">{{ location.phone }}</span>
-												</a>
+
+											<div class="space-y-3 grow">
+												{% if area.email %}
+													<a href="mailto:{{ area.email }}" class="flex items-center text-gray-700 hover:text-gray-900 font-medium transition-colors">
+														<iconify-icon icon="lucide:mail" class="w-4 h-4 mr-2 text-current" aria-hidden="true"></iconify-icon>
+														{{ area.email }}
+													</a>
+												{% endif %}
+
+												{% if area.phone %}
+													<a href="tel:{{ area.phone|replace({' ': '', '(': '', ')': '', '-': ''}) }}" class="flex items-center text-gray-600 hover:text-gray-800 transition-colors">
+														<iconify-icon icon="lucide:phone" class="w-4 h-4 mr-2 text-current" aria-hidden="true"></iconify-icon>
+														{{ area.phone }}
+													</a>
+												{% endif %}
+											</div>
+
+											{% if area.formLink %}
+												<div class="mt-6">
+													<a href="{{ area.formLink.url }}" class="inline-flex items-center text-primary hover:text-primary-dark font-semibold transition-colors group" {% if area.formLink.target %} target="{{ area.formLink.target }}" {% endif %}>
+														{{ area.formLink.title|default('Kontaktformular') }}
+														<iconify-icon icon="lucide:arrow-right" class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform text-current" aria-hidden="true"></iconify-icon>
+													</a>
+												</div>
 											{% endif %}
 										</div>
 									</div>
 								{% endif %}
 							{% endfor %}
 						</div>
-					{% endif %}
+					</div>
+				{% endif %}
+
+			{% else %}
+
+				{# ========================================
+				   Layout 1: Mit Kontaktformular (Standard)
+				   ======================================== #}
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+
+					{# Left Column - Header & Location Cards #}
+					<div class="space-y-8">
+						<div>
+							{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign } %}
+						</div>
+
+						{# Location Cards #}
+						{% if locations|length > 0 %}
+							<div class="space-y-6">
+								{% for location in locations %}
+									{% if location.name or location.street %}
+										<div
+											class="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+											{# Location Name #}
+											{% if location.name %}
+												<h3 class="text-xl font-semibold text-gray-900 mb-3">{{ location.name }}</h3>
+											{% endif %}
+
+											{# Address Block #}
+											{% if location.street or location.zip or location.city or location.country %}
+												<div class="space-y-1 text-gray-600 mb-4 pb-4 border-b border-gray-200">
+													{% if location.street %}
+														<p class="text-base">{{ location.street }}</p>
+													{% endif %}
+													{% if location.zip or location.city %}
+														<p class="text-base">
+															{% if location.zip %}
+																{{ location.zip }}
+															{% endif %}
+															{% if location.city %}
+																{{ location.city }}
+															{% endif %}
+															{% if location.country %},
+																{{ location.country }}
+															{% endif %}
+														</p>
+													{% endif %}
+												</div>
+											{% endif %}
+
+											{# Contact Details #}
+											<div class="space-y-2">
+												{% if location.email %}
+													<a href="mailto:{{ location.email }}" class="flex items-center text-gray-700 hover:text-gray-900 transition-colors group">
+														<iconify-icon icon="lucide:mail" class="w-4 h-4 mr-2 text-current" aria-hidden="true"></iconify-icon>
+														<span class="text-sm font-medium">{{ location.email }}</span>
+													</a>
+												{% endif %}
+												{% if location.phone %}
+													<a href="tel:{{ location.phone|replace({' ': '', '(': '', ')': '', '-': ''}) }}" class="flex items-center text-gray-700 hover:text-gray-900 transition-colors group">
+														<iconify-icon icon="lucide:phone" class="w-4 h-4 mr-2 text-current" aria-hidden="true"></iconify-icon>
+														<span class="text-sm font-medium">{{ location.phone }}</span>
+													</a>
+												{% endif %}
+											</div>
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+
+					{# Right Column - Contact Form #}
+					<div class="bg-gray-50 rounded-lg p-8 lg:p-10 h-fit sticky top-8">
+						<h3 class="text-2xl font-semibold text-gray-900 mb-6">Kontaktformular</h3>
+						{% include "templates/_partials/contactForm.twig" with { formId: 'contactForm' } %}
+					</div>
 				</div>
 
-				{# Right Column - Contact Form #}
-				<div class="bg-gray-50 rounded-lg p-8 lg:p-10 h-fit sticky top-8">
-					<h3 class="text-2xl font-semibold text-gray-900 mb-6">Kontaktformular</h3>
-					{% include "templates/_partials/contactForm.twig" with { formId: 'contactForm' } %}
-				</div>
-			</div>
+			{% endif %}
+
 		</div>
 	</section>
 </flynt-component>
