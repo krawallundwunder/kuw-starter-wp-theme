@@ -89,7 +89,7 @@ function getACFLayout()
 {
   return [
     'name' => 'ModulTeamSection',
-    'label' => 'Modul: Team Bereich',
+    'label' => __('Modul: Teambereich', 'flynt'),
     'sub_fields' => [
       [
         'label' => __('Inhalt', 'flynt'),
@@ -100,22 +100,23 @@ function getACFLayout()
         'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'maxlength' => 20,
-        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Unser Team", „Über uns", „Die Köpfe" (max. 20 Zeichen)).', 'flynt'),
+        'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
+        'placeholder' => __('z. B. Unser Team', 'flynt'),
+        'wrapper' => ['width' => '50'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'maxlength' => 50,
-        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
+        'placeholder' => __('z. B. Die Menschen hinter Neue Wege', 'flynt'),
+        'wrapper' => ['width' => '75'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
         'type' => 'textarea',
-        'maxlength' => 750,
-        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
       ],
       [
         'label' => __('Einstellungen', 'flynt'),
@@ -124,15 +125,16 @@ function getACFLayout()
         'placement' => 'top',
       ],
       [
-        'label' => __('Text Ausrichtung', 'flynt'),
+        'label' => __('Text im Kopfbereich', 'flynt'),
         'name' => 'textAlign',
         'type' => 'button_group',
-        'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+        'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
         'choices' => [
           'text-start' => __('Links', 'flynt'),
           'text-center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'text-start',
+        'wrapper' => ['width' => '50'],
       ],
     ],
   ];

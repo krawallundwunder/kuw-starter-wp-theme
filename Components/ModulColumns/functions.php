@@ -76,30 +76,31 @@ function getACFLayout(): array
         'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Leistungen", „Vorteile" (max. 20 Zeichen)).', 'flynt'),
-        'maxlength' => 20,
+        'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
+        'placeholder' => __('z. B. Leistungen', 'flynt'),
+        'wrapper' => ['width' => '50'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'maxlength' => 50,
-        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
+        'placeholder' => __('z. B. Unsere Leistungen', 'flynt'),
+        'wrapper' => ['width' => '75'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
         'type' => 'textarea',
-        'maxlength' => 750,
-        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
       ],
       [
         'label' => __('Buttons', 'flynt'),
         'name' => 'ctaButtons',
         'type' => 'repeater',
-        'instructions' => __('Fügen Sie hier übergeordnete Buttons hinzu.', 'flynt'),
+        'instructions' => __('Fügen Sie hier Buttons hinzu.', 'flynt'),
         'layout' => 'row',
-        'button_label' => __('Übergeordneten Button hinzufügen', 'flynt'),
+        'button_label' => __('Button hinzufügen', 'flynt'),
         'max' => 2,
         'sub_fields' => [
           [
@@ -114,7 +115,7 @@ function getACFLayout(): array
         'label' => __('Spalten', 'flynt'),
         'name' => 'columns',
         'type' => 'repeater',
-        'instructions' => __('Füge zwischen 2 und 4 Spalten hinzu.', 'flynt'),
+        'instructions' => __('Fügen Sie zwischen 2 und 4 Spalten hinzu.', 'flynt'),
         'layout' => 'row',
         'min' => 2,
         'max' => 4,
@@ -169,8 +170,7 @@ function getACFLayout(): array
             'label' => __('Tagline', 'flynt'),
             'name' => 'tag',
             'type' => 'text',
-            'maxlength' => 20,
-            'instructions' => __('(max. 20 Zeichen)', 'flynt'),
+            'instructions' => __('Kurzer Tag über dem Spaltentitel.', 'flynt'),
             'wrapper' => [
               'width' => '20%'
             ]
@@ -179,8 +179,7 @@ function getACFLayout(): array
             'label' => __('Titel', 'flynt'),
             'name' => 'subtitle',
             'type' => 'text',
-            'maxlength' => 50,
-            'instructions' => __('(max. 50 Zeichen)', 'flynt'),
+            'instructions' => __('Titel der Spalte.', 'flynt'),
             'wrapper' => [
               'width' => '20%'
             ]
@@ -189,8 +188,7 @@ function getACFLayout(): array
             'label' => __('Beschreibung', 'flynt'),
             'name' => 'description',
             'type' => 'textarea',
-            'maxlength' => 1150,
-            'instructions' => __('(max. 1150 Zeichen)', 'flynt'),
+            'instructions' => __('Beschreibungstext der Spalte.', 'flynt'),
             'tabs' => 'visual',
             'wrapper' => [
               'width' => '25%'
@@ -222,7 +220,7 @@ function getACFLayout(): array
           [
             'label' => __('Text im Kopfbereich', 'flynt'),
             'name' => 'textAlignment',
-            'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+            'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
             'type' => 'select',
             'choices' => [
               'start' => __('Links', 'flynt'),
@@ -235,10 +233,7 @@ function getACFLayout(): array
           ],
           [
             'label' => __('Bildformat', 'flynt'),
-            'instructions' => __('<strong>Was macht diese Einstellung?</strong><br>
-                                  Bestimmt die Form aller Bilder (z.B. breiter oder höher).<br><br>
-                                  <strong>⚠️ Wichtig für Icons/Logos:</strong><br>
-                                  Diese Option schneidet Bilder zu. Für unverzerrte Icons aktivieren Sie bitte "Abgerundete Bilder".', 'flynt'),
+            'instructions' => __('Bestimmt die Form aller Bilder (z. B. breiter oder höher).<br><strong>Wichtig für Icons/Logos:</strong> Diese Option schneidet Bilder zu. Für unverzerrte Icons aktivieren Sie bitte „Abgerundete Bilder".', 'flynt'),
             'name' => 'aspectRatio',
             'type' => 'select',
             'choices' => [
