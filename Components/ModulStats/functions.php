@@ -89,7 +89,7 @@ function getACFLayout(): array
             'name' => 'label',
             'type' => 'text',
             'instructions' => __('z. B. „Transaktionen" oder „Aug 2021".', 'flynt'),
-            'wrapper' => ['width' => '50'],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Wert / Überschrift', 'flynt'),
@@ -157,7 +157,7 @@ function getACFLayout(): array
         'step' => 100,
         'instructions' => __('Dauer der Zählanimation in Millisekunden (mind. 300 ms).', 'flynt'),
         'wrapper' => [
-          'width' => '50',
+          'width' => '50%',
         ],
         'conditional_logic' => [
           [

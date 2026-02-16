@@ -7,40 +7,58 @@
 			{% endif %}
 
 			{% if layout == 'timeline' %}
-				<div class="mx-auto pt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
-					{% for item in items %}
-						<div class="relative">
-							<div class="flex items-center text-sm/6 font-semibold text-secondary">
-								<iconify-icon icon="lucide:dot" class="text-2xl"></iconify-icon>
-								{{ item.label }}
-								<div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"></div>
-							</div>
-							<p class="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
-								{{ _self.counter(item.value, enableCounter, counterDuration) }}
-							</p>
-							<p class="mt-1 text-base/7 text-gray-600">{{ item.subtext }}</p>
-						</div>
-					{% endfor %}
-				</div>
+				{{ _self.renderTimeline(items, enableCounter, counterDuration) }}
 			{% else %}
-				{# Combines 'simple' and 'simpleGrid' logic #}
-				{% set simpleGridCols = items|length > 0 ? items|length : 1 %}
-				{% set gridClass = layout == 'simpleGrid' ? 'grid-cols-1 gap-0.5 overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-' ~ simpleGridCols : 'grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3' %}
-				<dl class="grid {{ gridClass }} text-center mt-10">
-					{% for item in items %}
-						<div class="flex flex-col {{ layout == 'simpleGrid' ? 'bg-gray-400/5 p-8' : 'mx-auto max-w-xs gap-y-4' }}">
-							<dt class="{{ layout == 'simpleGrid' ? 'text-sm/6 font-semibold' : 'text-base/7' }} text-gray-600">{{ item.label }}</dt>
-							<dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 {{ layout == 'simple' ? 'sm:text-5xl' }}">
-								{{ _self.counter(item.value, enableCounter, counterDuration) }}
-							</dd>
-						</div>
-					{% endfor %}
-				</dl>
+				{{ _self.renderGrid(items, layout, enableCounter, counterDuration) }}
 			{% endif %}
+
 		</div>
 	</section>
 </flynt-component>
 
+{% macro renderTimeline(items, enableCounter, duration) %}
+	<div class="mx-auto pt-10 grid grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+		{% for item in items %}
+			<div class="relative">
+				<div class="flex items-center text-sm/6 font-semibold text-secondary">
+					<iconify-icon icon="lucide:dot" class="text-2xl"></iconify-icon>
+					{{ item.label }}
+					<div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"></div>
+				</div>
+				<p class="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
+					{{ _self.counter(item.value, enableCounter, duration) }}
+				</p>
+				<p class="mt-1 text-base/7 text-gray-600">{{ item.subtext }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endmacro %}
+
+{% macro renderGrid(items, layout, enableCounter, duration) %}
+	{% set isSimpleGrid = layout == 'simpleGrid' %}
+	{% set count = items|length %}
+
+	{% set gridClass = isSimpleGrid 
+		? 'grid-cols-1 gap-0.5 overflow-hidden rounded-2xl sm:grid-cols-2 ' ~ (count >= 3 ? 'lg:grid-cols-3' : (count == 2 ? 'lg:grid-cols-2' : ''))
+		: 'grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3' 
+	%}
+
+	<dl class="grid {{ gridClass }} text-center mt-10">
+		{% for item in items %}
+			<div class="flex flex-col {{ isSimpleGrid ? 'bg-gray-400/5 p-8' : 'mx-auto max-w-xs gap-y-4' }}">
+				<dt class="{{ isSimpleGrid ? 'text-sm/6 font-semibold' : 'text-base/7' }} text-gray-600">
+					{{ item.label }}
+				</dt>
+				<dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 {{ isSimpleGrid ? '' : 'sm:text-5xl' }}">
+					{{ _self.counter(item.value, enableCounter, duration) }}
+				</dd>
+			</div>
+		{% endfor %}
+	</dl>
+{% endmacro %}
+
 {% macro counter(value, enabled, duration) %}
-	<span data-ref="counter" data-counter-enabled="{{ enabled ? 'true' : 'false' }}" data-counter-duration="{{ duration|default(2000) }}">{{ value }}</span>
+	<span data-ref="counter" data-counter-enabled="{{ enabled ? 'true' : 'false' }}" data-counter-duration="{{ duration|default(2000) }}">
+		{{ value }}
+	</span>
 {% endmacro %}

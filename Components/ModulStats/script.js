@@ -33,7 +33,7 @@ export default function (el) {
   counters.forEach(c => observer.observe(c))
 }
 
-function animate(el, start, end, duration, callback) {
+function animate(start, end, duration, callback) {
   let startTimestamp = null
   const step = (timestamp) => {
     if (!startTimestamp) startTimestamp = timestamp
