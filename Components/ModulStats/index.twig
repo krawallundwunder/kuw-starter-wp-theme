@@ -20,10 +20,10 @@
 	<div class="mx-auto pt-10 grid grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
 		{% for item in items %}
 			<div class="relative">
-				<div class="flex items-center text-sm/6 font-semibold text-secondary">
-					<iconify-icon icon="lucide:dot" class="text-2xl"></iconify-icon>
+				<div class="flex items-center text-secondary">
+					<iconify-icon icon="lucide:dot" class="text-2xl -ml-2"></iconify-icon>
 					{{ item.label }}
-					<div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"></div>
+					<div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-4 lg:w-auto lg:flex-auto lg:translate-x-0 text-sm/6 font-semibold"></div>
 				</div>
 				<p class="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
 					{{ _self.counter(item.value, enableCounter, duration) }}
@@ -45,7 +45,7 @@
 
 	<dl class="grid {{ gridClass }} text-center mt-10">
 		{% for item in items %}
-			<div class="flex flex-col {{ isSimpleGrid ? 'bg-gray-400/5 p-8' : 'mx-auto max-w-xs gap-y-4' }}">
+			<div class="flex flex-col {{ isSimpleGrid ? 'bg-secondary/10 p-8' : 'mx-auto max-w-xs gap-y-4' }}">
 				<dt class="{{ isSimpleGrid ? 'text-sm/6 font-semibold' : 'text-base/7' }} text-gray-600">
 					{{ item.label }}
 				</dt>
