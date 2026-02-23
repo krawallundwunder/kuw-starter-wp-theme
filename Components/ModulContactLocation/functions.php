@@ -3,34 +3,31 @@
 namespace Flynt\Components\ModulContactLocation;
 
 add_filter('Flynt/addComponentData?name=ModulContactLocation', function ($data) {
-  if (!empty($data['ctaButtons'])) {
-    $data['buttons'] = array_map(function ($cta) {
-      return [
-        'text' => $cta['button']['title'] ?? '',
-        'link' => $cta['button']['url'] ?? '',
-        'target' => $cta['button']['target'] ?? '',
-      ];
-    }, array_filter($data['ctaButtons'], fn($cta) => !empty($cta['button'])));
-  }
-
-  $gridMap = [
-    '2' => 'grid-cols-1 md:grid-cols-2',
-    '3' => 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3',
-    '4' => 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
-  ];
-
-  $layoutType = $data['layout'] ?? 'Kontakt';
-  $columnChoice = ($layoutType === 'Kontakt')
-    ? ($data['contactLayout'] ?? '2')
-    : ($data['locationsLayout'] ?? '2');
-
-  $data['gridClass'] = $gridMap[$columnChoice] ?? $gridMap['2'];
-
   return $data;
 });
 
 function getACFLayout()
 {
+  $conditionWithForm = [
+    [
+      [
+        'fieldPath' => 'layoutVariant',
+        'operator' => '==',
+        'value' => 'withForm',
+      ],
+    ],
+  ];
+
+  $conditionContactOnly = [
+    [
+      [
+        'fieldPath' => 'layoutVariant',
+        'operator' => '==',
+        'value' => 'contactOnly',
+      ],
+    ],
+  ];
+
   return [
     'name' => 'ModulContactLocation',
     'label' => __('Modul: Kontakt & Standorte', 'flynt'),
@@ -40,12 +37,14 @@ function getACFLayout()
         'name' => 'contentTab',
         'type' => 'tab',
       ],
+
+      // --- Header (beide Layouts) ---
       [
         'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
         'maxlength' => 20,
-        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Kontakt", „Standorte", „Ansprechpartner" (max. 20 Zeichen).', 'flynt'),
+        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Kontakt", „Standorte", „Ansprechpartner") (max. 20 Zeichen).', 'flynt'),
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -62,103 +61,29 @@ function getACFLayout()
         'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
       ],
       [
-        'label' => __('Buttons', 'flynt'),
-        'name' => 'ctaButtons',
-        'type' => 'repeater',
-        'instructions' => __('Fügen Sie hier übergeordnete Buttons hinzu.', 'flynt'),
-        'layout' => 'row',
-        'button_label' => __('Übergeordneten Button hinzufügen', 'flynt'),
-        'max' => 2,
-        'sub_fields' => [
-          [
-            'label' => __('Button', 'flynt'),
-            'name' => 'button',
-            'type' => 'link',
-            'return_format' => 'array',
-          ],
-        ],
-      ],
-      [
-        'label' => __('Kontaktbereiche', 'flynt'),
-        'name' => 'contactAreas',
-        'type' => 'repeater',
-        'instructions' => __('Fügen Sie hier Kontaktbereiche hinzu (max. 6).', 'flynt'),
-        'min' => 0,
-        'max' => 6,
-        'layout' => 'block',
-        'button_label' => __('Kontaktbereich hinzufügen', 'flynt'),
-        'conditional_logic' => [
-          [
-            [
-              'fieldPath' => 'layout',
-              'operator' => '==',
-              'value' => 'Kontakt',
-            ],
-          ],
-        ],
-        'sub_fields' => [
-          [
-            'label' => __('Titel', 'flynt'),
-            'name' => 'title',
-            'type' => 'text',
-            'maxlength' => 50,
-            'instructions' => __('(max. 50 Zeichen)', 'flynt'),
-            'wrapper' => ['width' => '100%'],
-          ],
-          [
-            'label' => __('E-Mail', 'flynt'),
-            'name' => 'email',
-            'type' => 'email',
-            'wrapper' => ['width' => '50%'],
-          ],
-          [
-            'label' => __('Telefon', 'flynt'),
-            'name' => 'phone',
-            'type' => 'text',
-            'wrapper' => ['width' => '50%'],
-          ],
-          [
-            'label' => __('Link zum Kontaktformular', 'flynt'),
-            'name' => 'formLink',
-            'type' => 'link',
-            'instructions' => __('Optional: Link zum Kontaktformular', 'flynt'),
-            'return_format' => 'array',
-            'wrapper' => ['width' => '100%'],
-          ],
-        ],
-      ],
-      [
-        'label' => __('Standorte', 'flynt'),
+        'label' => __('Standorte & Kontaktdaten', 'flynt'),
         'name' => 'locations',
         'type' => 'repeater',
-        'instructions' => __('Fügen Sie hier Standorte hinzu (max. 12).', 'flynt'),
+        'instructions' => __('Fügen Sie hier Standorte mit Kontaktdaten hinzu (max. 4).', 'flynt'),
         'min' => 0,
-        'max' => 12,
+        'max' => 4,
         'layout' => 'block',
-        'button_label' => 'Standort hinzufügen',
-        'conditional_logic' => [
-          [
-            [
-              'fieldPath' => 'layout',
-              'operator' => '==',
-              'value' => 'Standorte',
-            ],
-          ],
-        ],
+        'button_label' => __('Standort hinzufügen', 'flynt'),
+        'conditional_logic' => $conditionWithForm,
         'sub_fields' => [
           [
-            'label' => __('Standort-Name', 'flynt'),
-            'name' => 'city',
+            'label' => __('Standort-Name oder Kontaktperson', 'flynt'),
+            'name' => 'name',
             'type' => 'text',
-            'instructions' => __('(z. B. "Hauptsitz", "Niederlassung")', 'flynt'),
+            'instructions' => __('Name des Standorts oder der Kontaktperson (z. B. "Hauptsitz Dresden", "Max Mustermann")', 'flynt'),
             'required' => 0,
             'wrapper' => ['width' => '100%'],
           ],
           [
-            'label' => __('Straße', 'flynt'),
+            'label' => __('Straße & Hausnummer', 'flynt'),
             'name' => 'street',
             'type' => 'text',
-            'instructions' => __('(z. B. "Musterstraße 1")', 'flynt'),
+            'instructions' => __('Straßenadresse (z. B. "Musterstraße 123")', 'flynt'),
             'required' => 0,
             'wrapper' => ['width' => '100%'],
           ],
@@ -166,15 +91,15 @@ function getACFLayout()
             'label' => __('PLZ', 'flynt'),
             'name' => 'zip',
             'type' => 'text',
-            'instructions' => __('(z. B. "12345")', 'flynt'),
+            'instructions' => __('Postleitzahl (z. B. "01234")', 'flynt'),
             'required' => 0,
             'wrapper' => ['width' => '33.33%'],
           ],
           [
             'label' => __('Stadt', 'flynt'),
-            'name' => 'cityName',
+            'name' => 'city',
             'type' => 'text',
-            'instructions' => __('(z. B. "Berlin")', 'flynt'),
+            'instructions' => __('Stadtname (z. B. "Dresden")', 'flynt'),
             'required' => 0,
             'wrapper' => ['width' => '33.33%'],
           ],
@@ -182,20 +107,141 @@ function getACFLayout()
             'label' => __('Land', 'flynt'),
             'name' => 'country',
             'type' => 'text',
-            'instructions' => __('(z. B. "Deutschland")', 'flynt'),
+            'instructions' => __('Land (z. B. "Deutschland")', 'flynt'),
             'required' => 0,
             'wrapper' => ['width' => '33.33%'],
           ],
           [
-            'label' => __('Google Maps Link', 'flynt'),
+            'label' => __('E-Mail', 'flynt'),
+            'name' => 'email',
+            'type' => 'email',
+            'instructions' => __('Kontakt E-Mail-Adresse für diesen Standort', 'flynt'),
+            'wrapper' => ['width' => '50%'],
+          ],
+          [
+            'label' => __('Telefon', 'flynt'),
+            'name' => 'phone',
+            'type' => 'text',
+            'instructions' => __('Telefonnummer für diesen Standort', 'flynt'),
+            'wrapper' => ['width' => '50%'],
+          ],
+        ],
+      ],
+
+      // --- Layout 2: Nur Kontakt & Standorte ---
+
+      // Sektion: Standorte
+      [
+        'label' => '',
+        'name' => 'locationsDivider',
+        'type' => 'message',
+        'message' => '<h3 style="margin:0;padding:8px 0;border-bottom:2px solid #0073aa;">Standorte</h3>',
+        'conditional_logic' => $conditionContactOnly,
+      ],
+      [
+        'label' => __('Standorte', 'flynt'),
+        'name' => 'locationsList',
+        'type' => 'repeater',
+        'min' => 0,
+        'max' => 4,
+        'layout' => 'block',
+        'button_label' => __('Standort hinzufügen', 'flynt'),
+        'conditional_logic' => $conditionContactOnly,
+        'sub_fields' => [
+          [
+            'label' => __('Standort-Name', 'flynt'),
+            'name' => 'city',
+            'type' => 'text',
+            'instructions' => __('z. B. "Hauptsitz Dresden" oder "Niederlassung Berlin"', 'flynt'),
+            'required' => 0,
+            'wrapper' => ['width' => '100'],
+          ],
+          [
+            'label' => __('Straße', 'flynt'),
+            'name' => 'street',
+            'type' => 'text',
+            'required' => 0,
+            'wrapper' => ['width' => '100'],
+          ],
+          [
+            'label' => __('PLZ', 'flynt'),
+            'name' => 'zip',
+            'type' => 'text',
+            'required' => 0,
+            'wrapper' => ['width' => '33.33'],
+          ],
+          [
+            'label' => __('Stadt', 'flynt'),
+            'name' => 'cityName',
+            'type' => 'text',
+            'required' => 0,
+            'wrapper' => ['width' => '33.33'],
+          ],
+          [
+            'label' => __('Land (optional)', 'flynt'),
+            'name' => 'country',
+            'type' => 'text',
+            'required' => 0,
+            'wrapper' => ['width' => '33.33'],
+          ],
+          [
+            'label' => __('Google Maps Link (optional)', 'flynt'),
             'name' => 'mapLink',
             'type' => 'url',
-            'instructions' => __('Link zu Google Maps.', 'flynt'),
             'required' => 0,
           ],
         ],
       ],
 
+      // Sektion: Kontakt
+      [
+        'label' => '',
+        'name' => 'contactDivider',
+        'type' => 'message',
+        'message' => '<h3 style="margin:0;padding:8px 0;border-bottom:2px solid #0073aa;">Kontakt</h3>',
+        'conditional_logic' => $conditionContactOnly,
+      ],
+      [
+        'label' => __('Kontaktbereiche', 'flynt'),
+        'name' => 'contactAreas',
+        'type' => 'repeater',
+        'min' => 0,
+        'max' => 4,
+        'layout' => 'block',
+        'button_label' => __('Kontaktbereich hinzufügen', 'flynt'),
+        'conditional_logic' => $conditionContactOnly,
+        'sub_fields' => [
+          [
+            'label' => __('Titel', 'flynt'),
+            'name' => 'title',
+            'type' => 'text',
+            'required' => 0,
+            'wrapper' => ['width' => '100'],
+          ],
+          [
+            'label' => __('E-Mail', 'flynt'),
+            'name' => 'email',
+            'type' => 'email',
+            'required' => 0,
+            'wrapper' => ['width' => '50'],
+          ],
+          [
+            'label' => __('Telefon', 'flynt'),
+            'name' => 'phone',
+            'type' => 'text',
+            'required' => 0,
+            'wrapper' => ['width' => '50'],
+          ],
+          [
+            'label' => __('Link zum Kontaktformular', 'flynt'),
+            'name' => 'formLink',
+            'type' => 'link',
+            'return_format' => 'array',
+            'required' => 0,
+            'wrapper' => ['width' => '100'],
+          ],
+        ],
+      ],
       [
         'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
@@ -203,13 +249,15 @@ function getACFLayout()
       ],
       [
         'label' => __('Layout', 'flynt'),
-        'name' => 'layout',
-        'type' => 'select',
-        'instructions' => __('Wählen Sie zwischen Kontakt- oder Standorte-Ansicht.', 'flynt'),
+        'name' => 'layoutVariant',
+        'type' => 'button_group',
+        'instructions' => __('Wähle das Layout für dieses Modul.', 'flynt'),
         'choices' => [
-          'Kontakt' => __('Kontakt', 'flynt'),
-          'Standorte' => __('Standorte', 'flynt'),
+          'withForm' => __('Mit Kontaktformular', 'flynt'),
+          'contactOnly' => __('Nur Kontakt & Standorte', 'flynt'),
         ],
+        'default_value' => 'withForm',
+        'layout' => 'horizontal',
       ],
       [
         'label' => __('Text im Kopfbereich', 'flynt'),
@@ -220,52 +268,40 @@ function getACFLayout()
           'text-center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'text-start',
-        'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+        'instructions' => __('Lege fest, wie der Text im Header-Bereich ausgerichtet werden soll.', 'flynt'),
         'required' => 1,
+      ],
+      [
+        'label' => __('Design', 'flynt'),
+        'name' => 'designTab',
+        'type' => 'tab',
+        'conditional_logic' => $conditionContactOnly,
       ],
       [
         'label' => __('Kontakt-Layout', 'flynt'),
         'name' => 'contactLayout',
         'type' => 'select',
-        'instructions' => __('Anzahl der Spalten für Kontaktbereiche.', 'flynt'),
         'choices' => [
-          '2' => '2 Spalten',
-          '3' => '3 Spalten',
-          '4' => '4 Spalten',
+          '2' => __('2 Spalten', 'flynt'),
+          '3' => __('3 Spalten', 'flynt'),
+          '4' => __('4 Spalten', 'flynt'),
         ],
         'default_value' => '2',
-        'wrapper' => ['width' => '50%'],
-        'conditional_logic' => [
-          [
-            [
-              'fieldPath' => 'layout',
-              'operator' => '==',
-              'value' => 'Kontakt',
-            ],
-          ],
-        ],
+        'wrapper' => ['width' => '50'],
+        'conditional_logic' => $conditionContactOnly,
       ],
       [
         'label' => __('Standort-Layout', 'flynt'),
         'name' => 'locationsLayout',
         'type' => 'select',
-        'instructions' => __('Anzahl der Spalten für Standorte.', 'flynt'),
         'choices' => [
-          '2' => '2 Spalten',
-          '3' => '3 Spalten',
-          '4' => '4 Spalten',
+          '2' => __('2 Spalten', 'flynt'),
+          '3' => __('3 Spalten', 'flynt'),
+          '4' => __('4 Spalten', 'flynt'),
         ],
         'default_value' => '2',
-        'wrapper' => ['width' => '50%'],
-        'conditional_logic' => [
-          [
-            [
-              'fieldPath' => 'layout',
-              'operator' => '==',
-              'value' => 'Standorte',
-            ],
-          ],
-        ],
+        'wrapper' => ['width' => '50'],
+        'conditional_logic' => $conditionContactOnly,
       ],
     ],
   ];
