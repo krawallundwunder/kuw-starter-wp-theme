@@ -3,11 +3,6 @@
 		<div class="container mx-auto px-4 py-16">
 
 			{% if layoutVariant == 'contactOnly' %}
-
-				{# ========================================
-				   Layout 2: Nur Kontakt & Standorte
-				   ======================================== #}
-
 				{# Header #}
 				<div class="mb-12">
 					{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign } %}
@@ -42,9 +37,15 @@
 												{% endif %}
 												{% if location.zip or location.cityName %}
 													<p class="text-base">
-														{% if location.zip %}{{ location.zip }} {% endif %}
-														{% if location.cityName %}{{ location.cityName }}{% endif %}
-														{% if location.country %}, {{ location.country }}{% endif %}
+														{% if location.zip %}
+															{{ location.zip }}
+														{% endif %}
+														{% if location.cityName %}
+															{{ location.cityName }}
+														{% endif %}
+														{% if location.country %},
+															{{ location.country }}
+														{% endif %}
 													</p>
 												{% endif %}
 											</div>
@@ -120,10 +121,8 @@
 
 			{% else %}
 
-				{# ========================================
-				   Layout 1: Mit Kontaktformular (Standard)
-				   ======================================== #}
-				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+				<div
+					class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 
 					{# Left Column - Header & Location Cards #}
 					<div class="space-y-8">

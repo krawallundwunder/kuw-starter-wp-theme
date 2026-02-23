@@ -32,9 +32,6 @@ function getACFLayout()
     'name' => 'ModulContactLocation',
     'label' => __('Modul: Kontakt & Standorte', 'flynt'),
     'sub_fields' => [
-      // ========================================
-      // Tab: Inhalt
-      // ========================================
       [
         'label' => __('Inhalt', 'flynt'),
         'name' => 'contentTab',
@@ -245,10 +242,6 @@ function getACFLayout()
           ],
         ],
       ],
-
-      // ========================================
-      // Tab: Einstellungen
-      // ========================================
       [
         'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
@@ -278,10 +271,6 @@ function getACFLayout()
         'instructions' => __('Lege fest, wie der Text im Header-Bereich ausgerichtet werden soll.', 'flynt'),
         'required' => 1,
       ],
-
-      // ========================================
-      // Tab: Design (nur für Layout 2)
-      // ========================================
       [
         'label' => __('Design', 'flynt'),
         'name' => 'designTab',
