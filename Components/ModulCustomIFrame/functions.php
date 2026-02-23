@@ -45,7 +45,7 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Einbettungs-Code', 'flynt'),
-        'instructions' => __('Fügen Sie hier den Einbettungs-Code ein (z. B. von Google Maps, Calendly, Typeform). Wenn dieser Code angegeben ist, wird die iFrame URL ignoriert.', 'flynt'),
+        'instructions' => __('Fügen Sie hier den Einbettungs-Code ein (z. B. von Google Maps, Calendly, Typeform). Wenn dieser Code angegeben ist, wird die iFrame URL ignoriert. ⚠️ Sicherheitshinweis: Dieser Code wird ungefiltert ausgegeben. Fügen Sie ausschließlich Code aus vertrauenswürdigen Quellen ein.', 'flynt'),
         'name' => 'customCode',
         'type' => 'textarea',
         'rows' => 6,
@@ -80,10 +80,10 @@ function getACFLayout(): array
         'name' => 'textAlign',
         'type' => 'select',
         'choices' => [
-          'start' => __('Links', 'flynt'),
-          'center' => __('Zentriert', 'flynt'),
+          'text-start' => __('Links', 'flynt'),
+          'text-center' => __('Zentriert', 'flynt'),
         ],
-        'default_value' => 'start',
+        'default_value' => 'text-start',
         'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
         'required' => 1,
       ],
