@@ -2,3 +2,9 @@
 @import '../Components/FeatureFlexibleContentExtension/styles/_screenshot.css';
 @import '../Components/FeatureFlexibleContentExtension/styles/_search.css';
 @import './styles/_fonts.css';
+
+.acf-layout-title__label {
+	font-weight: 300;
+  font-style: italic;
+  opacity: 0.8;
+}
