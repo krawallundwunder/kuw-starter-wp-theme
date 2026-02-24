@@ -16,7 +16,7 @@
     "lint": "./vendor/bin/phpcs",
     "format": "./vendor/bin/phpcbf",
     "prettier": "npx prettier --write .",
-    "prepare": "husky",
+    "prepare": "husky && husky",
     "test": "bun run build:lint",
     "test:ci": "bun run lint && bun run build"
   },
@@ -29,6 +29,7 @@
     "swiper": "^11.1.1"
   },
   "devDependencies": {
+    "@prettier/plugin-php": "^0.24.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.16",
     "@zackad/prettier-plugin-twig": "^0.16.0",
