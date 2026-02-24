@@ -30,7 +30,6 @@ add_action('Flynt/afterRegisterComponents', function (): void {
           Components\ModulColumns\getACFLayout(),
           Components\ModulSliderTextImage\getACFLayout(),
           Components\ModuliFrame\getACFLayout(),
-          Components\ModulCustomIFrame\getACFLayout(),
           Components\ModulCardsRepeater\getACFLayout(),
           Components\ModulFAQ\getACFLayout(),
           Components\ModulTextImage\getACFLayout(),
