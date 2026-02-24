@@ -4,29 +4,13 @@ namespace Flynt\Components\ModulColumns;
 
 add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
   if (!empty($data['ctaButtons'])) {
-    $data['buttons'] = [];
-    foreach ($data['ctaButtons'] as $ctaButton) {
-      if (!empty($ctaButton['button'])) {
-        $data['buttons'][] = [
-          'text' => $ctaButton['button']['title'],
-          'link' => $ctaButton['button']['url'],
-          'target' => $ctaButton['button']['target'],
-        ];
-      }
-    }
-  }
-
-  if (!empty($data['cardButton'])) {
-    $data['cardButtonFormatted'] = [];
-    foreach ($data['cardButton'] as $cardButton) {
-      if (!empty($cardButton['button'])) {
-        $data['cardButtons'][] = [
-          'text' => $cardButton['button']['title'],
-          'link' => $cardButton['button']['url'],
-          'target' => $cardButton['button']['target'],
-        ];
-      }
-    }
+    $data['buttons'] = array_map(function ($ctaButton) {
+      return [
+        'text' => $ctaButton['button']['title'] ?? '',
+        'link' => $ctaButton['button']['url'] ?? '',
+        'target' => $ctaButton['button']['target'] ?? '',
+      ];
+    }, $data['ctaButtons']);
   }
 
   if (!empty($data['columns'])) {
@@ -34,12 +18,35 @@ add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
       if (!empty($column['image'])) {
         if (is_object($column['image']) && method_exists($column['image'], 'src')) {
           $imageUrl = $column['image']->src();
-          $extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
-          $column['image'] = [
-            'src' => $imageUrl,
-            'alt' => $column['image']->alt(),
-            'mime_type' => ($extension === 'svg') ? 'image/svg+xml' : 'image/' . $extension,
-          ];
+          $imageAlt = method_exists($column['image'], 'alt') ? $column['image']->alt() : '';
+        } elseif (is_array($column['image'])) {
+          $imageUrl = $column['image']['url'] ?? '';
+          $imageAlt = $column['image']['alt'] ?? '';
+        } else {
+          $imageUrl = '';
+          $imageAlt = '';
+        }
+        $column['image_url'] = $imageUrl;
+        $column['image_alt'] = $imageAlt;
+        $extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
+        $column['isSvg'] = ($extension === 'svg');
+
+        if ($column['isSvg']) {
+          $size = $column['iconSize'] ?? 'normal';
+          switch ($size) {
+            case 'small':
+              $column['iconSizeClass'] = 'w-12 h-12';
+              break;
+            case 'normal':
+              $column['iconSizeClass'] = 'w-20 h-20';
+              break;
+            case 'large':
+              $column['iconSizeClass'] = 'w-32 h-32';
+              break;
+            default:
+              $column['iconSizeClass'] = 'w-20 h-20';
+              break;
+          }
         }
       }
     }
@@ -64,8 +71,6 @@ function getACFLayout(): array
         'name' => 'contentTab',
         'type' => 'tab',
         'placement' => 'top',
-        'endpoint' => 0,
-        'layout' => 'row',
       ],
       [
         'label' => __('Tagline', 'flynt'),
@@ -125,9 +130,40 @@ function getACFLayout(): array
             'library' => 'all',
             'max_size' => 4,
             'mime_types' => 'jpg,jpeg,png,svg,webp',
-            'wrapper' => [
-              'width' => '20%'
-            ]
+            'wrapper' => ['width' => '25%']
+          ],
+          [
+            'label' => __('Icon Größe', 'flynt'),
+            'name' => 'iconSize',
+            'type' => 'select',
+            'instructions' => __('Nur erforderlich, wenn das Bild ein SVG ist.', 'flynt'),
+            'choices' => [
+              'small' => 'Klein',
+              'normal' => 'Normal',
+            ],
+            'default_value' => 'normal',
+            'wrapper' => ['width' => '15%'],
+            'conditional_logic' => [
+              [
+                [
+                  'field' => 'image',
+                  'operator' => '==',
+                  'value' => 'svg',
+                ],
+              ],
+            ],
+          ],
+          [
+            'label' => __('SVG Position', 'flynt'),
+            'name' => 'svgPosition',
+            'type' => 'select',
+            'instructions' => __('Legt die Position des SVG innerhalb der Spalte fest.', 'flynt'),
+            'choices' => [
+              'left' => __('Links', 'flynt'),
+              'center' => __('Zentriert', 'flynt'),
+            ],
+            'default_value' => 'center',
+            'wrapper' => ['width' => '20%']
           ],
           [
             'label' => __('Tagline', 'flynt'),
@@ -176,8 +212,6 @@ function getACFLayout(): array
         'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
         'type' => 'tab',
-        'placement' => 'top',
-        'endpoint' => 0,
       ],
       [
         'label' => '',
