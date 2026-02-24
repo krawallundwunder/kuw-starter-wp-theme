@@ -1,0 +1,83 @@
+{% extends 'templates/_document.twig' %}
+
+{% block content %}
+	<article
+		class="container mx-auto py-16 px-4">
+
+		{# === HERO-BILD === #}
+		{% set imageId = post.meta('image') ?: post.thumbnail.id %}
+
+		{% if imageId %}
+			<div class="aspect-video mb-8 rounded-xl overflow-hidden shadow-lg">
+				<img src="{{ Image(imageId).src }}" srcset="{{ Image(imageId).srcset }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+			</div>
+		{% endif %}
+
+		{# === HEADER === #}
+		<header class="mb-8">
+			<div class="flex items-center justify-between gap-4 mb-4">
+				{% if post.meta('tagline') %}
+					<span class="bg-primary text-white px-3 py-1 rounded-full text-sm uppercase font-medium">
+						{{ post.meta('tagline') }}
+					</span>
+				{% endif %}
+
+				{% if post.date %}
+					<time datetime="{{ post.date }}" class="text-gray-500 text-md ml-auto">
+						{{ post.date|date("d.m.Y") }}
+					</time>
+				{% endif %}
+			</div>
+
+			<h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+				{{ post.meta('title') ?: post.title }}
+
+			</h1>
+		</header>
+
+		{# === HAUPTINHALT === #}
+		<div class="prose prose-lg max-w-none mb-12">
+			{% if post.meta('description') %}
+				<p class="text-xl text-gray-600 leading-relaxed">
+					{{ post.meta('description') }}
+				</p>
+			{% endif %}
+			<div class="flex flex-col sm:flex-row items-center gap-6">
+				<div class="">
+					{% include "templates/_partials/button.twig" with {
+				link: archive_url,
+				text: archive_button_text,
+				variant: 'textBack',
+				size: 'medium'
+			    } only %}
+				</div>
+				<div class="">
+					{% include "templates/_partials/button.twig" with {
+				text: 'Zurück zur vorherigen Seite',
+				variant: 'outlined',
+				size: 'medium',
+        extraAttributes: 'onclick="if (document.referrer) { history.back(); } else { window.location.href=\'/\'; }"'
+			    } only %}
+				</div>
+			</div>
+		</div>
+
+	</article>
+
+	{# === CTA-BEREICH === #}
+	{% include "templates/_partials/cta.twig" with {
+		cta_enabled: post.meta('cta_enabled'),
+		cta_title: post.meta('cta_title'),
+		cta_text: post.meta('cta_text'),
+		cta_button: post.meta('cta_button'),
+		cta_background: post.meta('cta_background')
+	} only %}
+
+	{# === FAQ-BEREICH === #}
+	{% include "templates/_partials/faq.twig" with {
+		faq_enabled: post.meta('faq_enabled'),
+		faq_title: post.meta('faq_title'),
+		faq_items: post.meta('faq_items')
+	} only %}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% if faq_enabled and faq_items %}
+	<section class="py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div class="max-w-3xl mx-auto">
+
+				{% if faq_title %}
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
+						{{ faq_title }}
+					</h2>
+				{% endif %}
+
+				<div class="space-y-4">
+					{% for item in faq_items %}
+						<details class="bg-white rounded-lg shadow-md overflow-hidden group">
+							<summary class="px-6 py-4 cursor-pointer flex justify-between items-center font-semibold text-lg text-gray-900 hover:bg-gray-50 transition-colors">
+								<span>{{ item.question }}</span>
+								<svg class="w-5 h-5 text-primary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</summary>
+							<div class="px-6 pb-4 pt-2 prose prose-sm max-w-none text-gray-600">
+								{{ item.answer }}
+							</div>
+						</details>
+					{% endfor %}
+				</div>
+
+			</div>
+		</div>
+	</section>
+{% endif %}

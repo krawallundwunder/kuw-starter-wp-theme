@@ -1,0 +1,162 @@
+{
+    "key": "group_6989b3df3b997",
+    "title": "Content-Karten Übersicht",
+    "fields": [
+        {
+            "key": "field_6989ef23ce26a",
+            "label": "Slug Bezeichnung",
+            "name": "archive_slug",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Hiermit passt du die URL deiner Content-Karten Übersicht an.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "z.B. unsere-projekte",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6989b3df1cf23",
+            "label": "Titel",
+            "name": "archive_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6989b40a1cf24",
+            "label": "Beschreibung",
+            "name": "archive_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_6989b42f1cf25",
+            "label": "Anzahl der sichtbaren Karten pro Seite",
+            "name": "archive_posts_per_page",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6989b4601cf27",
+            "label": "Anordnung der Karten",
+            "name": "archive_order",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "DESC": "Neueste zuerst",
+                "ASC": "Älteste zuerst"
+            },
+            "default_value": "DESC",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_6989ec4c0ce2a",
+            "label": "Button-Name",
+            "name": "archive_button_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Mit diesem Feld änderst du den Namen des Buttons, welcher dich von deiner Einzelansicht zum gesamten Content-Karten Überblick bringt.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "z.B. \"Zurück zur gesamten Übersicht\"",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "content-karten-übersicht"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1771237688
+}

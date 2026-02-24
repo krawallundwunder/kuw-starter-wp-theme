@@ -1,34 +1,64 @@
 <?php
 
-namespace Flynt\Components\ModulCardsRepeater;
+namespace Flynt\Components\ModulContentCards;
 
-add_filter('Flynt/addComponentData?name=ModulCardsRepeater', function ($data) {
-  if (!empty($data['ctaButtons'])) {
-    $data['buttons'] = array_map(
-      fn($btn) => [
-        'text' => $btn['button']['title'] ?? '',
-        'link' => $btn['button']['url'] ?? '',
-      ],
-      array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button']))
-    );
-  }
+use Timber\Timber;
 
-  $ratio = $data['options']['aspectRatio'] ?? '16:9';
-  $data['aspectRatioClass'] = ($ratio === '4:3') ? 'aspect-[4/3]' : 'aspect-video';
+add_filter('Flynt/addComponentData?name=ModulContentCards', function ($data) {
 
-  $cardCount = count($data['cards'] ?? []);
-  $lgColumns = $cardCount <= 3 ? ($cardCount ?: 1) : 3;
-  $data['gridClass'] = "lg:grid-cols-{$lgColumns}";
+    $data['taxonomies'] = $data['taxonomies'] ?: [];
 
-  return $data;
+    // Base Query Args
+    $queryArgs = [
+        'post_type' => 'content_card',
+        'posts_per_page' => 9,
+        'status' => 'publish',
+    ];
+
+    // NUR wenn Kategorien ausgewählt wurden, filter hinzufügen
+    if (!empty($data['taxonomies'])) {
+        $queryArgs['tax_query'] = [
+            [
+                'taxonomy' => 'content_card_category',
+                'field' => 'term_id',
+                'terms' => array_map(fn($tax) => $tax->term_id, $data['taxonomies']),
+            ],
+        ];
+    }
+
+    $data['items'] = Timber::get_posts($queryArgs);
+
+
+    if (empty($data['items'])) {
+        $data['items'] = [];
+    }
+
+    if (!empty($data['ctaButtons'])) {
+        $data['buttons'] = array_map(
+            fn($btn) => [
+                'text' => $btn['button']['title'] ?? '',
+                'link' => $btn['button']['url'] ?? '',
+            ],
+            array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button']))
+        );
+    }
+
+    $ratio = $data['options']['aspectRatio'] ?? '16:9';
+    $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
+
+    $cardCount = count($data['items']); // ✅ Jetzt safe!
+    $lgColumns = min(max($cardCount, 1), 3);
+    $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][$lgColumns];
+
+    return $data;
 });
 
 
 function getACFLayout()
 {
   return [
-    'name' => 'ModulCardsRepeater',
-    'label' => __('Modul: Dynamische Inhaltskacheln', 'flynt'),
+    'name' => 'ModulContentCards',
+    'label' => __('Modul: Content-Karten', 'flynt'),
     'sub_fields' => [
       [
         'label' => __('Inhalt', 'flynt'),
@@ -76,47 +106,6 @@ function getACFLayout()
         ],
       ],
       [
-        'label' => __('Kacheln', 'flynt'),
-        'name' => 'cards',
-        'type' => 'repeater',
-        'min' => 1,
-        'layout' => 'block',
-        'button_label' => __('Kachel hinzufügen', 'flynt'),
-        'sub_fields' => [
-          [
-            'label' => __('Bild', 'flynt'),
-            'name' => 'image',
-            'type' => 'image',
-            'instructions' => __('Bild der Kachel (Erlaubte Typen: jpg,jpeg,png,svg).', 'flynt'),
-            'return_format' => 'id',
-            'preview_size' => 'thumbnail',
-            'library' => 'all',
-            'mime_types' => 'jpg,jpeg,png,svg',
-          ],
-          [
-            'label' => __('Titel', 'flynt'),
-            'name' => 'title',
-            'type' => 'text',
-            'maxlength' => 20,
-            'instructions' => __('(max. 20 Zeichen)', 'flynt'),
-          ],
-          [
-            'label' => __('Beschreibung', 'flynt'),
-            'name' => 'description',
-            'type' => 'textarea',
-            'maxlength' => 1150,
-            'instructions' => __('(max. 1150 Zeichen)', 'flynt'),
-          ],
-          [
-            'label' => __('Button Link', 'flynt'),
-            'name' => 'cardButton',
-            'type' => 'link',
-            'return_format' => 'array',
-            'instructions' => __('Button für die Kachel', 'flynt'),
-          ],
-        ],
-      ],
-      [
         'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
         'type' => 'tab',
@@ -147,6 +136,23 @@ function getACFLayout()
         ],
         'default_value' => '16:9',
         'ui' => 1,
+      ],
+      [
+        'label' => __('Kategorien', 'flynt'),
+        'instructions' => __(
+          'Wählen Sie 1 oder mehrere Kategorien aus oder lassen Sie das Feld leer, um alle Beiträge anzuzeigen.',
+          'flynt',
+        ),
+        'name' => 'taxonomies',
+        'type' => 'taxonomy',
+        'taxonomy' => 'content_card_category',
+        'field_type' => 'multi_select',
+        'allow_null' => 1,
+        'multiple' => 1,
+        'add_term' => 0,
+        'save_terms' => 0,
+        'load_terms' => 0,
+        'return_format' => 'object',
       ],
     ],
   ];
