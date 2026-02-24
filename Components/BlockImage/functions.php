@@ -38,7 +38,7 @@ function getACFLayout(): array
         'name' => 'options',
         'type' => 'group',
         'layout' => 'row',
-        'sub_fields' => [FieldVariables\getTheme(), FieldVariables\getSize()],
+        'sub_fields' => [FieldVariables\getSize()],
       ],
     ],
   ];

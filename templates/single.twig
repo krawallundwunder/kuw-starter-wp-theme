@@ -1,18 +1,15 @@
 {% extends 'templates/_document.twig' %}
 
 {% block content %}
-  <article>
-    <header>
-      {{ renderComponent('BlockPostHeader', {post: post}) }}
-    </header>
-    <section class="wp-block-post-content has-global-padding is-layout-constrained">
-        {{ post.content }}
-    </section>
-    <footer>
-      {{ renderComponent('BlockPostFooter', {post: post}) }}
-    </footer>
-    <section>
-      {{ renderComponent('GridPostsLatest', {'taxonomies': post.categories(), 'options': {'theme': 'light', 'maxColumns': 3}}) }}
-    </section>
-  </article>
+	<article>
+		<header>
+			{{ renderComponent('BlockPostHeader', {post: post}) }}
+		</header>
+		<section class="mx-auto prose lg:prose-lg wrap-break-word px-4 md:px-0">
+			{{ post.content }}
+		</section>
+		<footer>
+			{{ renderComponent('BlockPostFooter', {post: post}) }}
+		</footer>
+	</article>
 {% endblock %}

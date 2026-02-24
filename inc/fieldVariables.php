@@ -35,8 +35,9 @@ function getSize($default = 'medium'): array
     'save_other_choice' => 0,
     'layout' => 'horizontal',
     'choices' => [
+      'small' => __('Small', 'flynt'),
       'medium' => __('Medium', 'flynt'),
-      'wide' => __('Wide', 'flynt'),
+      'large' => __('Large', 'flynt'),
       'full' => __('Full', 'flynt'),
     ],
     'default_value' => $default,

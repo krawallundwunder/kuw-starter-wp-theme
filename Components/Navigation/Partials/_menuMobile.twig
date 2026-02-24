@@ -1,0 +1,57 @@
+<ul class="flex flex-col list-none p-0 m-0 bg-white">
+	{% for item in items %}
+		{% set is_active = item.current or item.current_item_ancestor or item.current_item_parent %}
+
+		{# Check if any child is active #}
+		{% set child_is_active = false %}
+		{% if item.children is defined and item.children|length > 0 %}
+			{% for child in item.children %}
+				{% if child.current or child.current_item_ancestor %}
+					{% set child_is_active = true %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% set parent_should_be_active = is_active or child_is_active %}
+
+		<li class="border-b border-gray-50 last:border-0">
+			{% if item.children is defined and item.children|length > 0 %}
+				{# Parent with children - separate link and toggle #}
+				<div class="mobile-dropdown" data-open="{{ child_is_active ? 'true' : 'false' }}">
+					<div class="relative flex items-center justify-between py-4">
+						<a href="{{ item.link|e('esc_url') }}" class="mobile-menu-link flex-1 text-lg font-semibold {{ parent_should_be_active ? 'text-primary' : 'text-gray-800' }}" {{ item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
+							{{ item.title }}
+							{# Underline indicator when parent or child is active #}
+							{% if parent_should_be_active %}
+								<span class="absolute bottom-3 left-0 w-12 h-0.5 bg-primary"></span>
+							{% endif %}
+						</a>
+						<button type="button" class="mobile-dropdown-toggle p-2 -mr-2" aria-label="Toggle submenu">
+							<iconify-icon icon="lucide:chevron-down" class="w-5 h-5 text-gray-500 transition-transform duration-300 group-open/submenu:rotate-180 align-middle" aria-hidden="true"></iconify-icon>
+						</button>
+					</div>
+					<ul class="mobile-dropdown-content pl-4 space-y-4 overflow-hidden transition-all duration-300" style="{{ child_is_active ? 'max-height: 1000px; padding-bottom: 1rem;' : 'max-height: 0; padding-bottom: 0;' }}">
+						{% for child in item.children %}
+							<li>
+								<a href="{{ child.link|e('esc_url') }}" class="mobile-menu-link relative block text-base {{ child.current ? 'text-primary font-bold' : 'text-gray-600' }}" {{ child.is_external or child.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
+									{{ child.title }}
+									{# Underline for active child #}
+									{% if child.current %}
+										<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-primary"></span>
+									{% endif %}
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% else %}
+				<a href="{{ item.link|e('esc_url') }}" class="mobile-menu-link relative block py-4 text-lg font-semibold {{ is_active ? 'text-primary' : 'text-gray-800' }}" {{ item.is_external or item.is_target_blank ? ' target="_blank" rel="noopener noreferrer"' }}>
+					{{ item.title }}
+					{# Underline for active item #}
+					{% if is_active %}
+						<span class="absolute bottom-3 left-0 w-12 h-0.5 bg-primary"></span>
+					{% endif %}
+				</a>
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>

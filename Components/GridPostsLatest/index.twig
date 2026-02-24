@@ -1,51 +1,73 @@
 {% if posts|length > 0 %}
-  <flynt-component name="GridPostsLatest" class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}>
-    <div class="container" data-flow="layout">
-      {% if preContentHtml %}
-        <div data-size="medium" data-align="center" data-text-align="center">
-          {{ preContentHtml|e('wp_kses_post') }}
-        </div>
-      {% endif %}
-      <ul class="grid" {{ options.maxColumns ? 'data-max-columns="' ~ options.maxColumns ~ '"' }}>
-        {% for post in posts %}
-          {% set aria_labelledby_id = uuid ~ '-' ~ loop.index %}
-          <li class="post boxBorder" id="{{ aria_labelledby_id }}" data-theme="reset">
-            <a class="link" href="{{ post.link|e('esc_url') }}" aria-labelledby="{{ aria_labelledby_id }}">
-              {% if post.thumbnail %}
-                <figure class="figure">
-                  <img
-                    class="post-image figure-image lazyload"
-                    src="{{ post.thumbnail.src|resizeDynamic(768, (768 / 3 * 2)|round, 'center') }}"
-                    width="768"
-                    height="{{ (768 / 3 * 2)|round }}"
-                    srcset="{{ placeholderImage(768, (768 / 3 * 2)|round, 'rgba(125, 125, 125, 0.1)') }}"
-                    data-srcset="
-                      {{ post.thumbnail.src|resizeDynamic(1920, (1920 / 3 * 2)|round, 'center') }} 1920w,
-                      {{ post.thumbnail.src|resizeDynamic(1600, (1600 / 3 * 2)|round, 'center') }} 1600w,
-                      {{ post.thumbnail.src|resizeDynamic(1440, (1440 / 3 * 2)|round, 'center') }} 1440w,
-                      {{ post.thumbnail.src|resizeDynamic(1366, (1366 / 3 * 2)|round, 'center') }} 1366w,
-                      {{ post.thumbnail.src|resizeDynamic(1024, (1024 / 3 * 2)|round, 'center') }} 1024w,
-                      {{ post.thumbnail.src|resizeDynamic(768, (768 / 3 * 2)|round, 'center') }} 768w,
-                      {{ post.thumbnail.src|resizeDynamic(640, (640 / 3 * 2)|round, 'center') }} 640w"
-                    data-sizes="auto"
-                    alt="{{ post.thumbnail.alt|e ?: post.title }}">
-                </figure>
-              {% endif %}
-              <div class="content boxPadding">
-                <h2 class="h5">{{ post.title }}</h2>
-                <p>{{ post.excerpt.read_more(false) }}</p>
-              </div>
-              <footer class="footer">
-                <small class="readingTime">{{ labels.readingTime|replace({'%d': post.content|readingtime}) }}</small>
-                <span class="button button--text">{{ labels.readMore }}</span>
-              </footer>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-      <div data-size="medium" data-align="center" data-text-align="center">
-        <a href="{{ postTypeArchiveLink|e('esc_url') }}" class="button button--text">{{ labels.allPosts }}</a>
-      </div>
-    </div>
-  </flynt-component>
+	<flynt-component name="GridPostsLatest">
+		<div
+			class="container py-16">
+
+			{# Header Section #}
+			{% if preContentHtml %}
+				<div class="mb-12 prose max-w-none lg:prose-lg">
+					{{ preContentHtml|e('wp_kses_post') }}
+				</div>
+			{% endif %}
+
+			{# Grid Layout #}
+			<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				{% for post in posts %}
+					{% set aria_labelledby_id = uuid ~ '-' ~ loop.index %}
+					<li
+						class="relative flex flex-col bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-300" id="{{ aria_labelledby_id }}">
+
+						{# Image Container #}
+						<a href="{{ post.link|e('esc_url') }}" class="block overflow-hidden aspect-video">
+							{% if post.thumbnail %}
+								<img class="w-full h-full object-cover transition-transform duration-500" src="{{ post.thumbnail.src|resizeDynamic(768, 512, 'center') }}" srcset="{{ post.thumbnail.src|resizeDynamic(384, 256, 'center') }} 384w, {{ post.thumbnail.src|resizeDynamic(768, 512, 'center') }} 768w, {{ post.thumbnail.src|resizeDynamic(1024, 683, 'center') }} 1024w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw" alt="{{ post.thumbnail.alt|e ?: post.title }}" loading="lazy">
+							{% else %}
+								<div class="w-full h-full bg-slate-100 flex items-center justify-center">
+									<span class="text-slate-400">No Image</span>
+								</div>
+							{% endif %}
+						</a>
+
+						{# Content #}
+						<div class="p-6 flex flex-col flex-1 bg-primary/10">
+							<div class="flex-1 grow">
+								<h3 class="text-xl font-bold text-slate-900 leading-tight mb-3 hover:text-primary transition-colors">
+									<a href="{{ post.link|e('esc_url') }}" class="hover:underline">
+										{{ post.title }}
+									</a>
+								</h3>
+								<div class="text-slate-600 line-clamp-5 mb-4 text-sm leading-relaxed">
+									{{ post.excerpt.read_more(false) }}
+								</div>
+							</div>
+
+							{# Footer/Meta #}
+							<div class="mt-10 pt-4 border-t border-primary flex items-center justify-between">
+								<span class="text-xs font-medium uppercase tracking-wider text-black/50">
+									{{ labels.readingTime|replace({'%d': post.content|readingtime}) }}
+								</span>
+
+								{# Card Action using your Global Button #}
+								{% include "templates/_partials/button.twig" with {
+                    link: post.link,
+                    text: labels.readMore,
+                    variant: 'outlined',
+                  } only %}
+							</div>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+
+			{# Bottom CTA using your Global Button #}
+			<div class="mt-16 flex justify-center">
+				{% include "templates/_partials/button.twig" with {
+        link: postTypeArchiveLink,
+        text: labels.allPosts,
+        variant: 'text'
+      } only %}
+			</div>
+
+		</div>
+	</flynt-component>
 {% endif %}

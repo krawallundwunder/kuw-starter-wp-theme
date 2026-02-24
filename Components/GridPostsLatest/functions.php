@@ -2,7 +2,6 @@
 
 namespace Flynt\Components\GridPostsLatest;
 
-use Flynt\FieldVariables;
 use Flynt\Utils\Options;
 use Timber\Timber;
 
@@ -82,30 +81,6 @@ function getACFLayout(): array
         'save_terms' => 0,
         'load_terms' => 0,
         'return_format' => 'object',
-      ],
-      [
-        'label' => __('Options', 'flynt'),
-        'name' => 'optionsTab',
-        'type' => 'tab',
-        'placement' => 'top',
-        'endpoint' => 0,
-      ],
-      [
-        'label' => '',
-        'name' => 'options',
-        'type' => 'group',
-        'layout' => 'row',
-        'sub_fields' => [
-          FieldVariables\getTheme(),
-          [
-            'label' => __('Max Posts', 'flynt'),
-            'name' => 'maxPosts',
-            'type' => 'number',
-            'default_value' => 3,
-            'min' => 1,
-            'step' => 1,
-          ],
-        ],
       ],
     ],
   ];

@@ -1,0 +1,164 @@
+{
+    "key": "group_696664da04169",
+    "title": "Teammitglied Felder",
+    "fields": [
+        {
+            "key": "field_696664da18f1c",
+            "label": "Teammitglied Bild",
+            "name": "team_member_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Profilbild des Teammitglieds",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_6966655718f1e",
+            "label": "Teammitglied Position",
+            "name": "team_member_position",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Rolle / Position im Unternehmen",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6966657418f1f",
+            "label": "Teammitglied Links",
+            "name": "team_member_links",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Für Social Media / Website / Profilseiten",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Zeile hinzufügen",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_696669a44e4df",
+                    "label": "Link Bild",
+                    "name": "link_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Fügen Sie das Bild des Social Media hinzu",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "thumbnail",
+                    "parent_repeater": "field_6966657418f1f"
+                },
+                {
+                    "key": "field_696665b618f21",
+                    "label": "Link URL",
+                    "name": "link_url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "URL des Links",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_6966657418f1f"
+                }
+            ]
+        },
+        {
+            "key": "field_696665d018f22",
+            "label": "Teammitglied wird angezeigt",
+            "name": "team_member_is_shown",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Teammitglied auf der Seite anzeigen",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Wird angezeigt",
+            "ui_off_text": "Nicht angezeigt",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "team_member"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1768469568
+}

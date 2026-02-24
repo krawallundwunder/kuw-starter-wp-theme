@@ -1,4 +1,5 @@
 import 'vite/modulepreload-polyfill';
+import 'iconify-icon';
 import FlyntComponent from './scripts/FlyntComponent';
 
 import 'lazysizes';

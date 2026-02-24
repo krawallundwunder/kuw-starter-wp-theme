@@ -1,0 +1,28 @@
+<flynt-component name="ModulGalleryMasonry">
+	<section class="modul-masonry py-16" id="{{ anchor }}">
+		<div
+			class="container mx-auto px-4">
+
+			{# Header #}
+			{% if tag or title or description %}
+				<div class="mb-10">
+					{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign } %}
+				</div>
+			{% endif %}
+
+			{# Masonry Grid #}
+			<div class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[300px]">
+				{% for item in masonryItems %}
+					{% set formatClass = { 'tall': 'row-span-2', 'wide': 'col-span-2' }[item.itemFormat]|default('') %}
+
+					<div class="relative overflow-hidden rounded-sm {{ formatClass }}">
+						{% if item.image %}
+							<img class="absolute inset-0 h-full w-full object-cover" src="{{ item.image.src }}" alt="{{ item.image.alt }}" loading="lazy">
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</section>
+</flynt-component>

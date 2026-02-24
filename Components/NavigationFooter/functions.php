@@ -12,7 +12,22 @@ add_action('init', function (): void {
 });
 
 add_filter('Flynt/addComponentData?name=NavigationFooter', function (array $data): array {
+  $globalOptions = Options::getGlobal('Seiten Einstellungen');
+  $footerSettings = $globalOptions['footer_settings'] ?? [];
+  $data['footer_logo'] = $footerSettings['footer_logo'] ?? [];
+  $data['footer_social_media'] = $footerSettings['footer_social_media'] ?? [];
+  $data['footer_address'] = $footerSettings['footer_address'] ?? '';
   $data['menu'] = Timber::get_menu('navigation_footer') ?? Timber::get_pages_menu();
+
+  $acfLogo = $globalOptions['logo'] ?? [];
+  $wpLogoID = get_theme_mod('custom_logo');
+  $footerLogo = $data['footer_logo'] ?? [];
+  $wpLogo = $wpLogoID ? wp_get_attachment_image_url($wpLogoID, 'full') : null;
+  $data['logo'] = [
+    'src' => $acfLogo ?: $wpLogo ?: $footerLogo ?: null,
+    'alt' => get_bloginfo('name'),
+  ];
+
 
   return $data;
 });
@@ -24,16 +39,6 @@ Options::addTranslatable('NavigationFooter', [
     'type' => 'tab',
     'placement' => 'top',
     'endpoint' => 0,
-  ],
-  [
-    'label' => __('Text', 'flynt'),
-    'name' => 'contentHtml',
-    'type' => 'wysiwyg',
-    'delay' => 0,
-    'media_upload' => 0,
-    'required' => 1,
-    'toolbar' => 'basic',
-    'default_value' => '©&nbsp;' . date_i18n('Y') . ' ' . get_bloginfo('name'),
   ],
   [
     'label' => __('Labels', 'flynt'),

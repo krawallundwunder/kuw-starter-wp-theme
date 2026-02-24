@@ -13,12 +13,24 @@ add_action('init', function (): void {
 });
 
 add_filter('Flynt/addComponentData?name=Navigation', function (array $data): array {
+  $globalOptions = Options::getGlobal('Seiten Einstellungen');
   $data['menu'] = Timber::get_menu('navigation_main') ?? Timber::get_pages_menu();
+
+  $acfLogo = $globalOptions['logo'] ?? null;
+  $wpLogoID = get_theme_mod('custom_logo');
+  $wpLogo = $wpLogoID ? wp_get_attachment_image_url($wpLogoID, 'full') : null;
+  $defaultLogo = Asset::requireUrl('assets/images/logo.png');
+
+  $logoSrc = null;
+  if ($acfLogo && is_object($acfLogo) && method_exists($acfLogo, 'src')) {
+    $logoSrc = $acfLogo->src();
+  } elseif (is_array($acfLogo) && isset($acfLogo['src'])) {
+    $logoSrc = $acfLogo['src'];
+  }
+
   $data['logo'] = [
-    'src' => get_theme_mod('custom_logo')
-      ? wp_get_attachment_image_url(get_theme_mod('custom_logo'), 'full')
-      : Asset::requireUrl('assets/images/logo.png'),
-    'alt' => get_bloginfo('name'),
+    'src' => $logoSrc ?: $wpLogo ?: $defaultLogo,
+    'alt' => get_bloginfo('name') ?: '',
   ];
 
   return $data;

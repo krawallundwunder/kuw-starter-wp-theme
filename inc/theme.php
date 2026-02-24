@@ -40,16 +40,6 @@ Options::addTranslatable('Theme', [
         ],
       ],
       [
-        'label' => __('Skip to main content', 'flynt'),
-        'name' => 'skipToMainContent',
-        'type' => 'text',
-        'default_value' => __('Skip to main content', 'flynt'),
-        'required' => 1,
-        'wrapper' => [
-          'width' => '50',
-        ],
-      ],
-      [
         'label' => __('Main Content – Aria Label', 'flynt'),
         'name' => 'mainContentAriaLabel',
         'type' => 'text',

@@ -4,6 +4,16 @@ namespace Flynt\Components\BlockPostFooter;
 
 use Flynt\Utils\Options;
 
+add_filter('Flynt/addComponentData?name=BlockPostFooter', function (array $data): array {
+  $data['postTypeArchiveLink'] = get_option('page_for_posts')
+    ? get_permalink(get_option('page_for_posts'))
+    : get_post_type_archive_link('post');
+
+  return $data;
+});
+
+
+
 Options::addTranslatable('BlockPostFooter', [
   [
     'label' => __('Labels', 'flynt'),
@@ -34,6 +44,13 @@ Options::addTranslatable('BlockPostFooter', [
         'wrapper' => [
           'width' => '50',
         ],
+      ],
+      [
+        'label' => __('Back to Blog Label', 'flynt'),
+        'name' => 'allPosts',
+        'type' => 'text',
+        'default_value' => __('Back to Overview', 'flynt'),
+        'wrapper' => ['width' => '50'],
       ],
     ],
   ],
