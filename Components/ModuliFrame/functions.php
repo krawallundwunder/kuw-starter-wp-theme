@@ -6,7 +6,7 @@ function getACFLayout(): array
 {
   return [
     'name' => 'ModuliFrame',
-    'label' => __('Modul: OpenGeno Einbettung', 'flynt'),
+    'label' => __('Modul: Code/Seiten-Einbettung', 'flynt'),
     'sub_fields' => [
       [
         'label' => __('Inhalt', 'flynt'),
@@ -36,12 +36,39 @@ function getACFLayout(): array
         'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
       ],
       [
+        'label' => __('Option 1: iFrame Code', 'flynt'),
+        'name' => 'accordionCustomCode',
+        'type' => 'accordion',
+        'open' => 0,
+        'multi_expand' => 1,
+        'endpoint' => 0,
+      ],
+      [
+        'label' => __('iFrame Code', 'flynt'),
+        'instructions' => __('Fügen Sie hier den iFrame-Code ein (z. B. von Google Maps, Calendly, Typeform). Wenn dieser Code angegeben ist, wird die iFrame URL ignoriert. ⚠️ Sicherheitshinweis: Dieser Code wird ungefiltert ausgegeben. Fügen Sie ausschließlich Code aus vertrauenswürdigen Quellen ein.', 'flynt'),
+        'name' => 'customCode',
+        'type' => 'textarea',
+        'rows' => 6,
+      ],
+      [
+        'label' => __('Option 2: iFrame URL', 'flynt'),
+        'name' => 'accordionIframeUrl',
+        'type' => 'accordion',
+        'open' => 0,
+        'multi_expand' => 1,
+        'endpoint' => 0,
+      ],
+      [
         'label' => __('iFrame URL', 'flynt'),
-        'instructions' => __('URL der Seite, die eingebunden werden soll.', 'flynt'),
+        'instructions' => __('Alternativ zum Einbettungs-Code: URL der Seite, die direkt eingebunden werden soll.', 'flynt'),
         'name' => 'iframeUrl',
         'type' => 'url',
-        'default_value' => 'https://staging.opengeno.de/neuer-test/beitritt?embed=true',
-        'required' => 1,
+      ],
+      [
+        'name' => 'accordionEnd',
+        'label' => '',
+        'type' => 'accordion',
+        'endpoint' => 1,
       ],
       [
         'label' => __('Einstellungen', 'flynt'),
@@ -53,10 +80,10 @@ function getACFLayout(): array
         'name' => 'textAlign',
         'type' => 'select',
         'choices' => [
-          'start' => __('Links', 'flynt'),
-          'center' => __('Zentriert', 'flynt'),
+          'text-start' => __('Links', 'flynt'),
+          'text-center' => __('Zentriert', 'flynt'),
         ],
-        'default_value' => 'start',
+        'default_value' => 'text-start',
         'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
         'required' => 1,
       ],
