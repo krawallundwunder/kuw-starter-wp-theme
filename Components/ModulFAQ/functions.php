@@ -28,18 +28,16 @@ function getACFLayout(): array
       [
         'label' => __('Tagline', 'flynt'),
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
-        'placeholder' => __('z. B. FAQ', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'wrapper' => ['width' => '50%'],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
-        'placeholder' => __('z. B. Häufig gestellte Fragen', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'wrapper' => ['width' => '75%'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),

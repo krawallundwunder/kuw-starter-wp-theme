@@ -29,16 +29,14 @@ function getACFLayout(): array
         'name' => 'tag',
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
-        'placeholder' => __('z. B. Stimmen', 'flynt'),
-        'wrapper' => ['width' => '50%'],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
         'instructions' => __('Titel für den gesamten Slider.', 'flynt'),
-        'placeholder' => __('z. B. Das sagen unsere Mitglieder', 'flynt'),
-        'wrapper' => ['width' => '75%'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),

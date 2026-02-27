@@ -64,7 +64,7 @@ function getACFLayout(): array
 {
   return [
     'name' => 'modulColumns',
-    'label' => __('Modul: Statische Inhaltskacheln', 'flynt'),
+    'label' => __('Modul: Inhaltskacheln', 'flynt'),
     'sub_fields' => [
       [
         'label' => __('Inhalt', 'flynt'),
@@ -77,16 +77,14 @@ function getACFLayout(): array
         'name' => 'tag',
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
-        'placeholder' => __('z. B. Leistungen', 'flynt'),
-        'wrapper' => ['width' => '50%'],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
         'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
-        'placeholder' => __('z. B. Unsere Leistungen', 'flynt'),
-        'wrapper' => ['width' => '75%'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
@@ -237,7 +235,7 @@ function getACFLayout(): array
           [
             'label' => __('Bildformat', 'flynt'),
             'instructions' => __(
-              'Bestimmt die Form aller Bilder (z. B. breiter oder höher).<br><strong>Wichtig für Icons/Logos:</strong> Diese Option schneidet Bilder zu. Für unverzerrte Icons aktivieren Sie bitte „Abgerundete Bilder".',
+              'Bestimmt die Breite/Höhe aller Bilder. SVGs sind davon nicht betroffen.',
               'flynt',
             ),
             'name' => 'aspectRatio',
@@ -256,7 +254,7 @@ function getACFLayout(): array
             'label' => __('Abgerundete Bilder', 'flynt'),
             'name' => 'isImageRounded',
             'instructions' => __(
-              'Aktivieren, um Bilder mit abgerundeten Ecken darzustellen.',
+              'Aktivieren, um Bilder mit abgerundeten Ecken darzustellen. SVGs sind davon nicht betroffen.',
               'flynt',
             ),
             'type' => 'true_false',

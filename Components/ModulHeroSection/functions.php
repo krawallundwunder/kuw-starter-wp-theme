@@ -22,7 +22,7 @@ function getACFLayout()
 {
   return [
     'name' => 'ModulHeroSection',
-    'label' => __('Modul: Startbereich', 'flynt'),
+    'label' => __('Modul: Hero-Bereich', 'flynt'),
     'sub_fields' => [
       [
         'label' => __('Inhalt', 'flynt'),
@@ -35,17 +35,15 @@ function getACFLayout()
         'name' => 'tag',
         'type' => 'text',
         'instructions' => __('Kurzer Tag über der Überschrift.', 'flynt'),
-        'placeholder' => __('z. B. Willkommen', 'flynt'),
-        'wrapper' => ['width' => '50%'],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Überschrift', 'flynt'),
         'name' => 'headline',
         'type' => 'text',
         'instructions' => __('Hauptüberschrift des Startbereichs. Kurz und einprägsam.', 'flynt'),
-        'placeholder' => __('z. B. Gemeinsam mehr erreichen', 'flynt'),
         'tabs' => 'visual',
-        'wrapper' => ['width' => '75%'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Unterzeile', 'flynt'),
