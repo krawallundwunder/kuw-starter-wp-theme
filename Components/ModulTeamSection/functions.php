@@ -14,15 +14,15 @@ add_filter('Flynt/addComponentData?name=ModulTeamSection', function ($data) {
       [
         'taxonomy' => 'team_group',
         'operator' => 'NOT EXISTS',
-      ]
+      ],
     ],
     'meta_query' => [
       [
         'key' => 'team_member_is_shown',
         'value' => '1',
-        'compare' => '=='
-      ]
-    ]
+        'compare' => '==',
+      ],
+    ],
   ];
 
   $ungroupedMembers = get_posts($ungroupedArgs);
@@ -34,7 +34,7 @@ add_filter('Flynt/addComponentData?name=ModulTeamSection', function ($data) {
     $groupedMembers[] = [
       'title' => '', // No title for ungrouped
       'members' => $ungroupedMembers,
-      'is_ungrouped' => true
+      'is_ungrouped' => true,
     ];
   }
 
@@ -55,15 +55,15 @@ add_filter('Flynt/addComponentData?name=ModulTeamSection', function ($data) {
             'taxonomy' => 'team_group',
             'field' => 'term_id',
             'terms' => $term->term_id,
-          ]
+          ],
         ],
         'meta_query' => [
           [
             'key' => 'team_member_is_shown',
             'value' => '1',
-            'compare' => '=='
-          ]
-        ]
+            'compare' => '==',
+          ],
+        ],
       ];
 
       $members = get_posts($args);
@@ -75,7 +75,7 @@ add_filter('Flynt/addComponentData?name=ModulTeamSection', function ($data) {
         $groupedMembers[] = [
           'title' => $term->name,
           'members' => $members,
-          'is_ungrouped' => false
+          'is_ungrouped' => false,
         ];
       }
     }
@@ -102,7 +102,7 @@ function getACFLayout()
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
         'placeholder' => __('z. B. Unser Team', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -110,7 +110,7 @@ function getACFLayout()
         'type' => 'text',
         'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
         'placeholder' => __('z. B. Die Menschen hinter Neue Wege', 'flynt'),
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
@@ -128,13 +128,16 @@ function getACFLayout()
         'label' => __('Text im Kopfbereich', 'flynt'),
         'name' => 'textAlign',
         'type' => 'button_group',
-        'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
         'choices' => [
           'text-start' => __('Links', 'flynt'),
           'text-center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'text-start',
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
     ],
   ];

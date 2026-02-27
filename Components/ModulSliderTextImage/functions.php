@@ -12,7 +12,6 @@ add_filter('Flynt/addComponentData?name=ModulSliderTextImage', function (array $
   return $data;
 });
 
-
 function getACFLayout(): array
 {
   return [
@@ -31,7 +30,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
         'placeholder' => __('z. B. Stimmen', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -39,7 +38,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Titel für den gesamten Slider.', 'flynt'),
         'placeholder' => __('z. B. Das sagen unsere Mitglieder', 'flynt'),
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
@@ -51,7 +50,10 @@ function getACFLayout(): array
         'label' => __('Slides', 'flynt'),
         'name' => 'slides',
         'type' => 'repeater',
-        'instructions' => __('Hier haben Sie die Möglichkeit, Ihren Slider mit Inhalten zu füllen.', 'flynt'),
+        'instructions' => __(
+          'Hier haben Sie die Möglichkeit, Ihren Slider mit Inhalten zu füllen.',
+          'flynt',
+        ),
         'layout' => 'row',
         'min' => 1,
         'button_label' => __('Slide hinzufügen', 'flynt'),
@@ -59,7 +61,7 @@ function getACFLayout(): array
           [
             'label' => __('Inhalt', 'flynt'),
             'name' => 'contentSettings',
-            'type' => 'accordion'
+            'type' => 'accordion',
           ],
           [
             'label' => __('Fließtext', 'flynt'),
@@ -75,7 +77,7 @@ function getACFLayout(): array
             'type' => 'text',
             'instructions' => __('Name des Autors oder der Person.', 'flynt'),
             'wrapper' => [
-              'width' => '33',
+              'width' => '33%',
             ],
           ],
           [
@@ -84,7 +86,7 @@ function getACFLayout(): array
             'type' => 'text',
             'instructions' => __('z. B. „Geschäftsführer", „Mitglied".', 'flynt'),
             'wrapper' => [
-              'width' => '33',
+              'width' => '33%',
             ],
           ],
           [
@@ -95,14 +97,17 @@ function getACFLayout(): array
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
             'wrapper' => [
-              'width' => '33',
+              'width' => '33%',
             ],
           ],
           [
             'label' => __('Hintergrundfarbe', 'flynt'),
             'name' => 'bgColorClass',
             'type' => 'select',
-            'instructions' => __('Wählen Sie eine Hintergrundfarbe für diesen Abschnitt aus.', 'flynt'),
+            'instructions' => __(
+              'Wählen Sie eine Hintergrundfarbe für diesen Abschnitt aus.',
+              'flynt',
+            ),
             'choices' => [
               'bg-primary/20' => __('Primärfarbe', 'flynt'),
               'bg-secondary/20' => __('Sekundärfarbe', 'flynt'),
@@ -111,14 +116,14 @@ function getACFLayout(): array
             'default_value' => 'bg-primary/20',
             'allow_null' => 0,
           ],
-        ]
+        ],
       ],
       [
         'label' => __('Einstellungen', 'flynt'),
         'name' => 'optionsTab',
         'type' => 'tab',
         'placement' => 'top',
-        'endpoint' => 0
+        'endpoint' => 0,
       ],
       [
         'label' => '',
@@ -130,7 +135,10 @@ function getACFLayout(): array
             'label' => __('Text im Kopfbereich', 'flynt'),
             'name' => 'textAlign',
             'type' => 'button_group',
-            'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+            'instructions' => __(
+              'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+              'flynt',
+            ),
             'choices' => [
               'text-start' => __('Links', 'flynt'),
               'text-center' => __('Zentriert', 'flynt'),
@@ -139,39 +147,45 @@ function getACFLayout(): array
             'allow_null' => 0,
             'return_format' => 'value',
             'layout' => 'horizontal',
-            'wrapper' => ['width' => '50'],
+            'wrapper' => ['width' => '50%'],
           ],
 
           [
             'label' => __('Autoplay aktivieren', 'flynt'),
             'name' => 'autoplay',
             'type' => 'true_false',
-            'instructions' => __('Aktivieren oder deaktivieren Sie die automatische Wiedergabe für den Slider.', 'flynt'),
+            'instructions' => __(
+              'Aktivieren oder deaktivieren Sie die automatische Wiedergabe für den Slider.',
+              'flynt',
+            ),
             'default_value' => 0,
             'ui' => 1,
-            'wrapper' => ['width' => '25'],
+            'wrapper' => ['width' => '25%'],
           ],
           [
             'label' => __('Autoplay Geschwindigkeit (in Millisekunden)', 'flynt'),
             'name' => 'autoplaySpeed',
             'type' => 'number',
-            'instructions' => __('Legen Sie die Geschwindigkeit der automatischen Wiedergabe in Millisekunden fest.', 'flynt'),
+            'instructions' => __(
+              'Legen Sie die Geschwindigkeit der automatischen Wiedergabe in Millisekunden fest.',
+              'flynt',
+            ),
             'min' => 2000,
             'step' => 1,
             'default_value' => 4000,
-            'wrapper' => ['width' => '25'],
+            'wrapper' => ['width' => '25%'],
             'conditional_logic' => [
               [
                 [
                   'fieldPath' => 'autoplay',
                   'operator' => '==',
-                  'value' => 1
-                ]
-              ]
+                  'value' => 1,
+                ],
+              ],
             ],
           ],
-        ]
-      ]
+        ],
+      ],
     ],
   ];
 }

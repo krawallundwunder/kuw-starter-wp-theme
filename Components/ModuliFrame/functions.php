@@ -20,7 +20,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
         'placeholder' => __('z. B. Formular', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -28,7 +28,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
         'placeholder' => __('z. B. Jetzt Mitglied werden', 'flynt'),
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
@@ -46,7 +46,10 @@ function getACFLayout(): array
       ],
       [
         'label' => __('iFrame Code', 'flynt'),
-        'instructions' => __('Fügen Sie hier den iFrame-Code ein (z. B. von Google Maps, Calendly, Typeform). Wenn dieser Code angegeben ist, wird die iFrame URL ignoriert. ⚠️ Sicherheitshinweis: Dieser Code wird ungefiltert ausgegeben. Fügen Sie ausschließlich Code aus vertrauenswürdigen Quellen ein.', 'flynt'),
+        'instructions' => __(
+          'Fügen Sie hier den iFrame-Code ein (z. B. von Google Maps, Calendly, Typeform). Wenn dieser Code angegeben ist, wird die iFrame URL ignoriert. ⚠️ Sicherheitshinweis: Dieser Code wird ungefiltert ausgegeben. Fügen Sie ausschließlich Code aus vertrauenswürdigen Quellen ein.',
+          'flynt',
+        ),
         'name' => 'customCode',
         'type' => 'textarea',
         'rows' => 6,
@@ -61,7 +64,10 @@ function getACFLayout(): array
       ],
       [
         'label' => __('iFrame URL', 'flynt'),
-        'instructions' => __('Alternativ zum Einbettungs-Code: URL der Seite, die direkt eingebunden werden soll.', 'flynt'),
+        'instructions' => __(
+          'Alternativ zum Einbettungs-Code: URL der Seite, die direkt eingebunden werden soll.',
+          'flynt',
+        ),
         'name' => 'iframeUrl',
         'type' => 'url',
       ],
@@ -85,27 +91,35 @@ function getACFLayout(): array
           'text-center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'text-start',
-        'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
-        'wrapper' => ['width' => '33'],
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Minimale Höhe (in px)', 'flynt'),
-        'instructions' => __('Start-Höhe des iFrames. Wichtig, falls das automatische Anpassen nicht funktioniert.', 'flynt'),
+        'instructions' => __(
+          'Start-Höhe des iFrames. Wichtig, falls das automatische Anpassen nicht funktioniert.',
+          'flynt',
+        ),
         'name' => 'minHeight',
         'type' => 'number',
         'default_value' => 800,
-        'wrapper' => ['width' => '33'],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Scrollbalken erlauben?', 'flynt'),
-        'instructions' => __('Falls der Inhalt länger ist als die Höhe, wird ein Scrollbalken angezeigt.', 'flynt'),
+        'instructions' => __(
+          'Falls der Inhalt länger ist als die Höhe, wird ein Scrollbalken angezeigt.',
+          'flynt',
+        ),
         'name' => 'allowScroll',
         'type' => 'true_false',
         'default_value' => 0,
         'ui' => 1,
-        'wrapper' => ['width' => '33'],
+        'wrapper' => ['width' => '33%'],
       ],
-
     ],
   ];
 }

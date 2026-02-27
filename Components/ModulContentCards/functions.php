@@ -5,54 +5,53 @@ namespace Flynt\Components\ModulContentCards;
 use Timber\Timber;
 
 add_filter('Flynt/addComponentData?name=ModulContentCards', function ($data) {
+  $data['taxonomies'] = $data['taxonomies'] ?: [];
 
-    $data['taxonomies'] = $data['taxonomies'] ?: [];
+  // Base Query Args
+  $queryArgs = [
+    'post_type' => 'content_card',
+    'posts_per_page' => 9,
+    'status' => 'publish',
+  ];
 
-    // Base Query Args
-    $queryArgs = [
-        'post_type' => 'content_card',
-        'posts_per_page' => 9,
-        'status' => 'publish',
+  // NUR wenn Kategorien ausgewählt wurden, filter hinzufügen
+  if (!empty($data['taxonomies'])) {
+    $queryArgs['tax_query'] = [
+      [
+        'taxonomy' => 'content_card_category',
+        'field' => 'term_id',
+        'terms' => array_map(fn($tax) => $tax->term_id, $data['taxonomies']),
+      ],
     ];
+  }
 
-    // NUR wenn Kategorien ausgewählt wurden, filter hinzufügen
-    if (!empty($data['taxonomies'])) {
-        $queryArgs['tax_query'] = [
-            [
-                'taxonomy' => 'content_card_category',
-                'field' => 'term_id',
-                'terms' => array_map(fn($tax) => $tax->term_id, $data['taxonomies']),
-            ],
-        ];
-    }
+  $data['items'] = Timber::get_posts($queryArgs);
 
-    $data['items'] = Timber::get_posts($queryArgs);
+  if (empty($data['items'])) {
+    $data['items'] = [];
+  }
 
+  if (!empty($data['ctaButtons'])) {
+    $data['buttons'] = array_map(
+      fn($btn) => [
+        'text' => $btn['button']['title'] ?? '',
+        'link' => $btn['button']['url'] ?? '',
+      ],
+      array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button'])),
+    );
+  }
 
-    if (empty($data['items'])) {
-        $data['items'] = [];
-    }
+  $ratio = $data['options']['aspectRatio'] ?? '16:9';
+  $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
 
-    if (!empty($data['ctaButtons'])) {
-        $data['buttons'] = array_map(
-            fn($btn) => [
-                'text' => $btn['button']['title'] ?? '',
-                'link' => $btn['button']['url'] ?? '',
-            ],
-            array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button']))
-        );
-    }
+  $cardCount = count($data['items']); // ✅ Jetzt safe!
+  $lgColumns = min(max($cardCount, 1), 3);
+  $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][
+    $lgColumns
+  ];
 
-    $ratio = $data['options']['aspectRatio'] ?? '16:9';
-    $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
-
-    $cardCount = count($data['items']); // ✅ Jetzt safe!
-    $lgColumns = min(max($cardCount, 1), 3);
-    $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][$lgColumns];
-
-    return $data;
+  return $data;
 });
-
 
 function getACFLayout()
 {
@@ -73,7 +72,7 @@ function getACFLayout()
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
         'placeholder' => __('z. B. Leistungen', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -81,14 +80,14 @@ function getACFLayout()
         'type' => 'text',
         'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
         'placeholder' => __('z. B. Unsere Leistungen', 'flynt'),
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
         'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
         'type' => 'textarea',
-        'wrapper' => ['width' => '100'],
+        'wrapper' => ['width' => '100%'],
       ],
       [
         'label' => __('Buttons', 'flynt'),
@@ -103,7 +102,7 @@ function getACFLayout()
             'label' => __('Button', 'flynt'),
             'name' => 'button',
             'type' => 'link',
-            'return_format' => 'array'
+            'return_format' => 'array',
           ],
         ],
       ],
@@ -117,7 +116,10 @@ function getACFLayout()
         'label' => __('Text im Kopfbereich', 'flynt'),
         'name' => 'textAlign',
         'type' => 'button_group',
-        'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
         'choices' => [
           'text-start' => __('Links', 'flynt'),
           'text-center' => __('Zentriert', 'flynt'),
@@ -126,7 +128,7 @@ function getACFLayout()
         'allow_null' => 0,
         'return_format' => 'value',
         'layout' => 'horizontal',
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Bildformat', 'flynt'),
@@ -139,7 +141,7 @@ function getACFLayout()
         ],
         'default_value' => '16:9',
         'ui' => 1,
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Kategorien', 'flynt'),

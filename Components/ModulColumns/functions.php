@@ -29,7 +29,7 @@ add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
         $column['image_url'] = $imageUrl;
         $column['image_alt'] = $imageAlt;
         $extension = strtolower(pathinfo($imageUrl, PATHINFO_EXTENSION));
-        $column['isSvg'] = ($extension === 'svg');
+        $column['isSvg'] = $extension === 'svg';
 
         if ($column['isSvg']) {
           $size = $column['iconSize'] ?? 'normal';
@@ -53,7 +53,7 @@ add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
   }
 
   $ratio = $data['options']['aspectRatio'] ?? '16:9';
-  $data['aspectRatioClass'] = ($ratio === '4:3') ? 'aspect-[4/3]' : 'aspect-video';
+  $data['aspectRatioClass'] = $ratio === '4:3' ? 'aspect-[4/3]' : 'aspect-video';
   $data['textAlignmentClass'] = 'text-' . ($data['options']['textAlignment'] ?? 'start');
   $data['isImageRounded'] = $data['options']['isImageRounded'] ?? false;
 
@@ -78,7 +78,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
         'placeholder' => __('z. B. Leistungen', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -86,7 +86,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
         'placeholder' => __('z. B. Unsere Leistungen', 'flynt'),
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
@@ -131,7 +131,7 @@ function getACFLayout(): array
             'library' => 'all',
             'max_size' => 4,
             'mime_types' => 'jpg,jpeg,png,svg,webp',
-            'wrapper' => ['width' => '25%']
+            'wrapper' => ['width' => '25%'],
           ],
           [
             'label' => __('Icon Größe', 'flynt'),
@@ -164,7 +164,7 @@ function getACFLayout(): array
               'center' => __('Zentriert', 'flynt'),
             ],
             'default_value' => 'center',
-            'wrapper' => ['width' => '20%']
+            'wrapper' => ['width' => '20%'],
           ],
           [
             'label' => __('Tagline', 'flynt'),
@@ -172,8 +172,8 @@ function getACFLayout(): array
             'type' => 'text',
             'instructions' => __('Kurzer Tag über dem Spaltentitel.', 'flynt'),
             'wrapper' => [
-              'width' => '20%'
-            ]
+              'width' => '20%',
+            ],
           ],
           [
             'label' => __('Titel', 'flynt'),
@@ -181,8 +181,8 @@ function getACFLayout(): array
             'type' => 'text',
             'instructions' => __('Titel der Spalte.', 'flynt'),
             'wrapper' => [
-              'width' => '20%'
-            ]
+              'width' => '20%',
+            ],
           ],
           [
             'label' => __('Beschreibung', 'flynt'),
@@ -191,8 +191,8 @@ function getACFLayout(): array
             'instructions' => __('Beschreibungstext der Spalte.', 'flynt'),
             'tabs' => 'visual',
             'wrapper' => [
-              'width' => '25%'
-            ]
+              'width' => '25%',
+            ],
           ],
           [
             'label' => __('Button Link', 'flynt'),
@@ -201,10 +201,10 @@ function getACFLayout(): array
             'instructions' => __('Button für die Kachel', 'flynt'),
             'return_format' => 'array',
             'wrapper' => [
-              'width' => '15%'
-            ]
-          ]
-        ]
+              'width' => '15%',
+            ],
+          ],
+        ],
       ],
       [
         'label' => __('Einstellungen', 'flynt'),
@@ -220,7 +220,10 @@ function getACFLayout(): array
           [
             'label' => __('Text im Kopfbereich', 'flynt'),
             'name' => 'textAlignment',
-            'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+            'instructions' => __(
+              'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+              'flynt',
+            ),
             'type' => 'select',
             'choices' => [
               'start' => __('Links', 'flynt'),
@@ -228,12 +231,15 @@ function getACFLayout(): array
             ],
             'default_value' => 'start',
             'wrapper' => [
-              'width' => '50%'
-            ]
+              'width' => '50%',
+            ],
           ],
           [
             'label' => __('Bildformat', 'flynt'),
-            'instructions' => __('Bestimmt die Form aller Bilder (z. B. breiter oder höher).<br><strong>Wichtig für Icons/Logos:</strong> Diese Option schneidet Bilder zu. Für unverzerrte Icons aktivieren Sie bitte „Abgerundete Bilder".', 'flynt'),
+            'instructions' => __(
+              'Bestimmt die Form aller Bilder (z. B. breiter oder höher).<br><strong>Wichtig für Icons/Logos:</strong> Diese Option schneidet Bilder zu. Für unverzerrte Icons aktivieren Sie bitte „Abgerundete Bilder".',
+              'flynt',
+            ),
             'name' => 'aspectRatio',
             'type' => 'select',
             'choices' => [
@@ -243,21 +249,24 @@ function getACFLayout(): array
             'default_value' => '16:9',
             'ui' => 1,
             'wrapper' => [
-              'width' => '50%'
-            ]
+              'width' => '50%',
+            ],
           ],
           [
             'label' => __('Abgerundete Bilder', 'flynt'),
             'name' => 'isImageRounded',
-            'instructions' => __('Aktivieren, um Bilder mit abgerundeten Ecken darzustellen.', 'flynt'),
+            'instructions' => __(
+              'Aktivieren, um Bilder mit abgerundeten Ecken darzustellen.',
+              'flynt',
+            ),
             'type' => 'true_false',
             'ui' => 1,
             'wrapper' => [
               'width' => '50%',
-            ]
+            ],
           ],
-        ]
+        ],
       ],
-    ]
+    ],
   ];
 }

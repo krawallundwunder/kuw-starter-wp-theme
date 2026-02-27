@@ -36,7 +36,7 @@ function getACFLayout()
         'type' => 'text',
         'instructions' => __('Kurzer Tag über der Überschrift.', 'flynt'),
         'placeholder' => __('z. B. Willkommen', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Überschrift', 'flynt'),
@@ -45,7 +45,7 @@ function getACFLayout()
         'instructions' => __('Hauptüberschrift des Startbereichs. Kurz und einprägsam.', 'flynt'),
         'placeholder' => __('z. B. Gemeinsam mehr erreichen', 'flynt'),
         'tabs' => 'visual',
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Unterzeile', 'flynt'),
@@ -53,7 +53,7 @@ function getACFLayout()
         'type' => 'text',
         'instructions' => __('Kurzer Einleitungstext unter der Überschrift.', 'flynt'),
         'tabs' => 'visual',
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Buttons', 'flynt'),
@@ -110,7 +110,10 @@ function getACFLayout()
         'label' => __('Hintergrundbild', 'flynt'),
         'name' => 'backgroundImage',
         'type' => 'image',
-        'instructions' => __('Optionales Hintergrundbild für die gesamte Sektion (erlaubt: .jpg, .jpeg, .png, .svg, .webp)', 'flynt'),
+        'instructions' => __(
+          'Optionales Hintergrundbild für die gesamte Sektion (erlaubt: .jpg, .jpeg, .png, .svg, .webp)',
+          'flynt',
+        ),
         'return_format' => 'array',
         'preview_size' => 'thumbnail',
         'mime_types' => 'jpg, jpeg, png, svg, webp',

@@ -19,7 +19,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
         'placeholder' => __('z. B. Galerie', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -27,7 +27,7 @@ function getACFLayout(): array
         'type' => 'text',
         'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
         'placeholder' => __('z. B. Unsere Impressionen', 'flynt'),
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
@@ -50,9 +50,12 @@ function getACFLayout(): array
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
             'library' => 'all',
-            'instructions' => __('Bilder werden nach verfügbarem Platz angeordnet, nicht strikt nach Reihenfolge Ihrer hinzugefügten Bilder.<br>Große Formate beeinflussen die Position.', 'flynt'),
+            'instructions' => __(
+              'Bilder werden nach verfügbarem Platz angeordnet, nicht strikt nach Reihenfolge Ihrer hinzugefügten Bilder.<br>Große Formate beeinflussen die Position.',
+              'flynt',
+            ),
             'wrapper' => [
-              'width' => '50%'
+              'width' => '50%',
             ],
           ],
           [
@@ -67,7 +70,7 @@ function getACFLayout(): array
             ],
             'default_value' => 'default',
             'wrapper' => [
-              'width' => '50%'
+              'width' => '50%',
             ],
           ],
         ],
@@ -86,8 +89,11 @@ function getACFLayout(): array
           'text-center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'text-start',
-        'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
-        'wrapper' => ['width' => '50'],
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
+        'wrapper' => ['width' => '50%'],
       ],
     ],
   ];

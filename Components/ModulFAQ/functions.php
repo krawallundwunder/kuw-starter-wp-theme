@@ -6,7 +6,7 @@ add_filter('Flynt/addComponentData?name=ModulFAQ', function ($data) {
   // 1. Grid Logic for Layout 1 (Tiles)
   if ($data['layoutType'] === 'layout-1') {
     $cols = $data['columns'] ?? '2';
-    $data['gridClass'] = ($cols === '1') ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2';
+    $data['gridClass'] = $cols === '1' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2';
   }
 
   return $data;
@@ -31,7 +31,7 @@ function getACFLayout(): array
         'placeholder' => __('z. B. FAQ', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'wrapper' => ['width' => '50'],
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
@@ -39,7 +39,7 @@ function getACFLayout(): array
         'placeholder' => __('z. B. Häufig gestellte Fragen', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'wrapper' => ['width' => '75'],
+        'wrapper' => ['width' => '75%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
@@ -61,7 +61,7 @@ function getACFLayout(): array
             'name' => 'question',
             'type' => 'text',
             'instructions' => __('Die Frage, die beantwortet werden soll.', 'flynt'),
-            'wrapper' => ['width' => '50'],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Antwort', 'flynt'),
@@ -87,8 +87,11 @@ function getACFLayout(): array
           'center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'start',
-        'instructions' => __('Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
-        'wrapper' => ['width' => '33'],
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Layout', 'flynt'),
@@ -101,7 +104,7 @@ function getACFLayout(): array
         ],
         'default_value' => 'layout-1',
         'ui' => 1,
-        'wrapper' => ['width' => '33'],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Spaltenanzahl', 'flynt'),
@@ -114,15 +117,15 @@ function getACFLayout(): array
         ],
         'default_value' => '2',
         'ui' => 1,
-        'wrapper' => ['width' => '33'],
+        'wrapper' => ['width' => '33%'],
         'conditional_logic' => [
           [
             [
               'fieldPath' => 'layoutType',
               'operator' => '==',
-              'value' => 'layout-1'
-            ]
-          ]
+              'value' => 'layout-1',
+            ],
+          ],
         ],
       ],
     ],
