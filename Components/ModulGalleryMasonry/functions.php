@@ -52,9 +52,7 @@ function getACFLayout(): array
               'Bilder werden nach verfügbarem Platz angeordnet, nicht strikt nach Reihenfolge Ihrer hinzugefügten Bilder.<br>Große Formate beeinflussen die Position.',
               'flynt',
             ),
-            'wrapper' => [
-              'width' => '50%',
-            ],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Format', 'flynt'),
@@ -67,9 +65,7 @@ function getACFLayout(): array
               'wide' => __('Breitformat (2x1)', 'flynt'),
             ],
             'default_value' => 'default',
-            'wrapper' => [
-              'width' => '50%',
-            ],
+            'wrapper' => ['width' => '50%'],
           ],
         ],
       ],

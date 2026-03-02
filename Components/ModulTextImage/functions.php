@@ -131,9 +131,7 @@ function getACFLayout(): array
             ],
             'default_value' => '16:9',
             'ui' => 1,
-            'wrapper' => [
-              'width' => '50%',
-            ],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Bildposition', 'flynt'),

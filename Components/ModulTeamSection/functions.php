@@ -5,7 +5,6 @@ namespace Flynt\Components\ModulTeamSection;
 add_filter('Flynt/addComponentData?name=ModulTeamSection', function ($data) {
   $groupedMembers = [];
 
-  // 1. Get all ungrouped team members (no taxonomy assigned)
   $ungroupedArgs = [
     'post_type' => 'team_member',
     'posts_per_page' => -1,
@@ -32,13 +31,12 @@ add_filter('Flynt/addComponentData?name=ModulTeamSection', function ($data) {
       $member->fields = get_fields($member->ID);
     }
     $groupedMembers[] = [
-      'title' => '', // No title for ungrouped
+      'title' => '',
       'members' => $ungroupedMembers,
       'is_ungrouped' => true,
     ];
   }
 
-  // 2. Get grouped team members by taxonomy terms
   $terms = get_terms([
     'taxonomy' => 'team_group',
     'hide_empty' => true,

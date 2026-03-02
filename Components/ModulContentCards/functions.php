@@ -7,14 +7,12 @@ use Timber\Timber;
 add_filter('Flynt/addComponentData?name=ModulContentCards', function ($data) {
   $data['taxonomies'] = $data['taxonomies'] ?: [];
 
-  // Base Query Args
   $queryArgs = [
     'post_type' => 'content_card',
     'posts_per_page' => 9,
     'status' => 'publish',
   ];
 
-  // NUR wenn Kategorien ausgewählt wurden, filter hinzufügen
   if (!empty($data['taxonomies'])) {
     $queryArgs['tax_query'] = [
       [
@@ -44,7 +42,7 @@ add_filter('Flynt/addComponentData?name=ModulContentCards', function ($data) {
   $ratio = $data['options']['aspectRatio'] ?? '16:9';
   $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
 
-  $cardCount = count($data['items']); // ✅ Jetzt safe!
+  $cardCount = count($data['items']);
   $lgColumns = min(max($cardCount, 1), 3);
   $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][
     $lgColumns

@@ -86,9 +86,7 @@ function getACFLayout()
           'black' => __('Schwarz', 'flynt'),
         ],
         'default_value' => 'white',
-        'wrapper' => [
-          'width' => '33%',
-        ],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Textposition', 'flynt'),
@@ -100,9 +98,7 @@ function getACFLayout()
           'left' => __('Links', 'flynt'),
         ],
         'default_value' => 'full',
-        'wrapper' => [
-          'width' => '33%',
-        ],
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Hintergrundbild', 'flynt'),
@@ -116,9 +112,7 @@ function getACFLayout()
         'preview_size' => 'thumbnail',
         'mime_types' => 'jpg, jpeg, png, svg, webp',
         'library' => 'all',
-        'wrapper' => [
-          'width' => '33%',
-        ],
+        'wrapper' => ['width' => '33%'],
       ],
     ],
   ];

@@ -169,18 +169,14 @@ function getACFLayout(): array
             'name' => 'tag',
             'type' => 'text',
             'instructions' => __('Kurzer Tag über dem Spaltentitel.', 'flynt'),
-            'wrapper' => [
-              'width' => '20%',
-            ],
+            'wrapper' => ['width' => '20%'],
           ],
           [
             'label' => __('Titel', 'flynt'),
             'name' => 'subtitle',
             'type' => 'text',
             'instructions' => __('Titel der Spalte.', 'flynt'),
-            'wrapper' => [
-              'width' => '20%',
-            ],
+            'wrapper' => ['width' => '20%'],
           ],
           [
             'label' => __('Beschreibung', 'flynt'),
@@ -188,9 +184,7 @@ function getACFLayout(): array
             'type' => 'textarea',
             'instructions' => __('Beschreibungstext der Spalte.', 'flynt'),
             'tabs' => 'visual',
-            'wrapper' => [
-              'width' => '25%',
-            ],
+            'wrapper' => ['width' => '25%'],
           ],
           [
             'label' => __('Button Link', 'flynt'),
@@ -198,9 +192,7 @@ function getACFLayout(): array
             'type' => 'link',
             'instructions' => __('Button für die Kachel', 'flynt'),
             'return_format' => 'array',
-            'wrapper' => [
-              'width' => '15%',
-            ],
+            'wrapper' => ['width' => '15%'],
           ],
         ],
       ],
@@ -228,9 +220,7 @@ function getACFLayout(): array
               'center' => __('Zentriert', 'flynt'),
             ],
             'default_value' => 'start',
-            'wrapper' => [
-              'width' => '50%',
-            ],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Bildformat', 'flynt'),
@@ -246,9 +236,7 @@ function getACFLayout(): array
             ],
             'default_value' => '16:9',
             'ui' => 1,
-            'wrapper' => [
-              'width' => '50%',
-            ],
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Abgerundete Bilder', 'flynt'),
@@ -259,9 +247,7 @@ function getACFLayout(): array
             ),
             'type' => 'true_false',
             'ui' => 1,
-            'wrapper' => [
-              'width' => '50%',
-            ],
+            'wrapper' => ['width' => '50%'],
           ],
         ],
       ],

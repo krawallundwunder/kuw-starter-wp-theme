@@ -20,10 +20,6 @@ add_filter('Flynt/addComponentData?name=ModulStats', function ($data) {
   return $data;
 });
 
-/**
- * Defines the ACF fields for the component.
- * This aligns with the "Simple", "Simple Grid", and "Timeline" layouts requested.
- */
 function getACFLayout(): array
 {
   return [
@@ -167,9 +163,7 @@ function getACFLayout(): array
         'min' => 300,
         'step' => 100,
         'instructions' => __('Dauer der Zählanimation in Millisekunden (mind. 300 ms).', 'flynt'),
-        'wrapper' => [
-          'width' => '50%',
-        ],
+        'wrapper' => ['width' => '50%'],
         'conditional_logic' => [
           [
             [

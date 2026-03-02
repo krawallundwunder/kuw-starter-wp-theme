@@ -38,7 +38,6 @@ function getACFLayout()
         'type' => 'tab',
       ],
 
-      // --- Header (beide Layouts) ---
       [
         'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
@@ -115,9 +114,6 @@ function getACFLayout()
         ],
       ],
 
-      // --- Layout 2: Nur Kontakt & Standorte ---
-
-      // Sektion: Standorte
       [
         'label' => '',
         'name' => 'locationsDivider',
@@ -175,7 +171,6 @@ function getACFLayout()
         ],
       ],
 
-      // Sektion: Kontakt
       [
         'label' => '',
         'name' => 'contactDivider',

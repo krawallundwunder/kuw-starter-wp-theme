@@ -3,7 +3,6 @@
 namespace Flynt\Components\ModulFAQ;
 
 add_filter('Flynt/addComponentData?name=ModulFAQ', function ($data) {
-  // 1. Grid Logic for Layout 1 (Tiles)
   if ($data['layoutType'] === 'layout-1') {
     $cols = $data['columns'] ?? '2';
     $data['gridClass'] = $cols === '1' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2';

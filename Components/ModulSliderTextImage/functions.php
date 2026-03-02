@@ -74,18 +74,14 @@ function getACFLayout(): array
             'name' => 'name',
             'type' => 'text',
             'instructions' => __('Name des Autors oder der Person.', 'flynt'),
-            'wrapper' => [
-              'width' => '33%',
-            ],
+            'wrapper' => ['width' => '33%'],
           ],
           [
             'label' => __('Berufsbezeichnung/Rolle', 'flynt'),
             'name' => 'role',
             'type' => 'text',
             'instructions' => __('z. B. „Geschäftsführer", „Mitglied".', 'flynt'),
-            'wrapper' => [
-              'width' => '33%',
-            ],
+            'wrapper' => ['width' => '33%'],
           ],
           [
             'label' => __('Bild', 'flynt'),
@@ -94,9 +90,7 @@ function getACFLayout(): array
             'instructions' => __('Ideal: quadratisch.', 'flynt'),
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
-            'wrapper' => [
-              'width' => '33%',
-            ],
+            'wrapper' => ['width' => '33%'],
           ],
           [
             'label' => __('Hintergrundfarbe', 'flynt'),
