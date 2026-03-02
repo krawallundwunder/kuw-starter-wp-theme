@@ -5,7 +5,7 @@ namespace Flynt\Components\ModulGalleryMasonry;
 function getACFLayout(): array
 {
   return [
-    'label' => __('Modul: Gallery Masonry', 'flynt'),
+    'label' => __('Modul: Galerie Mosaik', 'flynt'),
     'name' => 'ModulGalleryMasonry',
     'sub_fields' => [
       [
@@ -17,30 +17,29 @@ function getACFLayout(): array
         'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'maxlength' => 20,
-        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Einbettung", „Formular", „Externe Inhalte" (max. 20 Zeichen)).', 'flynt'),
+        'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'maxlength' => 50,
-        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
         'type' => 'textarea',
-        'maxlength' => 750,
-        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
       ],
       [
-        'label' => __('Masonry Items', 'flynt'),
+        'label' => __('Galerie-Elemente', 'flynt'),
         'name' => 'masonryItems',
         'type' => 'repeater',
         'layout' => 'table',
-        'instructions' => __('Fügen Sie für jedes Masonry-Element Inhalte hinzu.', 'flynt'),
-        'button_label' => __('Masonry Element hinzufügen', 'flynt'),
+        'instructions' => __('Fügen Sie hier Ihre Galerie-Elemente hinzu.', 'flynt'),
+        'button_label' => __('Galerie-Element hinzufügen', 'flynt'),
         'sub_fields' => [
           [
             'label' => __('Bild', 'flynt'),
@@ -49,10 +48,11 @@ function getACFLayout(): array
             'return_format' => 'array',
             'preview_size' => 'thumbnail',
             'library' => 'all',
-            'instructions' => __('Bilder werden nach verfügbarem Platz angeordnet, nicht strikt nach Reihenfolge deiner hinzugefügten Bilder.<br> Große Formate beeinflussen die Position.<br> Beispiel: Soll dein erstes Bild 1x1 sein und dein zweites 2x1 sind die ersten 3 Spalten verbraucht.', 'flynt'),
-            'wrapper' => [
-              'width' => '50%'
-            ],
+            'instructions' => __(
+              'Bilder werden nach verfügbarem Platz angeordnet, nicht strikt nach Reihenfolge Ihrer hinzugefügten Bilder.<br>Große Formate beeinflussen die Position.',
+              'flynt',
+            ),
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Format', 'flynt'),
@@ -65,9 +65,7 @@ function getACFLayout(): array
               'wide' => __('Breitformat (2x1)', 'flynt'),
             ],
             'default_value' => 'default',
-            'wrapper' => [
-              'width' => '50%'
-            ],
+            'wrapper' => ['width' => '50%'],
           ],
         ],
       ],
@@ -85,7 +83,11 @@ function getACFLayout(): array
           'text-center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'text-start',
-        'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
+        'wrapper' => ['width' => '50%'],
       ],
     ],
   ];

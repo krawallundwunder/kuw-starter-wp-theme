@@ -3,10 +3,9 @@
 namespace Flynt\Components\ModulFAQ;
 
 add_filter('Flynt/addComponentData?name=ModulFAQ', function ($data) {
-  // 1. Grid Logic for Layout 1 (Tiles)
   if ($data['layoutType'] === 'layout-1') {
     $cols = $data['columns'] ?? '2';
-    $data['gridClass'] = ($cols === '1') ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2';
+    $data['gridClass'] = $cols === '1' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2';
   }
 
   return $data;
@@ -27,28 +26,27 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Tagline', 'flynt'),
-        'instructions' => __('Kurzer Tag über dem Titel (z. B. „FAQ", „Hilfe", „Support" (max. 20 Zeichen)).', 'flynt'),
+        'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'maxlength' => 20,
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
-        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'maxlength' => 50,
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
-        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
         'name' => 'description',
         'type' => 'textarea',
-        'maxlength' => 750,
       ],
       [
-        'label' => __('FAQ Items', 'flynt'),
-        'instructions' => __('Fügen Sie Fragen und Antworten hinzu (mind. 1).', 'flynt'),
+        'label' => __('Fragen & Antworten', 'flynt'),
+        'instructions' => __('Fügen Sie hier Ihre Fragen und Antworten hinzu.', 'flynt'),
         'name' => 'faqItems',
         'type' => 'repeater',
         'layout' => 'block',
@@ -59,17 +57,14 @@ function getACFLayout(): array
             'label' => __('Frage', 'flynt'),
             'name' => 'question',
             'type' => 'text',
-            'instructions' => __('(max. 150 Zeichen)', 'flynt'),
-            'maxlength' => 150,
-            'required' => 1,
+            'instructions' => __('Die Frage, die beantwortet werden soll.', 'flynt'),
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Antwort', 'flynt'),
             'name' => 'answer',
             'type' => 'textarea',
-            'maxlength' => 1000,
-            'instructions' => __('(max. 1000 Zeichen)', 'flynt'),
-            'required' => 1,
+            'instructions' => __('Ausführliche Antwort auf die Frage.', 'flynt'),
           ],
         ],
       ],
@@ -89,12 +84,15 @@ function getACFLayout(): array
           'center' => __('Zentriert', 'flynt'),
         ],
         'default_value' => 'start',
-        'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
-        'required' => 1,
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Layout', 'flynt'),
-        'instructions' => __('Wähle das Layout der FAQ-Items.', 'flynt'),
+        'instructions' => __('Wählen Sie das Layout für die Fragen & Antworten.', 'flynt'),
         'name' => 'layoutType',
         'type' => 'select',
         'choices' => [
@@ -103,6 +101,7 @@ function getACFLayout(): array
         ],
         'default_value' => 'layout-1',
         'ui' => 1,
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Spaltenanzahl', 'flynt'),
@@ -115,14 +114,15 @@ function getACFLayout(): array
         ],
         'default_value' => '2',
         'ui' => 1,
+        'wrapper' => ['width' => '33%'],
         'conditional_logic' => [
           [
             [
               'fieldPath' => 'layoutType',
               'operator' => '==',
-              'value' => 'layout-1'
-            ]
-          ]
+              'value' => 'layout-1',
+            ],
+          ],
         ],
       ],
     ],

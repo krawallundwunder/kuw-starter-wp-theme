@@ -16,9 +16,7 @@ add_filter('Flynt/addComponentData?name=ModulTextImage', function ($data) {
   $pos = $data['options']['imagePosition'] ?? 'left';
   $isVertical = in_array($pos, ['top', 'bottom']);
 
-  $data['gridClass'] = $isVertical
-    ? 'justify-items-center'
-    : 'md:grid-cols-2 items-center';
+  $data['gridClass'] = $isVertical ? 'justify-items-center' : 'md:grid-cols-2 items-center';
 
   $data['imageClass'] = '';
   $data['contentClass'] = '';
@@ -40,7 +38,7 @@ add_filter('Flynt/addComponentData?name=ModulTextImage', function ($data) {
   }
 
   $ratio = $data['options']['aspectRatio'] ?? '16:9';
-  $data['aspectRatioClass'] = ($ratio === '4:3') ? 'aspect-[4/3]' : 'aspect-video';
+  $data['aspectRatioClass'] = $ratio === '4:3' ? 'aspect-[4/3]' : 'aspect-video';
 
   return $data;
 });
@@ -49,7 +47,7 @@ function getACFLayout(): array
 {
   return [
     'name' => 'ModulTextImage',
-    'label' => __('Modul : Text & Bild', 'flynt'),
+    'label' => __('Modul: Text & Bild', 'flynt'),
     'sub_fields' => [
       [
         'label' => __('Inhalt', 'flynt'),
@@ -60,7 +58,10 @@ function getACFLayout(): array
       ],
       [
         'label' => __('Bild', 'flynt'),
-        'instructions' => __('Bild für den Inhaltsbereich (erlaubt: JPG, JPEG, PNG, SVG, WebP).', 'flynt'),
+        'instructions' => __(
+          'Bild für den Inhaltsbereich (erlaubt: JPG, JPEG, PNG, SVG, WebP).',
+          'flynt',
+        ),
         'name' => 'image',
         'type' => 'image',
         'preview_size' => 'thumbnail',
@@ -70,22 +71,21 @@ function getACFLayout(): array
         'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'maxlength' => 20,
-        'instructions' => __('Kurzer Tag über dem Titel (z. B. „Über uns", „Unsere Leistung", „Was uns ausmacht" (max. 20 Zeichen)).', 'flynt'),
+        'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'maxlength' => 50,
-        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
         'type' => 'textarea',
-        'maxlength' => 1500,
-        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 1500 Zeichen).', 'flynt'),
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
       ],
       [
         'label' => __('Buttons', 'flynt'),
@@ -119,8 +119,10 @@ function getACFLayout(): array
         'sub_fields' => [
           [
             'label' => __('Bildformat', 'flynt'),
-            'instructions' => __('<strong>Was macht diese Einstellung?</strong><br>
-              Bestimmt die Form aller Bilder (z.B. breiter oder höher).<br><br>', 'flynt'),
+            'instructions' => __(
+              'Bestimmt die Form aller Bilder (z. B. breiter oder höher).',
+              'flynt',
+            ),
             'name' => 'aspectRatio',
             'type' => 'select',
             'choices' => [
@@ -129,9 +131,7 @@ function getACFLayout(): array
             ],
             'default_value' => '16:9',
             'ui' => 1,
-            'wrapper' => [
-              'width' => '50%'
-            ]
+            'wrapper' => ['width' => '50%'],
           ],
           [
             'label' => __('Bildposition', 'flynt'),
@@ -146,6 +146,7 @@ function getACFLayout(): array
             ],
             'default_value' => 'left',
             'ui' => 1,
+            'wrapper' => ['width' => '50%'],
           ],
         ],
       ],

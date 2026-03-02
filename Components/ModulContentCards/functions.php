@@ -5,54 +5,51 @@ namespace Flynt\Components\ModulContentCards;
 use Timber\Timber;
 
 add_filter('Flynt/addComponentData?name=ModulContentCards', function ($data) {
+  $data['taxonomies'] = $data['taxonomies'] ?: [];
 
-    $data['taxonomies'] = $data['taxonomies'] ?: [];
+  $queryArgs = [
+    'post_type' => 'content_card',
+    'posts_per_page' => 9,
+    'status' => 'publish',
+  ];
 
-    // Base Query Args
-    $queryArgs = [
-        'post_type' => 'content_card',
-        'posts_per_page' => 9,
-        'status' => 'publish',
+  if (!empty($data['taxonomies'])) {
+    $queryArgs['tax_query'] = [
+      [
+        'taxonomy' => 'content_card_category',
+        'field' => 'term_id',
+        'terms' => array_map(fn($tax) => $tax->term_id, $data['taxonomies']),
+      ],
     ];
+  }
 
-    // NUR wenn Kategorien ausgewählt wurden, filter hinzufügen
-    if (!empty($data['taxonomies'])) {
-        $queryArgs['tax_query'] = [
-            [
-                'taxonomy' => 'content_card_category',
-                'field' => 'term_id',
-                'terms' => array_map(fn($tax) => $tax->term_id, $data['taxonomies']),
-            ],
-        ];
-    }
+  $data['items'] = Timber::get_posts($queryArgs);
 
-    $data['items'] = Timber::get_posts($queryArgs);
+  if (empty($data['items'])) {
+    $data['items'] = [];
+  }
 
+  if (!empty($data['ctaButtons'])) {
+    $data['buttons'] = array_map(
+      fn($btn) => [
+        'text' => $btn['button']['title'] ?? '',
+        'link' => $btn['button']['url'] ?? '',
+      ],
+      array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button'])),
+    );
+  }
 
-    if (empty($data['items'])) {
-        $data['items'] = [];
-    }
+  $ratio = $data['options']['aspectRatio'] ?? '16:9';
+  $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
 
-    if (!empty($data['ctaButtons'])) {
-        $data['buttons'] = array_map(
-            fn($btn) => [
-                'text' => $btn['button']['title'] ?? '',
-                'link' => $btn['button']['url'] ?? '',
-            ],
-            array_filter($data['ctaButtons'], fn($btn) => !empty($btn['button']))
-        );
-    }
+  $cardCount = count($data['items']);
+  $lgColumns = min(max($cardCount, 1), 3);
+  $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][
+    $lgColumns
+  ];
 
-    $ratio = $data['options']['aspectRatio'] ?? '16:9';
-    $data['aspectRatioClass'] = ['4:3' => 'aspect-[4/3]', '16:9' => 'aspect-video'][$ratio];
-
-    $cardCount = count($data['items']); // ✅ Jetzt safe!
-    $lgColumns = min(max($cardCount, 1), 3);
-    $data['gridClass'] = [1 => 'lg:grid-cols-1', 2 => 'lg:grid-cols-2', 3 => 'lg:grid-cols-3'][$lgColumns];
-
-    return $data;
+  return $data;
 });
-
 
 function getACFLayout()
 {
@@ -71,37 +68,37 @@ function getACFLayout()
         'label' => __('Tagline', 'flynt'),
         'name' => 'tag',
         'type' => 'text',
-        'instructions' => __('Kurzer Tag über dem Titel (z. B. „FAQ", „Hilfe", „Support" (max. 20 Zeichen).', 'flynt'),
-        'maxlength' => 20,
+        'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
+        'wrapper' => ['width' => '33%'],
       ],
       [
         'label' => __('Titel', 'flynt'),
         'name' => 'title',
         'type' => 'text',
-        'maxlength' => 50,
-        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig (max. 50 Zeichen).', 'flynt'),
+        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Beschreibung', 'flynt'),
         'name' => 'description',
-        'maxlength' => 750,
-        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt (max. 750 Zeichen).', 'flynt'),
+        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
         'type' => 'textarea',
+        'wrapper' => ['width' => '100%'],
       ],
       [
         'label' => __('Buttons', 'flynt'),
         'name' => 'ctaButtons',
         'type' => 'repeater',
-        'instructions' => __('Fügen Sie hier übergeordnete Buttons hinzu.', 'flynt'),
+        'instructions' => __('Fügen Sie hier Buttons hinzu.', 'flynt'),
         'layout' => 'row',
-        'button_label' => __('Übergeordneten Button Hinzufügen', 'flynt'),
+        'button_label' => __('Button hinzufügen', 'flynt'),
         'max' => 2,
         'sub_fields' => [
           [
             'label' => __('Button', 'flynt'),
             'name' => 'button',
             'type' => 'link',
-            'return_format' => 'array'
+            'return_format' => 'array',
           ],
         ],
       ],
@@ -115,7 +112,10 @@ function getACFLayout()
         'label' => __('Text im Kopfbereich', 'flynt'),
         'name' => 'textAlign',
         'type' => 'button_group',
-        'instructions' => __('Lege fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.', 'flynt'),
+        'instructions' => __(
+          'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
+          'flynt',
+        ),
         'choices' => [
           'text-start' => __('Links', 'flynt'),
           'text-center' => __('Zentriert', 'flynt'),
@@ -124,10 +124,11 @@ function getACFLayout()
         'allow_null' => 0,
         'return_format' => 'value',
         'layout' => 'horizontal',
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Bildformat', 'flynt'),
-        'instructions' => __('<strong>Was macht diese Einstellung?</strong><br> Bestimmt die Form aller Bilder (z.B. breiter oder höher).<br><br>', 'flynt'),
+        'instructions' => __('Bestimmt die Form aller Bilder (z. B. breiter oder höher).', 'flynt'),
         'name' => 'aspectRatio',
         'type' => 'select',
         'choices' => [
@@ -136,6 +137,7 @@ function getACFLayout()
         ],
         'default_value' => '16:9',
         'ui' => 1,
+        'wrapper' => ['width' => '50%'],
       ],
       [
         'label' => __('Kategorien', 'flynt'),
