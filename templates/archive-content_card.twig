@@ -1,145 +1,169 @@
 {% extends 'templates/_document.twig' %}
 
 {% block content %}
+  <section class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4">
+      {# === HEADER-BEREICH === #}
+      {% include 'templates/_partials/globalHeading.twig' with {
+        title: archive_title,
+        description: archive_description,
+        textAlign: 'text-center'
+      } only %}
 
-	<section class="py-16 bg-gray-50">
-		<div
-			class="container mx-auto px-4">
+      {# === KATEGORIE-FILTER === #}
+      {% if categories %}
+        <div class="mb-12 flex flex-wrap justify-center gap-3">
+          {# "Alle" Button #}
+          <a
+            href="{{ archive_url }}"
+            class="{% if not current_category %}bg-primary text-white{% else %}bg-white hover:bg-gray-100{% endif %} rounded-full px-6 py-2 font-medium text-gray-700 transition-all duration-300"
+          >
+            Alle
+          </a>
 
-			{# === HEADER-BEREICH === #}
-			{% include "templates/_partials/headings.twig" with {
-			title: archive_title,
-			description: archive_description,
-			textAlign: 'text-center'
-		} only %}
+          {# Kategorie-Buttons #}
+          {% for category in categories %}
+            <a
+              href="{{ category.link }}"
+              class="{% if current_category and current_category.slug == category.slug %}bg-primary text-white{% else %}bg-white hover:bg-gray-100{% endif %} rounded-full px-6 py-2 font-medium text-gray-700 transition-all duration-300"
+            >
+              {{ category.name }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
 
-			{# === KATEGORIE-FILTER === #}
-			{% if categories %}
-				<div
-					class="flex flex-wrap justify-center gap-3 mb-12">
-					{# "Alle" Button #}
-					<a href="{{ archive_url }}" class="px-6 py-2 rounded-full font-medium transition-all duration-300 {% if not current_category %}bg-primary text-white{% else %}bg-white text-gray-700 hover:bg-gray-100{% endif %}">
-						Alle
-					</a>
+      {# === GRID MIT KARTEN === #}
+      {% if posts %}
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {% for post in posts %}
+            {# --- DATEN VORBEREITUNG --- #}
+            {% set imageId = post.meta('image') ? : post.thumbnail.id %}
+            {% set itemDate = post.meta('date') ? : post.date %}
+            {% set itemTagline = post.meta('tagline') %}
+            {% set itemTitle = post.meta('title') ? : post.title %}
+            {% set itemDesc = post.meta('description') ? : post.preview.length(20).read_more(false)
+            %}
 
-					{# Kategorie-Buttons #}
-					{% for category in categories %}
-						<a href="{{ category.link }}" class="px-6 py-2 rounded-full font-medium transition-all duration-300 {% if current_category and current_category.slug == category.slug %}bg-primary text-white{% else %}bg-white text-gray-700 hover:bg-gray-100{% endif %}">
-							{{ category.name }}
-						</a>
-					{% endfor %}
-				</div>
-			{% endif %}
+            {# Link #}
+            {% set acfLink = post.meta('link') %}
+            {% set linkUrl = acfLink.url ?? post.link %}
+            {% set linkTarget = acfLink.target ?? '_self' %}
+            {% set linkText = acfLink.title ?? 'Mehr erfahren' %}
 
-			{# === GRID MIT KARTEN === #}
-			{% if posts %}
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{% for post in posts %}
-						{# --- DATEN VORBEREITUNG --- #}
-						{% set imageId = post.meta('image') ?: post.thumbnail.id %}
-						{% set itemDate = post.meta('date') ?: post.date %}
-						{% set itemTagline = post.meta('tagline') %}
-						{% set itemTitle = post.meta('title') ?: post.title %}
-						{% set itemDesc = post.meta('description') ?: post.preview.length(20).read_more(false) %}
+            {# --- KARTE --- #}
+            <article
+              class="group flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              <a
+                href="{{ linkUrl }}"
+                target="{{ linkTarget }}"
+                class="relative block aspect-video overflow-hidden bg-gray-200"
+              >
+                {% if imageId %}
+                  <img
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    src="{{ Image(imageId).src }}"
+                    srcset="{{ Image(imageId).srcset }}"
+                    alt="{{ itemTitle }}"
+                    loading="lazy"
+                  />
+                {% else %}
+                  <div
+                    class="flex h-full items-center justify-center bg-gray-100 font-medium text-gray-400"
+                  >
+                    Bild fehlt
+                  </div>
+                {% endif %}
+              </a>
 
-						{# Link #}
-						{% set acfLink = post.meta('link') %}
-						{% set linkUrl = acfLink.url ?? post.link %}
-						{% set linkTarget = acfLink.target ?? '_self' %}
-						{% set linkText = acfLink.title ?? 'Mehr erfahren' %}
+              <div class="flex grow flex-col p-6">
+                {% if itemDate or itemTagline %}
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    {% if itemTagline %}
+                      <p
+                        class="bg-primary w-fit rounded-2xl px-2 py-1 text-sm font-normal text-white"
+                      >
+                        {{ itemTagline }}
+                      </p>
+                    {% endif %}
 
-						{# --- KARTE --- #}
-						<article class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                    {% if itemDate %}
+                      <p class="ml-auto text-sm text-gray-500">
+                        {{ itemDate|date('d.m.Y') }}
+                      </p>
+                    {% endif %}
+                  </div>
+                {% endif %}
 
-							<a href="{{ linkUrl }}" target="{{ linkTarget }}" class="block overflow-hidden aspect-video bg-gray-200 relative">
-								{% if imageId %}
-									<img class="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-500" src="{{ Image(imageId).src }}" srcset="{{ Image(imageId).srcset }}" alt="{{ itemTitle }}" loading="lazy">
-								{% else %}
-									<div class="flex items-center justify-center h-full text-gray-400 bg-gray-100 font-medium">
-										Bild fehlt
-									</div>
-								{% endif %}
-							</a>
+                <h3 class="mb-3 text-xl font-bold text-gray-900">
+                  <a
+                    href="{{ linkUrl }}"
+                    target="{{ linkTarget }}"
+                    class="hover:text-primary transition-colors"
+                  >
+                    {{ itemTitle }}
+                  </a>
+                </h3>
 
-							<div class="p-6 grow flex flex-col">
+                <div class="prose prose-sm mb-6 max-w-none grow text-gray-600">
+                  {{ itemDesc }}
+                </div>
 
-								{% if itemDate or itemTagline %}
-									<div class="flex items-center justify-between gap-3 mb-4">
-										{% if itemTagline %}
-											<p class="text-sm font-normal bg-primary w-fit py-1 px-2 rounded-2xl text-white">
-												{{ itemTagline }}
-											</p>
-										{% endif %}
+                <div class="mt-auto border-t border-gray-100 pt-4">
+                  {% include 'templates/_partials/button.twig' with {
+                    link: linkUrl,
+                    text: linkText,
+                    variant: 'outlined'
+                  } only %}
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
 
-										{% if itemDate %}
-											<p class="text-sm text-gray-500 ml-auto">
-												{{ itemDate|date("d.m.Y") }}
-											</p>
-										{% endif %}
-									</div>
-								{% endif %}
+        {# === PAGINATION === #}
+        {% if pagination and (pagination.pages|length) > 1 %}
+          <nav class="mt-12 flex justify-center" aria-label="Seitennavigation">
+            <div class="flex gap-2">
+              {% if pagination.prev %}
+                <a
+                  href="{{ pagination.prev.link }}"
+                  class="rounded-lg border border-gray-300 bg-white px-4 py-2 transition-colors hover:bg-gray-50"
+                >
+                  ← Zurück
+                </a>
+              {% endif %}
 
-								<h3 class="text-xl font-bold text-gray-900 mb-3">
-									<a href="{{ linkUrl }}" target="{{ linkTarget }}" class="hover:text-primary transition-colors">
-										{{ itemTitle }}
-									</a>
-								</h3>
+              {% for page in pagination.pages %}
+                {% if page.link %}
+                  <a
+                    href="{{ page.link }}"
+                    class="{% if page.current %}bg-primary font-bold{% else %}bg-white hover:bg-gray-50{% endif %} rounded-lg border border-gray-300 px-4 py-2 text-white transition-colors"
+                  >
+                    {{ page.title }}
+                  </a>
+                {% else %}
+                  <span class="px-4 py-2 text-gray-400">...</span>
+                {% endif %}
+              {% endfor %}
 
-								<div class="text-gray-600 prose prose-sm max-w-none mb-6 grow">
-									{{ itemDesc }}
-								</div>
-
-								<div class="mt-auto pt-4 border-t border-gray-100">
-									{% include "templates/_partials/button.twig" with {
-									link: linkUrl,
-									text: linkText,
-									variant: 'outlined',
-								} only %}
-								</div>
-
-							</div>
-						</article>
-
-					{% endfor %}
-				</div>
-
-				{# === PAGINATION === #}
-				{% if pagination and pagination.pages|length > 1 %}
-					<nav class="mt-12 flex justify-center" aria-label="Seitennavigation">
-						<div class="flex gap-2">
-							{% if pagination.prev %}
-								<a href="{{ pagination.prev.link }}" class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-									← Zurück
-								</a>
-							{% endif %}
-
-							{% for page in pagination.pages %}
-								{% if page.link %}
-									<a href="{{ page.link }}" class="px-4 py-2 rounded-lg transition-colors
-																																																															          {% if page.current %}bg-primary text-white font-bold{% else %}bg-white border border-gray-300 hover:bg-gray-50{% endif %}">
-										{{ page.title }}
-									</a>
-								{% else %}
-									<span class="px-4 py-2 text-gray-400">...</span>
-								{% endif %}
-							{% endfor %}
-
-							{% if pagination.next %}
-								<a href="{{ pagination.next.link }}" class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-									Weiter →
-								</a>
-							{% endif %}
-						</div>
-					</nav>
-				{% endif %}
-
-			{% else %}
-				<p class="text-center text-gray-500 py-12 text-lg">
-					Noch keine Content-Karten vorhanden.
-				</p>
-			{% endif %}
-
-		</div>
-	</section>
-
+              {% if pagination.next %}
+                <a
+                  href="{{ pagination.next.link }}"
+                  class="rounded-lg border border-gray-300 bg-white px-4 py-2 transition-colors hover:bg-gray-50"
+                >
+                  Weiter →
+                </a>
+              {% endif %}
+            </div>
+          </nav>
+        {% endif %}
+      {% else %}
+        <p class="py-12 text-center text-lg text-gray-500">
+          Noch keine Content-Karten vorhanden.
+        </p>
+      {% endif %}
+    </div>
+  </section>
 {% endblock %}

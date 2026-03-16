@@ -1,61 +1,63 @@
 <flynt-component name="ModulContentCards">
-	<section class="py-16 bg-gray-50">
-		<div class="container mx-auto">
+  <section class="bg-gray-50 py-16">
+    <div class="container mx-auto">
+      {% if tag or title or description or buttons %}
+        {% include 'templates/_partials/globalHeading.twig' with {
+          tag,
+          title,
+          description,
+          buttons,
+          textAlign
+        } only %}
+      {% endif %}
 
-			{% if tag or title or description or buttons %}
-				{% include "templates/_partials/headings.twig" with {
-					tag, title, description, buttons, textAlign
-				} only %}
-			{% endif %}
+      {% if items %}
+        {# Mobile: 1 Spalte #}
+        <div class="flex flex-col gap-6 sm:hidden">
+          {% for item in items %}
+            {% include './_card-item.twig' with {
+              item: item,
+              aspectRatioClass: aspectRatioClass,
+              clampClass: 'line-clamp-5'
+            } %}
+          {% endfor %}
+        </div>
 
-			{% if items %}
-				{# Mobile: 1 Spalte #}
-				<div class="flex flex-col gap-6 sm:hidden">
-					{% for item in items %}
-						{% include './_card-item.twig' with {
-							item: item,
-							aspectRatioClass: aspectRatioClass,
-							clampClass: 'line-clamp-5'
-						} %}
-					{% endfor %}
-				</div>
+        {# Tablet: 2 Spalten #}
+        <div class="hidden items-start gap-6 sm:grid sm:grid-cols-2 lg:hidden">
+          {% for col in 0..1 %}
+            <div class="flex flex-col gap-6">
+              {% for item in items %}
+                {% if loop.index0 % 2 == col %}
+                  {% include './_card-item.twig' with {
+                    item: item,
+                    aspectRatioClass: aspectRatioClass,
+                    clampClass: col == 1 ? 'line-clamp-3' : 'line-clamp-5'
+                  } %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
 
-				{# Tablet: 2 Spalten #}
-				<div class="hidden sm:grid sm:grid-cols-2 lg:hidden gap-6 items-start">
-					{% for col in 0..1 %}
-						<div class="flex flex-col gap-6">
-							{% for item in items %}
-								{% if loop.index0 % 2 == col %}
-									{% include './_card-item.twig' with {
-										item: item,
-										aspectRatioClass: aspectRatioClass,
-										clampClass: col == 1 ? 'line-clamp-3' : 'line-clamp-5'
-									} %}
-								{% endif %}
-							{% endfor %}
-						</div>
-					{% endfor %}
-				</div>
-
-				{# Desktop: 3 Spalten #}
-				<div class="hidden lg:grid lg:grid-cols-3 gap-6 items-start">
-					{% set clampPerCol = ['line-clamp-5', 'line-clamp-3', 'line-clamp-5'] %}
-					{% for col in 0..2 %}
-						<div class="flex flex-col gap-6">
-							{% for item in items %}
-								{% if loop.index0 % 3 == col %}
-									{% include './_card-item.twig' with {
-										item: item,
-										aspectRatioClass: aspectRatioClass,
-										clampClass: clampPerCol[col]
-									} %}
-								{% endif %}
-							{% endfor %}
-						</div>
-					{% endfor %}
-				</div>
-			{% endif %}
-
-		</div>
-	</section>
+        {# Desktop: 3 Spalten #}
+        <div class="hidden items-start gap-6 lg:grid lg:grid-cols-3">
+          {% set clampPerCol = ['line-clamp-5', 'line-clamp-3', 'line-clamp-5'] %}
+          {% for col in 0..2 %}
+            <div class="flex flex-col gap-6">
+              {% for item in items %}
+                {% if loop.index0 % 3 == col %}
+                  {% include './_card-item.twig' with {
+                    item: item,
+                    aspectRatioClass: aspectRatioClass,
+                    clampClass: clampPerCol[col]
+                  } %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
 </flynt-component>

@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\BlockSpacer;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 
 add_filter('Flynt/addComponentData?name=BlockSpacer', function (array $data): array {
   $data['status'] = $data['options']['percentageDistance'] >= 101 ? 'expand' : 'collapse';
@@ -28,7 +28,7 @@ function getACFLayout(): array
         'type' => 'group',
         'layout' => 'row',
         'sub_fields' => [
-          FieldVariables\getTheme(),
+          GlobalHeading\getTheme(),
           [
             'label' => __('Vertical space', 'flynt'),
             'instructions' => __('Distance between two components.', 'flynt'),

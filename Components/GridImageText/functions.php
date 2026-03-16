@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\GridImageText;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 
 function getACFLayout(): array
 {
@@ -87,7 +87,7 @@ function getACFLayout(): array
         'type' => 'group',
         'layout' => 'row',
         'sub_fields' => [
-          FieldVariables\getTheme(),
+          GlobalHeading\getTheme(),
           [
             'label' => __('Max Columns', 'flynt'),
             'name' => 'maxColumns',

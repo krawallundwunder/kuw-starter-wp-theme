@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\BlockImage;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 
 function getACFLayout(): array
 {
@@ -38,7 +38,7 @@ function getACFLayout(): array
         'name' => 'options',
         'type' => 'group',
         'layout' => 'row',
-        'sub_fields' => [FieldVariables\getSize()],
+        'sub_fields' => [GlobalHeading\getSize()],
       ],
     ],
   ];

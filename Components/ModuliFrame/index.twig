@@ -1,18 +1,32 @@
 <flynt-component name="ModuliFrame">
-	<section class="py-8 md:py-12 lg:py-16">
-		<div class="container px-4 mx-auto">
-			{% if tag or title or description %}
-				{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign } %}
-			{% endif %}
-			{% if customCode or iframeUrl %}
-				<div class="w-full overflow-hidden rounded-lg bg-gray-100">
-					{% if customCode %}
-						{{ customCode|raw }}
-					{% else %}
-						<iframe src="{{ iframeUrl|e('esc_url') }}" width="100%" height="{{ minHeight|default(800) }}" style="border:none; overflow:{{ allowScroll ? 'auto' : 'hidden' }};" allowfullscreen loading="lazy" title="{{ title|default('iFrame Content')|e }}" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe>
-					{% endif %}
-				</div>
-			{% endif %}
-		</div>
-	</section>
+  <section class="py-8 md:py-12 lg:py-16">
+    <div class="container mx-auto px-4">
+      {% if tag or title or description %}
+        {% include 'templates/_partials/globalHeading.twig' with {
+          tag,
+          title,
+          description,
+          textAlign
+        } %}
+      {% endif %}
+      {% if customCode or iframeUrl %}
+        <div class="w-full overflow-hidden rounded-lg bg-gray-100">
+          {% if customCode %}
+            {{ customCode|raw }}
+          {% else %}
+            <iframe
+              src="{{ iframeUrl|e('esc_url') }}"
+              width="100%"
+              height="{{ minHeight|default(800) }}"
+              style="border:none; overflow:{{ allowScroll ? 'auto' : 'hidden' }};"
+              allowfullscreen
+              loading="lazy"
+              title="{{ title|default('iFrame Content')|e }}"
+              sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
+            ></iframe>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
 </flynt-component>

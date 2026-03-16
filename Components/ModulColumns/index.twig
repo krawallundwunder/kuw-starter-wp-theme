@@ -1,72 +1,108 @@
 <flynt-component name="ModulColumns">
-	<section class="py-8 md:py-12 lg:py-16 transition-all duration-300 ease-in-out">
-		<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-			{% if tag or title or description or buttons %}
-				{% include "templates/_partials/headings.twig" with { tag, title, description, buttons, textAlign: textAlignmentClass } %}
-			{% endif %}
+  <section class="py-8 transition-all duration-300 ease-in-out md:py-12 lg:py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      {% if tag or title or description or buttons %}
+        {% include 'templates/_partials/globalHeading.twig' with {
+          tag,
+          title,
+          description,
+          buttons,
+          textAlign: textAlignmentClass
+        } %}
+      {% endif %}
 
-			<div class="grid grid-cols-1 gap-8 md:grid-flow-col md:auto-cols-fr md:grid-cols-{{ columns|length }}">
-				{% for column in columns %}
-					<div class="column js-column-item bg-gray-50 flex flex-col gap-4 md:gap-8 h-full rounded-lg p-6 transition-all duration-300 ease-in-out text-{{ options.textAlignment }}">
+      <div
+        class="grid grid-cols-1 gap-8 md:auto-cols-fr md:grid-flow-col md:grid-cols-{{ columns|length }}"
+      >
+        {% for column in columns %}
+          <div
+            class="column js-column-item flex h-full flex-col gap-4 rounded-lg bg-gray-50 p-6 transition-all duration-300 ease-in-out md:gap-8 text-{{
+            options.textAlignment
+            }}"
+          >
+            <div class="grow">
+              {% if column.image %}
+                <div
+                  class="column-image {% if column.svgPosition == 'left' %} {% else %} {% endif %} mb-8 flex items-center justify-center justify-start"
+                >
+                  {% if column.isSvg %}
+                    {# SVG Icon View #}
+                    <div class="{{ column.iconSizeClass }} flex items-center justify-center">
+                      <img
+                        src="{{ column.image.src }}"
+                        alt="{{ column.image.alt }}"
+                        class="h-full w-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  {% elseif isImageRounded %}
+                    {# Rounded Photo View #}
+                    <img
+                      src="{{ column.image.src }}"
+                      alt="{{ column.image.alt }}"
+                      class="mx-auto aspect-square h-40 w-40 rounded-full object-cover sm:h-48 sm:w-48 lg:h-56 lg:w-56"
+                      loading="lazy"
+                    />
+                  {% else %}
+                    {# Standard Aspect Ratio View #}
+                    <div
+                      class="w-full {{
+                      aspectRatioClass
+                      }} flex items-center justify-center overflow-hidden rounded-lg bg-gray-100"
+                    >
+                      <img
+                        src="{{ column.image.src }}"
+                        alt="{{ column.image.alt }}"
+                        class="h-full w-full object-cover transition-all"
+                        loading="lazy"
+                      />
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
 
-						<div class="grow">
-							{% if column.image %}
-								<div class="column-image mb-8 flex items-center {% if column.svgPosition == 'left' %} justify-start {% else %} justify-center {% endif %}">
-									{% if column.isSvg %}
-										{# SVG Icon View #}
-										<div class="{{ column.iconSizeClass }} flex items-center justify-center">
-											<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" class="w-full h-full object-contain" loading="lazy">
-										</div>
-									{% elseif isImageRounded %}
-										{# Rounded Photo View #}
-										<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" class="rounded-full aspect-square w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 object-cover mx-auto" loading="lazy">
-									{% else %}
-										{# Standard Aspect Ratio View #}
-										<div class="w-full {{ aspectRatioClass }} overflow-hidden rounded-lg bg-gray-100 flex items-center justify-center">
-											<img src="{{ column.image.src }}" alt="{{ column.image.alt }}" class="w-full h-full object-cover transition-all" loading="lazy">
-										</div>
-									{% endif %}
-								</div>
-							{% endif %}
+              <div class="mx-2">
+                {% if column.tag %}
+                  <div class="column-tag mb-1">
+                    <span
+                      class="inline-block text-xs font-medium tracking-wide text-black/60 uppercase"
+                    >
+                      {{ column.tag }}
+                    </span>
+                  </div>
+                {% endif %}
 
-							<div class="mx-2">
-								{% if column.tag %}
-									<div class="column-tag mb-1">
-										<span class="inline-block text-xs font-medium text-black/60 uppercase tracking-wide">
-											{{ column.tag }}
-										</span>
-									</div>
-								{% endif %}
+                {% if column.subtitle %}
+                  <div class="column-subtitle-container mb-2.5">
+                    <h3
+                      class="js-column-subtitle column-subtitle w-full text-2xl font-medium text-black"
+                    >
+                      {{ column.subtitle }}
+                    </h3>
+                  </div>
+                {% endif %}
 
-								{% if column.subtitle %}
-									<div class="column-subtitle-container mb-2.5">
-										<h3 class="js-column-subtitle column-subtitle text-2xl font-medium w-full text-black">
-											{{ column.subtitle }}
-										</h3>
-									</div>
-								{% endif %}
+                {% if column.description %}
+                  <div class="column-description text-lg leading-tight font-light text-black/90">
+                    {{ column.description|raw }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
 
-								{% if column.description %}
-									<div class="column-description text-black/90 text-lg leading-tight font-light">
-										{{ column.description|raw }}
-									</div>
-								{% endif %}
-							</div>
-						</div>
-
-						<div>
-							{% if column.cardButton %}
-								{% include "templates/_partials/button.twig" with {
+            <div>
+              {% if column.cardButton %}
+                {% include 'templates/_partials/button.twig' with {
                   text: column.cardButton.title,
                   link: column.cardButton.url,
                   target: column.cardButton.target,
-                  variant: 'outlined',
+                  variant: 'outlined'
                 } only %}
-							{% endif %}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	</section>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
 </flynt-component>

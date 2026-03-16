@@ -1,79 +1,108 @@
 <flynt-component name="ModulTeamSection">
-	<div class="py-20 lg:py-24 bg-white">
-		<div
-			class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="bg-white py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {# Header Section #}
+      {% if tag or title or description %}
+        {% include 'templates/_partials/globalHeading.twig' with {
+          tag,
+          title,
+          description,
+          textAlign
+        } %}
+      {% endif %}
 
-			{# Header Section #}
-			{% if tag or title or description %}
-				{% include "templates/_partials/headings.twig" with { tag, title, description, textAlign } %}
-			{% endif %}
+      {# Display Grouped Team Members #}
+      {% if groupedMembers %}
+        {% for group in groupedMembers %}
+          <div class="mb-16 last:mb-0">
+            {# Group Title - Only show if not ungrouped #}
+            {% if not group.is_ungrouped and group.title %}
+              <h2
+                class="mb-8 border-b border-gray-200 pb-4 text-2xl font-bold text-gray-900 lg:text-3xl"
+              >
+                {{ group.title }}
+              </h2>
+            {% endif %}
 
-			{# Display Grouped Team Members #}
-			{% if groupedMembers %}
-				{% for group in groupedMembers %}
-					<div
-						class="mb-16 last:mb-0">
-						{# Group Title - Only show if not ungrouped #}
-						{% if not group.is_ungrouped and group.title %}
-							<h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-4">
-								{{ group.title }}
-							</h2>
-						{% endif %}
+            {# Members Grid #}
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+              {% for member in group.members %}
+                <div
+                  class="bg-primary/10 flex h-full flex-col items-center rounded-2xl p-8 text-center lg:p-10"
+                >
+                  {# Member Image #}
+                  <div class="mb-6 h-40 w-40 lg:h-48 lg:w-48">
+                    {% if member.fields.team_member_image %}
+                      <img
+                        src="{{ member.fields.team_member_image.src }}"
+                        alt="{{ member.post_title }}"
+                        class="h-full w-full rounded-full object-cover"
+                      />
+                    {% else %}
+                      <div
+                        class="flex h-full w-full items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-purple-700"
+                      >
+                        <svg
+                          class="h-24 w-24 text-white opacity-90"
+                          viewbox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </div>
+                    {% endif %}
+                  </div>
 
-						{# Members Grid #}
-						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-							{% for member in group.members %}
-								<div
-									class="bg-primary/10 rounded-2xl p-8 lg:p-10 flex flex-col items-center text-center h-full">
+                  {# Member Info #}
+                  <div class="w-full">
+                    <h3 class="mb-2 text-xl font-bold text-gray-900 lg:text-2xl">
+                      {{ member.post_title }}
+                    </h3>
 
-									{# Member Image #}
-									<div class="w-40 h-40 lg:w-48 lg:h-48 mb-6">
-										{% if member.fields.team_member_image %}
-											<img src="{{ member.fields.team_member_image.src }}" alt="{{ member.post_title }}" class="w-full h-full object-cover rounded-full">
-										{% else %}
-											<div class="w-full h-full rounded-full bg-linear-to-br from-purple-500 to-purple-700 flex items-center justify-center">
-												<svg class="w-24 h-24 text-white opacity-90" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
-												</svg>
-											</div>
-										{% endif %}
-									</div>
+                    {% if member.fields.team_member_position %}
+                      <p class="mb-5 text-base text-gray-600">
+                        {{ member.fields.team_member_position }}
+                      </p>
+                    {% endif %}
 
-									{# Member Info #}
-									<div class="w-full">
-										<h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2">
-											{{ member.post_title }}
-										</h3>
-
-										{% if member.fields.team_member_position %}
-											<p class="text-base text-gray-600 mb-5">
-												{{ member.fields.team_member_position }}
-											</p>
-										{% endif %}
-
-										{# Social Links #}
-										{% if member.fields.team_member_links %}
-											<div class="flex gap-3 justify-center items-center mt-5">
-												{% for link in member.fields.team_member_links %}
-													<a href="{{ link.link_url }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full text-primary/60 hover:text-primary/90 hover:bg-primary/30 transition-all duration-200" aria-label="{{ link.link_image.alt ?? 'Social link' }}">
-														<img src="{{ link.link_image.src }}" alt="{{ link.link_image.alt ?? 'Social icon' }}" class="w-5 h-5 object-contain">
-													</a>
-												{% endfor %}
-											</div>
-										{% endif %}
-									</div>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
-				{% endfor %}
-				{# Fallback if there is no Team Members #}
-			{% else %}
-				<div class="text-center py-12">
-					<p class="text-gray-500 text-lg">Keine Teammitglieder gefunden.</p>
-				</div>
-			{% endif %}
-
-		</div>
-	</div>
+                    {# Social Links #}
+                    {% if member.fields.team_member_links %}
+                      <div class="mt-5 flex items-center justify-center gap-3">
+                        {% for link in member.fields.team_member_links %}
+                          <a
+                            href="{{ link.link_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-primary/60 hover:text-primary/90 hover:bg-primary/30 flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200"
+                            aria-label="{{ link.link_image.alt ?? 'Social link' }}"
+                          >
+                            <img
+                              src="{{ link.link_image.src }}"
+                              alt="{{ link.link_image.alt ?? 'Social icon' }}"
+                              class="h-5 w-5 object-contain"
+                            />
+                          </a>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+        {# Fallback if there is no Team Members #}
+      {% else %}
+        <div class="py-12 text-center">
+          <p class="text-lg text-gray-500">
+            Keine Teammitglieder gefunden.
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </flynt-component>

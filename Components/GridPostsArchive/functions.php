@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\GridPostsArchive;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 use Flynt\Utils\Options;
 use Timber\Timber;
 
@@ -186,6 +186,6 @@ Options::addTranslatable('GridPostsArchive', [
     'name' => 'options',
     'type' => 'group',
     'layout' => 'row',
-    'sub_fields' => [FieldVariables\getTheme()],
+    'sub_fields' => [GlobalHeading\getTheme()],
   ],
 ]);

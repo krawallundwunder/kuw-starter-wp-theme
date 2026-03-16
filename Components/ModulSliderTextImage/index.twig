@@ -1,104 +1,147 @@
 <flynt-component name="ModulSliderTextImage" load:on="visible">
-	{% set backgroundColorConfig = {
-    'bg-primary/20': { 'design': 'gray', 'text': 'text-black' },
-    'bg-secondary/20': { 'design': 'gray-dark', 'text': 'text-black' },
-    'bg-black': { 'design': 'black', 'text': 'text-white' },
+  {% set backgroundColorConfig = {
+    'bg-primary/20': {
+      design: 'gray',
+      text: 'text-black'
+    },
+    'bg-secondary/20': {
+      design: 'gray-dark',
+      text: 'text-black'
+    },
+    'bg-black': {
+      design: 'black',
+      text: 'text-white'
+    }
   } %}
-	<script type="application/json">{{ jsonData|json_encode(constant('JSON_HEX_TAG') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_AMP') b-or constant('JSON_HEX_QUOT'))|raw }}</script>
-	<div class="container relative my-14" data-flow="layout">
+  <script type="application/json">
+    {{
+      jsonData
+        |json_encode(
+          constant('JSON_HEX_TAG') b-or constant('JSON_HEX_APOS') b-or constant('JSON_HEX_AMP')
+            b-or constant('JSON_HEX_QUOT')
+        )
+        |raw
+    }}
+  </script>
+  <div class="relative container my-14" data-flow="layout">
+    {% if tag or title or description or buttons %}
+      {% include 'templates/_partials/globalHeading.twig' with {
+        tag,
+        title,
+        description,
+        buttons,
+        textAlign: options.textAlign
+      } %}
+    {% endif %}
 
-		{% if tag or title or description or buttons %}
-			{% include "templates/_partials/headings.twig" with {tag, title, description, buttons, textAlign: options.textAlign } %}
-		{% endif %}
+    {% if slides %}
+      <div
+        data-ref="slider"
+        class="slider swiper-container overflow-hidden"
+        data-size="full"
+        data-align="center"
+      >
+        <div class="swiper-wrapper" role="region" aria-live="polite">
+          {% for slide in slides %}
+            {% set currentBgColor = slide.bgColorClass|default('bg-white') %}
+            {% set slideGraphicColor = backgroundColorConfig[currentBgColor].design %}
 
-		{% if slides %}
-			<div data-ref="slider" class="slider swiper-container overflow-hidden" data-size="full" data-align="center">
-				<div class="swiper-wrapper" role="region" aria-live="polite">
-					{% for slide in slides %}
-						{% set currentBgColor = slide.bgColorClass|default('bg-white') %}
-						{% set slideGraphicColor = backgroundColorConfig[currentBgColor].design %}
+            <div class="slider-item swiper-slide flex">
+              <section
+                class="relative flex w-full flex-col rounded-xl p-6 lg:rounded-4xl lg:p-16 {{
+                currentBgColor
+                }} {{ backgroundColorConfig[currentBgColor].text }}"
+              >
+                {% if slide.backgroundGraphic and slide.backgroundGraphic != 'none' %}
+                  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+                    {% include 'Partials/_graphic.twig' with {
+                      graphic: slide.backgroundGraphic,
+                      color: slideGraphicColor
+                    } %}
+                  </div>
+                {% endif %}
+                <div
+                  class="relative z-10 flex h-full flex-col items-center justify-between gap-8 md:flex-row"
+                >
+                  {% if slide.image %}
+                    <div class="">
+                      <div class="relative aspect-square overflow-hidden lg:h-76 lg:w-76">
+                        <img
+                          src="{{ slide.image.src }}"
+                          alt="{{ slide.image.alt }}"
+                          class="h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  {% endif %}
+                  <div class="flex w-full flex-col">
+                    {% if slide.content %}
+                      <div
+                        class="prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mb-8 text-2xl md:text-2xl {{
+                        backgroundColorConfig[currentBgColor].text
+                        }}"
+                      >
+                        {{ slide.content|raw }}
+                      </div>
+                    {% endif %}
+                    {% if slide.name or slide.role %}
+                      <div class="text-lg lg:text-xl">
+                        {% if slide.name %}
+                          <span class="font-semibold">{{ slide.name }}</span>
+                          {% if slide.name and slide.role %}
+                            ,
+                          {% endif %}
+                        {% endif %}
+                        {% if slide.role %}
+                          <span class="opacity-90">{{ slide.role }}</span>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </section>
+            </div>
+          {% endfor %}
+        </div>
 
-						<div class="slider-item swiper-slide flex">
-
-							<section class="p-6 lg:p-16 rounded-xl lg:rounded-4xl relative w-full  flex flex-col {{ currentBgColor }} {{ backgroundColorConfig[currentBgColor].text }}">
-								{% if slide.backgroundGraphic and slide.backgroundGraphic != 'none' %}
-									<div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-										{% include 'Partials/_graphic.twig' with { graphic: slide.backgroundGraphic, color: slideGraphicColor } %}
-									</div>
-								{% endif %}
-								<div class="relative z-10 h-full flex flex-col md:flex-row gap-8 items-center justify-between">
-									{% if slide.image %}
-										<div class="">
-											<div class="relative lg:w-76 lg:h-76 aspect-square overflow-hidden">
-												<img src="{{ slide.image.src }}" alt="{{ slide.image.alt }}" class="w-full h-full object-cover">
-											</div>
-										</div>
-									{% endif %}
-									<div class="w-full flex flex-col">
-										{% if slide.content %}
-											<div class="prose lg:prose-lg prose-li:marker:text-current prose-a:text-current prose-strong:text-current prose-blockquote:text-current prose-headings:text-current mb-8 text-2xl md:text-2xl {{ backgroundColorConfig[currentBgColor].text }}">
-												{{ slide.content|raw }}
-											</div>
-										{% endif %}
-										{% if slide.name or slide.role %}
-											<div class="text-lg lg:text-xl">
-												{% if slide.name %}
-													<span class="font-semibold">{{ slide.name }}</span>
-													{% if slide.name and slide.role %},
-													{% endif %}
-												{% endif %}
-												{% if slide.role %}
-													<span class="opacity-90">{{ slide.role }}</span>
-												{% endif %}
-											</div>
-										{% endif %}
-									</div>
-								</div>
-							</section>
-
-						</div>
-					{% endfor %}
-				</div>
-
-				<button type="button" data-ref="prev" class="group hidden lg:block absolute z-10 -bottom-1 border border-primary left-4 size-10 rounded-full items-center justify-center transition-colors duration-300 bg-transparent hover:bg-primary cursor-pointer slider-button slider-button--prev" aria-label="{{ sliderOptions.a11y.prevSlideMessage|e }}">
-					<iconify-icon icon="lucide:arrow-left" class="w-full h-full text-2xl text-primary group-hover:text-white  place-content-center transition-colors duration-300" aria-hidden="true"></iconify-icon>
-				</button>
-				<button type="button" data-ref="next" class="group hidden lg:block absolute border border-primary items-center justify-center z-10 -bottom-1 right-4 size-10 rounded-full transition-colors duration-300 bg-transparent hover:bg-primary cursor-pointer slider-button slider-button--next" aria-label="{{ sliderOptions.a11y.nextSlideMessage|e }}">
-					<iconify-icon icon="lucide:arrow-right" class="w-full h-full text-2xl text-primary group-hover:text-white  place-content-center transition-colors duration-300" aria-hidden="true"></iconify-icon>
-				</button>
-				<div data-ref="pagination" class="slider-pagination text-center mt-6 space-x-2"></div>
-			</div>
-		{% endif %}
-	</div>
+        <button
+          type="button"
+          data-ref="prev"
+          class="group border-primary hover:bg-primary slider-button slider-button--prev absolute -bottom-1 left-4 z-10 hidden size-10 cursor-pointer items-center justify-center rounded-full border bg-transparent transition-colors duration-300 lg:block"
+          aria-label="{{ sliderOptions.a11y.prevSlideMessage|e }}"
+        >
+          <iconify-icon
+            icon="lucide:arrow-left"
+            class="text-primary h-full w-full place-content-center text-2xl transition-colors duration-300 group-hover:text-white"
+            aria-hidden="true"
+          ></iconify-icon>
+        </button>
+        <button
+          type="button"
+          data-ref="next"
+          class="group border-primary hover:bg-primary slider-button slider-button--next absolute right-4 -bottom-1 z-10 hidden size-10 cursor-pointer items-center justify-center rounded-full border bg-transparent transition-colors duration-300 lg:block"
+          aria-label="{{ sliderOptions.a11y.nextSlideMessage|e }}"
+        >
+          <iconify-icon
+            icon="lucide:arrow-right"
+            class="text-primary h-full w-full place-content-center text-2xl transition-colors duration-300 group-hover:text-white"
+            aria-hidden="true"
+          ></iconify-icon>
+        </button>
+        <div data-ref="pagination" class="slider-pagination mt-6 space-x-2 text-center"></div>
+      </div>
+    {% endif %}
+  </div>
 </flynt-component>
 
 <style>
-	.swiper-slide {
-		height: auto;
-		display: flex;
-	}
+  .swiper-slide { height: auto; display: flex; }
 
-	.slider-item {
-		display: flex;
-		width: 100%;
-	}
+  .slider-item { display: flex; width: 100%; }
 
-	.slider-item section {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		min-height: 400px;
-	}
+  .slider-item section { display: flex; flex-direction: column; width: 100%; min-height: 400px; }
 
-	@media(min-width: 1024px) {
-		.slider-item section {
-			min-height: 500px;
-		}
-	}
+  @media(min-width: 1024px) { .slider-item section { min-height: 500px; } }
 
-	/* Equal height container */
-	.slider-item .relative.z-10 {
-		display: flex;
-		flex: 1;
-	}
+  /* Equal height container */ .slider-item .relative.z-10 { display: flex; flex: 1; }
 </style>

@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\BlockVideoOembed;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 use Flynt\Utils\Oembed;
 use Flynt\Utils\Options;
 
@@ -60,7 +60,7 @@ function getACFLayout(): array
         'name' => 'options',
         'type' => 'group',
         'layout' => 'row',
-        'sub_fields' => [FieldVariables\getTheme(), FieldVariables\getSize()],
+        'sub_fields' => [GlobalHeading\getTheme(), GlobalHeading\getSize()],
       ],
     ],
   ];

@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\ListComponents;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 use Flynt\ComponentManager;
 use Flynt\Utils\Options;
 use Parsedown;
@@ -133,7 +133,7 @@ function getACFLayout(): array
         'name' => 'options',
         'type' => 'group',
         'layout' => 'row',
-        'sub_fields' => [FieldVariables\getTheme()],
+        'sub_fields' => [GlobalHeading\getTheme()],
       ],
     ],
   ];

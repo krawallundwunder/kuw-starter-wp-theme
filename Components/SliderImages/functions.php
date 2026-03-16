@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\SliderImages;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 use Flynt\Utils\Options;
 
 add_filter('Flynt/addComponentData?name=SliderImages', function (array $data): array {
@@ -84,7 +84,7 @@ function getACFLayout(): array
               ],
             ],
           ],
-          FieldVariables\getTheme(),
+          GlobalHeading\getTheme(),
         ],
       ],
     ],

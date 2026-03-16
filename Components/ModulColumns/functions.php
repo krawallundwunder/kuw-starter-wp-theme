@@ -2,16 +2,10 @@
 
 namespace Flynt\Components\ModulColumns;
 
+use Flynt\GlobalHeading;
+
 add_filter('Flynt/addComponentData?name=ModulColumns', function ($data) {
-  if (!empty($data['ctaButtons'])) {
-    $data['buttons'] = array_map(function ($ctaButton) {
-      return [
-        'text' => $ctaButton['button']['title'] ?? '',
-        'link' => $ctaButton['button']['url'] ?? '',
-        'target' => $ctaButton['button']['target'] ?? '',
-      ];
-    }, $data['ctaButtons']);
-  }
+  $data = GlobalHeading\processCtaButtons($data);
 
   if (!empty($data['columns'])) {
     foreach ($data['columns'] as &$column) {
@@ -72,43 +66,7 @@ function getACFLayout(): array
         'type' => 'tab',
         'placement' => 'top',
       ],
-      [
-        'label' => __('Tagline', 'flynt'),
-        'name' => 'tag',
-        'type' => 'text',
-        'instructions' => __('Kurzer Tag über dem Titel.', 'flynt'),
-        'wrapper' => ['width' => '33%'],
-      ],
-      [
-        'label' => __('Titel', 'flynt'),
-        'name' => 'title',
-        'type' => 'text',
-        'instructions' => __('Titel des Inhalts. Kurz, klar und aussagekräftig.', 'flynt'),
-        'wrapper' => ['width' => '50%'],
-      ],
-      [
-        'label' => __('Beschreibung', 'flynt'),
-        'name' => 'description',
-        'type' => 'textarea',
-        'instructions' => __('Beschreibung oder Einleitungstext zum Inhalt.', 'flynt'),
-      ],
-      [
-        'label' => __('Buttons', 'flynt'),
-        'name' => 'ctaButtons',
-        'type' => 'repeater',
-        'instructions' => __('Fügen Sie hier Buttons hinzu.', 'flynt'),
-        'layout' => 'row',
-        'button_label' => __('Button hinzufügen', 'flynt'),
-        'max' => 2,
-        'sub_fields' => [
-          [
-            'label' => __('Button', 'flynt'),
-            'name' => 'button',
-            'type' => 'link',
-            'return_format' => 'array',
-          ],
-        ],
-      ],
+      ...GlobalHeading\getHeaderFields(),
       [
         'label' => __('Spalten', 'flynt'),
         'name' => 'columns',
@@ -207,21 +165,7 @@ function getACFLayout(): array
         'type' => 'group',
         'layout' => 'row',
         'sub_fields' => [
-          [
-            'label' => __('Text im Kopfbereich', 'flynt'),
-            'name' => 'textAlignment',
-            'instructions' => __(
-              'Legen Sie fest, wie der Text oberhalb des Moduls ausgerichtet werden soll.',
-              'flynt',
-            ),
-            'type' => 'select',
-            'choices' => [
-              'start' => __('Links', 'flynt'),
-              'center' => __('Zentriert', 'flynt'),
-            ],
-            'default_value' => 'start',
-            'wrapper' => ['width' => '50%'],
-          ],
+          GlobalHeading\getHeaderTextAlignmentField(),
           [
             'label' => __('Bildformat', 'flynt'),
             'instructions' => __(

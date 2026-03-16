@@ -140,6 +140,7 @@ function getACFLayout(): array
         'choices' => [
           'text-start' => __('Links', 'flynt'),
           'text-center' => __('Zentriert', 'flynt'),
+          'text-split' => __('Geteilt', 'flynt'),
         ],
         'default_value' => 'text-start',
         'allow_null' => 0,

@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\BlockImageText;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 
 function getACFLayout(): array
 {
@@ -78,7 +78,7 @@ function getACFLayout(): array
         'type' => 'group',
         'layout' => 'row',
         'sub_fields' => [
-          FieldVariables\getTheme(),
+          GlobalHeading\getTheme(),
           [
             'label' => __('Aspect Ratio', 'flynt'),
             'name' => 'aspectRatio',

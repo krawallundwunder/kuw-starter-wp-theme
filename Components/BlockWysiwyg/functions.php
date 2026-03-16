@@ -2,7 +2,7 @@
 
 namespace Flynt\Components\BlockWysiwyg;
 
-use Flynt\FieldVariables;
+use Flynt\GlobalHeading;
 
 function getACFLayout(): array
 {
@@ -38,10 +38,10 @@ function getACFLayout(): array
         'type' => 'group',
         'layout' => 'row',
         'sub_fields' => [
-          FieldVariables\getTheme(),
-          FieldVariables\getSize(),
-          FieldVariables\getAlignment(),
-          FieldVariables\getTextAlignment(),
+          GlobalHeading\getTheme(),
+          GlobalHeading\getSize(),
+          GlobalHeading\getAlignment(),
+          GlobalHeading\getTextAlignment(),
         ],
       ],
     ],

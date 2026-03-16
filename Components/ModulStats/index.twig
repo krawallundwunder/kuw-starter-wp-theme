@@ -1,64 +1,89 @@
 <flynt-component name="ModulStats" load:on="visible">
-	<section class="bg-white py-10 sm:py-16">
-		<div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <section class="bg-white py-10 sm:py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      {% if tag or title or description or buttons %}
+        {% include 'templates/_partials/globalHeading.twig' with {
+          tag,
+          title,
+          description,
+          buttons,
+          textAlign
+        } %}
+      {% endif %}
 
-			{% if tag or title or description or buttons %}
-				{% include "templates/_partials/headings.twig" with { tag, title, description, buttons, textAlign } %}
-			{% endif %}
-
-			{% if layout == 'timeline' %}
-				{{ _self.renderTimeline(items, enableCounter, counterDuration) }}
-			{% else %}
-				{{ _self.renderGrid(items, layout, enableCounter, counterDuration) }}
-			{% endif %}
-
-		</div>
-	</section>
+      {% if layout == 'timeline' %}
+        {{ _self.renderTimeline(items, enableCounter, counterDuration) }}
+      {% else %}
+        {{ _self.renderGrid(items, layout, enableCounter, counterDuration) }}
+      {% endif %}
+    </div>
+  </section>
 </flynt-component>
 
 {% macro renderTimeline(items, enableCounter, duration) %}
-	<div class="mx-auto pt-10 grid grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
-		{% for item in items %}
-			<div class="relative">
-				<div class="flex items-center text-secondary">
-					<iconify-icon icon="lucide:dot" class="text-2xl -ml-2"></iconify-icon>
-					{{ item.label }}
-					<div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-4 lg:w-auto lg:flex-auto lg:translate-x-0 text-sm/6 font-semibold"></div>
-				</div>
-				<p class="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
-					{{ _self.counter(item.value, enableCounter, duration) }}
-				</p>
-				<p class="mt-1 text-base/7 text-gray-600">{{ item.subtext }}</p>
-			</div>
-		{% endfor %}
-	</div>
+  <div class="mx-auto grid grid-cols-1 gap-8 pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+    {% for item in items %}
+      <div class="relative">
+        <div class="text-secondary flex items-center">
+          <iconify-icon icon="lucide:dot" class="-ml-2 text-2xl"></iconify-icon>
+          {{ item.label }}
+          <div
+            class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 text-sm/6 font-semibold sm:-ml-4 lg:static lg:-mr-6 lg:ml-4 lg:w-auto lg:flex-auto lg:translate-x-0"
+          ></div>
+        </div>
+        <p class="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
+          {{ _self.counter(item.value, enableCounter, duration) }}
+        </p>
+        <p class="mt-1 text-base/7 text-gray-600">
+          {{ item.subtext }}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
 {% endmacro %}
 
 {% macro renderGrid(items, layout, enableCounter, duration) %}
-	{% set isSimpleGrid = layout == 'simpleGrid' %}
-	{% set count = items|length %}
+  {% set isSimpleGrid = layout == 'simpleGrid' %}
+  {% set count = items|length %}
 
-	{% set gridClass = isSimpleGrid 
-		? 'grid-cols-1 gap-0.5 overflow-hidden rounded-2xl sm:grid-cols-2 ' ~ (count >= 3 ? 'lg:grid-cols-3' : (count == 2 ? 'lg:grid-cols-2' : ''))
-		: 'grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3' 
-	%}
+  {% set gridClass = isSimpleGrid
+    ? 'grid-cols-1 gap-0.5 overflow-hidden rounded-2xl sm:grid-cols-2 '
+      ~ (count >= 3 ? 'lg:grid-cols-3' : count == 2 ? 'lg:grid-cols-2' : '')
+    : 'grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3'
+  %}
 
-	<dl class="grid {{ gridClass }} text-center mt-10">
-		{% for item in items %}
-			<div class="flex flex-col {{ isSimpleGrid ? 'bg-secondary/10 p-8' : 'mx-auto max-w-xs gap-y-4' }}">
-				<dt class="{{ isSimpleGrid ? 'text-sm/6 font-semibold' : 'text-base/7' }} text-gray-600">
-					{{ item.label }}
-				</dt>
-				<dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 {{ isSimpleGrid ? '' : 'sm:text-5xl' }}">
-					{{ _self.counter(item.value, enableCounter, duration) }}
-				</dd>
-			</div>
-		{% endfor %}
-	</dl>
+  <dl class="grid {{ gridClass }} mt-10 text-center">
+    {% for item in items %}
+      <div
+        class="flex flex-col {{
+        isSimpleGrid
+          ? 'bg-secondary/10 p-8'
+          : 'mx-auto max-w-xs gap-y-4'
+        }}"
+      >
+        <dt class="{{ isSimpleGrid ? 'text-sm/6 font-semibold' : 'text-base/7' }} text-gray-600">
+          {{ item.label }}
+        </dt>
+        <dd
+          class="order-first text-3xl font-semibold tracking-tight text-gray-900 {{
+          isSimpleGrid
+            ? ''
+            : 'sm:text-5xl'
+          }}"
+        >
+          {{ _self.counter(item.value, enableCounter, duration) }}
+        </dd>
+      </div>
+    {% endfor %}
+  </dl>
 {% endmacro %}
 
 {% macro counter(value, enabled, duration) %}
-	<span data-ref="counter" data-counter-enabled="{{ enabled ? 'true' : 'false' }}" data-counter-duration="{{ duration|default(2000) }}">
-		{{ value }}
-	</span>
+  <span
+    data-ref="counter"
+    data-counter-enabled="{{ enabled ? 'true' : 'false' }}"
+    data-counter-duration="{{ duration|default(2000) }}"
+  >
+    {{ value }}
+  </span>
 {% endmacro %}
